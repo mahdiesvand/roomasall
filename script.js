@@ -11,10 +11,11 @@ onValue
 import {
 getAuth,
 createUserWithEmailAndPassword,
-signInWithEmailAndPassword
+signInWithEmailAndPassword,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-alert("script وصل شد");
+
 const firebaseConfig = {
   apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
   authDomain: "roomasal.firebaseapp.com",
@@ -43,10 +44,10 @@ let password = document.getElementById("password").value;
 createUserWithEmailAndPassword(auth,email,password)
 
 .then(()=>{
+
 alert("ثبت نام موفق بود");
 
-document.getElementById("loginBox").style.display="none";
-document.getElementById("chatBox").style.display="block";
+showChat();
 
 })
 
@@ -67,10 +68,10 @@ let password = document.getElementById("password").value;
 signInWithEmailAndPassword(auth,email,password)
 
 .then(()=>{
+
 alert("ورود موفق بود");
 
-document.getElementById("loginBox").style.display="none";
-document.getElementById("chatBox").style.display="block";
+showChat();
 
 })
 
@@ -81,26 +82,50 @@ alert(error.message);
 };
 
 
+
+// باز کردن چت
+function showChat(){
+
+document.getElementById("loginBox").style.display="none";
+
+document.getElementById("chatBox").style.display="block";
+
+}
+
+
+
+// ماندگار شدن ورود
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+showChat();
+
+}
+
+});
+
+
+
 // ارسال پیام
 window.sendMessage = function(){
 
 let name = document.getElementById("name").value;
+
 let text = document.getElementById("message").value;
-
-
-if(name==="" || text===""){
-alert("نام و پیام را وارد کنید");
-return;
-}
 
 
 let messageRef = push(ref(database,"messages"));
 
 
 set(messageRef,{
+
 name:name,
+
 text:text,
+
 time:Date.now()
+
 });
 
 
