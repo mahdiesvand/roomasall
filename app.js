@@ -12,3 +12,6 @@ function login(){
     window.location.href = "chat.html";
 
 }
+function login(){
+    alert("دکمه کار کرد");
+}
