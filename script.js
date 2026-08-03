@@ -1,35 +1,99 @@
-window.send = function(){
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-let text = document.getElementById("text").value;
 
-if(text == ""){
-alert("پیام خالی است");
-return;
-}
+// اطلاعات Firebase خودت را اینجا بگذار
+const firebaseConfig = {
 
-let box = document.getElementById("messages");
+apiKey: "API_KEY",
 
-let msg = document.createElement("div");
-msg.className = "msg";
-msg.innerHTML = text;
+authDomain: "PROJECT.firebaseapp.com",
 
-box.appendChild(msg);
+databaseURL: "https://PROJECT-default-rtdb.firebaseio.com",
 
-document.getElementById("text").value = "";
+projectId: "PROJECT",
 
-}
-document.getElementById("sendBtn").onclick = function(){
+storageBucket: "PROJECT.appspot.com",
 
-let text = document.getElementById("text").value;
+messagingSenderId: "SENDER_ID",
 
-let box = document.getElementById("messages");
-
-let msg = document.createElement("div");
-msg.className="msg";
-msg.innerHTML=text;
-
-box.appendChild(msg);
-
-document.getElementById("text").value="";
+appId: "APP_ID"
 
 };
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+
+const messages = document.getElementById("messages");
+
+const online = document.getElementById("online");
+
+
+online.innerHTML="متصل شد ✅";
+
+
+const messagesRef = ref(db,"messages");
+
+
+
+// دریافت پیام‌ها
+
+onValue(messagesRef,(snapshot)=>{
+
+
+messages.innerHTML="";
+
+
+snapshot.forEach((item)=>{
+
+
+let data=item.val();
+
+
+let div=document.createElement("div");
+
+div.className="msg";
+
+div.innerHTML=data.text;
+
+
+messages.appendChild(div);
+
+
+});
+
+
+});
+
+
+
+
+// ارسال پیام
+
+document.getElementById("sendBtn").onclick=function(){
+
+
+let input=document.getElementById("text");
+
+
+if(input.value.trim()=="") return;
+
+
+
+push(messagesRef,{
+
+text:input.value,
+
+user:localStorage.getItem("user") || "کاربر"
+
+});
+
+
+
+input.value="";
+
+
+                        }
