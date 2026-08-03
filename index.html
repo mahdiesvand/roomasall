@@ -2,30 +2,33 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عسل چت</title>
-<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="background:#111;color:white;text-align:center;padding:50px">
 
-<div class="box">
+<h1>🍯 عسل چت</h1>
 
-    <div class="logo">
-        🍯
-    </div>
+<input id="username" placeholder="نام کاربری">
 
-    <h1>عسل چت</h1>
-    <p>پیام‌رسان شخصی شما</p>
+<button onclick="login()">ورود</button>
 
-    <input id="username" type="text" placeholder="نام کاربری">
+<script>
 
-    <button onclick="login()">ورود به عسل چت</button>
+function login(){
 
-</div>
+let name = document.getElementById("username").value;
 
+if(name==""){
+alert("نام وارد کن");
+return;
+}
 
-<script src="app.js"></script>
+window.location.href="chat.html";
+
+}
+
+</script>
 
 </body>
 </html>
