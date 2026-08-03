@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-import { 
+import {
 getDatabase,
 ref,
 push,
@@ -8,11 +8,13 @@ set,
 onValue
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
-import { 
+import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
   authDomain: "roomasal.firebaseapp.com",
@@ -28,8 +30,58 @@ const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
+const auth = getAuth(app);
 
 
+// ثبت نام
+window.register = function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+alert("ثبت نام موفق بود");
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("chatBox").style.display="block";
+
+})
+
+.catch((error)=>{
+alert(error.message);
+});
+
+};
+
+
+// ورود
+window.login = function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+alert("ورود موفق بود");
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("chatBox").style.display="block";
+
+})
+
+.catch((error)=>{
+alert(error.message);
+});
+
+};
+
+
+// ارسال پیام
 window.sendMessage = function(){
 
 let name = document.getElementById("name").value;
@@ -57,6 +109,8 @@ document.getElementById("message").value="";
 };
 
 
+
+// نمایش پیام ها
 
 const chat = document.getElementById("chat");
 
@@ -93,48 +147,3 @@ ${new Date(data.time).toLocaleTimeString("fa-IR")}
 
 
 });
-window.register = function(){
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-createUserWithEmailAndPassword(auth,email,password)
-
-.then(()=>{
-alert("ثبت نام موفق بود");
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("chatBox").style.display="block";
-
-})
-
-.catch((error)=>{
-alert(error.message);
-});
-
-};
-
-
-
-window.login = function(){
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-signInWithEmailAndPassword(auth,email,password)
-
-.then(()=>{
-alert("ورود موفق بود");
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("chatBox").style.display="block";
-
-})
-
-.catch((error)=>{
-alert(error.message);
-});
-
-};
