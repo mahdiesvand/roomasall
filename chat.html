@@ -4,23 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عسل چت</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{
+box-sizing:border-box;
+font-family:Tahoma;
+}
+
+body{
+margin:0;
+height:100vh;
+background:#080808;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.chat{
+width:100%;
+max-width:450px;
+height:95vh;
+background:#111;
+border-radius:25px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+box-shadow:0 0 40px #000;
+}
+
+.header{
+padding:20px;
+background:#1d1d1d;
+color:#e8b84b;
+font-size:22px;
+text-align:center;
+}
+
+.messages{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+.msg{
+background:#222;
+padding:12px 16px;
+border-radius:18px;
+margin:10px 0;
+width:max-content;
+max-width:80%;
+}
+
+.me{
+background:#d6a436;
+color:#000;
+margin-right:auto;
+}
+
+.send{
+display:flex;
+padding:15px;
+gap:10px;
+background:#151515;
+}
+
+.send input{
+flex:1;
+padding:13px;
+border-radius:20px;
+border:none;
+background:#222;
+color:white;
+}
+
+button{
+border:none;
+border-radius:20px;
+padding:10px 18px;
+background:#d6a436;
+cursor:pointer;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div class="chat">
 
-<h2>🍯 عسل چت</h2>
-
-<div id="welcome"></div>
-
-<div class="messages" id="messages">
+<div class="header">
+🍯 عسل چت
 </div>
+
+<div class="messages" id="messages"></div>
+
 
 <div class="send">
 
-<input id="msg" placeholder="پیام بنویس...">
+<input id="text" placeholder="پیام بنویس...">
 
 <button onclick="send()">ارسال</button>
 
@@ -31,31 +114,24 @@
 
 <script>
 
-let user = localStorage.getItem("asalUser");
-
-if(!user){
-window.location="index.html";
-}
-
-document.getElementById("welcome").innerHTML =
-"خوش آمدی "+user;
-
-
 function send(){
 
-let text=document.getElementById("msg").value;
+let input=document.getElementById("text");
 
-if(text=="") return;
-
-
-let box=document.createElement("p");
-
-box.innerHTML="🟡 "+text;
-
-document.getElementById("messages").appendChild(box);
+if(input.value=="") return;
 
 
-document.getElementById("msg").value="";
+let div=document.createElement("div");
+
+div.className="msg me";
+
+div.innerHTML=input.value;
+
+
+document.getElementById("messages").appendChild(div);
+
+
+input.value="";
 
 }
 
