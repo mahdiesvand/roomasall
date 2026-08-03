@@ -18,3 +18,18 @@ box.appendChild(msg);
 document.getElementById("text").value = "";
 
 }
+document.getElementById("sendBtn").onclick = function(){
+
+let text = document.getElementById("text").value;
+
+let box = document.getElementById("messages");
+
+let msg = document.createElement("div");
+msg.className="msg";
+msg.innerHTML=text;
+
+box.appendChild(msg);
+
+document.getElementById("text").value="";
+
+};
