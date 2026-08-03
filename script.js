@@ -93,3 +93,48 @@ ${new Date(data.time).toLocaleTimeString("fa-IR")}
 
 
 });
+window.register = function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+alert("ثبت نام موفق بود");
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("chatBox").style.display="block";
+
+})
+
+.catch((error)=>{
+alert(error.message);
+});
+
+};
+
+
+
+window.login = function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+alert("ورود موفق بود");
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("chatBox").style.display="block";
+
+})
+
+.catch((error)=>{
+alert(error.message);
+});
+
+};
