@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ورود | عسل چت</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Tahoma, Arial;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:#f3f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    width:360px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    text-align:center;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+    color:#e9a400;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    height:45px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:6px;
+    padding:0 15px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#e9a400;
+}
+
+button{
+    width:100%;
+    height:45px;
+    margin-top:15px;
+    border:none;
+    border-radius:6px;
+    background:#e9a400;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#cc8d00;
+}
+
+a{
+    display:block;
+    margin-top:20px;
+    color:#777;
+    text-decoration:none;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+        🍯 عسل چت
+    </div>
+
+    <input id="username" type="text" placeholder="نام کاربری">
+
+    <input id="password" type="password" placeholder="رمز عبور">
+
+    <button onclick="login()">
+        ورود
+    </button>
+
+    <a href="register.html">
+        ساخت حساب جدید
+    </a>
+
+</div>
+
+
+<script>
+
+function login(){
+
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+
+if(user==="" || pass===""){
+    alert("لطفاً همه قسمت‌ها را پر کنید");
+    return;
+}
+
+
+// موقت - بعداً به Firebase وصل می‌کنیم
+localStorage.setItem("user",user);
+
+window.location.href="chat.html";
+
+}
+
+</script>
+
+
+</body>
+</html>
