@@ -1,101 +1,31 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Room Chat</title>
-
+<title>عسل چت</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+<div class="box">
 
-<div class="container">
+    <div class="logo">
+        🍯
+    </div>
 
+    <h1>عسل چت</h1>
+    <p>پیام‌رسان شخصی شما</p>
 
-<!-- ورود -->
+    <input id="username" type="text" placeholder="نام کاربری">
 
-<div id="loginBox">
-
-<h2>💬 ورود به چت روم</h2>
-
-
-<input id="name" placeholder="نام کاربری">
-
-
-<input id="photo" placeholder="لینک عکس پروفایل">
-
-
-<input id="email" type="email" placeholder="ایمیل">
-
-
-<input id="password" type="password" placeholder="رمز عبور">
-
-
-<button onclick="register()">
-ثبت نام
-</button>
-
-
-<button onclick="login()">
-ورود
-</button>
-
+    <button onclick="login()">ورود به عسل چت</button>
 
 </div>
 
 
-
-
-
-<!-- چت -->
-
-<div id="chatBox" style="display:none;">
-
-
-<div class="profile">
-
-<img id="myPhoto" src="" width="50" height="50">
-
-<span id="myName"></span>
-
-</div>
-
-
-
-<h1>💬 چت روم</h1>
-
-
-<div id="chat"></div>
-
-
-
-<input id="message" placeholder="پیام خود را بنویس">
-
-
-<button onclick="sendMessage()">
-ارسال
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-<script type="module" src="script.js"></script>
-
+<script src="app.js"></script>
 
 </body>
-
 </html>
