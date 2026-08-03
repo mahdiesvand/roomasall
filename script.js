@@ -25,21 +25,28 @@ from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 
 // اطلاعات Firebase خودت
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-
-apiKey: "YOUR_API_KEY",
-
-authDomain: "YOUR_PROJECT.firebaseapp.com",
-
-projectId: "YOUR_PROJECT_ID",
-
-storageBucket: "YOUR_PROJECT.appspot.com",
-
-messagingSenderId: "YOUR_SENDER_ID",
-
-appId: "YOUR_APP_ID"
-
+  apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
+  authDomain: "roomasal.firebaseapp.com",
+  databaseURL: "https://roomasal-default-rtdb.firebaseio.com",
+  projectId: "roomasal",
+  storageBucket: "roomasal.firebasestorage.app",
+  messagingSenderId: "74039115594",
+  appId: "1:74039115594:web:18fb78cfe77207f18c4bb3",
+  measurementId: "G-T9W22HHGBF"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 
 
