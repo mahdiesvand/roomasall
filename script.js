@@ -77,6 +77,10 @@ chat.innerHTML += `
 
 ${data.text}
 
+<span class="time">
+${new Date(data.time).toLocaleTimeString("fa-IR")}
+</span>
+
 </div>
 
 `;
