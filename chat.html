@@ -2,6 +2,7 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +12,7 @@
 
 *{
 box-sizing:border-box;
-font-family:Tahoma;
+font-family:tahoma;
 }
 
 body{
@@ -35,16 +36,15 @@ border-radius:25px;
 overflow:hidden;
 display:flex;
 flex-direction:column;
-box-shadow:0 0 40px #000;
 
 }
 
 
 .header{
 
-padding:18px;
+padding:20px;
 background:#1d1d1d;
-color:#e8b84b;
+color:#d6a436;
 font-size:22px;
 text-align:center;
 
@@ -55,10 +55,8 @@ text-align:center;
 
 font-size:13px;
 color:#00ff88;
-margin-top:5px;
 
 }
-
 
 
 .messages{
@@ -70,12 +68,11 @@ overflow-y:auto;
 }
 
 
-
 .msg{
 
 background:#222;
-padding:12px 16px;
-border-radius:18px;
+padding:12px;
+border-radius:15px;
 margin:10px 0;
 width:max-content;
 max-width:80%;
@@ -83,53 +80,35 @@ max-width:80%;
 }
 
 
-
-.me{
-
-background:#d6a436;
-color:#000;
-margin-right:auto;
-
-}
-
-
-
 .send{
 
 display:flex;
 padding:15px;
 gap:10px;
-background:#151515;
 
 }
 
 
-
-.send input{
+input{
 
 flex:1;
-padding:13px;
+padding:12px;
 border-radius:20px;
 border:none;
 background:#222;
 color:white;
-outline:none;
 
 }
-
 
 
 button{
 
+padding:12px 20px;
 border:none;
 border-radius:20px;
-padding:10px 18px;
 background:#d6a436;
-cursor:pointer;
 
 }
-
-
 
 </style>
 
@@ -153,36 +132,28 @@ cursor:pointer;
 </div>
 
 
-
 <div class="messages" id="messages">
 
 </div>
 
 
-
 <div class="send">
 
-<input id="text" placeholder="پیام بنویس...">
+<input id="text" placeholder="پیام بنویس">
 
-<butt
-ارسال
-</<button id="sendBtn">
+<button id="sendBtn">
 ارسال
 </button>
 
-
 </div>
 
 
 </div>
-
 
 
 <script type="module" src="script.js"></script>
 
 
 </body>
-<script>
-document.getElementById("online").innerHTML="اتصال تست شد";
-</script>
+
 </html>
