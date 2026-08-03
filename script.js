@@ -8,7 +8,11 @@ set,
 onValue
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
-
+import { 
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 const firebaseConfig = {
   apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
   authDomain: "roomasal.firebaseapp.com",
