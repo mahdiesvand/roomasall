@@ -5,8 +5,10 @@ getDatabase,
 ref,
 push,
 set,
-onValue
+onValue,
+get
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
 
 import {
 getAuth,
@@ -16,15 +18,25 @@ onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
-  authDomain: "roomasal.firebaseapp.com",
-  databaseURL: "https://roomasal-default-rtdb.firebaseio.com",
-  projectId: "roomasal",
-  storageBucket: "roomasal.firebasestorage.app",
-  messagingSenderId: "74039115594",
-  appId: "1:74039115594:web:18fb78cfe77207f18c4bb3"
+
+apiKey: "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
+
+authDomain: "roomasal.firebaseapp.com",
+
+databaseURL: "https://roomasal-default-rtdb.firebaseio.com",
+
+projectId: "roomasal",
+
+storageBucket: "roomasal.firebasestorage.app",
+
+messagingSenderId: "74039115594",
+
+appId: "1:74039115594:web:18fb78cfe77207f18c4bb3"
+
 };
+
 
 
 const app = initializeApp(firebaseConfig);
@@ -34,56 +46,11 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 
-// ثبت نام
-window.register = function(){
 
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-createUserWithEmailAndPassword(auth,email,password)
-
-.then(()=>{
-
-alert("ثبت نام موفق بود");
-
-showChat();
-
-})
-
-.catch((error)=>{
-alert(error.message);
-});
-
-};
-
-
-// ورود
-window.login = function(){
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-
-signInWithEmailAndPassword(auth,email,password)
-
-.then(()=>{
-
-alert("ورود موفق بود");
-
-showChat();
-
-})
-
-.catch((error)=>{
-alert(error.message);
-});
-
-};
+let currentUser = null;
 
 
 
-// باز کردن چت
 function showChat(){
 
 document.getElementById("loginBox").style.display="none";
@@ -94,85 +61,222 @@ document.getElementById("chatBox").style.display="block";
 
 
 
-// ماندگار شدن ورود
-onAuthStateChanged(auth,(user)=>{
+window.register = function(){
 
-if(user){
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("chatBox").style.display="block";
-
-}else{
-
-document.getElementById("loginBox").style.display="block";
-document.getElementById("chatBox").style.display="none";
-
-}
-
-});
-
-
-
-// ارسال پیام
-window.sendMessage = function(){
 
 let name = document.getElementById("name").value;
 
-let text = document.getElementById("message").value;
+let photo = document.getElementById("photo").value;
+
+let email = document.getElementById("email").value;
+
+let password = document.getElementById("password").value;
 
 
-let messageRef = push(ref(database,"messages"));
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then((userCredential)=>{
 
 
-set(messageRef,{
+let uid = userCredential.user.uid;
+
+
+set(ref(database,"users/"+uid),{
 
 name:name,
 
-text:text,
+photo:photo,
 
-time:Date.now()
+email:email
 
 });
 
 
-document.getElementById("message").value="";
+alert("ثبت نام موفق شد");
+
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+
+};
+id="b2script"
+window.login = function(){
+
+
+let email = document.getElementById("email").value;
+
+let password = document.getElementById("password").value;
+
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+
+alert("ورود موفق شد");
+
+})
+
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
 
 };
 
 
 
-// نمایش پیام ها
 
-const chat = document.getElementById("chat");
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(user){
+
+
+currentUser = user;
+
+
+get(ref(database,"users/"+user.uid))
+
+.then((snapshot)=>{
+
+
+let data = snapshot.val();
+
+
+if(data){
+
+
+document.getElementById("myName").innerHTML = data.name;
+
+
+document.getElementById("myPhoto").src = data.photo;
+
+
+}
+
+
+showChat();
+
+
+});
+
+
+}
+
+
+});
+
+
+
+
+
+
+window.sendMessage = function(){
+
+
+let text = document.getElementById("message").value;
+
+
+
+if(text=="") return;
+
+
+
+let msg = push(ref(database,"messages"));
+
+
+
+set(msg,{
+
+
+uid:currentUser.uid,
+
+name:document.getElementById("myName").innerHTML,
+
+photo:document.getElementById("myPhoto").src,
+
+text:text,
+
+time:Date.now()
+
+
+});
+
+
+
+document.getElementById("message").value="";
+
+
+};
+
+
+
+
 
 
 onValue(ref(database,"messages"),(snapshot)=>{
 
 
+let chat = document.getElementById("chat");
+
+
 chat.innerHTML="";
+
 
 
 snapshot.forEach((item)=>{
 
 
-let data=item.val();
+let data = item.val();
+
 
 
 chat.innerHTML += `
 
+
 <div class="message">
 
-<b>${data.name}</b><br>
+
+<img src="${data.photo}" width="40" height="40">
+
+
+<b>${data.name}</b>
+
+
+<br>
+
 
 ${data.text}
 
-<span class="time">
+
+<br>
+
+
+<small>
+
 ${new Date(data.time).toLocaleTimeString("fa-IR")}
-</span>
+
+</small>
+
 
 </div>
 
+
 `;
+
+
 
 });
 
