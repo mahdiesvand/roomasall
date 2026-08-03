@@ -2,10 +2,11 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>چت روم</title>
+<title>Room Chat</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,10 +19,17 @@
 <div class="container">
 
 
+<!-- ورود -->
+
 <div id="loginBox">
-<div id="loginBox" style="display:none;">
-  
-<h2>ورود به چت روم</h2>
+
+<h2>💬 ورود به چت روم</h2>
+
+
+<input id="name" placeholder="نام کاربری">
+
+
+<input id="photo" placeholder="لینک عکس پروفایل">
 
 
 <input id="email" type="email" placeholder="ایمیل">
@@ -46,27 +54,39 @@
 
 
 
+<!-- چت -->
+
 <div id="chatBox" style="display:none;">
+
+
+<div class="profile">
+
+<img id="myPhoto" src="" width="50" height="50">
+
+<span id="myName"></span>
+
+</div>
+
 
 
 <h1>💬 چت روم</h1>
 
 
-<input id="name" placeholder="نام شما">
-
-
 <div id="chat"></div>
+
 
 
 <input id="message" placeholder="پیام خود را بنویس">
 
 
 <button onclick="sendMessage()">
-ارسال پیام
+ارسال
 </button>
 
 
+
 </div>
+
 
 
 </div>
