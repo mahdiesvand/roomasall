@@ -102,6 +102,11 @@ if(user){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("chatBox").style.display="block";
 
+}else{
+
+document.getElementById("loginBox").style.display="block";
+document.getElementById("chatBox").style.display="none";
+
 }
 
 });
