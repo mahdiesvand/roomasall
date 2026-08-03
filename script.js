@@ -48,7 +48,7 @@ messages.appendChild(div);
 
 
 window.send = function(){
-
+alert("کار کرد");
 let input=document.getElementById("text");
 
 if(input.value.trim()=="") return;
