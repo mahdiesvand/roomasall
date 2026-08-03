@@ -99,7 +99,8 @@ onAuthStateChanged(auth,(user)=>{
 
 if(user){
 
-showChat();
+document.getElementById("loginBox").style.display="none";
+document.getElementById("chatBox").style.display="block";
 
 }
 
