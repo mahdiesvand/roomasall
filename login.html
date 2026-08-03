@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 
 <meta charset="UTF-8">
@@ -10,85 +11,130 @@
 <style>
 
 *{
-box-sizing:border-box;
-font-family:Tahoma,Arial;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma, Arial;
 }
 
 body{
-margin:0;
-height:100vh;
-background:#f3f6f9;
-display:flex;
-justify-content:center;
-align-items:center;
+
+    min-height:100vh;
+    background:#eef2f6;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
 }
 
 
-.login-box{
+.login-container{
 
-width:360px;
-background:white;
-padding:35px;
-border-radius:15px;
-box-shadow:0 8px 25px #0002;
-text-align:center;
+    width:380px;
+    background:#fff;
+    padding:40px 35px;
+    border-radius:12px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+    text-align:center;
 
 }
 
 
 .logo{
 
-font-size:32px;
-font-weight:bold;
-color:#e5a000;
-margin-bottom:25px;
+    font-size:36px;
+    font-weight:bold;
+    color:#d89b00;
+    margin-bottom:10px;
+
+}
+
+
+.subtitle{
+
+    color:#777;
+    font-size:14px;
+    margin-bottom:30px;
+
+}
+
+
+.input-box{
+
+    text-align:right;
+    margin-bottom:15px;
+
+}
+
+
+label{
+
+    display:block;
+    margin-bottom:6px;
+    color:#555;
+    font-size:14px;
 
 }
 
 
 input{
 
-width:100%;
-height:45px;
-margin:10px 0;
-border:1px solid #ddd;
-border-radius:7px;
-padding:10px;
-font-size:15px;
+    width:100%;
+    height:48px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:0 15px;
+    font-size:15px;
+    outline:none;
+
+}
+
+
+input:focus{
+
+    border-color:#d89b00;
 
 }
 
 
 button{
 
-width:100%;
-height:45px;
-margin-top:15px;
-border:0;
-border-radius:7px;
-background:#e5a000;
-color:white;
-font-size:17px;
-cursor:pointer;
+    width:100%;
+    height:48px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#d89b00;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
 
 }
 
 
 button:hover{
 
-background:#c88b00;
+    background:#b98200;
+
+}
+
+
+.footer{
+
+    margin-top:25px;
+    color:#888;
+    font-size:14px;
 
 }
 
 
 a{
 
-display:block;
-margin-top:20px;
-color:#777;
-text-decoration:none;
+    color:#d89b00;
+    text-decoration:none;
 
 }
+
 
 </style>
 
@@ -98,7 +144,7 @@ text-decoration:none;
 <body>
 
 
-<div class="login-box">
+<div class="login-container">
 
 
 <div class="logo">
@@ -106,26 +152,59 @@ text-decoration:none;
 </div>
 
 
+<div class="subtitle">
+ورود به حساب کاربری
+</div>
+
+
+
+<div class="input-box">
+
+<label>
+ایمیل
+</label>
+
 <input 
 id="email"
 type="email"
-placeholder="ایمیل">
+placeholder="example@gmail.com">
 
+</div>
+
+
+
+<div class="input-box">
+
+<label>
+رمز عبور
+</label>
 
 <input 
 id="password"
 type="password"
 placeholder="رمز عبور">
 
+</div>
+
+
 
 <button onclick="login()">
+
 ورود
+
 </button>
 
 
+
+<div class="footer">
+
+حساب ندارید؟
+
 <a href="register.html">
-ساخت حساب جدید
+ثبت نام
 </a>
+
+</div>
 
 
 </div>
