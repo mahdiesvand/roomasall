@@ -1,159 +1,101 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>عسل چت</title>
+<title>چت روم</title>
 
-<style>
-
-*{
-box-sizing:border-box;
-font-family:tahoma;
-}
-
-body{
-margin:0;
-height:100vh;
-background:#080808;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-
-.chat{
-
-width:100%;
-max-width:450px;
-height:95vh;
-background:#111;
-border-radius:25px;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-
-}
-
-
-.header{
-
-padding:20px;
-background:#1d1d1d;
-color:#d6a436;
-font-size:22px;
-text-align:center;
-
-}
-
-
-#online{
-
-font-size:13px;
-color:#00ff88;
-
-}
-
-
-.messages{
-
-flex:1;
-padding:15px;
-overflow-y:auto;
-
-}
-
-
-.msg{
-
-background:#222;
-padding:12px;
-border-radius:15px;
-margin:10px 0;
-width:max-content;
-max-width:80%;
-
-}
-
-
-.send{
-
-display:flex;
-padding:15px;
-gap:10px;
-
-}
-
-
-input{
-
-flex:1;
-padding:12px;
-border-radius:20px;
-border:none;
-background:#222;
-color:white;
-
-}
-
-
-button{
-
-padding:12px 20px;
-border:none;
-border-radius:20px;
-background:#d6a436;
-
-}
-
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+<div class="chat-box">
 
-<div class="chat">
+    <div class="header">
+        💬 چت روم
+        <span id="user"></span>
+    </div>
 
+    <div id="messages" class="messages"></div>
 
-<div class="header">
-
-🍯 عسل چت
-
-<div id="online">
-در حال اتصال...
-</div>
-
-</div>
-
-
-<div class="messages" id="messages">
+    <div class="send-box">
+        <input id="message" type="text" placeholder="پیام بنویس...">
+        <button onclick="sendMessage()">ارسال</button>
+    </div>
 
 </div>
 
 
-<div class="send">
+<script type="module">
 
-<input id="text" placeholder="پیام بنویس">
-
-<button id="sendBtn">
-ارسال
-</button>
-
-</div>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
 
 
-</div>
+const firebaseConfig = {
+  apiKey: "API_KEY_خودت",
+  authDomain: "AUTH_DOMAIN_خودت",
+  databaseURL: "DATABASE_URL_خودت",
+  projectId: "PROJECT_ID_خودت",
+  storageBucket: "STORAGE_BUCKET_خودت",
+  messagingSenderId: "SENDER_ID_خودت",
+  appId: "APP_ID_خودت"
+};
 
 
-<script type="module" src="script.js"></script>
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
+
+let username = localStorage.getItem("username");
+
+if(!username){
+    window.location.href="index.html";
+}
+
+document.getElementById("user").innerHTML = username;
+
+
+const messagesRef = ref(db,"messages");
+
+
+window.sendMessage = function(){
+
+    let text = document.getElementById("message").value.trim();
+
+    if(text==="") return;
+
+    push(messagesRef,{
+        name: username,
+        text: text
+    });
+
+    document.getElementById("message").value="";
+}
+
+
+
+onChildAdded(messagesRef,(data)=>{
+
+    let msg = data.val();
+
+    let box = document.getElementById("messages");
+
+    box.innerHTML += `
+    <div class="message">
+        <b>${msg.name}</b><br>
+        ${msg.text}
+    </div>
+    `;
+
+    box.scrollTop = box.scrollHeight;
+
+});
+
+
+</script>
 
 </body>
-
 </html>
