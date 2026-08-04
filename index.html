@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به چت روم</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    font-family:tahoma;
+    color:white;
+}
+
+.container{
+    width:350px;
+    margin:80px auto;
+    text-align:center;
+    background:#111;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px #cc0033;
+}
+
+h2{
+    color:#ff3366;
+}
+
+input{
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    text-align:center;
+    font-size:16px;
+}
+
+.gender{
+    margin:15px;
+}
+
+button{
+    width:90%;
+    padding:12px;
+    background:#cc0033;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+button:hover{
+    background:#ff3366;
+}
+
+.menu img{
+    width:90px;
+    margin:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="menu">
+<img src="https://i.imgur.com/7QJZ6Zk.png">
+</div>
+
+
+<h2>ورود به چت روم</h2>
+
+
+<input id="username" type="text" placeholder="نام کاربری">
+
+
+<div class="gender">
+<label>
+<input type="radio" name="gender" value="پسر" checked>
+پسر
+</label>
+
+<label>
+<input type="radio" name="gender" value="دختر">
+دختر
+</label>
+</div>
+
+
+<button onclick="login()">ورود</button>
+
+
+</div>
+
+
+<script>
+
+function login(){
+
+let username=document.getElementById("username").value;
+
+if(username.trim()==""){
+alert("لطفا نام کاربری وارد کنید");
+return;
+}
+
+
+localStorage.setItem("username",username);
+
+
+window.location="chat.html";
+
+}
+
+</script>
+
+
+</body>
+</html>
