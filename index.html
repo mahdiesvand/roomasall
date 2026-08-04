@@ -3,84 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به چت روم</title>
 
-<title>عسل چت</title>
-
-<style>
-body{
-margin:0;
-height:100vh;
-background:#080808;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-font-family:tahoma;
-}
-
-.box{
-background:#151515;
-padding:30px;
-border-radius:20px;
-width:300px;
-text-align:center;
-}
-
-input{
-width:90%;
-padding:12px;
-border:none;
-border-radius:20px;
-margin:10px;
-background:#222;
-color:white;
-}
-
-button{
-padding:12px 25px;
-border:none;
-border-radius:20px;
-background:#d6a436;
-cursor:pointer;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="box">
+<div class="login-box">
+    <h1>💬 چت روم</h1>
+    <p>نام خود را وارد کنید</p>
 
-<h2>🍯 عسل چت</h2>
+    <input type="text" id="username" placeholder="نام شما">
 
-<input id="username" placeholder="نام کاربری">
-
-<br>
-
-<button onclick="login()">
-ورود
-</button>
-
+    <button onclick="login()">ورود به چت</button>
 </div>
 
-
 <script>
+function login() {
+    let name = document.getElementById("username").value.trim();
 
-function login(){
+    if(name === ""){
+        alert("لطفاً نام خود را وارد کنید.");
+        return;
+    }
 
-let user=document.getElementById("username").value;
+    localStorage.setItem("username", name);
 
-if(user==""){
-alert("نام وارد کن");
-return;
+    window.location.href = "chat.html";
 }
-
-localStorage.setItem("user",user);
-
-location.href="chat.html";
-
-}
-
 </script>
 
 </body>
