@@ -1,101 +1,143 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>چت روم</title>
+<title>ChatRoom</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+body{
+    margin:0;
+    background:#e5e7eb;
+    font-family:tahoma;
+}
+
+.header{
+    background:#2563eb;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:20px;
+}
+
+.chat{
+    height:75vh;
+    padding:15px;
+    overflow-y:auto;
+}
+
+.message{
+    background:white;
+    padding:10px;
+    margin:10px;
+    border-radius:15px;
+    max-width:70%;
+}
+
+.me{
+    background:#2563eb;
+    color:white;
+    margin-right:auto;
+}
+
+.inputbox{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    padding:10px;
+    display:flex;
+}
+
+input{
+    flex:1;
+    padding:12px;
+    border-radius:20px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+button{
+    margin-right:8px;
+    border:0;
+    background:#2563eb;
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="chat-box">
 
-    <div class="header">
-        💬 چت روم
-        <span id="user"></span>
-    </div>
+<div class="header">
+💬 ChatRoom
+</div>
 
-    <div id="messages" class="messages"></div>
 
-    <div class="send-box">
-        <input id="message" type="text" placeholder="پیام بنویس...">
-        <button onclick="sendMessage()">ارسال</button>
-    </div>
+<div class="chat" id="chat">
 
 </div>
 
 
-<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+<div class="inputbox">
 
+<input id="message" placeholder="پیام بنویس...">
 
-const firebaseConfig = {
-  apiKey: "API_KEY_خودت",
-  authDomain: "AUTH_DOMAIN_خودت",
-  databaseURL: "DATABASE_URL_خودت",
-  projectId: "PROJECT_ID_خودت",
-  storageBucket: "STORAGE_BUCKET_خودت",
-  messagingSenderId: "SENDER_ID_خودت",
-  appId: "APP_ID_خودت"
-};
+<button onclick="sendMessage()">ارسال</button>
+
+</div>
 
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
 
+<script>
 
-let username = localStorage.getItem("username");
+let username = localStorage.getItem("user");
 
 if(!username){
-    window.location.href="index.html";
-}
 
-document.getElementById("user").innerHTML = username;
+window.location="index.html";
 
-
-const messagesRef = ref(db,"messages");
-
-
-window.sendMessage = function(){
-
-    let text = document.getElementById("message").value.trim();
-
-    if(text==="") return;
-
-    push(messagesRef,{
-        name: username,
-        text: text
-    });
-
-    document.getElementById("message").value="";
 }
 
 
 
-onChildAdded(messagesRef,(data)=>{
+function sendMessage(){
 
-    let msg = data.val();
+let text=document.getElementById("message").value;
 
-    let box = document.getElementById("messages");
+if(text=="") return;
 
-    box.innerHTML += `
-    <div class="message">
-        <b>${msg.name}</b><br>
-        ${msg.text}
-    </div>
-    `;
 
-    box.scrollTop = box.scrollHeight;
+let box=document.createElement("div");
 
-});
+box.className="message me";
+
+box.innerHTML=
+"<b>"+username+"</b><br>"+text;
+
+
+document.getElementById("chat").appendChild(box);
+
+
+document.getElementById("message").value="";
+
+
+}
 
 
 </script>
 
+
 </body>
+
 </html>
