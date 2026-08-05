@@ -164,33 +164,31 @@ const messagesRef = ref(db,"messages");
 
 // ارسال پیام
 
-window.sendMessage=function(){
+window.sendMessage = async function(){
 
+let text = document.getElementById("message").value;
 
-let text=document.getElementById("message").value;
+if(text.trim()=="") return;
 
+try {
 
-if(text=="") return;
-
-
-
-push(messagesRef,{
-
+await push(messagesRef,{
 name:user,
-
 text:text,
-
 time:Date.now()
-
 });
 
-
+alert("پیام ارسال شد");
 
 document.getElementById("message").value="";
 
+} catch(error){
+
+alert("خطا: " + error.message);
 
 }
 
+}
 
 
 
