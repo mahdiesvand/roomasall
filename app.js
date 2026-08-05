@@ -1,5 +1,5 @@
 import { db } from "./firebase.js";
-
+alert("app.js جدید اجرا شد");
 import {
     ref,
     push,
