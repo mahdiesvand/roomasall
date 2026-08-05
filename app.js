@@ -1,3 +1,4 @@
+alert("APP JS اجرا شد");
 import { db } from "./firebase.js";
 alert("app.js جدید اجرا شد");
 import {
