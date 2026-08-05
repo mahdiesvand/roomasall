@@ -26,7 +26,7 @@ window.sendMessage = function(){
         return;
     }
 
-
+alert("رسید به مرحله ذخیره");
     push(messagesRef, {
 
         name: user,
