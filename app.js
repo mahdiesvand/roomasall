@@ -35,10 +35,20 @@ window.sendMessage = function(){
 
         time: Date.now()
 
+    })
+    .then(function(){
+
+        alert("پیام در Firebase ذخیره شد");
+
+        input.value="";
+
+    })
+    .catch(function(error){
+
+        alert("خطای Firebase: " + error.message);
+
     });
 
-
-    input.value="";
 
 };
 
