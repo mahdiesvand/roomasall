@@ -9,15 +9,19 @@ import {
 
 const messagesRef = ref(db, "messages");
 
+
 let user = localStorage.getItem("username") || "کاربر";
 
 
+
+// ارسال پیام
 
 window.sendMessage = function(){
 
     let input = document.getElementById("text");
 
     let message = input.value.trim();
+
 
     if(message === ""){
         return;
@@ -33,18 +37,12 @@ window.sendMessage = function(){
     })
     .then(()=>{
 
-        alert("ذخیره موفق شد");
-        input.value="";
+        input.value = "";
 
     })
     .catch((error)=>{
 
-        alert(
-          "خطای Firebase:\n" +
-          error.code +
-          "\n" +
-          error.message
-        );
+        alert("خطای ذخیره: " + error.message);
 
     });
 
@@ -52,23 +50,31 @@ window.sendMessage = function(){
 
 
 
+// دریافت پیام‌ها
+
 onChildAdded(messagesRef,(data)=>{
 
-    let msg=data.val();
 
-    let box=document.getElementById("messages");
+    let msg = data.val();
+
+
+    let box = document.getElementById("messages");
+
 
     box.innerHTML += `
 
     <div class="message">
 
     <b>${msg.name}</b><br>
+
     ${msg.text}
 
     </div>
 
     `;
 
-    box.scrollTop=box.scrollHeight;
+
+    box.scrollTop = box.scrollHeight;
+
 
 });
