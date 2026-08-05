@@ -1,6 +1,5 @@
-alert("APP JS اجرا شد");
 import { db } from "./firebase.js";
-alert("app.js جدید اجرا شد");
+
 import {
     ref,
     push,
@@ -9,12 +8,10 @@ import {
 
 
 const messagesRef = ref(db, "messages");
-alert("اتصال Firebase آماده است");
 
 let user = localStorage.getItem("username") || "کاربر";
 
 
-// ارسال پیام
 
 window.sendMessage = function(){
 
@@ -22,64 +19,56 @@ window.sendMessage = function(){
 
     let message = input.value.trim();
 
-
     if(message === ""){
         return;
     }
 
-alert("رسید به مرحله ذخیره");
+
     push(messagesRef, {
 
         name: user,
-
         text: message,
-
         time: Date.now()
 
     })
-    .then(function(){
+    .then(()=>{
 
-        alert("پیام در Firebase ذخیره شد");
-
+        alert("ذخیره موفق شد");
         input.value="";
 
     })
-    .catch(function(error){
+    .catch((error)=>{
 
-        alert("خطای Firebase: " + error.message);
+        alert(
+          "خطای Firebase:\n" +
+          error.code +
+          "\n" +
+          error.message
+        );
 
     });
-
 
 };
 
 
 
-// دریافت پیام‌ها
+onChildAdded(messagesRef,(data)=>{
 
-onChildAdded(messagesRef, (data)=>{
+    let msg=data.val();
 
-
-    let msg = data.val();
-
-
-    let box = document.getElementById("messages");
-
+    let box=document.getElementById("messages");
 
     box.innerHTML += `
 
     <div class="message">
 
     <b>${msg.name}</b><br>
-
     ${msg.text}
 
     </div>
 
     `;
 
-
-    box.scrollTop = box.scrollHeight;
-
+    box.scrollTop=box.scrollHeight;
 
 });
