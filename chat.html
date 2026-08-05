@@ -160,34 +160,30 @@ const messagesRef = ref(db,"messages");
 
 
 
-
 // ارسال پیام
 
-window.sendMessage = async function(){
+window.sendMessage = function(){
 
 let text = document.getElementById("message").value;
 
-if(text.trim()=="") return;
+if(text.trim() === ""){
+    return;
+}
 
-try {
-
-await push(messagesRef,{
-name:user,
-text:text,
-time:Date.now()
+push(ref(db, "messages"), {
+    name: user,
+    text: text,
+    time: Date.now()
+})
+.then(function(){
+    alert("پیام ذخیره شد");
+    document.getElementById("message").value = "";
+})
+.catch(function(error){
+    alert("خطا: " + error.message);
 });
 
-alert("پیام ارسال شد");
-
-document.getElementById("message").value="";
-
-} catch(error){
-
-alert("خطا: " + error.message);
-
-}
-
-}
+    }
 
 
 
