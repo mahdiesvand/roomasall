@@ -8,7 +8,7 @@ import {
 
 
 const messagesRef = ref(db, "messages");
-
+alert("اتصال Firebase آماده است");
 
 let user = localStorage.getItem("username") || "کاربر";
 
