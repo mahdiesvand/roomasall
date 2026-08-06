@@ -10,6 +10,15 @@
 
 <style>
 
+#profile{
+
+font-size:13px;
+margin-top:5px;
+color:#222;
+
+}
+
+    
 *{
 box-sizing:border-box;
 }
@@ -257,14 +266,7 @@ font-weight:normal;
 } 
 </style>
 
-#profile{
 
-font-size:13px;
-margin-top:5px;
-color:#222;
-
-}
-    
 </head>
 
 
@@ -285,26 +287,6 @@ color:#222;
 <span id="online">
 🟢 آنلاین
 </span>
-
-</div>
-
-
-<div class="profile-box">
-
-<input id="newName" placeholder="نام جدید">
-
-<select id="avatar">
-<option>🙂</option>
-<option>😎</option>
-<option>🤖</option>
-<option>🔥</option>
-<option>🍯</option>
-<option>👑</option>
-</select>
-
-<button onclick="saveProfile()">
-ذخیره
-</button>
 
 </div>
 
@@ -364,47 +346,6 @@ window.location.href="index.html";
 </script>
 
 <script type="module" src="online.js"></script>
- <script>
-
-function saveProfile(){
-
-let name =
-document.getElementById("newName").value;
-
-
-let avatar =
-document.getElementById("avatar").value;
-
-
-if(name){
-
-localStorage.setItem("username",name);
-
-}
-
-
-localStorage.setItem("avatar",avatar);
-
-
-location.reload();
-
-}
-
-
-
-let oldName =
-localStorage.getItem("username") || "کاربر";
-
-
-let oldAvatar =
-localStorage.getItem("avatar") || "🙂";
-
-
-document.getElementById("profile").innerHTML =
-oldAvatar + " " + oldName;
-
-
- </script>   
 <script type="module" src="app.js"></script>
 
 
