@@ -1,466 +1,237 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>عسل چت</title>
-
-
 <style>
 
-*{
-box-sizing:border-box;
+.message-box{
+    display:flex;
+    flex-direction:column;
 }
 
-
-body{
-
-margin:0;
-height:100vh;
-font-family:tahoma;
-background:#0b141a;
-color:white;
-
+.message-name{
+    font-size:12px;
+    color:#d4af37;
+    margin-bottom:5px;
 }
 
-
-
-.chat{
-
-height:100vh;
-max-width:600px;
-margin:auto;
-display:flex;
-flex-direction:column;
-
-background:#0b141a;
-
+.message-time{
+    font-size:10px;
+    opacity:.6;
+    margin-top:5px;
+    text-align:left;
 }
 
-
-
-
-/* هدر */
-
-.header{
-
-height:75px;
-
-display:flex;
-flex-direction:column;
-
-align-items:center;
-justify-content:center;
-
-background:
-
-linear-gradient(
-135deg,
-#8f6500,
-#ffd700,
-#8f6500
-);
-
-
-color:#111;
-
-font-size:24px;
-
-font-weight:bold;
-
-box-shadow:0 3px 15px #000;
-
+.mymsg .message-name{
+    color:#111;
 }
 
-
-
-#profile{
-
-font-size:12px;
-
-color:#333;
-
+.online{
+    font-size:12px;
+    text-align:center;
+    padding:5px;
+    background:#181818;
+    color:#aaa;
 }
 
-
-.header span{
-
-font-size:12px;
-
-color:#075e54;
-
-font-weight:bold;
-
+.footer{
+    display:flex;
+    background:#151515;
+    padding:8px;
 }
 
-
-
-
-
-/* محیط پیام */
-
-.messages{
-
-flex:1;
-
-padding:15px;
-
-overflow-y:auto;
-
-
-/* پس زمینه عسل */
-
-background:
-
-radial-gradient(
-circle,
-rgba(255,215,0,.08) 2px,
-transparent 2px
-);
-
-background-size:35px 35px;
-
+.footer input{
+    background:#333;
+    color:white;
 }
 
-
-
-
-
-.message{
-
-position:relative;
-
-padding:12px 16px;
-
-border-radius:20px;
-
-margin-bottom:12px;
-
-max-width:80%;
-
-width:fit-content;
-
-font-size:15px;
-
-line-height:1.5;
-
-animation:show .25s;
-
-box-shadow:
-
-0 3px 10px rgba(0,0,0,.4);
-
+.footer button{
+    cursor:pointer;
 }
 
-
-
-
-.message b{
-
-display:block;
-
-font-size:13px;
-
-margin-bottom:5px;
-
-color:#ffd700;
-
+.empty{
+    text-align:center;
+    opacity:.5;
+    margin-top:40px;
 }
-
-
-
-.message small{
-
-display:block;
-
-text-align:left;
-
-font-size:10px;
-
-opacity:.6;
-
-margin-top:6px;
-
-}
-
-
-
-/* پیام خودم */
-
-.message.mine{
-
-margin-left:auto;
-
-background:
-
-linear-gradient(
-135deg,
-#ffd700,
-#d9a900
-);
-
-
-color:#111;
-
-border-bottom-right-radius:5px;
-
-}
-
-
-
-.message.mine b{
-
-color:#000;
-
-}
-
-
-
-
-/* پیام دیگران */
-
-.message.other{
-
-margin-right:auto;
-
-background:
-
-linear-gradient(
-135deg,
-#202b36,
-#263746
-);
-
-
-color:white;
-
-border-bottom-left-radius:5px;
-
-}
-
-
-
-
-
-
-/* نوار ارسال */
-
-.input{
-
-display:flex;
-
-padding:10px;
-
-background:#17212b;
-
-align-items:center;
-
-border-top:1px solid #333;
-
-}
-
-
-
-.input input{
-
-flex:1;
-
-padding:14px;
-
-border:none;
-
-outline:none;
-
-border-radius:30px;
-
-background:#0b141a;
-
-color:white;
-
-font-size:15px;
-
-}
-
-
-
-.input button{
-
-margin-right:8px;
-
-width:50px;
-
-height:50px;
-
-border:none;
-
-border-radius:50%;
-
-
-background:
-
-linear-gradient(
-135deg,
-#ffd700,
-#b8860b
-);
-
-
-font-size:21px;
-
-cursor:pointer;
-
-}
-
-
-
-.input button:active{
-
-transform:scale(.9);
-
-}
-
-
-
-
-@keyframes show{
-
-from{
-
-opacity:0;
-
-transform:translateY(15px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
 
 </style>
 
 
-</head>
-
-
-
-<body>
-
-
-
-<div class="chat">
-
-
-<div class="header">
-
-🍯 عسل چت
-
-<div id="profile"></div>
-
-
-<span id="online">
+<div class="online">
 🟢 آنلاین
-</span>
-
 </div>
 
 
+<script type="module">
+
+
+import { db } from "./firebase.js";
+
+
+import {
+ref,
+push,
+onChildAdded,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 
 
-<div class="messages" id="messages">
+const box=document.getElementById("messages");
 
-</div>
-
-
+const input=document.getElementById("messageInput");
 
 
 
-<div class="input">
-
-
-<input 
-type="file" 
-id="imageInput" 
-accept="image/*"
-style="display:none"
->
+let username=localStorage.getItem("username");
 
 
 
-<button onclick="document.getElementById('imageInput').click()">
+if(!username){
 
-📷
-
-</button>
+username=prompt("نام خود را وارد کنید");
 
 
+if(!username){
 
-
-<input id="text" placeholder="پیام بنویسید...">
-
-
-
-
-<button onclick="sendMessage()">
-
-➤
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<script>
-
-let user = localStorage.getItem("username");
-
-if(!user){
-
-window.location.href="index.html";
+username="کاربر";
 
 }
 
-</script>
 
-<script>
-
-let profileName =
-localStorage.getItem("username") || "کاربر";
-
-let profileAvatar =
-localStorage.getItem("avatar") || "🙂";
+localStorage.setItem("username",username);
 
 
-document.getElementById("profile").innerHTML =
-profileAvatar + " " + profileName;
+}
+
+
+
+const messagesRef=ref(db,"messages");
+
+
+
+
+function showTime(t){
+
+
+let d=new Date(t);
+
+
+return d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");
+
+
+}
+
+
+
+
+window.sendMessage=function(){
+
+
+let text=input.value.trim();
+
+
+
+if(text=="") return;
+
+
+
+push(messagesRef,{
+
+name:username,
+
+text:text,
+
+time:Date.now()
+
+});
+
+
+
+input.value="";
+
+
+
+};
+
+
+
+
+
+input.addEventListener("keydown",function(e){
+
+
+if(e.key==="Enter"){
+
+sendMessage();
+
+}
+
+
+});
+
+
+
+
+
+onChildAdded(messagesRef,function(snapshot){
+
+
+
+let data=snapshot.val();
+
+
+
+let div=document.createElement("div");
+
+
+
+div.className="message";
+
+
+
+if(data.name===username){
+
+div.classList.add("mymsg");
+
+}
+
+
+
+div.innerHTML=`
+
+<div class="message-name">
+
+${data.name}
+
+</div>
+
+
+<div class="message-box">
+
+${data.text}
+
+</div>
+
+
+<div class="message-time">
+
+${showTime(data.time)}
+
+</div>
+
+`;
+
+
+
+box.appendChild(div);
+
+
+
+box.scrollTop=box.scrollHeight;
+
+
+
+});
+
 
 
   </script>
-
-<script type="module" src="online.js"></script>
-<script type="module" src="users.js"></script>
-<script type="module" src="app.js"></script>
-
-
-</body>
-
-</html>
