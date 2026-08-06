@@ -441,7 +441,20 @@ window.location.href="index.html";
 
 </script>
 
+<script>
 
+let profileName =
+localStorage.getItem("username") || "کاربر";
+
+let profileAvatar =
+localStorage.getItem("avatar") || "🙂";
+
+
+document.getElementById("profile").innerHTML =
+profileAvatar + " " + profileName;
+
+
+  </script>
 
 <script type="module" src="online.js"></script>
 
