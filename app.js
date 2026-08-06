@@ -4,7 +4,7 @@ import {
     ref,
     push,
     onChildAdded
-} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js"; 
 
 
 const messagesRef = ref(db, "messages");
