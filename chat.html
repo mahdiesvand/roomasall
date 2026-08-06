@@ -290,15 +290,28 @@ font-weight:normal;
 
 <div class="input">
 
+<input 
+type="file" 
+id="imageInput" 
+accept="image/*"
+style="display:none"
+>
+
+
+<button onclick="document.getElementById('imageInput').click()">
+📷
+</button>
+
 
 <input id="text" placeholder="پیام بنویسید...">
 
 
 <button onclick="sendMessage()">
-
 ➤
-
 </button>
+
+
+</div>
 
 
 </div>
