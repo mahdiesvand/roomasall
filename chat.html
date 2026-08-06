@@ -8,7 +8,6 @@
 
 <title>عسل چت</title>
 
-
 <style>
 
 *{
@@ -42,12 +41,11 @@ background:#0b141a;
 
 
 
-
 /* هدر */
 
 .header{
 
-height:65px;
+height:75px;
 
 display:flex;
 flex-direction:column;
@@ -56,7 +54,6 @@ align-items:center;
 justify-content:center;
 
 background:
-
 linear-gradient(
 135deg,
 #8f6500,
@@ -67,11 +64,13 @@ linear-gradient(
 
 color:#111;
 
-font-size:18px;
+font-size:24px;
 
 font-weight:bold;
 
 box-shadow:0 3px 15px #000;
+
+position:relative;
 
 }
 
@@ -86,17 +85,71 @@ color:#333;
 }
 
 
-.header span{
+.header button{
 
 font-size:12px;
-
-color:#075e54;
 
 font-weight:bold;
 
 }
 
 
+
+#onlineBtn{
+
+border:none;
+
+background:#075e54;
+
+color:white;
+
+border-radius:20px;
+
+padding:5px 15px;
+
+margin-top:5px;
+
+cursor:pointer;
+
+}
+
+
+
+#onlineList{
+
+display:none;
+
+position:absolute;
+
+top:75px;
+
+right:0;
+
+left:0;
+
+background:#111;
+
+color:white;
+
+padding:10px;
+
+z-index:10;
+
+border-bottom:1px solid #333;
+
+max-height:200px;
+
+overflow-y:auto;
+
+}
+
+
+
+#onlineList.show{
+
+display:block;
+
+}
 
 
 
@@ -111,8 +164,6 @@ padding:15px;
 overflow-y:auto;
 
 
-/* پس زمینه عسل */
-
 background:
 
 radial-gradient(
@@ -124,8 +175,6 @@ transparent 2px
 background-size:35px 35px;
 
 }
-
-
 
 
 
@@ -151,14 +200,8 @@ animation:show .25s;
 
 box-shadow:
 
-0 3px 10px rgba(0,0,0,.4);
-
-}
-
-
-
-
-.message b{
+0 3
+  .message b{
 
 display:block;
 
@@ -240,7 +283,6 @@ color:white;
 border-bottom-left-radius:5px;
 
 }
-
 
 
 
@@ -368,9 +410,14 @@ transform:translateY(0);
 <div id="profile"></div>
 
 
-<span id="online">
-🟢 آنلاین
-</span>
+<button id="onlineBtn">
+🟢 آنلاین‌ها
+</button>
+
+
+<div id="onlineList">
+</div>
+
 
 </div>
 
@@ -422,14 +469,8 @@ style="display:none"
 </div>
 
 
-</div>
-
-
-
-
-
-
-<script>
+</div> 
+  <script>
 
 let user = localStorage.getItem("username");
 
@@ -440,6 +481,7 @@ window.location.href="index.html";
 }
 
 </script>
+
 
 <script>
 
@@ -454,7 +496,24 @@ document.getElementById("profile").innerHTML =
 profileAvatar + " " + profileName;
 
 
-  </script>
+</script>
+
+
+<script>
+
+let btn=document.getElementById("onlineBtn");
+
+let list=document.getElementById("onlineList");
+
+
+btn.onclick=function(){
+
+list.classList.toggle("show");
+
+}
+
+</script>
+
 
 <script type="module" src="online.js"></script>
 <script type="module" src="users.js"></script>
