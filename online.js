@@ -8,31 +8,42 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 
+
+// گرفتن نام کاربر
 let user = localStorage.getItem("username") || "کاربر";
 
 
-let onlineRef = ref(db, "online/" + user);
+// مسیر کاربر آنلاین
+let onlineRef = ref(
+    db,
+    "online/" + encodeURIComponent(user)
+);
+
 
 
 // ثبت آنلاین بودن
 set(onlineRef, {
-    name:user,
-    time:Date.now()
+
+    name: user,
+
+    time: Date.now()
+
 });
 
 
-// حذف خودکار هنگام خروج
+
+// حذف خودکار وقتی خارج شد
 onDisconnect(onlineRef).remove();
 
 
 
-// نمایش لیست کاربران آنلاین
 
-onValue(ref(db,"online"),(snap)=>{
+// خواندن کاربران آنلاین
+
+onValue(ref(db,"online"), (snap)=>{
 
 
-    let box = document.getElementById("onlineUsers");
-
+    let list = document.getElementById("onlineUsers");
 
     let countBox = document.getElementById("online");
 
@@ -53,28 +64,39 @@ onValue(ref(db,"online"),(snap)=>{
 
 
 
-        html += `
+        if(data && data.name){
 
-        <div class="online-user">
 
-        🟢 ${data.name}
+            html += `
 
-        </div>
+            <div class="online-user">
 
-        `;
+            🟢 ${data.name}
+
+            </div>
+
+            `;
+
+
+        }
 
 
     });
 
 
 
-    if(box){
 
-        box.innerHTML = html;
+    // نمایش لیست سمت راست
+
+    if(list){
+
+        list.innerHTML = html;
 
     }
 
 
+
+    // نمایش تعداد در هدر
 
     if(countBox){
 
