@@ -4,13 +4,14 @@ import {
     ref,
     push,
     onChildAdded
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js"; 
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 
 const messagesRef = ref(db, "messages");
 
 
 let user = localStorage.getItem("username") || "کاربر";
+
 
 
 
@@ -31,7 +32,9 @@ window.sendMessage = function(){
     push(messagesRef, {
 
         name: user,
+
         text: message,
+
         time: Date.now()
 
     })
@@ -50,6 +53,9 @@ window.sendMessage = function(){
 
 
 
+
+
+
 // دریافت پیام‌ها
 
 onChildAdded(messagesRef,(data)=>{
@@ -61,20 +67,47 @@ onChildAdded(messagesRef,(data)=>{
     let box = document.getElementById("messages");
 
 
+    let side = msg.name === user ? "mine" : "other";
+
+
+    let time = new Date(msg.time)
+    .toLocaleTimeString("fa-IR",
+    {
+        hour:"2-digit",
+        minute:"2-digit"
+    });
+
+
+
     box.innerHTML += `
 
-    <div class="message">
 
-    <b>${msg.name}</b><br>
+    <div class="message ${side}">
 
-    ${msg.text}
+
+        <b>${msg.name}</b>
+
+        <br>
+
+        ${msg.text}
+
+
+        <small>
+
+        ${time}
+
+        </small>
+
 
     </div>
+
 
     `;
 
 
+
     box.scrollTop = box.scrollHeight;
+
 
 
 });
