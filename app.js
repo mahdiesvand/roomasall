@@ -23,9 +23,12 @@ let user = localStorage.getItem("username") || "کاربر";
 let avatar = localStorage.getItem("avatar") || "🙂";
 
 
-// ارسال پیام متنی
+
+
+// ارسال پیام
 
 window.sendMessage = function(){
+
 
     let input = document.getElementById("text");
 
@@ -37,9 +40,12 @@ window.sendMessage = function(){
     }
 
 
-    push(messagesRef, {
+
+    push(messagesRef,{
 
         name:user,
+
+        avatar:avatar,
 
         text:message,
 
@@ -50,7 +56,9 @@ window.sendMessage = function(){
     });
 
 
+
     input.value="";
+
 
 };
 
@@ -59,12 +67,12 @@ window.sendMessage = function(){
 
 
 
-// انتخاب عکس
+// ارسال عکس
 
 document.getElementById("imageInput").addEventListener("change", async function(e){
 
 
-    let file = e.target.files[0];
+    let file=e.target.files[0];
 
 
     if(!file){
@@ -73,7 +81,7 @@ document.getElementById("imageInput").addEventListener("change", async function(
 
 
 
-    let imageRef = storageRef(
+    let imgRef = storageRef(
         storage,
         "images/" + Date.now() + "_" + file.name
     );
@@ -83,17 +91,18 @@ document.getElementById("imageInput").addEventListener("change", async function(
     try{
 
 
-        await uploadBytes(imageRef,file);
+        await uploadBytes(imgRef,file);
 
 
-
-        let url = await getDownloadURL(imageRef);
+        let url = await getDownloadURL(imgRef);
 
 
 
         push(messagesRef,{
 
             name:user,
+
+            avatar:avatar,
 
             image:url,
 
@@ -108,7 +117,7 @@ document.getElementById("imageInput").addEventListener("change", async function(
     }
     catch(error){
 
-        alert("خطای ارسال عکس: " + error.message);
+        alert("خطای ارسال عکس: "+error.message);
 
     }
 
@@ -120,8 +129,7 @@ document.getElementById("imageInput").addEventListener("change", async function(
 
 
 
-
-// دریافت پیام‌ها
+// نمایش پیام‌ها
 
 
 onChildAdded(messagesRef,(data)=>{
@@ -136,7 +144,6 @@ onChildAdded(messagesRef,(data)=>{
     let side = msg.name === user ? "mine":"other";
 
 
-
     let content="";
 
 
@@ -146,11 +153,10 @@ onChildAdded(messagesRef,(data)=>{
 
         content = `
 
-        <img src="${msg.image}" 
+        <img src="${msg.image}"
         style="
         max-width:220px;
         border-radius:15px;
-        display:block;
         ">
 
         `;
@@ -166,20 +172,20 @@ onChildAdded(messagesRef,(data)=>{
 
 
 
-
     box.innerHTML += `
 
 
     <div class="message ${side}">
 
 
-    <b>${msg.name}</b>
+    <b>${msg.avatar || "🙂"} ${msg.name}</b>
 
 
     <br>
 
 
     ${content}
+
 
 
     <small>
