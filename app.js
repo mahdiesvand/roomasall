@@ -1,10 +1,18 @@
-import { db } from "./firebase.js";
+import { db, storage } from "./firebase.js";
 
 import {
     ref,
     push,
     onChildAdded
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+
+import {
+    ref as storageRef,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
 
 
 const messagesRef = ref(db, "messages");
@@ -15,7 +23,7 @@ let user = localStorage.getItem("username") || "کاربر";
 
 
 
-// ارسال پیام
+// ارسال پیام متنی
 
 window.sendMessage = function(){
 
@@ -31,23 +39,18 @@ window.sendMessage = function(){
 
     push(messagesRef, {
 
-        name: user,
+        name:user,
 
-        text: message,
+        text:message,
 
-        time: Date.now()
+        type:"text",
 
-    })
-    .then(()=>{
-
-        input.value = "";
-
-    })
-    .catch((error)=>{
-
-        alert("خطای ذخیره: " + error.message);
+        time:Date.now()
 
     });
+
+
+    input.value="";
 
 };
 
@@ -56,26 +59,111 @@ window.sendMessage = function(){
 
 
 
+// انتخاب عکس
+
+document.getElementById("imageInput").addEventListener("change", async function(e){
+
+
+    let file = e.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+
+    let imageRef = storageRef(
+        storage,
+        "images/" + Date.now() + "_" + file.name
+    );
+
+
+
+    try{
+
+
+        await uploadBytes(imageRef,file);
+
+
+
+        let url = await getDownloadURL(imageRef);
+
+
+
+        push(messagesRef,{
+
+            name:user,
+
+            image:url,
+
+            type:"image",
+
+            time:Date.now()
+
+        });
+
+
+
+    }
+    catch(error){
+
+        alert("خطای ارسال عکس: " + error.message);
+
+    }
+
+
+});
+
+
+
+
+
+
+
 // دریافت پیام‌ها
+
 
 onChildAdded(messagesRef,(data)=>{
 
 
-    let msg = data.val();
+    let msg=data.val();
 
 
-    let box = document.getElementById("messages");
+    let box=document.getElementById("messages");
 
 
-    let side = msg.name === user ? "mine" : "other";
+    let side = msg.name === user ? "mine":"other";
 
 
-    let time = new Date(msg.time)
-    .toLocaleTimeString("fa-IR",
-    {
-        hour:"2-digit",
-        minute:"2-digit"
-    });
+
+    let content="";
+
+
+
+    if(msg.type==="image"){
+
+
+        content = `
+
+        <img src="${msg.image}" 
+        style="
+        max-width:220px;
+        border-radius:15px;
+        display:block;
+        ">
+
+        `;
+
+
+    }else{
+
+
+        content = msg.text;
+
+
+    }
+
 
 
 
@@ -85,28 +173,36 @@ onChildAdded(messagesRef,(data)=>{
     <div class="message ${side}">
 
 
-        <b>${msg.name}</b>
-
-        <br>
-
-        ${msg.text}
+    <b>${msg.name}</b>
 
 
-        <small>
+    <br>
 
-        ${time}
 
-        </small>
+    ${content}
+
+
+    <small>
+
+    ${new Date(msg.time)
+    .toLocaleTimeString("fa-IR",
+    {
+        hour:"2-digit",
+        minute:"2-digit"
+    })}
+
+    </small>
 
 
     </div>
+
 
 
     `;
 
 
 
-    box.scrollTop = box.scrollHeight;
+    box.scrollTop=box.scrollHeight;
 
 
 
