@@ -20,7 +20,7 @@ const messagesRef = ref(db, "messages");
 
 let user = localStorage.getItem("username") || "کاربر";
 
-
+let avatar = localStorage.getItem("avatar") || "🙂";
 
 
 // ارسال پیام متنی
