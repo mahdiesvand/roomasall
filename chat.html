@@ -27,12 +27,15 @@ color:white;
 }
 
 
+
 /* ساختار اصلی */
 
 .main{
 
 height:100vh;
+
 max-width:800px;
+
 margin:auto;
 
 display:flex;
@@ -43,23 +46,23 @@ direction:rtl;
 
 
 
-/* لیست آنلاین سمت راست */
+/* لیست آنلاین */
 
 .online-panel{
 
-width:150px;
+width:140px;
 
 background:#151f27;
 
-margin:10px;
-
-border-radius:18px;
+margin:8px;
 
 padding:10px;
 
+border-radius:15px;
+
 height:max-content;
 
-box-shadow:0 0 15px #000;
+box-shadow:0 0 12px #000;
 
 }
 
@@ -69,11 +72,11 @@ box-shadow:0 0 15px #000;
 
 text-align:center;
 
-font-size:14px;
-
 color:#ffd700;
 
-margin-bottom:12px;
+font-size:14px;
+
+margin-bottom:10px;
 
 }
 
@@ -95,7 +98,7 @@ font-size:13px;
 
 
 
-/* چت */
+/* چت اصلی */
 
 .chat{
 
@@ -113,60 +116,42 @@ background:#0b141a;
 
 
 
-/* هدر */
+/* هدر جدید کوچک */
 
-.header{
+.top-bar{
 
-height:75px;
+height:45px;
 
 display:flex;
 
-flex-direction:column;
-
 align-items:center;
 
-justify-content:center;
+justify-content:space-between;
 
+padding:0 15px;
 
-background:
+background:#17212b;
 
-linear-gradient(
-135deg,
-#8f6500,
-#ffd700,
-#8f6500
-);
+color:#ffd700;
 
-
-color:#111;
-
-font-size:22px;
+font-size:16px;
 
 font-weight:bold;
 
-box-shadow:0 3px 15px #000;
+box-shadow:0 2px 8px #000;
 
 }
+
 
 
 #profile{
 
 font-size:12px;
 
-color:#333;
+color:#ccc;
 
 }
 
-
-.header span{
-
-font-size:12px;
-
-color:#075e54;
-
-font-weight:bold;
-
-}
 
 
 
@@ -195,8 +180,6 @@ background-size:35px 35px;
 
 
 
-/* پیام */
-
 .message{
 
 position:relative;
@@ -215,15 +198,11 @@ font-size:15px;
 
 line-height:1.5;
 
-animation:show .25s;
-
 box-shadow:
 0 3px 10px rgba(0,0,0,.4);
 
 }
-
-
-.message b{
+  .message b{
 
 display:block;
 
@@ -253,7 +232,7 @@ margin-top:6px;
 
 
 
-/* پیام من */
+/* پیام خودم */
 
 .message.mine{
 
@@ -266,7 +245,6 @@ linear-gradient(
 #ffd700,
 #d9a900
 );
-
 
 color:#111;
 
@@ -298,7 +276,6 @@ linear-gradient(
 #263746
 );
 
-
 color:white;
 
 border-bottom-left-radius:5px;
@@ -307,7 +284,8 @@ border-bottom-left-radius:5px;
 
 
 
-/* ورودی پیام */
+
+/* نوار ارسال */
 
 .input{
 
@@ -385,42 +363,21 @@ transform:scale(.9);
 
 
 
-@keyframes show{
-
-from{
-
-opacity:0;
-
-transform:translateY(15px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-
 </style>
 
 
 </head>
 
 
+
 <body>
+
 
 
 <div class="main">
 
 
-<!-- لیست آنلاین -->
+<!-- لیست آنلاین سمت راست -->
 
 <div class="online-panel">
 
@@ -435,9 +392,6 @@ transform:translateY(0);
 <div id="onlineUsers">
 
 
-<!-- کاربران اینجا می‌آیند -->
-
-
 </div>
 
 
@@ -450,27 +404,140 @@ transform:translateY(0);
 <div class="chat">
 
 
-<div class="header">
 
-🍯 به عسل چت خوش آمدید
-
-
-<div id="profile"></div>
+<div class="top-bar">
 
 
-<span>
-🟢 آنلاین
-</span>
+<div>
+🍯 عسل چت
+</div>
 
+
+
+<div id="online">
+
+🟢 آنلاین: 0
 
 </div>
 
 
 
-<div class="messages" id="messages">
+</div> import { db } from "./firebase.js";
+
+import {
+    ref,
+    set,
+    onValue,
+    onDisconnect
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+
+
+// گرفتن نام کاربر
+let user = localStorage.getItem("username") || "کاربر";
+
+
+// مسیر کاربر آنلاین
+let onlineRef = ref(
+    db,
+    "online/" + encodeURIComponent(user)
+);
+
+
+
+// ثبت آنلاین بودن
+set(onlineRef, {
+
+    name: user,
+
+    time: Date.now()
+
+});
+
+
+
+// حذف خودکار وقتی خارج شد
+onDisconnect(onlineRef).remove();
+
+
+
+
+// خواندن کاربران آنلاین
+
+onValue(ref(db,"online"), (snap)=>{
+
+
+    let list = document.getElementById("onlineUsers");
+
+    let countBox = document.getElementById("online");
+
+
+    let html = "";
+
+    let count = 0;
+
+
+
+    snap.forEach((item)=>{
+
+
+        count++;
+
+
+        let data = item.val();
+
+
+
+        if(data && data.name){
+
+
+            html += `
+
+            <div class="online-user">
+
+            🟢 ${data.name}
+
+            </div>
+
+            `;
+
+
+        }
+
+
+    });
+
+
+
+
+    // نمایش لیست سمت راست
+
+    if(list){
+
+        list.innerHTML = html;
+
+    }
+
+
+
+    // نمایش تعداد در هدر
+
+    if(countBox){
+
+        countBox.innerHTML =
+        "🟢 آنلاین: " + count;
+
+    }
+
+
+
+});
+
+  <div class="messages" id="messages">
 
 
 </div>
+
 
 
 
@@ -512,11 +579,18 @@ placeholder="پیام بنویسید..."
 </div>
 
 
+
 </div>
 
 
-</div> 
-  <script>
+</div>
+
+
+
+
+
+
+<script>
 
 
 let user = localStorage.getItem("username");
@@ -527,7 +601,6 @@ if(!user){
 window.location.href="index.html";
 
 }
-
 
 
 </script>
@@ -547,9 +620,15 @@ localStorage.getItem("avatar") || "🙂";
 
 
 
-document.getElementById("profile").innerHTML =
+let profile = document.getElementById("profile");
 
+
+if(profile){
+
+profile.innerHTML =
 profileAvatar + " " + profileName;
+
+}
 
 
 
@@ -564,6 +643,7 @@ profileAvatar + " " + profileName;
 <script type="module" src="users.js"></script>
 
 <script type="module" src="app.js"></script>
+
 
 
 
