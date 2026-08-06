@@ -21,7 +21,7 @@ body{
 margin:0;
 height:100vh;
 font-family:tahoma;
-background:#0e1621;
+background:#0b141a;
 color:white;
 
 }
@@ -35,9 +35,11 @@ max-width:600px;
 margin:auto;
 display:flex;
 flex-direction:column;
-background:#17212b;
+
+background:#0b141a;
 
 }
+
 
 
 
@@ -45,7 +47,7 @@ background:#17212b;
 
 .header{
 
-height:70px;
+height:75px;
 
 display:flex;
 flex-direction:column;
@@ -53,24 +55,33 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 
-background:#202b36;
+background:
 
-color:#ffd700;
+linear-gradient(
+135deg,
+#8f6500,
+#ffd700,
+#8f6500
+);
 
-font-size:23px;
+
+color:#111;
+
+font-size:24px;
 
 font-weight:bold;
 
-box-shadow:0 3px 10px #000;
+box-shadow:0 3px 15px #000;
 
 }
+
 
 
 #profile{
 
 font-size:12px;
 
-color:#ddd;
+color:#333;
 
 }
 
@@ -79,9 +90,9 @@ color:#ddd;
 
 font-size:12px;
 
-color:#7cff7c;
+color:#075e54;
 
-font-weight:normal;
+font-weight:bold;
 
 }
 
@@ -89,7 +100,7 @@ font-weight:normal;
 
 
 
-/* بخش پیام ها */
+/* محیط پیام */
 
 .messages{
 
@@ -99,13 +110,18 @@ padding:15px;
 
 overflow-y:auto;
 
+
+/* پس زمینه عسل */
+
 background:
 
-linear-gradient(
-180deg,
-#0e1621,
-#101820
+radial-gradient(
+circle,
+rgba(255,215,0,.08) 2px,
+transparent 2px
 );
+
+background-size:35px 35px;
 
 }
 
@@ -117,9 +133,9 @@ linear-gradient(
 
 position:relative;
 
-padding:12px 15px;
+padding:12px 16px;
 
-border-radius:18px;
+border-radius:20px;
 
 margin-bottom:12px;
 
@@ -129,11 +145,16 @@ width:fit-content;
 
 font-size:15px;
 
+line-height:1.5;
+
 animation:show .25s;
 
-box-shadow:0 2px 5px #0005;
+box-shadow:
+
+0 3px 10px rgba(0,0,0,.4);
 
 }
+
 
 
 
@@ -161,23 +182,30 @@ font-size:10px;
 
 opacity:.6;
 
-margin-top:5px;
+margin-top:6px;
 
 }
 
 
 
-/* پیام من */
+/* پیام خودم */
 
 .message.mine{
 
 margin-left:auto;
 
-background:#d9fdd3;
+background:
+
+linear-gradient(
+135deg,
+#ffd700,
+#d9a900
+);
+
 
 color:#111;
 
-border-bottom-right-radius:4px;
+border-bottom-right-radius:5px;
 
 }
 
@@ -192,18 +220,24 @@ color:#000;
 
 
 
-
 /* پیام دیگران */
 
 .message.other{
 
 margin-right:auto;
 
-background:#202b36;
+background:
+
+linear-gradient(
+135deg,
+#202b36,
+#263746
+);
+
 
 color:white;
 
-border-bottom-left-radius:4px;
+border-bottom-left-radius:5px;
 
 }
 
@@ -212,7 +246,7 @@ border-bottom-left-radius:4px;
 
 
 
-/* پایین چت */
+/* نوار ارسال */
 
 .input{
 
@@ -220,9 +254,11 @@ display:flex;
 
 padding:10px;
 
-background:#202b36;
+background:#17212b;
 
 align-items:center;
+
+border-top:1px solid #333;
 
 }
 
@@ -238,9 +274,9 @@ border:none;
 
 outline:none;
 
-border-radius:25px;
+border-radius:30px;
 
-background:#0e1621;
+background:#0b141a;
 
 color:white;
 
@@ -254,17 +290,25 @@ font-size:15px;
 
 margin-right:8px;
 
-width:48px;
+width:50px;
 
-height:48px;
+height:50px;
 
 border:none;
 
 border-radius:50%;
 
-background:#ffd700;
 
-font-size:20px;
+background:
+
+linear-gradient(
+135deg,
+#ffd700,
+#b8860b
+);
+
+
+font-size:21px;
 
 cursor:pointer;
 
@@ -277,6 +321,7 @@ cursor:pointer;
 transform:scale(.9);
 
 }
+
 
 
 
@@ -352,13 +397,18 @@ style="display:none"
 >
 
 
+
 <button onclick="document.getElementById('imageInput').click()">
+
 📷
+
 </button>
 
 
 
+
 <input id="text" placeholder="پیام بنویسید...">
+
 
 
 
