@@ -1,674 +1,83 @@
 <!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>عسل منچ | AAA Game UI</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>عسل منچ 3D</title><style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
+    background:#02050a;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
-body{
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            #263f59 0%,
-            #0b1726 38%,
-            #03070d 75%,
-            #010204 100%
-        );
-
-    color:white;
+#game{
+    position:fixed;
+    inset:0;
 }
 
-/* =========================================
-   APP
-========================================= */
-
-.app{
-    width:100%;
-    height:100vh;
-    position:relative;
-    overflow:hidden;
+canvas{
+    display:block;
 }
 
-/* cinematic light */
-
-.app::before{
-    content:"";
-    position:absolute;
-
-    width:800px;
-    height:800px;
-
-    left:50%;
-    top:42%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,190,65,.16),
-            rgba(60,130,255,.05) 45%,
-            transparent 70%
-        );
-
-    filter:blur(30px);
-
+.hud{
+    position:fixed;
+    inset:0;
     pointer-events:none;
+    z-index:10;
 }
 
-/* =========================================
-   TOP HUD
-========================================= */
-
-.topbar{
+.top{
     position:absolute;
-
     top:14px;
     left:14px;
     right:14px;
 
-    height:62px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    z-index:100;
 }
 
-/* logo */
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo-icon{
-    width:46px;
-    height:46px;
-
-    border-radius:14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66c,
-            #ff8e19
-        );
-
-    box-shadow:
-        0 8px 25px rgba(255,145,25,.28),
-        inset 0 2px 4px rgba(255,255,255,.65);
-}
-
-.logo-name{
-    font-size:18px;
-    font-weight:900;
-}
-
-.logo-name span{
-    color:#ffd64d;
-}
-
-/* currency */
-
-.currency{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    padding:8px 12px;
+.brand{
+    padding:11px 16px;
 
     border-radius:15px;
 
-    background:
-        rgba(7,14,24,.76);
+    background:rgba(5,12,21,.72);
+    border:1px solid rgba(255,255,255,.12);
 
-    border:
-        1px solid rgba(255,255,255,.09);
+    color:#fff;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
 
     backdrop-filter:blur(14px);
 }
 
-.coin{
-    width:27px;
-    height:27px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #fff7a7,
-            #ffc928 48%,
-            #a76b00
-        );
-
-    color:#5c3900;
-
-    font-size:13px;
-
-    box-shadow:
-        inset 0 2px 3px rgba(255,255,255,.7),
-        0 3px 8px rgba(0,0,0,.35);
+.brand b{
+    color:#ffd34d;
 }
 
-.currency strong{
-    font-size:12px;
-}
+.info{
+    padding:10px 15px;
 
-/* =========================================
-   PLAYER CARDS
-========================================= */
+    border-radius:15px;
 
-.player{
-    position:absolute;
+    background:rgba(5,12,21,.72);
+    border:1px solid rgba(255,255,255,.12);
 
-    z-index:80;
+    color:#d9e5f2;
 
-    width:170px;
-
-    padding:10px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(18,34,51,.94),
-            rgba(5,12,21,.94)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    box-shadow:
-        0 14px 35px rgba(0,0,0,.35);
-
-    backdrop-filter:blur(15px);
-
-    transition:.3s;
-}
-
-.player.active{
-    border-color:rgba(255,210,74,.65);
-
-    box-shadow:
-        0 0 25px rgba(255,190,40,.17),
-        0 15px 35px rgba(0,0,0,.45);
-}
-
-.player.red{
-    top:88px;
-    left:14px;
-}
-
-.player.green{
-    top:88px;
-    right:14px;
-}
-
-.player.yellow{
-    bottom:85px;
-    right:14px;
-}
-
-.player.blue{
-    bottom:85px;
-    left:14px;
-}
-
-.player-row{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.avatar{
-    width:40px;
-    height:40px;
-
-    border-radius:13px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:20px;
-
-    border:2px solid rgba(255,255,255,.25);
-
-    box-shadow:
-        inset 0 2px 5px rgba(255,255,255,.25),
-        0 5px 12px rgba(0,0,0,.3);
-}
-
-.red .avatar{
-    background:linear-gradient(145deg,#ff6262,#a9111b);
-}
-
-.green .avatar{
-    background:linear-gradient(145deg,#75ef91,#108b40);
-}
-
-.yellow .avatar{
-    background:linear-gradient(145deg,#ffe66c,#c48a0c);
-}
-
-.blue .avatar{
-    background:linear-gradient(145deg,#66ceff,#166dc5);
-}
-
-.player-info{
-    min-width:0;
-}
-
-.player-name{
     font-size:11px;
-    font-weight:bold;
+
+    backdrop-filter:blur(14px);
 }
 
-.player-status{
-    margin-top:4px;
-
-    font-size:8px;
-
-    color:#8498af;
-}
-
-.online{
-    color:#65e98b;
-}
-
-.player-stats{
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:9px;
-
-    font-size:8px;
-
-    color:#7f93aa;
-}
-
-.player-stats b{
-    color:#fff;
-}
-
-/* =========================================
-   MAIN GAME AREA
-========================================= */
-
-.game-area{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:min(74vw,650px);
-
-    aspect-ratio:1;
-
-    transform:translate(-50%,-50%);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-/* table shadow */
-
-.game-area::before{
-    content:"";
-
-    position:absolute;
-
-    inset:5%;
-
-    border-radius:35px;
-
-    background:#000;
-
-    filter:blur(40px);
-
-    opacity:.65;
-}
-
-/* =========================================
-   3D TABLE
-========================================= */
-
-.table{
-    position:relative;
-
-    width:100%;
-    height:100%;
-
-    border-radius:38px;
-
-    padding:14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #3d5667,
-            #0a121b 65%
-        );
-
-    border:
-        1px solid rgba(255,255,255,.13);
-
-    box-shadow:
-        0 35px 70px rgba(0,0,0,.65),
-        inset 0 2px 2px rgba(255,255,255,.12);
-}
-
-.board{
-    position:relative;
-
-    width:100%;
-    height:100%;
-
-    border-radius:28px;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #e9ce89,
-            #b18b45 70%,
-            #80612d
-        );
-
-    box-shadow:
-        inset 0 0 45px rgba(45,25,5,.38),
-        inset 0 2px 2px rgba(255,255,255,.4);
-}
-
-/* wooden texture */
-
-.board::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    opacity:.18;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0 8px,
-            rgba(70,40,10,.15) 9px,
-            transparent 11px
-        );
-
-    pointer-events:none;
-}
-
-/* =========================================
-   FOUR AREAS
-========================================= */
-
-.home-area{
-    position:absolute;
-
-    width:36%;
-    height:36%;
-
-    border-radius:23px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:3px solid rgba(255,255,255,.28);
-
-    box-shadow:
-        inset 0 7px 18px rgba(255,255,255,.2),
-        inset 0 -14px 25px rgba(0,0,0,.18);
-}
-
-.home-red{
-    top:3%;
-    left:3%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ff6c6c,
-            #b81925
-        );
-}
-
-.home-green{
-    top:3%;
-    right:3%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #72ec8c,
-            #128d43
-        );
-}
-
-.home-yellow{
-    bottom:3%;
-    right:3%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66c,
-            #c68d0e
-        );
-}
-
-.home-blue{
-    bottom:3%;
-    left:3%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #67ceff,
-            #176cc3
-        );
-}
-
-/* =========================================
-   PAWN GRID
-========================================= */
-
-.pawn-grid{
-    width:68%;
-    height:68%;
-
-    padding:10px;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:1fr 1fr;
-
-    gap:9px;
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.18);
-
-    box-shadow:
-        inset 0 3px 10px rgba(255,255,255,.18);
-}
-
-.pawn-slot{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(0,0,0,.12);
-}
-
-/* =========================================
-   PAWNS
-========================================= */
-
-.pawn{
-    width:clamp(24px,4.5vw,39px);
-    height:clamp(24px,4.5vw,39px);
-
-    border-radius:50%;
-
-    position:relative;
-
-    border:3px solid rgba(255,255,255,.7);
-
-    box-shadow:
-        inset 5px 6px 8px rgba(255,255,255,.5),
-        inset -7px -8px 10px rgba(0,0,0,.3),
-        0 8px 12px rgba(0,0,0,.35);
-
-    transition:.25s;
-}
-
-.pawn::after{
-    content:"";
-
-    position:absolute;
-
-    width:38%;
-    height:22%;
-
-    left:19%;
-    top:10%;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.62);
-
-    filter:blur(1px);
-}
-
-.pawn-red{
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #ffd0d0,
-            #e92f38 45%,
-            #8d1118
-        );
-}
-
-.pawn-green{
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #d3ffdc,
-            #25bb59 45%,
-            #08702e
-        );
-}
-
-.pawn-yellow{
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #fffbc4,
-            #f0c52c 45%,
-            #986500
-        );
-}
-
-.pawn-blue{
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #d5f5ff,
-            #299be9 45%,
-            #084c91
-        );
-}
-
-/* =========================================
-   CENTER
-========================================= */
-
-.center{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:25%;
-    height:25%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #fff8c4,
-            #ffc934 35%,
-            #e67c13 70%,
-            #873b0c
-        );
-
-    border:4px solid rgba(255,255,255,.7);
-
-    box-shadow:
-        0 0 35px rgba(255,181,30,.45),
-        inset 0 4px 8px rgba(255,255,255,.5),
-        0 12px 20px rgba(0,0,0,.35);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:clamp(20px,4vw,34px);
-}
-
-/* =========================================
-   TURN PANEL
-========================================= */
-
-.turn-panel{
+.turn{
     position:absolute;
 
     left:50%;
@@ -676,11 +85,9 @@ body{
 
     transform:translateX(-50%);
 
-    z-index:120;
+    min-width:205px;
 
-    min-width:210px;
-
-    padding:8px 10px;
+    padding:9px 10px;
 
     border-radius:18px;
 
@@ -688,569 +95,1163 @@ body{
     align-items:center;
     gap:10px;
 
-    background:
-        rgba(4,11,19,.88);
+    background:rgba(4,10,18,.86);
 
-    border:
-        1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.13);
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.45);
+        0 15px 40px rgba(0,0,0,.5),
+        0 0 25px rgba(255,190,50,.08);
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(18px);
 }
 
-.turn-avatar{
-    width:38px;
-    height:38px;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #62cbff,
-            #176cc5
-        );
-
-    font-size:19px;
-}
-
-.turn-info{
+.turnText{
     flex:1;
+    color:#fff;
+    font-size:10px;
 }
 
-.turn-info small{
+.turnText small{
     display:block;
-
-    color:#8194aa;
-
-    font-size:8px;
+    color:#8294a9;
+    margin-bottom:4px;
 }
 
-.turn-info strong{
-    display:block;
+.diceButton{
+    width:52px;
+    height:52px;
 
-    margin-top:3px;
-
-    font-size:11px;
-}
-
-/* =========================================
-   DICE
-========================================= */
-
-.dice{
-    width:58px;
-    height:58px;
-
-    border-radius:16px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:28px;
-
-    color:#172337;
+    border:0;
+    border-radius:15px;
 
     background:
         linear-gradient(
             145deg,
-            #ffffff,
-            #cbd6e2
+            #fff,
+            #bfcbd8
         );
+
+    color:#162234;
+
+    font-size:25px;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.4),
-        inset 0 3px 5px rgba(255,255,255,.9);
+        0 7px 18px rgba(0,0,0,.45),
+        inset 0 2px 4px rgba(255,255,255,.9);
 
     cursor:pointer;
 
-    transition:.2s;
+    pointer-events:auto;
 }
 
-.dice:hover{
-    transform:translateY(-2px);
+.diceButton.roll{
+    animation:roll .6s ease;
 }
 
-.dice.roll{
-    animation:diceRoll .6s ease;
+@keyframes roll{
+    0%{
+        transform:rotate(0) scale(1);
+    }
+    35%{
+        transform:rotate(140deg) scale(.75);
+    }
+    70%{
+        transform:rotate(290deg) scale(1.12);
+    }
+    100%{
+        transform:rotate(360deg) scale(1);
+    }
 }
 
-@keyframes diceRoll{
-    0%{transform:rotate(0) scale(1)}
-    30%{transform:rotate(120deg) scale(.75)}
-    60%{transform:rotate(270deg) scale(1.12)}
-    100%{transform:rotate(360deg) scale(1)}
-}
-
-/* =========================================
-   ACTION BUTTONS
-========================================= */
-
-.actions{
-    position:absolute;
-
-    z-index:110;
-
-    right:50%;
-
-    transform:translateX(50%);
-
-    bottom:92px;
-
-    display:flex;
-
-    gap:8px;
-}
-
-.action{
-    height:34px;
-
-    padding:0 13px;
-
-    border-radius:11px;
-
-    border:1px solid rgba(255,255,255,.10);
-
-    color:#dce7f3;
-
-    background:
-        rgba(8,17,28,.78);
-
-    font-family:inherit;
-
-    font-size:8px;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(10px);
-}
-
-.action.primary{
-    color:#171008;
-
-    font-weight:bold;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffe66b,
-            #ff971b
-        );
-}
-
-/* =========================================
-   NOTIFICATION
-========================================= */
-
-.notification{
+.hint{
     position:absolute;
 
     left:50%;
+    top:85px;
 
-    top:82px;
+    transform:translateX(-50%);
 
-    transform:
-        translateX(-50%)
-        translateY(-20px);
+    padding:9px 16px;
 
-    z-index:200;
+    border-radius:13px;
 
-    padding:10px 17px;
+    background:rgba(4,10,18,.82);
 
-    border-radius:14px;
+    border:1px solid rgba(255,211,77,.2);
 
-    background:
-        rgba(5,13,22,.9);
+    color:#dce7f3;
 
-    border:
-        1px solid rgba(255,214,74,.25);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.4);
-
-    font-size:10px;
+    font-size:9px;
 
     opacity:0;
 
-    transition:.35s;
-
-    pointer-events:none;
+    transition:.3s;
 }
 
-.notification.show{
+.hint.show{
     opacity:1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+.player{
+    position:absolute;
 
-@media(max-width:700px){
+    width:145px;
 
-    .game-area{
-        width:94vw;
-    }
+    padding:9px;
+
+    border-radius:16px;
+
+    background:rgba(5,13,22,.78);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+
+.player.red{
+    top:85px;
+    left:12px;
+}
+
+.player.green{
+    top:85px;
+    right:12px;
+}
+
+.player.yellow{
+    bottom:85px;
+    right:12px;
+}
+
+.player.blue{
+    bottom:85px;
+    left:12px;
+    border-color:rgba(85,190,255,.4);
+}
+
+.playerName{
+    font-size:10px;
+    color:white;
+}
+
+.playerStatus{
+    margin-top:4px;
+    font-size:8px;
+    color:#6be58b;
+}
+
+@media(max-width:650px){
 
     .player{
-        width:135px;
-        padding:8px;
+        width:112px;
+        padding:7px;
     }
 
-    .player.red{
-        top:78px;
-        left:8px;
-    }
-
+    .player.red,
     .player.green{
-        top:78px;
-        right:8px;
-    }
-
-    .player.yellow{
-        bottom:74px;
-        right:8px;
-    }
-
-    .player.blue{
-        bottom:74px;
-        left:8px;
-    }
-
-    .player-name{
-        font-size:9px;
-    }
-
-    .player-stats{
-        font-size:7px;
-    }
-
-    .avatar{
-        width:34px;
-        height:34px;
-        font-size:17px;
-    }
-
-    .topbar{
-        top:8px;
-        left:8px;
-        right:8px;
-    }
-
-    .logo-name{
-        display:none;
-    }
-
-    .turn-panel{
-        bottom:12px;
-        min-width:190px;
-    }
-
-    .actions{
-        bottom:76px;
-    }
-
-    .action{
-        padding:0 10px;
-    }
-}
-
-@media(max-height:650px){
-
-    .player{
-        transform:scale(.82);
-        transform-origin:top;
+        top:75px;
     }
 
     .player.yellow,
     .player.blue{
-        transform-origin:bottom;
+        bottom:75px;
+    }
+
+    .brand{
+        font-size:11px;
+    }
+
+    .info{
+        font-size:9px;
     }
 }
-</style></head><body><div class="app"><!-- TOP HUD --><div class="topbar"><div class="logo">
+</style></head><body><div id="game"></div><div class="hud"><div class="top">
 
-    <div class="logo-icon">
-        🎲
+    <div class="brand">
+        🍯 عسل <b>منچ</b>
     </div>
 
-    <div class="logo-name">
-        عسل <span>منچ</span>
-    </div>
-
-</div>
-
-<div class="currency">
-
-    <div class="coin">
-        🪙
-    </div>
-
-    <strong id="coins">
-        12,500
-    </strong>
-
-</div>
-
-</div><!-- PLAYERS --><div class="player red"><div class="player-row">
-
-    <div class="avatar">
-        🔥
-    </div>
-
-    <div class="player-info">
-
-        <div class="player-name">
-            آرش
-        </div>
-
-        <div class="player-status online">
-            ● آنلاین
-        </div>
-
+    <div class="info">
+        🟢 آنلاین
+        &nbsp; • &nbsp;
+        4 بازیکن
     </div>
 
 </div>
 
-<div class="player-stats">
-    <span>مهره‌ها <b>4/4</b></span>
-    <span>امتیاز <b>850</b></span>
+
+<div class="player red">
+    <div class="playerName">🔴 آرش</div>
+    <div class="playerStatus">● آنلاین</div>
 </div>
 
-</div><div class="player green"><div class="player-row">
+<div class="player green">
+    <div class="playerName">🟢 علی</div>
+    <div class="playerStatus">● آنلاین</div>
+</div>
 
-    <div class="avatar">
-        😎
+<div class="player yellow">
+    <div class="playerName">🟡 محمد</div>
+    <div class="playerStatus">● آنلاین</div>
+</div>
+
+<div class="player blue">
+    <div class="playerName">🔵 شما</div>
+    <div class="playerStatus">● نوبت شما</div>
+</div>
+
+
+<div class="hint" id="hint">
+    🎲 تاس را پرتاب کن
+</div>
+
+
+<div class="turn">
+
+    <div class="turnText">
+        <small>نوبت بازیکن</small>
+        شما — آبی
     </div>
 
-    <div class="player-info">
-
-        <div class="player-name">
-            علی
-        </div>
-
-        <div class="player-status online">
-            ● آنلاین
-        </div>
-
-    </div>
+    <button class="diceButton" id="dice">
+        ⚀
+    </button>
 
 </div>
 
-<div class="player-stats">
-    <span>مهره‌ها <b>3/4</b></span>
-    <span>امتیاز <b>720</b></span>
-</div>
+</div><script type="importmap">
+{
+    "imports":{
+        "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+    }
+}
+</script><script type="module">
 
-</div><div class="player yellow"><div class="player-row">
+import * as THREE from "three";
 
-    <div class="avatar">
-        ⚡
-    </div>
 
-    <div class="player-info">
+/* ==================================================
+   SCENE
+================================================== */
 
-        <div class="player-name">
-            محمد
-        </div>
+const scene = new THREE.Scene();
 
-        <div class="player-status online">
-            ● آنلاین
-        </div>
+scene.background =
+    new THREE.Color(0x02060c);
 
-    </div>
+scene.fog =
+    new THREE.FogExp2(
+        0x02060c,
+        0.035
+    );
 
-</div>
 
-<div class="player-stats">
-    <span>مهره‌ها <b>2/4</b></span>
-    <span>امتیاز <b>640</b></span>
-</div>
+/* ==================================================
+   CAMERA
+================================================== */
 
-</div><div class="player blue active"><div class="player-row">
+const camera =
+    new THREE.PerspectiveCamera(
+        42,
+        innerWidth / innerHeight,
+        0.1,
+        100
+    );
 
-    <div class="avatar">
-        👑
-    </div>
-
-    <div class="player-info">
-
-        <div class="player-name">
-            شما
-        </div>
-
-        <div class="player-status online">
-            ● نوبت شما
-        </div>
-
-    </div>
-
-</div>
-
-<div class="player-stats">
-    <span>مهره‌ها <b id="myPawns">4/4</b></span>
-    <span>امتیاز <b id="myScore">0</b></span>
-</div>
-
-</div><!-- GAME --><div class="game-area"><div class="table"><div class="board"><!-- RED HOME --><div class="home-area home-red"><div class="pawn-grid"><div class="pawn-slot">
-<div class="pawn pawn-red"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-red"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-red"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-red"></div>
-</div></div></div><!-- GREEN HOME --><div class="home-area home-green"><div class="pawn-grid"><div class="pawn-slot">
-<div class="pawn pawn-green"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-green"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-green"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-green"></div>
-</div></div></div><!-- YELLOW HOME --><div class="home-area home-yellow"><div class="pawn-grid"><div class="pawn-slot">
-<div class="pawn pawn-yellow"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-yellow"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-yellow"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-yellow"></div>
-</div></div></div><!-- BLUE HOME --><div class="home-area home-blue"><div class="pawn-grid"><div class="pawn-slot">
-<div class="pawn pawn-blue"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-blue"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-blue"></div>
-</div><div class="pawn-slot">
-<div class="pawn pawn-blue"></div>
-</div></div></div><!-- CENTER --><div class="center">
-★
-</div></div>
-</div>
-</div><!-- ACTIONS --><div class="actions"><button class="action">
-💬 چت
-</button><button class="action">
-⚙ تنظیمات
-</button><button class="action primary" id="hint">
-💡 راهنما
-</button></div><!-- TURN / DICE --><div class="turn-panel"><div class="turn-avatar">
-👑
-</div><div class="turn-info"><small>
-نوبت بازیکن
-</small><strong>
-شما — آبی
-</strong></div><div class="dice" id="dice">
-⚀
-</div></div><div class="notification" id="notification">
-🎲 تاس را پرتاب کن!
-</div></div><script>
-
-const dice =
-document.getElementById("dice");
-
-const notification =
-document.getElementById("notification");
-
-const score =
-document.getElementById("myScore");
-
-const faces = [
-"⚀",
-"⚁",
-"⚂",
-"⚃",
-"⚄",
-"⚅"
-];
-
-let busy = false;
-let points = 0;
-
-dice.addEventListener("click",()=>{
-
-if(busy) return;
-
-busy = true;
-
-dice.classList.add("roll");
-
-let i = 0;
-
-const timer =
-setInterval(()=>{
-
-dice.textContent =
-faces[
-Math.floor(Math.random()*6)
-];
-
-i++;
-
-if(i >= 9){
-
-clearInterval(timer);
-
-const result =
-Math.floor(Math.random()*6);
-
-dice.textContent =
-faces[result];
-
-points += (result + 1) * 10;
-
-score.textContent =
-points;
-
-dice.classList.remove("roll");
-
-showNotification(
-"🎲 عدد تاس: " + (result+1)
+camera.position.set(
+    0,
+    13,
+    13
 );
 
-setTimeout(()=>{
-busy = false;
-},500);
-
-}
-
-},70);
-
-});
+camera.lookAt(
+    0,
+    0,
+    0
+);
 
 
-function showNotification(text){
+/* ==================================================
+   RENDERER
+================================================== */
 
-notification.textContent =
-text;
+const renderer =
+    new THREE.WebGLRenderer({
+        antialias:true,
+        powerPreference:"high-performance"
+    });
 
-notification.classList.add("show");
+renderer.setPixelRatio(
+    Math.min(
+        devicePixelRatio,
+        2
+    )
+);
 
-setTimeout(()=>{
-notification.classList.remove("show");
-},1800);
+renderer.setSize(
+    innerWidth,
+    innerHeight
+);
 
-}
+renderer.shadowMap.enabled = true;
 
+renderer.shadowMap.type =
+    THREE.PCFSoftShadowMap;
+
+renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+renderer.toneMapping =
+    THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+    1.18;
 
 document
-.getElementById("hint")
-.addEventListener("click",()=>{
+    .getElementById("game")
+    .appendChild(renderer.domElement);
 
-showNotification(
-"💡 تاس را بزن و حرکتت را شروع کن!"
+
+/* ==================================================
+   LIGHTING
+================================================== */
+
+const ambient =
+    new THREE.HemisphereLight(
+        0xaecfff,
+        0x201507,
+        2.2
+    );
+
+scene.add(ambient);
+
+
+const key =
+    new THREE.DirectionalLight(
+        0xffe5b0,
+        4.2
+    );
+
+key.position.set(
+    -7,
+    12,
+    8
 );
 
-});
+key.castShadow = true;
+
+key.shadow.mapSize.width = 2048;
+key.shadow.mapSize.height = 2048;
+
+key.shadow.camera.left = -12;
+key.shadow.camera.right = 12;
+key.shadow.camera.top = 12;
+key.shadow.camera.bottom = -12;
+
+scene.add(key);
+
+
+const blueLight =
+    new THREE.PointLight(
+        0x338cff,
+        10,
+        18
+    );
+
+blueLight.position.set(
+    -5,
+    4,
+    -4
+);
+
+scene.add(blueLight);
+
+
+const goldLight =
+    new THREE.PointLight(
+        0xffb52e,
+        12,
+        15
+    );
+
+goldLight.position.set(
+    4,
+    5,
+    3
+);
+
+scene.add(goldLight);
+
+
+/* ==================================================
+   FLOOR
+================================================== */
+
+const floorGeo =
+    new THREE.CylinderGeometry(
+        15,
+        15,
+        .6,
+        64
+    );
+
+const floorMat =
+    new THREE.MeshStandardMaterial({
+        color:0x08111a,
+        roughness:.38,
+        metalness:.5
+    });
+
+const floor =
+    new THREE.Mesh(
+        floorGeo,
+        floorMat
+    );
+
+floor.position.y = -1;
+
+floor.receiveShadow = true;
+
+scene.add(floor);
+
+
+/* ==================================================
+   TABLE BASE
+================================================== */
+
+const tableGeo =
+    new THREE.BoxGeometry(
+        10,
+        .85,
+        10
+    );
+
+const tableMat =
+    new THREE.MeshStandardMaterial({
+        color:0x2b1710,
+        roughness:.27,
+        metalness:.12
+    });
+
+const table =
+    new THREE.Mesh(
+        tableGeo,
+        tableMat
+    );
+
+table.position.y = -0.25;
+
+table.castShadow = true;
+table.receiveShadow = true;
+
+scene.add(table);
+
+
+/* ==================================================
+   BOARD
+================================================== */
+
+const boardGeo =
+    new THREE.BoxGeometry(
+        9.45,
+        .28,
+        9.45
+    );
+
+const boardMat =
+    new THREE.MeshStandardMaterial({
+        color:0xb88b43,
+        roughness:.43,
+        metalness:.08
+    });
+
+const board =
+    new THREE.Mesh(
+        boardGeo,
+        boardMat
+    );
+
+board.position.y = .35;
+
+board.receiveShadow = true;
+board.castShadow = true;
+
+scene.add(board);
+
+
+/* ==================================================
+   BOARD FRAME
+================================================== */
+
+const frameMat =
+    new THREE.MeshStandardMaterial({
+        color:0x4b2b18,
+        roughness:.3,
+        metalness:.15
+    });
+
+function frame(
+    x,
+    z,
+    sx,
+    sz
+){
+
+    const geo =
+        new THREE.BoxGeometry(
+            sx,
+            .45,
+            sz
+        );
+
+    const mesh =
+        new THREE.Mesh(
+            geo,
+            frameMat
+        );
+
+    mesh.position.set(
+        x,
+        .55,
+        z
+    );
+
+    mesh.castShadow = true;
+
+    scene.add(mesh);
+}
+
+frame(0,-4.75,10,.35);
+frame(0,4.75,10,.35);
+frame(-4.75,0,.35,10);
+frame(4.75,0,.35,10);
+
+
+/* ==================================================
+   HOME AREAS
+================================================== */
+
+const homeData = [
+
+    {
+        x:-2.9,
+        z:-2.9,
+        color:0xd8323e
+    },
+
+    {
+        x:2.9,
+        z:-2.9,
+        color:0x23a957
+    },
+
+    {
+        x:2.9,
+        z:2.9,
+        color:0xe5ae25
+    },
+
+    {
+        x:-2.9,
+        z:2.9,
+        color:0x238fd4
+    }
+
+];
+
+
+const homes = [];
+
+
+for(
+    const data of homeData
+){
+
+    const geo =
+        new THREE.BoxGeometry(
+            3.15,
+            .18,
+            3.15
+        );
+
+    const mat =
+        new THREE.MeshStandardMaterial({
+            color:data.color,
+            roughness:.34,
+            metalness:.12
+        });
+
+    const mesh =
+        new THREE.Mesh(
+            geo,
+            mat
+        );
+
+    mesh.position.set(
+        data.x,
+        .57,
+        data.z
+    );
+
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+
+    scene.add(mesh);
+
+    homes.push(mesh);
+}
+
+
+/* ==================================================
+   PATH CELLS
+================================================== */
+
+const pathCells = [];
+
+const cellSize = .52;
+
+for(
+    let row=-5;
+    row<=5;
+    row++
+){
+
+    for(
+        let col=-5;
+        col<=5;
+        col++
+    ){
+
+        if(
+            Math.abs(row)<=1 &&
+            Math.abs(col)<=1
+        ){
+            continue;
+        }
+
+        const edge =
+            Math.abs(row)===5 ||
+            Math.abs(col)===5;
+
+        if(!edge){
+            continue;
+        }
+
+        const geo =
+            new THREE.BoxGeometry(
+                cellSize,
+                .12,
+                cellSize
+            );
+
+        const mat =
+            new THREE.MeshStandardMaterial({
+                color:0xe5d29a,
+                roughness:.55,
+                metalness:.03
+            });
+
+        const cell =
+            new THREE.Mesh(
+                geo,
+                mat
+            );
+
+        cell.position.set(
+            col*.73,
+            .72,
+            row*.73
+        );
+
+        cell.castShadow = true;
+        cell.receiveShadow = true;
+
+        scene.add(cell);
+
+        pathCells.push(cell);
+
+    }
+
+}
+
+
+/* ==================================================
+   CENTER
+================================================== */
+
+const centerGeo =
+    new THREE.CylinderGeometry(
+        1.35,
+        1.35,
+        .18,
+        64
+    );
+
+const centerMat =
+    new THREE.MeshStandardMaterial({
+        color:0xffbd32,
+        roughness:.25,
+        metalness:.25,
+        emissive:0x4c2600,
+        emissiveIntensity:.35
+    });
+
+const center =
+    new THREE.Mesh(
+        centerGeo,
+        centerMat
+    );
+
+center.position.y = .78;
+
+center.castShadow = true;
+
+scene.add(center);
+
+
+/* ==================================================
+   PAWN FUNCTION
+================================================== */
+
+function createPawn(
+    color,
+    x,
+    z
+){
+
+    const group =
+        new THREE.Group();
+
+    /* body */
+
+    const bodyGeo =
+        new THREE.SphereGeometry(
+            .28,
+            32,
+            24
+        );
+
+    const bodyMat =
+        new THREE.MeshStandardMaterial({
+            color:color,
+            roughness:.22,
+            metalness:.18
+        });
+
+    const body =
+        new THREE.Mesh(
+            bodyGeo,
+            bodyMat
+        );
+
+    body.scale.y = 1.25;
+
+    body.position.y = .42;
+
+    body.castShadow = true;
+
+    group.add(body);
+
+
+    /* neck */
+
+    const neckGeo =
+        new THREE.CylinderGeometry(
+            .18,
+            .23,
+            .25,
+            32
+        );
+
+    const neck =
+        new THREE.Mesh(
+            neckGeo,
+            bodyMat
+        );
+
+    neck.position.y = .65;
+
+    neck.castShadow = true;
+
+    group.add(neck);
+
+
+    /* head */
+
+    const headGeo =
+        new THREE.SphereGeometry(
+            .24,
+            32,
+            32
+        );
+
+    const head =
+        new THREE.Mesh(
+            headGeo,
+            bodyMat
+        );
+
+    head.position.y = .88;
+
+    head.castShadow = true;
+
+    group.add(head);
+
+
+    /* base */
+
+    const baseGeo =
+        new THREE.CylinderGeometry(
+            .38,
+            .44,
+            .13,
+            48
+        );
+
+    const base =
+        new THREE.Mesh(
+            baseGeo,
+            bodyMat
+        );
+
+    base.position.y = .08;
+
+    base.castShadow = true;
+
+    group.add(base);
+
+
+    group.position.set(
+        x,
+        0,
+        z
+    );
+
+    scene.add(group);
+
+    return group;
+
+}
+
+
+/* ==================================================
+   PAWNS
+================================================== */
+
+const pawnColors = [
+    0xe43a45,
+    0x2bb65b,
+    0xf0bd2c,
+    0x2998e5
+];
+
+const pawnPositions = [
+
+    [-3.25,-3.25],
+    [-2.45,-3.25],
+    [-3.25,-2.45],
+    [-2.45,-2.45],
+
+    [2.45,-3.25],
+    [3.25,-3.25],
+    [2.45,-2.45],
+    [3.25,-2.45],
+
+    [2.45,2.45],
+    [3.25,2.45],
+    [2.45,3.25],
+    [3.25,3.25],
+
+    [-3.25,2.45],
+    [-2.45,2.45],
+    [-3.25,3.25],
+    [-2.45,3.25]
+
+];
+
+
+const pawns = [];
+
+for(
+    let i=0;
+    i<16;
+    i++
+){
+
+    const color =
+        pawnColors[
+            Math.floor(i/4)
+        ];
+
+    const p =
+        pawnPositions[i];
+
+    const pawn =
+        createPawn(
+            color,
+            p[0],
+            p[1]
+        );
+
+    pawns.push(pawn);
+
+}
+
+
+/* ==================================================
+   DICE
+================================================== */
+
+const diceGroup =
+    new THREE.Group();
+
+diceGroup.position.set(
+    0,
+    1.05,
+    0
+);
+
+scene.add(diceGroup);
+
+
+const diceGeo =
+    new THREE.BoxGeometry(
+        .85,
+        .85,
+        .85,
+        4,
+        4,
+        4
+    );
+
+const diceMat =
+    new THREE.MeshStandardMaterial({
+        color:0xf4f5f7,
+        roughness:.17,
+        metalness:.05
+    });
+
+const diceMesh =
+    new THREE.Mesh(
+        diceGeo,
+        diceMat
+    );
+
+diceMesh.castShadow = true;
+
+diceGroup.add(diceMesh);
+
+
+/* ==================================================
+   DICE ROLL
+================================================== */
+
+const diceButton =
+    document.getElementById(
+        "dice"
+    );
+
+let rolling = false;
+
+const faces = [
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
+];
+
+diceButton.addEventListener(
+    "click",
+    ()=>{
+
+        if(rolling)
+            return;
+
+        rolling = true;
+
+        diceButton.classList.add(
+            "roll"
+        );
+
+        let frame = 0;
+
+        const timer =
+            setInterval(
+                ()=>{
+
+                    diceMesh.rotation.x += .45;
+                    diceMesh.rotation.z += .55;
+
+                    diceButton.textContent =
+                        faces[
+                            Math.floor(
+                                Math.random()*6
+                            )
+                        ];
+
+                    frame++;
+
+                    if(frame>14){
+
+                        clearInterval(timer);
+
+                        const result =
+                            Math.floor(
+                                Math.random()*6
+                            );
+
+                        diceButton.textContent =
+                            faces[result];
+
+                        diceMesh.rotation.x =
+                            0;
+
+                        diceMesh.rotation.z =
+                            0;
+
+                        rolling = false;
+
+                        showHint(
+                            "🎲 عدد تاس: "+
+                            (result+1)
+                        );
+
+                    }
+
+                },
+                55
+            );
+
+    }
+);
+
+
+/* ==================================================
+   HINT
+================================================== */
+
+const hint =
+    document.getElementById(
+        "hint"
+    );
+
+function showHint(text){
+
+    hint.textContent = text;
+
+    hint.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        ()=>{
+            hint.classList.remove(
+                "show"
+            );
+        },
+        1700
+    );
+
+}
+
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+const clock =
+    new THREE.Clock();
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+    const t =
+        clock.getElapsedTime();
+
+
+    /* subtle pawn animation */
+
+    pawns.forEach(
+        (pawn,i)=>{
+
+            pawn.rotation.y =
+                Math.sin(
+                    t*.8+i
+                )*.025;
+
+        }
+    );
+
+
+    /* center glow */
+
+    center.material.emissiveIntensity =
+        .32 +
+        Math.sin(t*2)*.08;
+
+
+    /* slow camera breathing */
+
+    camera.position.x =
+        Math.sin(t*.12)*.35;
+
+    camera.position.z =
+        13 +
+        Math.sin(t*.16)*.25;
+
+    camera.lookAt(
+        0,
+        .2,
+        0
+    );
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+animate();
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+addEventListener(
+    "resize",
+    ()=>{
+
+        camera.aspect =
+            innerWidth /
+            innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            innerWidth,
+            innerHeight
+        );
+
+        renderer.setPixelRatio(
+            Math.min(
+                devicePixelRatio,
+                2
+            )
+        );
+
+    }
+);
 
 </script></body>
-   </html>
+    </html>
