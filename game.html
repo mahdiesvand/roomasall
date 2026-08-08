@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>منچ سه‌بعدی</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#080b10;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+#game{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+canvas{
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+#loading{
+    position:fixed;
+    inset:0;
+    z-index:20;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #202733 0%,
+            #0b0f15 55%,
+            #05070a 100%
+        );
+
+    color:white;
+}
+
+.logo{
+    font-size:42px;
+    font-weight:900;
+    color:#ffd45a;
+
+    text-shadow:
+        0 0 10px rgba(255,210,70,.35),
+        0 0 30px rgba(255,180,30,.15);
+
+    margin-bottom:14px;
+}
+
+.loading-text{
+    color:#aeb7c5;
+    font-size:14px;
+}
+
+.loader{
+    width:180px;
+    height:4px;
+    margin-top:20px;
+
+    background:#252d38;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.loader span{
+    display:block;
+    width:45%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        #d99b25,
+        #ffe18a
+    );
+
+    border-radius:10px;
+
+    animation:load 1.2s infinite ease-in-out;
+}
+
+@keyframes load{
+
+    0%{
+        transform:translateX(230%);
+    }
+
+    100%{
+        transform:translateX(-230%);
+    }
+
+}
+
+#ui{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+}
+
+.top-bar{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:12px 16px;
+
+    border-radius:16px;
+
+    background:rgba(12,16,23,.72);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    color:white;
+}
+
+.game-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.status{
+    font-size:12px;
+    color:#9da8b8;
+}
+
+#message{
+    position:absolute;
+
+    left:50%;
+    bottom:25px;
+
+    transform:translateX(-50%);
+
+    padding:10px 18px;
+
+    border-radius:14px;
+
+    background:rgba(10,13,18,.78);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#dce3ed;
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    backdrop-filter:blur(10px);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div id="game"></div>
+
+
+<div id="loading">
+
+    <div class="logo">
+        🎲 منچ
+    </div>
+
+    <div class="loading-text">
+        در حال آماده‌سازی میز بازی...
+    </div>
+
+    <div class="loader">
+        <span></span>
+    </div>
+
+</div>
+
+
+<div id="ui">
+
+    <div class="top-bar">
+
+        <div class="game-title">
+            منچ سه‌بعدی
+        </div>
+
+        <div class="status" id="status">
+            آماده‌سازی...
+        </div>
+
+    </div>
+
+    <div id="message">
+        با لمس صفحه، میز را بچرخان
+    </div>
+
+</div>
+
+
+<!-- THREE.JS -->
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+}
+</script>
+
+
+<script type="module">
+
+import * as THREE from "three";
+
+
+/* =========================================
+   BASIC VARIABLES
+========================================= */
+
+let scene;
+let camera;
+let renderer;
+
+let table;
+
+let isDragging = false;
+
+let previousX = 0;
+let previousY = 0;
+
+let targetRotationY = 0;
+let targetRotationX = 0;
+
+let currentRotationY = 0;
+let currentRotationX = 0;
+
+
+/* =========================================
+   START
+========================================= */
+
+init();
+
+
+function init(){
+
+    createScene();
+
+    createCamera();
+
+    createRenderer();
+
+    createLights();
+
+    createTable();
+
+    setupControls();
+
+    animate();
+
+    setTimeout(() => {
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("status").textContent =
+            "اتصال برقرار است";
+
+    },800);
+
+}
+
+
+/* =========================================
+   SCENE
+========================================= */
+
+function createScene(){
+
+    scene = new THREE.Scene();
+
+    scene.background =
+        new THREE.Color(0x080b10);
+
+}
+
+
+/* =========================================
+   CAMERA
+========================================= */
+
+function createCamera(){
+
+    camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
+
+    camera.position.set(
+        0,
+        8.5,
+        9.5
+    );
+
+    camera.lookAt(
+        0,
+        0,
+        0
+    );
+
+}
+
+
+/* =========================================
+   RENDERER
+========================================= */
+
+function createRenderer(){
+
+    renderer = new THREE.WebGLRenderer({
+
+        antialias:true,
+
+        powerPreference:"high-performance"
+
+    });
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio,2)
+    );
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    renderer.shadowMap.enabled = true;
+
+    renderer.shadowMap.type =
+        THREE.PCFSoftShadowMap;
+
+    renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
+
+    renderer.toneMapping =
+        THREE.ACESFilmicToneMapping;
+
+    renderer.toneMappingExposure = 1.15;
+
+
+    document
+        .getElementById("game")
+        .appendChild(renderer.domElement);
+
+}
+
+
+/* =========================================
+   LIGHTING
+========================================= */
+
+function createLights(){
+
+    const ambient =
+        new THREE.HemisphereLight(
+            0xffffff,
+            0x111827,
+            2
+        );
+
+    scene.add(ambient);
+
+
+    const mainLight =
+        new THREE.DirectionalLight(
+            0xfff4dc,
+            4
+        );
+
+    mainLight.position.set(
+        4,
+        10,
+        5
+    );
+
+    mainLight.castShadow = true;
+
+    mainLight.shadow.mapSize.width = 2048;
+    mainLight.shadow.mapSize.height = 2048;
+
+    mainLight.shadow.camera.left = -10;
+    mainLight.shadow.camera.right = 10;
+    mainLight.shadow.camera.top = 10;
+    mainLight.shadow.camera.bottom = -10;
+
+    scene.add(mainLight);
+
+
+    const fillLight =
+        new THREE.PointLight(
+            0x6688ff,
+            18,
+            30
+        );
+
+    fillLight.position.set(
+        -6,
+        5,
+        -5
+    );
+
+    scene.add(fillLight);
+
+
+    const warmLight =
+        new THREE.PointLight(
+            0xffa52b,
+            15,
+            25
+        );
+
+    warmLight.position.set(
+        5,
+        3,
+        6
+    );
+
+    scene.add(warmLight);
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+function createTable(){
+
+    table = new THREE.Group();
+
+    scene.add(table);
+
+
+    /* TABLE TOP */
+
+    const topGeometry =
+        new THREE.BoxGeometry(
+            8,
+            0.45,
+            8
+        );
+
+
+    const topMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x613c20,
+
+            roughness:0.62,
+
+            metalness:0.05
+
+        });
+
+
+    const top =
+        new THREE.Mesh(
+            topGeometry,
+            topMaterial
+        );
+
+
+    top.position.y = -0.25;
+
+    top.receiveShadow = true;
+    top.castShadow = true;
+
+    table.add(top);
+
+
+    /* TABLE BORDER */
+
+    const borderGeometry =
+        new THREE.BoxGeometry(
+            8.5,
+            0.7,
+            8.5
+        );
+
+
+    const borderMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x2b160d,
+
+            roughness:0.5,
+
+            metalness:0.25
+
+        });
+
+
+    const border =
+        new THREE.Mesh(
+            borderGeometry,
+            borderMaterial
+        );
+
+
+    border.position.y = -0.65;
+
+    border.receiveShadow = true;
+    border.castShadow = true;
+
+    table.add(border);
+
+
+    /* INNER BOARD */
+
+    const boardGeometry =
+        new THREE.BoxGeometry(
+            7.3,
+            0.12,
+            7.3
+        );
+
+
+    const boardMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xead8ae,
+
+            roughness:0.7,
+
+            metalness:0
+
+        });
+
+
+    const board =
+        new THREE.Mesh(
+            boardGeometry,
+            boardMaterial
+        );
+
+
+    board.position.y = 0.02;
+
+    board.receiveShadow = true;
+
+    table.add(board);
+
+
+    /* GOLDEN EDGE */
+
+    const edgeGeometry =
+        new THREE.BoxGeometry(
+            7.55,
+            0.16,
+            7.55
+        );
+
+
+    const edgeMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xb98222,
+
+            roughness:0.35,
+
+            metalness:0.7
+
+        });
+
+
+    const edge =
+        new THREE.Mesh(
+            edgeGeometry,
+            edgeMaterial
+        );
+
+
+    edge.position.y = 0.09;
+
+    table.add(edge);
+
+
+    /* BOARD CENTER */
+
+    const centerGeometry =
+        new THREE.BoxGeometry(
+            7.15,
+            0.08,
+            7.15
+        );
+
+
+    const centerMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xeee0bc,
+
+            roughness:0.65
+
+        });
+
+
+    const center =
+        new THREE.Mesh(
+            centerGeometry,
+            centerMaterial
+        );
+
+
+    center.position.y = 0.18;
+
+    center.receiveShadow = true;
+
+    table.add(center);
+
+
+    /* FLOOR */
+
+    const floorGeometry =
+        new THREE.PlaneGeometry(
+            80,
+            80
+        );
+
+
+    const floorMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x07090d,
+
+            roughness:0.8,
+
+            metalness:0
+
+        });
+
+
+    const floor =
+        new THREE.Mesh(
+            floorGeometry,
+            floorMaterial
+        );
+
+
+    floor.rotation.x =
+        -Math.PI / 2;
+
+    floor.position.y =
+        -1.05;
+
+    floor.receiveShadow = true;
+
+    scene.add(floor);
+
+}
+
+
+/* =========================================
+   TOUCH / MOUSE CONTROL
+========================================= */
+
+function setupControls(){
+
+    const canvas =
+        renderer.domElement;
+
+
+    canvas.addEventListener(
+        "pointerdown",
+        onPointerDown
+    );
+
+
+    window.addEventListener(
+        "pointermove",
+        onPointerMove
+    );
+
+
+    window.addEventListener(
+        "pointerup",
+        onPointerUp
+    );
+
+
+    window.addEventListener(
+        "resize",
+        onResize
+    );
+
+}
+
+
+function onPointerDown(event){
+
+    isDragging = true;
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+}
+
+
+function onPointerMove(event){
+
+    if(!isDragging) return;
+
+
+    const dx =
+        event.clientX - previousX;
+
+    const dy =
+        event.clientY - previousY;
+
+
+    targetRotationY += dx * 0.006;
+
+    targetRotationX += dy * 0.004;
+
+
+    targetRotationX =
+        THREE.MathUtils.clamp(
+            targetRotationX,
+            -0.35,
+            0.35
+        );
+
+
+    previousX =
+        event.clientX;
+
+    previousY =
+        event.clientY;
+
+}
+
+
+function onPointerUp(){
+
+    isDragging = false;
+
+}
+
+
+/* =========================================
+   RESIZE
+========================================= */
+
+function onResize(){
+
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    if(table){
+
+        currentRotationY +=
+            (targetRotationY -
+             currentRotationY) * 0.08;
+
+
+        currentRotationX +=
+            (targetRotationX -
+             currentRotationX) * 0.08;
+
+
+        table.rotation.y =
+            currentRotationY;
+
+
+        table.rotation.x =
+            currentRotationX;
+
+    }
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+</script>
+
+</body>
+</html>
