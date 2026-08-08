@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>🐝 عسل‌منچ - نسخه ۴</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:#101114;
+
+    color:#fff;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.game-container{
+
+    width:100%;
+
+    max-width:620px;
+
+    padding:10px;
+
+}
+
+.header{
+
+    text-align:center;
+
+    padding:10px 0 14px;
+
+}
+
+.header h1{
+
+    font-size:27px;
+
+}
+
+.header p{
+
+    color:#999;
+
+    font-size:12px;
+
+    margin-top:5px;
+
+}
+
+
+/* =================================
+   تخته
+================================= */
+
+.board{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:1;
+
+    background:#f1f1f1;
+
+    border:5px solid #292c33;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+}
+
+
+/* =================================
+   خانه بازیکنان
+================================= */
+
+.home{
+
+    position:absolute;
+
+    width:38%;
+
+    height:38%;
+
+    padding:9%;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    grid-template-rows:1fr 1fr;
+
+    gap:8%;
+
+    z-index:2;
+
+}
+
+.home.red{
+
+    top:0;
+
+    left:0;
+
+    background:#e74c3c;
+
+}
+
+.home.green{
+
+    top:0;
+
+    right:0;
+
+    background:#2ecc71;
+
+}
+
+.home.blue{
+
+    bottom:0;
+
+    left:0;
+
+    background:#3498db;
+
+}
+
+.home.yellow{
+
+    bottom:0;
+
+    right:0;
+
+    background:#f1c40f;
+
+}
+
+
+.piece-slot{
+
+    background:#fff;
+
+    border-radius:50%;
+
+    border:2px solid rgba(0,0,0,.2);
+
+}
+
+
+/* =================================
+   مسیر
+================================= */
+
+.track{
+
+    position:absolute;
+
+    left:19%;
+
+    top:19%;
+
+    width:62%;
+
+    height:62%;
+
+    z-index:3;
+
+}
+
+
+.track-cell{
+
+    position:absolute;
+
+    width:9%;
+
+    height:9%;
+
+    background:#fff;
+
+    border:1px solid #aaa;
+
+    border-radius:5px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:8px;
+
+    color:#777;
+
+}
+
+
+.track-cell.safe{
+
+    background:#fff4b8;
+
+}
+
+
+.track-cell.safe::after{
+
+    content:"★";
+
+    color:#f5b400;
+
+    font-size:11px;
+
+}
+
+
+/* =================================
+   مسیر پایانی
+================================= */
+
+.finish-path{
+
+    position:absolute;
+
+    z-index:4;
+
+}
+
+
+.finish-path.red{
+
+    left:40%;
+
+    top:19%;
+
+    width:20%;
+
+    height:21%;
+
+    background:#e74c3c;
+
+}
+
+
+.finish-path.green{
+
+    left:60%;
+
+    top:40%;
+
+    width:21%;
+
+    height:20%;
+
+    background:#2ecc71;
+
+}
+
+
+.finish-path.yellow{
+
+    left:40%;
+
+    top:60%;
+
+    width:20%;
+
+    height:21%;
+
+    background:#f1c40f;
+
+}
+
+
+.finish-path.blue{
+
+    left:19%;
+
+    top:40%;
+
+    width:21%;
+
+    height:20%;
+
+    background:#3498db;
+
+}
+
+
+.finish-cell{
+
+    position:absolute;
+
+    width:18%;
+
+    height:18%;
+
+    background:rgba(255,255,255,.85);
+
+    border-radius:5px;
+
+}
+
+
+/* =================================
+   مرکز
+================================= */
+
+.center{
+
+    position:absolute;
+
+    left:40%;
+
+    top:40%;
+
+    width:20%;
+
+    height:20%;
+
+    z-index:6;
+
+    background:
+
+    conic-gradient(
+
+        #2ecc71 0 25%,
+
+        #f1c40f 0 50%,
+
+        #e74c3c 0 75%,
+
+        #3498db 0
+
+    );
+
+}
+
+
+/* =================================
+   مهره
+================================= */
+
+.piece{
+
+    position:absolute;
+
+    width:7%;
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    border:3px solid white;
+
+    z-index:20;
+
+    cursor:pointer;
+
+    transition:
+
+    left .25s ease,
+
+    top .25s ease,
+
+    transform .15s ease;
+
+    box-shadow:
+
+    0 3px 8px
+    rgba(0,0,0,.45);
+
+}
+
+
+.piece.red{
+
+    background:#e74c3c;
+
+}
+
+.piece.green{
+
+    background:#2ecc71;
+
+}
+
+.piece.blue{
+
+    background:#3498db;
+
+}
+
+.piece.yellow{
+
+    background:#f1c40f;
+
+}
+
+
+.piece.selectable{
+
+    animation:pulse 1s infinite;
+
+}
+
+
+.piece.selected{
+
+    transform:scale(1.25);
+
+    box-shadow:
+
+    0 0 0 4px #fff,
+
+    0 0 18px #f5b400;
+
+}
+
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+/* =================================
+   کنترل
+================================= */
+
+.controls{
+
+    margin-top:12px;
+
+    background:#191b20;
+
+    border:1px solid #292c33;
+
+    border-radius:18px;
+
+    padding:14px;
+
+    text-align:center;
+
+}
+
+
+.turn{
+
+    color:#aaa;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+
+.turn strong{
+
+    color:#f5b400;
+
+}
+
+
+.dice{
+
+    width:65px;
+
+    height:65px;
+
+    margin:auto;
+
+    margin-bottom:10px;
+
+    background:#fff;
+
+    color:#111;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+}
+
+
+.roll-btn{
+
+    width:100%;
+
+    border:0;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    background:#f5b400;
+
+    color:#111;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.roll-btn:active{
+
+    transform:scale(.97);
+
+}
+
+
+.roll-btn:disabled{
+
+    opacity:.45;
+
+}
+
+
+.status{
+
+    margin-top:9px;
+
+    color:#999;
+
+    font-size:11px;
+
+}
+
+
+/* =================================
+   بازیکنان
+================================= */
+
+.players{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:6px;
+
+    margin-top:10px;
+
+}
+
+
+.player{
+
+    padding:7px 3px;
+
+    border-radius:9px;
+
+    background:#111318;
+
+    font-size:10px;
+
+    border:2px solid transparent;
+
+}
+
+
+.player.red{
+    border-color:#e74c3c;
+}
+
+.player.green{
+    border-color:#2ecc71;
+}
+
+.player.blue{
+    border-color:#3498db;
+}
+
+.player.yellow{
+    border-color:#f1c40f;
+}
+
+
+.player.active{
+
+    box-shadow:
+    0 0 0 2px #f5b400;
+
+}
+
+
+/* =================================
+   برنده
+================================= */
+
+.win-message{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.78);
+
+    z-index:100;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.win-box{
+
+    width:85%;
+
+    max-width:360px;
+
+    background:#191b20;
+
+    border:2px solid #f5b400;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+}
+
+
+.win-box h2{
+
+    margin-bottom:10px;
+
+}
+
+
+.restart-btn{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#f5b400;
+
+    color:#111;
+
+    font-weight:bold;
+
+}
+
+
+/* موبایل */
+
+@media(max-width:420px){
+
+    .game-container{
+
+        padding:7px;
+
+    }
+
+    .header h1{
+
+        font-size:23px;
+
+    }
+
+    .board{
+
+        border-width:3px;
+
+    }
+
+    .piece{
+
+        border-width:2px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game-container">
+
+
+<div class="header">
+
+<h1>
+🐝 عسل‌منچ
+</h1>
+
+<p>
+نسخه ۴ — مسیر و قوانین پیشرفته
+</p>
+
+</div>
+
+
+
+<!-- =========================
+     تخته
+========================= -->
+
+<div
+class="board"
+id="board"
+>
+
+
+<!-- خانه قرمز -->
+
+<div class="home red">
+
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+
+</div>
+
+
+<!-- خانه سبز -->
+
+<div class="home green">
+
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+
+</div>
+
+
+<!-- خانه آبی -->
+
+<div class="home blue">
+
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+
+</div>
+
+
+<!-- خانه زرد -->
+
+<div class="home yellow">
+
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+<div class="piece-slot"></div>
+
+</div>
+
+
+<!-- مسیر -->
+
+<div
+class="track"
+id="track"
+></div>
+
+
+<!-- مسیرهای پایانی -->
+
+<div class="finish-path red"></div>
+
+<div class="finish-path green"></div>
+
+<div class="finish-path blue"></div>
+
+<div class="finish-path yellow"></div>
+
+
+<!-- مرکز -->
+
+<div class="center"></div>
+
+
+</div>
+
+
+
+<!-- =========================
+     کنترل
+========================= -->
+
+<div class="controls">
+
+
+<div class="turn">
+
+نوبت:
+
+<strong id="currentPlayer">
+🔴 قرمز
+</strong>
+
+</div>
+
+
+<div
+class="dice"
+id="dice"
+>
+🎲
+</div>
+
+
+<button
+class="roll-btn"
+id="rollButton"
+onclick="rollDice()"
+>
+
+🎲 انداختن تاس
+
+</button>
+
+
+<div
+class="status"
+id="status"
+>
+
+برای شروع تاس بینداز
+
+</div>
+
+
+<div class="players">
+
+
+<div
+class="player red active"
+id="player-red"
+>
+🔴 قرمز
+</div>
+
+
+<div
+class="player green"
+id="player-green"
+>
+🟢 سبز
+</div>
+
+
+<div
+class="player blue"
+id="player-blue"
+>
+🔵 آبی
+</div>
+
+
+<div
+class="player yellow"
+id="player-yellow"
+>
+🟡 زرد
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     برنده
+========================= -->
+
+<div
+class="win-message"
+id="winMessage"
+>
+
+<div class="win-box">
+
+<h2 id="winnerText">
+🏆 برنده!
+</h2>
+
+<p>
+هر چهار مهره به پایان رسیدند.
+</p>
+
+<button
+class="restart-btn"
+onclick="restartGame()"
+>
+
+🔄 بازی دوباره
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =================================
+   تنظیمات
+================================= */
+
+
+const colors = [
+
+    "red",
+
+    "green",
+
+    "blue",
+
+    "yellow"
+
+];
+
+
+const colorNames = {
+
+    red:"🔴 قرمز",
+
+    green:"🟢 سبز",
+
+    blue:"🔵 آبی",
+
+    yellow:"🟡 زرد"
+
+};
+
+
+let currentPlayer = 0;
+
+let diceValue = 0;
+
+let selectedPiece = null;
+
+let gameFinished = false;
+
+
+/*
+ * مسیر اصلی
+ */
+
+const path = [];
+
+
+/*
+ * همه مهره‌ها
+ */
+
+const pieces = [];
+
+
+
+/* =================================
+   مسیر ۵۲ خانه
+================================= */
+
+function createPath(){
+
+    /*
+     * مسیر حلقه‌ای 52 خانه‌ای
+     */
+
+    const points = [];
+
+    /*
+     * بالای تخته
+     */
+
+    for(let i=0;i<13;i++){
+
+        points.push([
+            23 + i * 4.5,
+            23
+        ]);
+
+    }
+
+
+    /*
+     * سمت راست
+     */
+
+    for(let i=0;i<13;i++){
+
+        points.push([
+            77,
+            23 + i * 4.5
+        ]);
+
+    }
+
+
+    /*
+     * پایین
+     */
+
+    for(let i=0;i<13;i++){
+
+        points.push([
+            77 - i * 4.5,
+            77
+        ]);
+
+    }
+
+
+    /*
+     * سمت چپ
+     */
+
+    for(let i=0;i<13;i++){
+
+        points.push([
+            23,
+            77 - i * 4.5
+        ]);
+
+    }
+
+
+    points.forEach(
+        function(point){
+
+            path.push(point);
+
+        }
+    );
+
+
+    /*
+     * نمایش خانه‌ها
+     */
+
+    path.forEach(
+        function(point,index){
+
+            const cell =
+            document.createElement("div");
+
+
+            cell.className =
+            "track-cell";
+
+
+            cell.style.left =
+            point[0] + "%";
+
+
+            cell.style.top =
+            point[1] + "%";
+
+
+            /*
+             * خانه امن
+             */
+
+            if(
+                index === 0 ||
+                index === 8 ||
+                index === 13 ||
+                index === 21 ||
+                index === 26 ||
+                index === 34 ||
+                index === 39 ||
+                index === 47
+            ){
+
+                cell.classList.add(
+                    "safe"
+                );
+
+            }
+
+
+            document
+            .getElementById("track")
+            .appendChild(cell);
+
+        }
+    );
+
+}
+
+
+createPath();
+
+
+
+/* =================================
+   نقطه شروع رنگ‌ها
+================================= */
+
+const startPositions = {
+
+    red:0,
+
+    green:13,
+
+    yellow:26,
+
+    blue:39
+
+};
+
+
+
+/* =================================
+   خانه‌های اولیه مهره
+================================= */
+
+const homePositions = {
+
+    red:[
+
+        [9,9],
+
+        [21,9],
+
+        [9,21],
+
+        [21,21]
+
+    ],
+
+    green:[
+
+        [79,9],
+
+        [91,9],
+
+        [79,21],
+
+        [91,21]
+
+    ],
+
+    blue:[
+
+        [9,79],
+
+        [21,79],
+
+        [9,91],
+
+        [21,91]
+
+    ],
+
+    yellow:[
+
+        [79,79],
+
+        [91,79],
+
+        [79,91],
+
+        [91,91]
+
+    ]
+
+};
+
+
+
+/* =================================
+   ساخت مهره‌ها
+================================= */
+
+function createPieces(){
+
+    colors.forEach(
+        function(color){
+
+            for(
+                let i=0;
+                i<4;
+                i++
+            ){
+
+                const piece =
+                document.createElement("div");
+
+
+                piece.className =
+                "piece " + color;
+
+
+                piece.dataset.color =
+                color;
+
+
+                piece.dataset.index =
+                i;
+
+
+                /*
+                 * -1 یعنی داخل خانه
+                 */
+
+                piece.dataset.position =
+                -1;
+
+
+                const position =
+                homePositions[color][i];
+
+
+                piece.style.left =
+                position[0] + "%";
+
+
+                piece.style.top =
+                position[1] + "%";
+
+
+                piece.addEventListener(
+                    "click",
+                    function(){
+
+                        selectPiece(piece);
+
+                    }
+                );
+
+
+                document
+                .getElementById("board")
+                .appendChild(piece);
+
+
+                pieces.push(piece);
+
+            }
+
+        }
+    );
+
+}
+
+
+createPieces();
+
+
+
+/* =================================
+   تاس
+================================= */
+
+function rollDice(){
+
+    if(
+        diceValue !== 0 ||
+        gameFinished
+    ){
+
+        return;
+
+    }
+
+
+    diceValue =
+    Math.floor(
+        Math.random()*6
+    ) + 1;
+
+
+    const faces = [
+
+        "⚀",
+
+        "⚁",
+
+        "⚂",
+
+        "⚃",
+
+        "⚄",
+
+        "⚅"
+
+    ];
+
+
+    document
+    .getElementById("dice")
+    .textContent =
+    faces[diceValue-1];
+
+
+    const color =
+    colors[currentPlayer];
+
+
+    const available =
+    getAvailablePieces(color);
+
+
+    /*
+     * اگر حرکتی وجود ندارد
+     */
+
+    if(
+        available.length === 0
+    ){
+
+        document
+        .getElementById("status")
+        .textContent =
+        "حرکت ممکن نیست";
+
+
+        setTimeout(
+            nextTurn,
+            900
+        );
+
+
+        return;
+
+    }
+
+
+    available.forEach(
+        function(piece){
+
+            piece.classList.add(
+                "selectable"
+            );
+
+        }
+    );
+
+
+    document
+    .getElementById("status")
+    .textContent =
+    "یک مهره را انتخاب کن";
+
+}
+
+
+
+/* =================================
+   مهره‌های قابل حرکت
+================================= */
+
+function getAvailablePieces(color){
+
+    return pieces.filter(
+        function(piece){
+
+            if(
+                piece.dataset.color !==
+                color
+            ){
+
+                return false;
+
+            }
+
+
+            const position =
+            Number(
+                piece.dataset.position
+            );
+
+
+            /*
+             * مهره داخل خانه
+             */
+
+            if(position === -1){
+
+                return diceValue === 6;
+
+            }
+
+
+            /*
+             * مهره روی مسیر
+             */
+
+            return true;
+
+        }
+    );
+
+}
+
+
+
+/* =================================
+   انتخاب مهره
+================================= */
+
+function selectPiece(piece){
+
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    if(
+        piece.dataset.color !==
+        colors[currentPlayer]
+    ){
+
+        return;
+
+    }
+
+
+    if(diceValue === 0){
+
+        return;
+
+    }
+
+
+    const oldPosition =
+    Number(
+        piece.dataset.position
+    );
+
+
+    /*
+     * خروج با ۶
+     */
+
+    if(
+        oldPosition === -1 &&
+        diceValue !== 6
+    ){
+
+        return;
+
+    }
+
+
+    pieces.forEach(
+        function(item){
+
+            item.classList.remove(
+                "selectable"
+            );
+
+            item.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    piece.classList.add(
+        "selected"
+    );
+
+
+    selectedPiece =
+    piece;
+
+
+    movePiece();
+
+}
+
+
+
+/* =================================
+   حرکت
+================================= */
+
+function movePiece(){
+
+    if(!selectedPiece){
+
+        return;
+
+    }
+
+
+    const color =
+    selectedPiece.dataset.color;
+
+
+    let position =
+    Number(
+        selectedPiece.dataset.position
+    );
+
+
+    /*
+     * خروج از خانه
+     */
+
+    if(position === -1){
+
+        position =
+        startPositions[color];
+
+    }
+
+    else{
+
+        position += diceValue;
+
+    }
+
+
+    /*
+     * اگر از مسیر اصلی رد شد
+     */
+
+    position =
+    position % 52;
+
+
+    selectedPiece.dataset.position =
+    position;
+
+
+    moveToPath(
+        selectedPiece,
+        position
+    );
+
+
+    /*
+     * خوردن
+     */
+
+    checkCapture(
+        selectedPiece,
+        position
+    );
+
+
+    /*
+     * بررسی تعداد مهره‌های فعال
+     */
+
+    checkWinner(color);
+
+
+    const six =
+    diceValue === 6;
+
+
+    diceValue = 0;
+
+
+    selectedPiece.classList.remove(
+        "selected"
+    );
+
+
+    selectedPiece = null;
+
+
+    document
+    .getElementById("dice")
+    .textContent =
+    "🎲";
+
+
+    /*
+     * با ۶ نوبت اضافه
+     */
+
+    if(six){
+
+        document
+        .getElementById("status")
+        .textContent =
+        "🎉 شش آوردی! دوباره تاس بینداز";
+
+        return;
+
+    }
+
+
+    nextTurn();
+
+}
+
+
+
+/* =================================
+   حرکت روی مسیر
+================================= */
+
+function moveToPath(
+    piece,
+    position
+){
+
+    const point =
+    path[position];
+
+
+    if(!point){
+
+        return;
+
+    }
+
+
+    piece.style.left =
+    point[0] + "%";
+
+
+    piece.style.top =
+    point[1] + "%";
+
+}
+
+
+
+/* =================================
+   خوردن مهره
+================================= */
+
+function checkCapture(
+    movingPiece,
+    position
+){
+
+    /*
+     * خانه امن
+     */
+
+    const safe =
+    (
+        position === 0 ||
+        position === 8 ||
+        position === 13 ||
+        position === 21 ||
+        position === 26 ||
+        position === 34 ||
+        position === 39 ||
+        position === 47
+    );
+
+
+    if(safe){
+
+        return;
+
+    }
+
+
+    const movingColor =
+    movingPiece.dataset.color;
+
+
+    pieces.forEach(
+        function(other){
+
+            if(
+                other === movingPiece
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                other.dataset.position !=
+                position
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                other.dataset.color ===
+                movingColor
+            ){
+
+                return;
+
+            }
+
+
+            sendHome(other);
+
+        }
+    );
+
+}
+
+
+
+/* =================================
+   برگشت مهره
+================================= */
+
+function sendHome(piece){
+
+    const color =
+    piece.dataset.color;
+
+
+    const index =
+    Number(
+        piece.dataset.index
+    );
+
+
+    const position =
+    homePositions[color][index];
+
+
+    piece.dataset.position =
+    -1;
+
+
+    piece.style.left =
+    position[0] + "%";
+
+
+    piece.style.top =
+    position[1] + "%";
+
+}
+
+
+
+/* =================================
+   بررسی برد
+================================= */
+
+function checkWinner(color){
+
+    /*
+     * برای این نسخه،
+     * برد وقتی است که هر ۴ مهره
+     * حداقل یک بار وارد مسیر شده باشند.
+     *
+     * در نسخه ۵ مقصد واقعی اضافه می‌شود.
+     */
+
+    const playerPieces =
+    pieces.filter(
+        function(piece){
+
+            return (
+                piece.dataset.color ===
+                color
+            );
+
+        }
+    );
+
+
+    const active =
+    playerPieces.filter(
+        function(piece){
+
+            return (
+                Number(
+                    piece.dataset.position
+                ) >= 0
+            );
+
+        }
+    );
+
+
+    if(
+        active.length === 4
+    ){
+
+        showWinner(color);
+
+    }
+
+}
+
+
+
+/* =================================
+   نمایش برنده
+================================= */
+
+function showWinner(color){
+
+    gameFinished = true;
+
+
+    document
+    .getElementById("winnerText")
+    .textContent =
+    "🏆 " +
+    colorNames[color] +
+    " برنده شد!";
+
+
+    document
+    .getElementById("winMessage")
+    .style.display =
+    "flex";
+
+}
+
+
+
+/* =================================
+   تغییر نوبت
+================================= */
+
+function nextTurn(){
+
+    diceValue = 0;
+
+
+    currentPlayer++;
+
+
+    if(
+        currentPlayer >=
+        colors.length
+    ){
+
+        currentPlayer = 0;
+
+    }
+
+
+    const color =
+    colors[currentPlayer];
+
+
+    document
+    .getElementById("currentPlayer")
+    .textContent =
+    colorNames[color];
+
+
+    document
+    .querySelectorAll(".player")
+    .forEach(
+        function(item){
+
+            item.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        "player-" + color
+    )
+    .classList.add(
+        "active"
+    );
+
+
+    document
+    .getElementById("status")
+    .textContent =
+    "نوبت " +
+    colorNames[color];
+
+}
+
+
+
+/* =================================
+   شروع دوباره
+================================= */
+
+function restartGame(){
+
+    location.reload();
+
+}
+
+
+window.rollDice =
+rollDice;
+
+
+window.restartGame =
+restartGame;
+
+
+</script>
+
+</body>
+
+</html>
