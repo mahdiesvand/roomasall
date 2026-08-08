@@ -1,236 +1,36 @@
-/*
-PLAYER SYSTEM
-ذخیره بازیکن، امتیاز و رکورد
-*/
+// player.js
 
-const PLAYER_KEY = "gamePlayer";
-
-let player = {
-name: "بازیکن",
-score: 0,
-bestScore: 0,
-gamesPlayed: 0
+const player = {
+    name: localStorage.getItem("playerName") || "بازیکن",
+    score: Number(localStorage.getItem("playerScore")) || 0,
+    record: Number(localStorage.getItem("playerRecord")) || 0,
+    games: Number(localStorage.getItem("playerGames")) || 0
 };
 
-/* =========================
-بارگذاری اطلاعات بازیکن
-========================= */
+// نمایش اطلاعات بازیکن
+function showPlayerInfo() {
 
-function loadPlayer(){
+    const nameElement = document.getElementById("playerName");
+    const scoreElement = document.getElementById("playerScore");
+    const recordElement = document.getElementById("playerRecord");
+    const gamesElement = document.getElementById("playerGames");
 
-const saved =
-    localStorage.getItem(PLAYER_KEY);
+    if (nameElement) {
+        nameElement.textContent = player.name;
+    }
 
-if(saved){
+    if (scoreElement) {
+        scoreElement.textContent = player.score;
+    }
 
-    try{
+    if (recordElement) {
+        recordElement.textContent = player.record;
+    }
 
-        player = {
-            ...player,
-            ...JSON.parse(saved)
-        };
-
-    }catch(error){
-
-        console.log(
-            "اطلاعات بازیکن قابل خواندن نیست."
-        );
+    if (gamesElement) {
+        gamesElement.textContent = player.games;
     }
 }
 
-updatePlayerUI();
-
-}
-
-/* =========================
-ذخیره اطلاعات
-========================= */
-
-function savePlayer(){
-
-localStorage.setItem(
-    PLAYER_KEY,
-    JSON.stringify(player)
-);
-
-}
-
-/* =========================
-ثبت امتیاز
-========================= */
-
-function addScore(points = 1){
-
-player.score += points;
-
-if(player.score > player.bestScore){
-
-    player.bestScore =
-        player.score;
-}
-
-savePlayer();
-
-updatePlayerUI();
-
-}
-
-/* =========================
-پایان بازی
-========================= */
-
-function finishGame(){
-
-player.gamesPlayed++;
-
-if(player.score > player.bestScore){
-
-    player.bestScore =
-        player.score;
-}
-
-savePlayer();
-
-updatePlayerUI();
-
-}
-
-/* =========================
-شروع بازی جدید
-========================= */
-
-function resetScore(){
-
-player.score = 0;
-
-savePlayer();
-
-updatePlayerUI();
-
-}
-
-/* =========================
-تغییر نام بازیکن
-========================= */
-
-function setPlayerName(name){
-
-if(!name){
-    return;
-}
-
-name = name.trim();
-
-if(name.length === 0){
-    return;
-}
-
-if(name.length > 20){
-
-    name = name.substring(0,20);
-}
-
-player.name = name;
-
-savePlayer();
-
-updatePlayerUI();
-
-}
-
-/* =========================
-نمایش اطلاعات
-========================= */
-
-function updatePlayerUI(){
-
-const nameElement =
-    document.getElementById("playerName");
-
-const scoreElement =
-    document.getElementById("playerScore");
-
-const bestElement =
-    document.getElementById("bestScore");
-
-const gamesElement =
-    document.getElementById("gamesPlayed");
-
-
-if(nameElement){
-    nameElement.textContent =
-        player.name;
-}
-
-if(scoreElement){
-    scoreElement.textContent =
-        player.score;
-}
-
-if(bestElement){
-    bestElement.textContent =
-        player.bestScore;
-}
-
-if(gamesElement){
-    gamesElement.textContent =
-        player.gamesPlayed;
-}
-
-}
-
-/* =========================
-دریافت اطلاعات بازیکن
-========================= */
-
-function getPlayer(){
-
-return player;
-
-}
-
-/* =========================
-اجرای اولیه
-========================= */
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-    loadPlayer();
-
-}
-
-);
-
-/* =========================
-دسترسی از فایل‌های دیگر
-========================= */
-
-window.loadPlayer = loadPlayer;
-window.savePlayer = savePlayer;
-window.addScore = addScore;
-window.finishGame = finishGame;
-window.resetScore = resetScore;
-window.setPlayerName = setPlayerName;
-window.getPlayer = getPlayer;
-function changePlayerName(){
-
-    const oldName =
-        player.name || "بازیکن";
-
-    const newName =
-        prompt(
-            "نام بازیکن را وارد کنید:",
-            oldName
-        );
-
-    if(newName === null){
-        return;
-    }
-
-    setPlayerName(newName);
-}
-
-window.changePlayerName =
-    changePlayerName;
+// اجرای خودکار
+document.addEventListener("DOMContentLoaded", showPlayerInfo);
