@@ -50,26 +50,24 @@ body{
     color:#222;
 
     overflow:hidden;
-
 }
 
 
 /* =========================================
-   کل صفحه
+   PAGE
 ========================================= */
 
 .chat-page{
 
     width:100vw;
-
     height:100vh;
 
     display:flex;
-
     flex-direction:column;
 
     padding:8px;
 
+    position:relative;
 }
 
 
@@ -80,7 +78,6 @@ body{
 .top-header{
 
     height:38px;
-
     flex-shrink:0;
 
     background:
@@ -89,8 +86,7 @@ body{
             #171717
         );
 
-    border:
-        2px solid #111;
+    border:2px solid #111;
 
     box-shadow:
         0 1px 4px #000;
@@ -98,7 +94,6 @@ body{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     color:#fff;
@@ -106,16 +101,7 @@ body{
     font-size:12px;
 
     position:relative;
-
 }
-
-
-.top-header span{
-
-    color:#eee;
-
-}
-
 
 .top-header .music{
 
@@ -128,7 +114,6 @@ body{
     align-items:center;
 
     gap:5px;
-
 }
 
 
@@ -145,30 +130,27 @@ body{
     display:grid;
 
     grid-template-columns:
-        minmax(0, 1fr)
+        minmax(0,1fr)
         265px;
 
     gap:8px;
 
     margin-top:5px;
-
 }
 
 
 /* =========================================
-   CHAT AREA
+   CHAT
 ========================================= */
 
 .chat-panel{
 
     min-width:0;
-
     min-height:0;
 
     background:#fff;
 
-    border:
-        2px solid #111;
+    border:2px solid #111;
 
     box-shadow:
         0 0 4px rgba(0,0,0,.8);
@@ -176,12 +158,11 @@ body{
     display:flex;
 
     flex-direction:column;
-
 }
 
 
 /* =========================================
-   CHAT MESSAGES
+   MESSAGES
 ========================================= */
 
 .messages{
@@ -191,7 +172,6 @@ body{
     min-height:0;
 
     overflow-y:auto;
-
     overflow-x:hidden;
 
     direction:rtl;
@@ -205,16 +185,10 @@ body{
             #e8e8e8 21px,
             #fff 22px
         );
-
 }
 
-
-/* scrollbar */
-
 .messages::-webkit-scrollbar{
-
     width:7px;
-
 }
 
 .messages::-webkit-scrollbar-thumb{
@@ -222,7 +196,6 @@ body{
     background:#999;
 
     border-radius:5px;
-
 }
 
 
@@ -246,16 +219,11 @@ body{
 
     background:
         rgba(255,255,255,.72);
-
 }
-
 
 .message:hover{
-
     background:#f5f5f5;
-
 }
-
 
 .message-header{
 
@@ -266,24 +234,7 @@ body{
     gap:6px;
 
     margin-bottom:2px;
-
 }
-
-
-.message-avatar{
-
-    width:25px;
-
-    height:25px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:1px solid #bbb;
-
-}
-
 
 .message-name{
 
@@ -292,9 +243,7 @@ body{
     color:#4c55c8;
 
     font-size:11px;
-
 }
-
 
 .message-text{
 
@@ -303,12 +252,11 @@ body{
     font-size:12px;
 
     word-break:break-word;
-
 }
 
 
 /* =========================================
-   CHAT INPUT
+   INPUT
 ========================================= */
 
 .chat-input-area{
@@ -329,9 +277,7 @@ body{
     display:flex;
 
     gap:5px;
-
 }
-
 
 .message-input{
 
@@ -339,31 +285,24 @@ body{
 
     height:38px;
 
-    border:
-        1px solid #999;
+    border:1px solid #999;
 
     border-radius:3px;
 
     outline:none;
 
-    padding:
-        0 10px;
+    padding:0 10px;
 
     font-family:Tahoma;
 
     font-size:12px;
 
     background:#fff;
-
 }
-
 
 .message-input:focus{
-
     border-color:#7421a0;
-
 }
-
 
 .send-button{
 
@@ -386,19 +325,15 @@ body{
     font-family:Tahoma;
 
     font-size:11px;
-
 }
 
-
 .send-button:active{
-
     background:#bbb;
-
 }
 
 
 /* =========================================
-   RIGHT SIDEBAR
+   SIDEBAR
 ========================================= */
 
 .sidebar{
@@ -407,8 +342,7 @@ body{
 
     background:#fff;
 
-    border:
-        2px solid #111;
+    border:2px solid #111;
 
     box-shadow:
         0 0 4px rgba(0,0,0,.8);
@@ -416,12 +350,11 @@ body{
     display:flex;
 
     flex-direction:column;
-
 }
 
 
 /* =========================================
-   LOGIN / INFO
+   SIDEBAR INFO
 ========================================= */
 
 .sidebar-info{
@@ -433,9 +366,7 @@ body{
     text-align:center;
 
     background:#fff;
-
 }
-
 
 .join-button{
 
@@ -443,8 +374,7 @@ body{
 
     width:150px;
 
-    margin:
-        0 auto 8px;
+    margin:0 auto 8px;
 
     padding:7px;
 
@@ -460,8 +390,8 @@ body{
 
     font-size:11px;
 
+    cursor:pointer;
 }
-
 
 .online-title{
 
@@ -470,18 +400,14 @@ body{
     color:#333;
 
     margin-bottom:6px;
-
 }
-
 
 .online-number{
 
     font-weight:bold;
 
     font-size:12px;
-
 }
-
 
 .search-box{
 
@@ -489,13 +415,11 @@ body{
 
     height:30px;
 
-    border:
-        1px solid #ddd;
+    border:1px solid #ddd;
 
     background:#fafafa;
 
-    padding:
-        0 8px;
+    padding:0 8px;
 
     outline:none;
 
@@ -504,7 +428,6 @@ body{
     font-size:10px;
 
     text-align:right;
-
 }
 
 
@@ -547,12 +470,11 @@ body{
 
     border-bottom:
         1px solid #42106f;
-
 }
 
 
 /* =========================================
-   USER LIST
+   USERS
 ========================================= */
 
 .users{
@@ -566,14 +488,10 @@ body{
     overflow-x:hidden;
 
     background:#fff;
-
 }
 
-
 .users::-webkit-scrollbar{
-
     width:6px;
-
 }
 
 .users::-webkit-scrollbar-thumb{
@@ -581,7 +499,6 @@ body{
     background:#aaa;
 
     border-radius:5px;
-
 }
 
 
@@ -593,8 +510,7 @@ body{
 
     min-height:37px;
 
-    padding:
-        4px 5px;
+    padding:4px 5px;
 
     display:grid;
 
@@ -611,25 +527,18 @@ body{
         1px solid #eee;
 
     background:#fff;
-
 }
-
 
 .user:hover{
-
     background:#f7f7f7;
-
 }
-
 
 .user-gender{
 
     font-size:16px;
 
     text-align:center;
-
 }
-
 
 .user-name{
 
@@ -646,16 +555,11 @@ body{
     color:#1682a8;
 
     text-align:right;
-
 }
-
 
 .user-name.female{
-
     color:#d83b91;
-
 }
-
 
 .user-avatar{
 
@@ -667,18 +571,15 @@ body{
 
     object-fit:cover;
 
-    border:
-        1px solid #aaa;
+    border:1px solid #aaa;
 
-}
+    display:flex;
 
+    align-items:center;
 
-.user-status{
+    justify-content:center;
 
-    font-size:9px;
-
-    color:#888;
-
+    background:#eee;
 }
 
 
@@ -688,8 +589,7 @@ body{
 
 .notice{
 
-    padding:
-        5px 8px;
+    padding:5px 8px;
 
     text-align:center;
 
@@ -699,9 +599,7 @@ body{
 
     background:#fff;
 
-    border-bottom:
-        1px solid #eee;
-
+    border-bottom:1px solid #eee;
 }
 
 
@@ -723,8 +621,7 @@ body{
             #202020
         );
 
-    border:
-        2px solid #111;
+    border:2px solid #111;
 
     display:flex;
 
@@ -732,11 +629,8 @@ body{
 
     gap:7px;
 
-    padding:
-        4px 8px;
-
+    padding:4px 8px;
 }
-
 
 .bottom-links{
 
@@ -749,18 +643,14 @@ body{
     color:#ddd;
 
     font-size:9px;
-
 }
-
 
 .bottom-links span{
 
     color:#e28aff;
 
     margin-left:10px;
-
 }
-
 
 .action{
 
@@ -783,443 +673,351 @@ body{
     font-size:17px;
 
     cursor:pointer;
-
 }
 
-
-/* =================================
-
-  ACTION BUTTONS
-========================================= */
-
 .action:hover{
-background:#fff;
+    background:#fff;
 }
 
 .action:active{
-transform:scale(.94);
+    transform:scale(.94);
 }
 
+
 /* =========================================
-EMOJI PANEL
+   EMOJI
 ========================================= */
 
 .emoji-panel{
 
-position:absolute;
+    position:absolute;
 
-bottom:52px;
+    bottom:52px;
 
-right:8px;
+    right:8px;
 
-width:260px;
+    width:260px;
 
-max-height:190px;
+    max-height:190px;
 
-overflow-y:auto;
+    overflow-y:auto;
 
-display:none;
+    display:none;
 
-padding:8px;
+    padding:8px;
 
-background:#fff;
+    background:#fff;
 
-border:2px solid #222;
+    border:2px solid #222;
 
-box-shadow:
-    0 2px 10px rgba(0,0,0,.45);
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.45);
 
-z-index:1000;
-
+    z-index:1000;
 }
 
 .emoji-panel.show{
-display:grid;
 
-grid-template-columns:
-    repeat(8,1fr);
+    display:grid;
 
-gap:5px;
+    grid-template-columns:
+        repeat(8,1fr);
 
+    gap:5px;
 }
 
 .emoji{
 
-height:28px;
+    height:28px;
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    align-items:center;
 
-justify-content:center;
+    justify-content:center;
 
-cursor:pointer;
+    cursor:pointer;
 
-font-size:18px;
+    font-size:18px;
 
-border-radius:3px;
-
+    border-radius:3px;
 }
 
 .emoji:hover{
-
-background:#eee;
-
+    background:#eee;
 }
 
+
 /* =========================================
-ONLINE DOT
+   ONLINE DOT
 ========================================= */
 
 .online-dot{
 
-width:7px;
+    width:7px;
 
-height:7px;
+    height:7px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:#20bd3a;
+    background:#20bd3a;
 
-display:inline-block;
+    display:inline-block;
 
-margin-left:3px;
+    margin-left:3px;
 
+    flex-shrink:0;
 }
 
+
 /* =========================================
-SYSTEM MESSAGE
+   SYSTEM
 ========================================= */
 
 .system-message{
 
-padding:6px;
+    padding:6px;
 
-text-align:center;
+    text-align:center;
 
-color:#777;
+    color:#777;
 
-font-size:10px;
+    font-size:10px;
 
-background:#f7f7f7;
+    background:#f7f7f7;
 
-border-bottom:1px solid #eee;
-
+    border-bottom:1px solid #eee;
 }
 
+.no-users{
+
+    padding:20px 5px;
+
+    text-align:center;
+
+    color:#aaa;
+
+    font-size:10px;
+}
+
+.loading{
+
+    padding:15px;
+
+    text-align:center;
+
+    color:#888;
+
+    font-size:10px;
+}
+
+
 /* =========================================
-MOBILE
+   MOBILE
 ========================================= */
 
 @media(max-width:700px){
 
-.chat-page{
+    .chat-page{
+        padding:4px;
+    }
 
-    padding:4px;
+    .main-layout{
 
+        grid-template-columns:
+            minmax(0,1fr)
+            190px;
+
+        gap:4px;
+    }
+
+    .sidebar{
+        width:190px;
+    }
+
+    .top-header{
+
+        height:34px;
+
+        font-size:11px;
+    }
+
+    .message{
+
+        padding:6px 8px;
+
+        font-size:11px;
+    }
+
+    .message-text{
+        font-size:11px;
+    }
+
+    .message-input{
+        height:36px;
+    }
+
+    .send-button{
+
+        width:55px;
+
+        height:36px;
+    }
+
+    .bottom-bar{
+        height:42px;
+    }
 }
 
-.main-layout{
-
-    grid-template-columns:
-        minmax(0,1fr)
-        190px;
-
-    gap:4px;
-
-}
-
-.sidebar{
-
-    width:190px;
-
-}
-
-.top-header{
-
-    height:34px;
-
-    font-size:11px;
-
-}
-
-.message{
-
-    padding:
-        6px 8px;
-
-    font-size:11px;
-
-}
-
-.message-text{
-
-    font-size:11px;
-
-}
-
-.message-avatar{
-
-    width:22px;
-
-    height:22px;
-
-}
-
-.message-input{
-
-    height:36px;
-
-}
-
-.send-button{
-
-    width:55px;
-
-    height:36px;
-
-}
-
-.bottom-bar{
-
-    height:42px;
-
-}
-
-}
 
 /* =========================================
-SMALL PHONES
+   SMALL MOBILE
 ========================================= */
 
 @media(max-width:480px){
 
-.chat-page{
+    .chat-page{
+        padding:2px;
+    }
 
-    padding:2px;
+    .main-layout{
 
+        grid-template-columns:
+            minmax(0,1fr)
+            145px;
+
+        gap:2px;
+    }
+
+    .sidebar{
+        width:145px;
+    }
+
+    .join-button{
+
+        width:115px;
+
+        font-size:9px;
+    }
+
+    .online-title{
+        font-size:9px;
+    }
+
+    .room-title{
+
+        height:28px;
+
+        font-size:11px;
+    }
+
+    .user{
+
+        grid-template-columns:
+            20px
+            minmax(0,1fr)
+            22px;
+
+        min-height:34px;
+    }
+
+    .user-name{
+        font-size:9px;
+    }
+
+    .user-avatar{
+
+        width:21px;
+
+        height:21px;
+    }
+
+    .bottom-links{
+        font-size:8px;
+    }
 }
 
-.main-layout{
-
-    grid-template-columns:
-        minmax(0,1fr)
-        145px;
-
-    gap:2px;
-
-}
-
-.sidebar{
-
-    width:145px;
-
-}
-
-.join-button{
-
-    width:115px;
-
-    font-size:9px;
-
-}
-
-.online-title{
-
-    font-size:9px;
-
-}
-
-.room-title{
-
-    height:28px;
-
-    font-size:11px;
-
-}
-
-.user{
-
-    grid-template-columns:
-        20px
-        minmax(0,1fr)
-        22px;
-
-    min-height:34px;
-
-}
-
-.user-name{
-
-    font-size:9px;
-
-}
-
-.user-avatar{
-
-    width:21px;
-
-    height:21px;
-
-}
-
-.bottom-links{
-
-    font-size:8px;
-
-}
-
-}
 
 /* =========================================
-EXTRA SMALL PHONES
+   EXTRA SMALL
 ========================================= */
 
 @media(max-width:360px){
 
-.main-layout{
+    .main-layout{
 
-    grid-template-columns:
-        minmax(0,1fr)
-        125px;
+        grid-template-columns:
+            minmax(0,1fr)
+            125px;
+    }
 
+    .sidebar{
+        width:125px;
+    }
+
+    .message{
+        font-size:10px;
+    }
+
+    .message-text{
+        font-size:10px;
+    }
+
+    .user-name{
+        font-size:8px;
+    }
+
+    .user-gender{
+        font-size:13px;
+    }
 }
 
-.sidebar{
-
-    width:125px;
-
-}
-
-.message{
-
-    font-size:10px;
-
-}
-
-.message-text{
-
-    font-size:10px;
-
-}
-
-.user-name{
-
-    font-size:8px;
-
-}
-
-.user-gender{
-
-    font-size:13px;
-
-}
-
-}
-
-/* =========================================
-SELECTION
-========================================= */
 
 ::selection{
 
-background:#7d25a8;
+    background:#7d25a8;
 
-color:#fff;
-
+    color:#fff;
 }
 
-/* =========================================
-INPUT PLACEHOLDER
-========================================= */
 
 .message-input::placeholder{
-
-color:#999;
-
+    color:#999;
 }
 
-/* =========================================
-NO USERS
-========================================= */
-
-.no-users{
-
-padding:20px 5px;
-
-text-align:center;
-
-color:#aaa;
-
-font-size:10px;
-
-}
-
-/* =========================================
-LOADING
-========================================= */
-
-.loading{
-
-padding:15px;
-
-text-align:center;
-
-color:#888;
-
-font-size:10px;
-
-}
-
-/* =========================================
-POSITION WRAPPER
-========================================= */
-
-.chat-page{
-
-position:relative;
-
-}
-
-/* =========================================
-FIX MOBILE HEIGHT
-========================================= */
-
-@supports(height:100dvh){
-
-html,
-body{
-
-    height:100dvh;
-
-}
-
-.chat-page{
-
-    height:100dvh;
-
-}
-
-}
-
-/* =========================================
-PREVENT DOUBLE TAP ZOOM
-========================================= */
 
 button,
 .action,
 .user{
 
-touch-action:manipulation;
-
+    touch-action:manipulation;
 }
 
-/* =========================================
-END CSS
-========================================= */
 
-</style></head><body><div class="chat-page"><!-- =====================================
-     HEADER
+@supports(height:100dvh){
+
+    html,
+    body{
+        height:100dvh;
+    }
+
+    .chat-page{
+        height:100dvh;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="chat-page">
+
+
+<!-- =====================================
+HEADER
 ====================================== -->
 
 <div class="top-header">
@@ -1231,6 +1029,7 @@ END CSS
     <div class="music">
 
         🎵
+
         <span>
             موزیک
         </span>
@@ -1241,194 +1040,189 @@ END CSS
 
 
 <!-- =====================================
-     MAIN
+MAIN
 ====================================== -->
 
 <div class="main-layout">
 
 
-    <!-- =================================
-         CHAT
-    ================================== -->
+<!-- =====================================
+CHAT
+====================================== -->
 
-    <section class="chat-panel">
-
-
-        <!-- MESSAGES -->
-
-        <div
-            id="messages"
-            class="messages"
-        >
-
-            <div class="system-message">
-
-                به عسل چت خوش آمدید 🍯
-
-            </div>
-
-        </div>
+<section class="chat-panel">
 
 
-        <!-- INPUT -->
+<div
+    id="messages"
+    class="messages"
+>
 
-        <div class="chat-input-area">
+    <div class="system-message">
 
-            <button
-                id="emojiButton"
-                class="action"
-                type="button"
-                title="ایموجی"
-            >
-                😊
-            </button>
+        به عسل چت خوش آمدید 🍯
 
-            <input
-                id="messageInput"
-                class="message-input"
-                type="text"
-                autocomplete="off"
-                placeholder="پیام خود را بنویسید..."
-            >
+    </div>
 
-            <button
-                id="sendButton"
-                class="send-button"
-                type="button"
-            >
-                ارسال
-            </button>
-
-        </div>
+</div>
 
 
-    </section>
+<div class="chat-input-area">
 
 
-
-    <!-- =================================
-         SIDEBAR
-    ================================== -->
-
-    <aside class="sidebar">
-
-
-        <div class="sidebar-info">
-
-            <button
-                id="joinButton"
-                class="join-button"
-                type="button"
-            >
-                ورود به چت
-            </button>
+<button
+    id="emojiButton"
+    class="action"
+    type="button"
+>
+    😊
+</button>
 
 
-            <div class="online-title">
-
-                کاربران آنلاین
-
-                <span
-                    id="onlineNumber"
-                    class="online-number"
-                >
-                    0
-                </span>
-
-            </div>
+<input
+    id="messageInput"
+    class="message-input"
+    type="text"
+    autocomplete="off"
+    placeholder="پیام خود را بنویسید..."
+>
 
 
-            <input
-                id="searchUsers"
-                class="search-box"
-                type="text"
-                placeholder="جستجوی کاربر..."
-                autocomplete="off"
-            >
-
-        </div>
+<button
+    id="sendButton"
+    class="send-button"
+    type="button"
+>
+    ارسال
+</button>
 
 
-        <div class="room-title">
+</div>
 
-            کاربران آنلاین
-
-        </div>
+</section>
 
 
-        <div
-            id="users"
-            class="users"
-        >
+<!-- =====================================
+SIDEBAR
+====================================== -->
 
-            <div class="loading">
-
-                در حال دریافت کاربران...
-
-            </div>
-
-        </div>
+<aside class="sidebar">
 
 
-        <div class="notice">
-
-            لطفاً قوانین چت را رعایت کنید.
-
-        </div>
+<div class="sidebar-info">
 
 
-    </aside>
+<button
+    id="joinButton"
+    class="join-button"
+    type="button"
+>
+    ورود به چت
+</button>
+
+
+<div class="online-title">
+
+    کاربران آنلاین
+
+    <span
+        id="onlineNumber"
+        class="online-number"
+    >
+        0
+    </span>
+
+</div>
+
+
+<input
+    id="searchUsers"
+    class="search-box"
+    type="text"
+    placeholder="جستجوی کاربر..."
+    autocomplete="off"
+>
 
 
 </div>
 
 
+<div class="room-title">
+
+    کاربران آنلاین
+
+</div>
+
+
+<div
+    id="users"
+    class="users"
+>
+
+    <div class="loading">
+
+        در حال دریافت کاربران...
+
+    </div>
+
+</div>
+
+
+<div class="notice">
+
+    لطفاً قوانین چت را رعایت کنید.
+
+</div>
+
+
+</aside>
+
+</div>
+
 
 <!-- =====================================
-     BOTTOM BAR
+BOTTOM
 ====================================== -->
 
 <div class="bottom-bar">
 
 
-    <div class="bottom-links">
+<div class="bottom-links">
 
-        <span>قوانین</span>
+    <span>قوانین</span>
 
-        <span>راهنما</span>
+    <span>راهنما</span>
 
-        <span>درباره ما</span>
+    <span>درباره ما</span>
 
-        <span>تماس با ما</span>
+    <span>تماس با ما</span>
 
-    </div>
-
-
-    <button
-        id="emojiBottom"
-        class="action"
-        type="button"
-        title="ایموجی"
-    >
-        😊
-    </button>
+</div>
 
 
-    <button
-        id="soundButton"
-        class="action"
-        type="button"
-        title="صدا"
-    >
-        🔊
-    </button>
+<button
+    id="emojiBottom"
+    class="action"
+    type="button"
+>
+    😊
+</button>
+
+
+<button
+    id="soundButton"
+    class="action"
+    type="button"
+>
+    🔊
+</button>
 
 
 </div>
 
 
 <!-- =====================================
-     EMOJI PANEL
+EMOJI PANEL
 ====================================== -->
 
 <div
@@ -1465,52 +1259,158 @@ END CSS
 
 </div>
 
-</div><script>
+
+</div>
+
+
+<!-- =====================================
+FIREBASE
+====================================== -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+
+import {
+
+    getDatabase,
+    ref,
+    push,
+    onChildAdded,
+    onValue,
+    set,
+    onDisconnect,
+    serverTimestamp
+
+}
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+
 
 /* =========================================
-   ELEMENTS
+FIREBASE CONFIG
+========================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
+
+    authDomain:
+        "roomasal.firebaseapp.com",
+
+    databaseURL:
+        "https://roomasal-default-rtdb.firebaseio.com",
+
+    projectId:
+        "roomasal",
+
+    storageBucket:
+        "roomasal.firebasestorage.app",
+
+    messagingSenderId:
+        "74039115594",
+
+    appId:
+        "1:74039115594:web:18fb78cfe77207f18c4bb3",
+
+    measurementId:
+        "G-T9W22HHGBF"
+
+};
+
+
+/* =========================================
+INITIALIZE
+========================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const db =
+    getDatabase(app);
+
+
+/* =========================================
+ELEMENTS
 ========================================= */
 
 const messages =
-    document.getElementById("messages");
+    document.getElementById(
+        "messages"
+    );
+
 
 const messageInput =
-    document.getElementById("messageInput");
+    document.getElementById(
+        "messageInput"
+    );
+
 
 const sendButton =
-    document.getElementById("sendButton");
+    document.getElementById(
+        "sendButton"
+    );
+
 
 const emojiButton =
-    document.getElementById("emojiButton");
+    document.getElementById(
+        "emojiButton"
+    );
+
 
 const emojiBottom =
-    document.getElementById("emojiBottom");
+    document.getElementById(
+        "emojiBottom"
+    );
+
 
 const emojiPanel =
-    document.getElementById("emojiPanel");
+    document.getElementById(
+        "emojiPanel"
+    );
+
 
 const searchUsers =
-    document.getElementById("searchUsers");
+    document.getElementById(
+        "searchUsers"
+    );
+
 
 const usersBox =
-    document.getElementById("users");
+    document.getElementById(
+        "users"
+    );
+
 
 const onlineNumber =
-    document.getElementById("onlineNumber");
+    document.getElementById(
+        "onlineNumber"
+    );
+
 
 const joinButton =
-    document.getElementById("joinButton");
+    document.getElementById(
+        "joinButton"
+    );
+
 
 const soundButton =
-    document.getElementById("soundButton");
+    document.getElementById(
+        "soundButton"
+    );
 
 
 /* =========================================
-   USER
+USERNAME
 ========================================= */
 
 let username =
-    localStorage.getItem("username");
+    localStorage.getItem(
+        "username"
+    );
+
 
 if(!username){
 
@@ -1520,32 +1420,182 @@ if(!username){
 
 
 /* =========================================
-   SEND MESSAGE
+DATABASE REFERENCES
 ========================================= */
 
-function sendMessage(){
+const messagesRef =
+    ref(
+        db,
+        "messages"
+    );
+
+
+/* =========================================
+ONLINE
+========================================= */
+
+const userKey =
+    encodeURIComponent(
+        username
+    );
+
+
+const onlineRef =
+    ref(
+        db,
+        "online/" + userKey
+    );
+
+
+set(
+    onlineRef,
+    {
+
+        name:
+            username,
+
+        time:
+            serverTimestamp()
+
+    }
+
+).catch(function(error){
+
+    console.error(
+        "Online error:",
+        error
+    );
+
+});
+
+
+/* =========================================
+REMOVE ONLINE
+========================================= */
+
+onDisconnect(
+    onlineRef
+).remove();
+
+
+/* =========================================
+SEND MESSAGE
+========================================= */
+
+async function sendMessage(){
 
     const text =
         messageInput.value.trim();
 
+
     if(!text){
+
         return;
+
     }
 
 
-    addMessage(
-        username,
-        text
-    );
+    try{
+
+        await push(
+            messagesRef,
+            {
+
+                name:
+                    username,
+
+                text:
+                    text,
+
+                time:
+                    serverTimestamp()
+
+            }
+        );
 
 
-    messageInput.value = "";
+        messageInput.value = "";
+
+        messageInput.focus();
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Send error:",
+            error
+        );
+
+        alert(
+            "ارسال پیام انجام نشد."
+        );
+
+    }
 
 }
 
 
 /* =========================================
-   ADD MESSAGE
+SEND BUTTON
+========================================= */
+
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* =========================================
+ENTER
+========================================= */
+
+messageInput.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+RECEIVE MESSAGES
+========================================= */
+
+onChildAdded(
+    messagesRef,
+    function(snapshot){
+
+        const data =
+            snapshot.val();
+
+
+        if(!data){
+
+            return;
+
+        }
+
+
+        addMessage(
+            data.name || "مهمان",
+            data.text || ""
+        );
+
+    }
+);
+
+
+/* =========================================
+ADD MESSAGE
 ========================================= */
 
 function addMessage(
@@ -1554,7 +1604,10 @@ function addMessage(
 ){
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.className =
         "message";
@@ -1567,11 +1620,12 @@ function addMessage(
             <div class="online-dot"></div>
 
             <span class="message-name">
+
                 ${escapeHTML(name)}
+
             </span>
 
         </div>
-
 
         <div class="message-text">
 
@@ -1592,54 +1646,263 @@ function addMessage(
 
 
 /* =========================================
-   ESCAPE HTML
+ESCAPE
 ========================================= */
 
 function escapeHTML(text){
 
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
 /* =========================================
-   EVENTS
+ONLINE USERS
 ========================================= */
 
-sendButton.addEventListener(
-    "click",
-    sendMessage
-);
+onValue(
+    ref(db, "online"),
+
+    function(snapshot){
+
+        const data =
+            snapshot.val();
 
 
-messageInput.addEventListener(
-    "keydown",
-    function(e){
+        const list = [];
 
-        if(e.key === "Enter"){
 
-            e.preventDefault();
+        if(data){
 
-            sendMessage();
+            Object.keys(data)
+                .forEach(function(key){
+
+                    const user =
+                        data[key];
+
+
+                    if(user){
+
+                        list.push({
+
+                            name:
+                                user.name ||
+                                "مهمان",
+
+                            gender:
+                                user.gender ||
+                                "♂",
+
+                            avatar:
+                                user.avatar ||
+                                ""
+
+                        });
+
+                    }
+
+                });
 
         }
+
+
+        renderUsers(list);
+
+    },
+
+    function(error){
+
+        console.error(
+            "Users error:",
+            error
+        );
+
+
+        usersBox.innerHTML = `
+
+            <div class="no-users">
+
+                خطا در دریافت کاربران
+
+            </div>
+
+        `;
 
     }
 );
 
 
 /* =========================================
-   EMOJI
+RENDER USERS
+========================================= */
+
+function renderUsers(list){
+
+    usersBox.innerHTML = "";
+
+
+    onlineNumber.textContent =
+        list.length;
+
+
+    if(!list.length){
+
+        usersBox.innerHTML = `
+
+            <div class="no-users">
+
+                کاربری آنلاین نیست
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(function(user){
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "user";
+
+
+        div.dataset.name =
+            user.name;
+
+
+        div.innerHTML = `
+
+            <div class="user-gender">
+
+                ${user.gender}
+
+            </div>
+
+            <div
+                class="user-name
+                ${
+                    user.gender === "♀"
+                    ? "female"
+                    : ""
+                }"
+            >
+
+                ${escapeHTML(user.name)}
+
+            </div>
+
+            ${
+                user.avatar
+
+                ?
+
+                `<img
+                    class="user-avatar"
+                    src="${escapeHTML(
+                        user.avatar
+                    )}"
+                    alt=""
+                >`
+
+                :
+
+                `<div class="user-avatar">
+                    👤
+                </div>`
+            }
+
+        `;
+
+
+        usersBox.appendChild(div);
+
+    });
+
+
+    applyUserSearch();
+
+}
+
+
+/* =========================================
+SEARCH
+========================================= */
+
+function applyUserSearch(){
+
+    const value =
+        searchUsers.value
+            .trim()
+            .toLowerCase();
+
+
+    document
+        .querySelectorAll(".user")
+        .forEach(function(user){
+
+            const name =
+                user.dataset.name
+                    .toLowerCase();
+
+
+            user.style.display =
+                name.includes(value)
+                ? "grid"
+                : "none";
+
+        });
+
+}
+
+
+searchUsers.addEventListener(
+    "input",
+    applyUserSearch
+);
+
+
+/* =========================================
+EMOJI
 ========================================= */
 
 function toggleEmoji(){
 
-    emojiPanel.classList.toggle("show");
+    emojiPanel.classList.toggle(
+        "show"
+    );
 
 }
 
@@ -1676,50 +1939,7 @@ document
 
 
 /* =========================================
-   SEARCH USERS
-========================================= */
-
-searchUsers.addEventListener(
-    "input",
-    function(){
-
-        const value =
-            this.value
-                .trim()
-                .toLowerCase();
-
-
-        document
-            .querySelectorAll(".user")
-            .forEach(function(user){
-
-                const name =
-                    user.dataset.name
-                        .toLowerCase();
-
-
-                if(
-                    name.includes(value)
-                ){
-
-                    user.style.display =
-                        "grid";
-
-                }else{
-
-                    user.style.display =
-                        "none";
-
-                }
-
-            });
-
-    }
-);
-
-
-/* =========================================
-   JOIN
+JOIN
 ========================================= */
 
 joinButton.addEventListener(
@@ -1734,7 +1954,7 @@ joinButton.addEventListener(
 
 
 /* =========================================
-   SOUND
+SOUND
 ========================================= */
 
 let soundEnabled = true;
@@ -1750,131 +1970,15 @@ soundButton.addEventListener(
 
         soundButton.textContent =
             soundEnabled
-                ? "🔊"
-                : "🔇";
+            ? "🔊"
+            : "🔇";
 
     }
 );
 
 
 /* =========================================
-   DEMO USERS
-========================================= */
-
-const demoUsers = [
-
-    {
-        name:"مهدی",
-        gender:"♂",
-        avatar:""
-    },
-
-    {
-        name:"عسل",
-        gender:"♀",
-        avatar:""
-    },
-
-    {
-        name:"کاربر مهمان",
-        gender:"♂",
-        avatar:""
-    },
-
-    {
-        name:"سارا",
-        gender:"♀",
-        avatar:""
-    }
-
-];
-
-
-function renderUsers(list){
-
-    usersBox.innerHTML = "";
-
-
-    if(!list.length){
-
-        usersBox.innerHTML = `
-            <div class="no-users">
-                کاربری پیدا نشد
-            </div>
-        `;
-
-        onlineNumber.textContent =
-            "0";
-
-        return;
-
-    }
-
-
-    onlineNumber.textContent =
-        list.length;
-
-
-    list.forEach(function(user){
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "user";
-
-
-        div.dataset.name =
-            user.name;
-
-
-        div.innerHTML = `
-
-            <div class="user-gender">
-
-                ${user.gender}
-
-            </div>
-
-
-            <div
-                class="user-name
-                ${user.gender === "♀" ? "female" : ""}"
-            >
-
-                ${escapeHTML(user.name)}
-
-            </div>
-
-
-            ${
-                user.avatar
-                ?
-                `<img
-                    class="user-avatar"
-                    src="${user.avatar}"
-                >`
-                :
-                `<div class="user-avatar">
-                    👤
-                </div>`
-            }
-
-        `;
-
-
-        usersBox.appendChild(div);
-
-    });
-
-}
-
-
-renderUsers(demoUsers);
-
-
-/* =========================================
-   CLOSE EMOJI
+CLOSE EMOJI
 ========================================= */
 
 document.addEventListener(
@@ -1882,9 +1986,19 @@ document.addEventListener(
     function(e){
 
         if(
-            !emojiPanel.contains(e.target) &&
-            e.target !== emojiButton &&
+
+            !emojiPanel.contains(
+                e.target
+            )
+
+            &&
+
+            e.target !== emojiButton
+
+            &&
+
             e.target !== emojiBottom
+
         ){
 
             emojiPanel.classList.remove(
@@ -1898,7 +2012,20 @@ document.addEventListener(
 
 
 /* =========================================
-   END
+READY
 ========================================= */
 
-</script></body></html>
+console.log(
+    "🍯 Asal Chat Firebase Ready"
+);
+
+console.log(
+    "User:",
+    username
+);
+
+</script>
+
+</body>
+
+      </html>
