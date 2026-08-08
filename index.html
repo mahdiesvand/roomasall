@@ -4,11 +4,25 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>عسل منچ 🐝</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#080706"
+>
+
+<title>عسل گیم | دنیای بازی</title>
+
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     box-sizing:border-box;
@@ -16,621 +30,935 @@
     padding:0;
 }
 
-html{
-    background:#080604;
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
+
 
 body{
+
     min-height:100vh;
-    font-family:Tahoma,Arial,sans-serif;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
     color:#fff;
-    background:
-    radial-gradient(
-        circle at 50% -10%,
-        rgba(255,193,7,.18),
-        transparent 35%
-    ),
-    radial-gradient(
-        circle at 0% 100%,
-        rgba(255,140,0,.08),
-        transparent 35%
-    ),
-    #080604;
+
+    background:#070605;
+
+    overflow-x:hidden;
+
 }
 
-.app{
-    width:100%;
-    max-width:680px;
-    margin:auto;
-    padding:10px;
-}
 
-.header{
-    text-align:center;
-    padding:10px 0 15px;
-}
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
-.header h1{
-    font-size:30px;
-    font-weight:900;
-    background:
-    linear-gradient(
-        135deg,
-        #fff1a8,
-        #ffc107,
-        #ff9800
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
+.background{
 
-.header p{
-    margin-top:5px;
-    color:#a99a80;
-    font-size:12px;
-}
+    position:fixed;
 
-/* تخته */
+    inset:0;
 
-.board{
-    position:relative;
-    width:100%;
-    aspect-ratio:1;
-    padding:5px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #ffd54f,
-        #8d5d16,
-        #ffca28
-    );
-
-    border-radius:25px;
-
-    box-shadow:
-    0 0 0 1px rgba(255,193,7,.4),
-    0 15px 45px rgba(0,0,0,.65),
-    0 0 45px rgba(255,179,0,.12);
+    z-index:-10;
 
     overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,193,7,.13),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(255,150,0,.08),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(255,193,7,.06),
+            transparent 25%
+        ),
+
+        #070605;
+
 }
 
-.board::before{
+
+/* نور مرکزی */
+
+.background::after{
+
     content:"";
+
     position:absolute;
-    inset:5px;
-    border-radius:20px;
-    pointer-events:none;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            rgba(0,0,0,.72) 85%
+        );
+
+}
+
+
+/* =====================================================
+   GAME BACKGROUND ART
+===================================================== */
+
+.game-art{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:720px;
+
+    height:720px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-4deg);
+
+    opacity:.12;
+
+    filter:
+        blur(1.5px)
+        saturate(.65);
+
+}
+
+
+/* صفحه منچ */
+
+.ludo{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:430px;
+
+    height:430px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(2deg);
+
+    border-radius:38px;
+
+    background:
+
+        conic-gradient(
+            #d83b35 0 25%,
+            #35a85c 0 50%,
+            #e3b82f 0 75%,
+            #3785c4 0 100%
+        );
+
+    border:10px solid #c08a1b;
+
     box-shadow:
-    inset 0 0 25px rgba(0,0,0,.4);
-    z-index:50;
+        0 0 60px rgba(255,193,7,.18),
+        0 30px 80px rgba(0,0,0,.7);
+
 }
 
-/* خانه های رنگی */
 
-.home{
+.ludo::before{
+
+    content:"";
+
     position:absolute;
-    width:40%;
-    height:40%;
-    padding:7%;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:1fr 1fr;
-    gap:8%;
-    z-index:2;
-}
 
-.home.red{
-    left:0;
-    top:0;
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #ff6b5f,
-        #c62828
-    );
-    border-radius:20px 0 0 0;
-}
+    inset:18%;
 
-.home.green{
-    right:0;
-    top:0;
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #65e89a,
-        #159447
-    );
-    border-radius:0 20px 0 0;
-}
-
-.home.blue{
-    left:0;
-    bottom:0;
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #65baff,
-        #1970b8
-    );
-    border-radius:0 0 0 20px;
-}
-
-.home.yellow{
-    right:0;
-    bottom:0;
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #fff176,
-        #d99c00
-    );
-    border-radius:0 0 20px 0;
-}
-
-/* جای مهره */
-
-.slot{
-    position:relative;
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #fff,
-        #ddd
-    );
     border-radius:50%;
-    border:3px solid rgba(0,0,0,.25);
-
-    box-shadow:
-    inset 0 4px 7px rgba(0,0,0,.18),
-    0 3px 6px rgba(0,0,0,.3);
-}
-
-/* مسیر */
-
-.track{
-    position:absolute;
-    left:20%;
-    top:20%;
-    width:60%;
-    height:60%;
-    z-index:3;
-}
-
-.cell{
-    position:absolute;
-    width:8%;
-    height:8%;
 
     background:
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #e9e5dc
-    );
 
-    border:1px solid rgba(100,80,40,.35);
-    border-radius:5px;
+        repeating-conic-gradient(
+            rgba(255,255,255,.7) 0deg 7deg,
+            transparent 7deg 15deg
+        );
+
+    opacity:.28;
+
+}
+
+
+.ludo::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:35%;
+
+    top:35%;
+
+    width:30%;
+
+    height:30%;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #ffd54f,
+            #b87508
+        );
 
     box-shadow:
-    inset 0 1px 2px rgba(255,255,255,.9),
-    0 1px 2px rgba(0,0,0,.15);
+        0 0 30px rgba(255,193,7,.3);
+
+}
+
+
+/* =====================================================
+   GAME ICONS
+===================================================== */
+
+.icon{
+
+    position:absolute;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
-}
 
-.cell.safe{
-    background:
-    radial-gradient(
-        circle,
-        #fff8cf,
-        #e8bd36
-    );
+    font-size:55px;
 
-    border:2px solid #bd8610;
+    opacity:.6;
 
-    box-shadow:
-    0 0 8px rgba(255,193,7,.55);
-}
+    filter:
+        blur(.3px)
+        grayscale(.25);
 
-.cell.safe::after{
-    content:"★";
-    color:#9b6500;
-    font-size:11px;
-}
-
-/* مرکز */
-
-.center{
-    position:absolute;
-    left:40%;
-    top:40%;
-    width:20%;
-    height:20%;
-    z-index:8;
-
-    background:
-    conic-gradient(
-        #e53935 0deg 90deg,
-        #22b85b 90deg 180deg,
-        #f4c20d 180deg 270deg,
-        #2989d8 270deg 360deg
-    );
-
-    border:3px solid rgba(255,255,255,.75);
-
-    box-shadow:
-    inset 0 0 15px rgba(0,0,0,.3),
-    0 0 12px rgba(255,193,7,.3);
-}
-
-/* مهره ها */
-
-.piece{
-    position:absolute;
-    width:7%;
-    aspect-ratio:1;
-    border-radius:50%;
-
-    border:3px solid rgba(255,255,255,.95);
-
-    z-index:20;
-    cursor:pointer;
-
-    transition:
-    left .28s cubic-bezier(.2,.8,.2,1),
-    top .28s cubic-bezier(.2,.8,.2,1),
-    transform .15s ease;
-
-    box-shadow:
-    inset 0 3px 4px rgba(255,255,255,.55),
-    inset 0 -5px 7px rgba(0,0,0,.25),
-    0 4px 9px rgba(0,0,0,.5);
-}
-
-.piece.red{
-    background:
-    radial-gradient(
-        circle at 30% 25%,
-        #ff8a80,
-        #e53935 55%,
-        #9f1717
-    );
-}
-
-.piece.green{
-    background:
-    radial-gradient(
-        circle at 30% 25%,
-        #9affba,
-        #25bd60 55%,
-        #087a35
-    );
-}
-
-.piece.blue{
-    background:
-    radial-gradient(
-        circle at 30% 25%,
-        #9bd7ff,
-        #258fdf 55%,
-        #10548c
-    );
-}
-
-.piece.yellow{
-    background:
-    radial-gradient(
-        circle at 30% 25%,
-        #fffbd0,
-        #ffd52e 55%,
-        #c18400
-    );
-}
-
-.piece.selectable{
-    animation:pieceGlow 1s infinite;
-}
-
-@keyframes pieceGlow{
-
-    0%{
-        transform:scale(1);
-        box-shadow:0 0 0 rgba(255,193,7,0);
-    }
-
-    50%{
-        transform:scale(1.18);
-        box-shadow:
-        0 0 0 3px rgba(255,255,255,.7),
-        0 0 20px rgba(255,193,7,.95);
-    }
-
-    100%{
-        transform:scale(1);
-    }
+    text-shadow:
+        0 10px 25px rgba(0,0,0,.8);
 
 }
 
-.piece.selected{
-    transform:scale(1.25);
+
+.card1{
+    top:7%;
+    left:9%;
+    transform:rotate(-18deg);
 }
 
-/* کنترل */
-
-.panel{
-    margin-top:14px;
-    padding:15px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #1b1710,
-        #100e0a
-    );
-
-    border:
-    1px solid rgba(255,193,7,.28);
-
-    border-radius:20px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.04);
+.card2{
+    bottom:8%;
+    right:8%;
+    transform:rotate(17deg);
 }
 
-.turn{
-    text-align:center;
-    color:#9d927e;
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-.turn strong{
-    color:#ffd54f;
-    font-size:14px;
+.ps{
+    top:13%;
+    right:5%;
+    transform:rotate(12deg);
 }
 
 .dice{
-    width:76px;
-    height:76px;
-    margin:0 auto 12px;
+    bottom:11%;
+    left:8%;
+    transform:rotate(-15deg);
+}
 
-    border-radius:19px;
+.chess{
+    top:49%;
+    left:2%;
+    font-size:45px;
+}
 
-    background:
-    linear-gradient(
-        145deg,
-        #fff,
-        #dedbd2
-    );
+.controller{
+    bottom:38%;
+    right:2%;
+    font-size:50px;
+}
 
-    color:#17130c;
+.cards{
+    top:30%;
+    right:2%;
+    font-size:42px;
+}
+
+.target{
+    bottom:4%;
+    left:45%;
+    font-size:45px;
+}
+
+
+/* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+.particle{
+
+    position:absolute;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:#ffd54f;
+
+    opacity:.45;
+
+    box-shadow:
+        0 0 12px #ffc107;
+
+    animation:
+        float 7s infinite ease-in-out;
+
+}
+
+
+.p1{
+    left:14%;
+    top:30%;
+}
+
+.p2{
+    left:82%;
+    top:25%;
+    animation-delay:2s;
+}
+
+.p3{
+    left:22%;
+    top:75%;
+    animation-delay:4s;
+}
+
+.p4{
+    left:75%;
+    top:70%;
+    animation-delay:1s;
+}
+
+
+@keyframes float{
+
+    0%,
+    100%{
+        transform:translateY(0);
+        opacity:.25;
+    }
+
+    50%{
+        transform:translateY(-25px);
+        opacity:.7;
+    }
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.page{
+
+    min-height:100vh;
 
     display:flex;
+
+    flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
+
+    padding:
+        25px
+        16px;
+
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.brand{
+
+    text-align:center;
+
+    margin-bottom:24px;
+
+}
+
+
+.logo{
+
+    width:78px;
+
+    height:78px;
+
+    margin:
+        0 auto
+        14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:25px;
 
     font-size:40px;
 
-    box-shadow:
-    0 7px 18px rgba(0,0,0,.5),
-    inset 0 2px 3px rgba(255,255,255,.9);
+    background:
 
-    border:1px solid #aaa;
+        linear-gradient(
+            145deg,
+            #ffe082,
+            #ffc107 45%,
+            #c88700
+        );
+
+    box-shadow:
+
+        0 0 0 1px
+            rgba(255,255,255,.15),
+
+        0 12px 35px
+            rgba(255,174,0,.22),
+
+        inset 0 2px 5px
+            rgba(255,255,255,.65);
+
 }
 
-.roll-button{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:15px;
+
+.brand h1{
+
+    font-size:34px;
+
+    font-weight:900;
+
+    letter-spacing:-1px;
 
     background:
-    linear-gradient(
-        135deg,
-        #ffe082,
-        #ffc107 50%,
-        #e09b00
-    );
 
-    color:#211700;
-    font-size:17px;
-    font-weight:900;
+        linear-gradient(
+            135deg,
+            #fff4bc,
+            #ffd54f,
+            #ffab00
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.brand p{
+
+    margin-top:8px;
+
+    color:#a89c87;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-card{
+
+    width:100%;
+
+    max-width:430px;
+
+    padding:28px;
+
+    border-radius:28px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(32,27,19,.92),
+            rgba(12,10,8,.94)
+        );
+
+    border:
+        1px solid
+        rgba(255,193,7,.25);
+
+    box-shadow:
+
+        0 30px 80px
+            rgba(0,0,0,.7),
+
+        0 0 45px
+            rgba(255,193,7,.06),
+
+        inset 0 1px 0
+            rgba(255,255,255,.07);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+/* خط طلایی */
+
+.login-card::before{
+
+    content:"";
+
+    display:block;
+
+    width:70px;
+
+    height:3px;
+
+    margin:
+        -28px
+        auto
+        25px;
+
+    border-radius:10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffc107,
+            transparent
+        );
+
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome{
+
+    text-align:center;
+
+    margin-bottom:24px;
+
+}
+
+
+.welcome h2{
+
+    font-size:21px;
+
+    margin-bottom:8px;
+
+}
+
+
+.welcome p{
+
+    color:#8f8677;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-label{
+
+    display:block;
+
+    color:#c8bda8;
+
+    font-size:12px;
+
+    margin-bottom:8px;
+
+}
+
+
+.input-box{
+
+    position:relative;
+
+}
+
+
+.input-box span{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size:18px;
+
+}
+
+
+.input{
+
+    width:100%;
+
+    height:56px;
+
+    border-radius:15px;
+
+    border:
+        1px solid
+        #342d20;
+
+    outline:none;
+
+    padding:
+        0
+        45px
+        0
+        15px;
+
+    color:#fff;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    background:
+        rgba(5,5,4,.72);
+
+    transition:.25s;
+
+}
+
+
+.input::placeholder{
+
+    color:#625b50;
+
+}
+
+
+.input:focus{
+
+    border-color:#d99f18;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,193,7,.08);
+
+}
+
+
+/* =====================================================
+   ENTER BUTTON
+===================================================== */
+
+.enter-button{
+
+    width:100%;
+
+    height:58px;
+
+    margin-top:16px;
+
+    border:0;
+
+    border-radius:16px;
+
     cursor:pointer;
 
-    box-shadow:
-    0 5px 15px rgba(255,193,7,.2),
-    inset 0 1px 0 rgba(255,255,255,.6);
-}
+    font-family:inherit;
 
-.roll-button:active{
-    transform:translateY(2px) scale(.98);
-}
+    font-size:16px;
 
-.roll-button:disabled{
-    opacity:.4;
-}
-
-.status{
-    text-align:center;
-    color:#a99a80;
-    font-size:12px;
-    margin-top:10px;
-    min-height:18px;
-}
-
-/* بازیکنان */
-
-.players{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
-    margin-top:13px;
-}
-
-.player{
-    padding:9px 3px;
-    text-align:center;
-    background:#0d0c09;
-    border-radius:11px;
-    font-size:10px;
-    border:1px solid #29231a;
-    transition:.2s;
-}
-
-.player.red{
-    border-bottom:3px solid #e53935;
-}
-
-.player.green{
-    border-bottom:3px solid #25bd60;
-}
-
-.player.blue{
-    border-bottom:3px solid #258fdf;
-}
-
-.player.yellow{
-    border-bottom:3px solid #ffd52e;
-}
-
-.player.active{
-    background:#211b0d;
-    transform:translateY(-2px);
-
-    box-shadow:
-    0 0 0 1px rgba(255,193,7,.45),
-    0 5px 14px rgba(255,193,7,.08);
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-    margin-top:9px;
-}
-
-.stat{
-    background:#0d0c09;
-    border:1px solid #29231a;
-    border-radius:11px;
-    padding:9px;
-    text-align:center;
-}
-
-.stat-title{
-    color:#716957;
-    font-size:10px;
-}
-
-.stat-value{
-    color:#f5c84b;
-    font-size:17px;
     font-weight:900;
-    margin-top:4px;
-}
 
-/* مودال برد */
-
-.win-modal{
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.82);
-
-    backdrop-filter:blur(8px);
-
-    z-index:100;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-}
-
-.win-box{
-    width:88%;
-    max-width:370px;
-
-    padding:30px 24px;
-
-    text-align:center;
-
-    border-radius:24px;
+    color:#211600;
 
     background:
-    linear-gradient(
-        145deg,
-        #241d0d,
-        #100e09
-    );
 
-    border:1px solid #e8b42b;
+        linear-gradient(
+            135deg,
+            #ffe082,
+            #ffc107 45%,
+            #e29b00
+        );
 
     box-shadow:
-    0 20px 70px rgba(0,0,0,.7),
-    0 0 35px rgba(255,193,7,.15);
+
+        0 10px 25px
+            rgba(255,174,0,.18),
+
+        inset 0 1px 0
+            rgba(255,255,255,.7);
+
+    transition:
+        transform .15s,
+        box-shadow .15s;
+
 }
 
-.win-box h2{
-    color:#ffd54f;
-    font-size:25px;
-    margin-bottom:9px;
+
+.enter-button:hover{
+
+    box-shadow:
+
+        0 14px 32px
+            rgba(255,174,0,.28),
+
+        inset 0 1px 0
+            rgba(255,255,255,.7);
+
 }
 
-.win-box p{
-    color:#a99a80;
-    font-size:13px;
+
+.enter-button:active{
+
+    transform:
+        translateY(2px)
+        scale(.985);
+
 }
 
-.restart{
-    width:100%;
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:7px;
+
+    margin-top:18px;
+
+}
+
+
+.feature{
+
+    padding:
+        10px
+        5px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.045);
+
+}
+
+
+.feature-icon{
+
+    font-size:18px;
+
+    margin-bottom:4px;
+
+}
+
+
+.feature span{
+
+    display:block;
+
+    color:#756d60;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
     margin-top:20px;
-    border:0;
-    border-radius:13px;
-    padding:14px;
 
-    background:
-    linear-gradient(
-        135deg,
-        #ffe082,
-        #ffc107,
-        #db9800
-    );
+    text-align:center;
 
-    color:#211700;
-    font-size:15px;
-    font-weight:900;
+    color:#514b42;
+
+    font-size:10px;
+
 }
+
+
+.footer strong{
+
+    color:#8e7441;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media(max-width:480px){
 
-    .app{
-        padding:7px;
+    .page{
+
+        padding:
+            18px
+            12px;
+
     }
 
-    .header h1{
-        font-size:25px;
+
+    .game-art{
+
+        width:600px;
+
+        height:600px;
+
     }
 
-    .board{
-        border-radius:21px;
+
+    .ludo{
+
+        width:360px;
+
+        height:360px;
+
     }
 
-    .panel{
-        border-radius:17px;
-        padding:12px;
+
+    .icon{
+
+        font-size:42px;
+
     }
 
-    .dice{
+
+    .brand h1{
+
+        font-size:29px;
+
+    }
+
+
+    .logo{
+
         width:68px;
+
         height:68px;
+
         font-size:34px;
+
+    }
+
+
+    .login-card{
+
+        padding:23px 19px;
+
+        border-radius:24px;
+
+    }
+
+}
+
+
+@media(max-height:700px){
+
+    .page{
+
+        justify-content:
+            flex-start;
+
+        padding-top:20px;
+
+    }
+
+
+    .brand{
+
+        margin-bottom:15px;
+
+    }
+
+
+    .logo{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:29px;
+
+        margin-bottom:8px;
+
+    }
+
+
+    .brand h1{
+
+        font-size:25px;
+
+    }
+
+
+    .login-card{
+
+        padding:20px;
+
     }
 
 }
@@ -639,1076 +967,284 @@ body{
 
 </head>
 
+
 <body>
 
-<div class="app">
 
-    <div class="header">
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
-        <h1>🐝🍯 عسل منچ</h1>
-
-        <p>
-            منچ آنلاین عسل چت
-        </p>
-
-    </div>
+<div class="background">
 
 
-    <!-- تخته -->
-
-    <div class="board" id="board">
+    <div class="game-art">
 
 
-        <!-- خانه قرمز -->
+        <!-- منچ بزرگ محو -->
 
-        <div class="home red">
+        <div class="ludo"></div>
 
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
 
+        <!-- بازی‌های کوچک -->
+
+        <div class="icon card1">
+            🃏
         </div>
 
 
-        <!-- خانه سبز -->
-
-        <div class="home green">
-
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-
+        <div class="icon card2">
+            ♠️
         </div>
 
 
-        <!-- خانه آبی -->
-
-        <div class="home blue">
-
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-
+        <div class="icon ps">
+            🎮
         </div>
 
 
-        <!-- خانه زرد -->
-
-        <div class="home yellow">
-
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-
-        </div>
-
-
-        <!-- مسیر -->
-
-        <div
-            class="track"
-            id="track"
-        ></div>
-
-
-        <!-- مرکز -->
-
-        <div class="center"></div>
-
-
-    </div>
-
-
-    <!-- پنل بازی -->
-
-    <div class="panel">
-
-
-        <div class="turn">
-
-            نوبت:
-
-            <strong id="turn">
-                🔴 قرمز
-            </strong>
-
-        </div>
-
-
-        <div
-            class="dice"
-            id="dice"
-        >
+        <div class="icon dice">
             🎲
         </div>
 
 
-        <button
-            class="roll-button"
-            id="rollButton"
-            onclick="rollDice()"
-        >
-            🎲 انداختن تاس
-        </button>
-
-
-        <div
-            class="status"
-            id="status"
-        >
-            🎲 برای شروع تاس بینداز
+        <div class="icon chess">
+            ♟️
         </div>
 
 
-        <!-- بازیکنان -->
-
-        <div class="players">
-
-
-            <div
-                class="player red active"
-                id="player-red"
-            >
-                🔴 قرمز
-            </div>
-
-
-            <div
-                class="player green"
-                id="player-green"
-            >
-                🟢 سبز
-            </div>
-
-
-            <div
-                class="player blue"
-                id="player-blue"
-            >
-                🔵 آبی
-            </div>
-
-
-            <div
-                class="player yellow"
-                id="player-yellow"
-            >
-                🟡 زرد
-            </div>
-
-
+        <div class="icon controller">
+            🕹️
         </div>
 
 
-        <!-- آمار -->
-
-        <div class="stats">
-
-
-            <div class="stat">
-
-                <div class="stat-title">
-                    حرکت
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="moveCount"
-                >
-                    0
-                </div>
-
-            </div>
+        <div class="icon cards">
+            🂡
+        </div>
 
 
-            <div class="stat">
-
-                <div class="stat-title">
-                    نوبت
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="turnNumber"
-                >
-                    1
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-title">
-                    برد
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="winCount"
-                >
-                    0
-                </div>
-
-            </div>
-
-
+        <div class="icon target">
+            🎯
         </div>
 
 
     </div>
+
+
+    <!-- ذرات -->
+
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
 
 
 </div>
 
 
-<!-- پنجره برنده -->
 
-<div
-    class="win-modal"
-    id="winModal"
->
+<!-- =====================================================
+     PAGE
+===================================================== -->
 
-    <div class="win-box">
+<main class="page">
 
-        <h2 id="winnerText">
-            🏆 برنده شد!
-        </h2>
+
+    <!-- برند -->
+
+    <div class="brand">
+
+
+        <div class="logo">
+            🐝
+        </div>
+
+
+        <h1>
+            عسل گیم
+        </h1>
+
 
         <p>
-            تبریک! بازی با موفقیت به پایان رسید.
+            دنیای بازی‌ها، یکجا
         </p>
 
-        <button
-            class="restart"
-            onclick="restartGame()"
+
+    </div>
+
+
+
+    <!-- کارت ورود -->
+
+    <section class="login-card">
+
+
+        <div class="welcome">
+
+            <h2>
+                🎮 خوش اومدی!
+            </h2>
+
+            <p>
+                برای ورود به دنیای عسل گیم
+                نام بازیکنت رو وارد کن
+            </p>
+
+        </div>
+
+
+
+        <label
+            class="input-label"
+            for="playerName"
         >
-            🔄 بازی دوباره
+            نام بازیکن
+        </label>
+
+
+
+        <div class="input-box">
+
+
+            <span>
+                👤
+            </span>
+
+
+            <input
+                id="playerName"
+                class="input"
+                type="text"
+                maxlength="20"
+                autocomplete="off"
+                placeholder="مثلاً Mahdi"
+            >
+
+
+        </div>
+
+
+
+        <button
+            class="enter-button"
+            onclick="enterGame()"
+        >
+
+            ورود به عسل گیم
+            <span> 🚀</span>
+
         </button>
 
-    </div>
+
+
+        <!-- امکانات -->
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🎮
+                </div>
+
+                <span>
+                    بازی‌های جذاب
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🏆
+                </div>
+
+                <span>
+                    رکورد و امتیاز
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⭐
+                </div>
+
+                <span>
+                    امکانات PRO
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- فوتر -->
+
+    <div class="footer">
+
+        © 2026
+        <strong>
+            عسل گیم
+        </strong>
+
+        •
+        همه بازی‌ها در یکجا 🍯
 
     </div>
 
-    <script>
 
-/* =========================================
-   عسل منچ — GAME ENGINE
-========================================= */
+</main>
 
-const COLORS = [
-    "red",
-    "green",
-    "blue",
-    "yellow"
-];
 
-const PLAYER_NAMES = [
-    "🔴 قرمز",
-    "🟢 سبز",
-    "🔵 آبی",
-    "🟡 زرد"
-];
 
-const DICE_FACES = [
-    "⚀",
-    "⚁",
-    "⚂",
-    "⚃",
-    "⚄",
-    "⚅"
-];
+<script>
 
+/* =====================================================
+   ورود بازیکن
+===================================================== */
 
-/* =========================================
-   وضعیت بازی
-========================================= */
+function enterGame(){
 
-let currentPlayer = 0;
-
-let diceValue = 0;
-
-let waitingForPiece = false;
-
-let moveCount = 0;
-
-let turnNumber = 1;
-
-let gameFinished = false;
-
-
-/* وضعیت مهره‌ها */
-
-const pieces = {
-
-    red: [-1,-1,-1,-1],
-
-    green: [-1,-1,-1,-1],
-
-    blue: [-1,-1,-1,-1],
-
-    yellow: [-1,-1,-1,-1]
-
-};
-
-
-/* =========================================
-   مسیر بازی
-========================================= */
-
-const path = [
-
-    {x:40,y:5},
-    {x:40,y:10},
-    {x:40,y:15},
-
-    {x:35,y:20},
-    {x:30,y:20},
-    {x:25,y:20},
-
-    {x:20,y:25},
-    {x:20,y:30},
-    {x:20,y:35},
-
-    {x:15,y:40},
-    {x:10,y:40},
-    {x:5,y:40},
-
-    {x:5,y:45},
-    {x:5,y:50},
-    {x:5,y:55},
-
-    {x:10,y:60},
-    {x:15,y:60},
-    {x:20,y:60},
-
-    {x:20,y:65},
-    {x:20,y:70},
-    {x:20,y:75},
-
-    {x:25,y:80},
-    {x:30,y:80},
-    {x:35,y:80},
-
-    {x:40,y:85},
-    {x:40,y:90},
-    {x:40,y:95},
-
-    {x:45,y:95},
-    {x:50,y:95},
-    {x:55,y:95},
-
-    {x:60,y:90},
-    {x:60,y:85},
-    {x:60,y:80},
-
-    {x:65,y:80},
-    {x:70,y:80},
-    {x:75,y:80},
-
-    {x:80,y:75},
-    {x:80,y:70},
-    {x:80,y:65},
-
-    {x:85,y:60},
-    {x:90,y:60},
-    {x:95,y:60},
-
-    {x:95,y:55},
-    {x:95,y:50},
-    {x:95,y:45},
-
-    {x:90,y:40},
-    {x:85,y:40},
-    {x:80,y:40},
-
-    {x:80,y:35},
-    {x:80,y:30},
-    {x:80,y:25},
-
-    {x:75,y:20},
-    {x:70,y:20},
-    {x:65,y:20},
-
-    {x:60,y:15},
-    {x:60,y:10},
-    {x:60,y:5},
-
-    {x:55,y:5},
-    {x:50,y:5},
-    {x:45,y:5}
-
-];
-
-
-/* =========================================
-   نقطه شروع هر رنگ
-========================================= */
-
-const startIndex = {
-
-    red:0,
-
-    green:14,
-
-    blue:42,
-
-    yellow:28
-
-};
-
-
-/* =========================================
-   خانه‌های امن
-========================================= */
-
-const safePositions = [
-
-    0,
-    8,
-    13,
-    21,
-    26,
-    34,
-    39,
-    47
-
-];
-
-
-/* =========================================
-   خانه مهره‌ها
-========================================= */
-
-const homePositions = {
-
-    red:[
-        {x:11,y:11},
-        {x:23,y:11},
-        {x:11,y:23},
-        {x:23,y:23}
-    ],
-
-    green:[
-        {x:77,y:11},
-        {x:65,y:11},
-        {x:77,y:23},
-        {x:65,y:23}
-    ],
-
-    blue:[
-        {x:11,y:77},
-        {x:23,y:77},
-        {x:11,y:65},
-        {x:23,y:65}
-    ],
-
-    yellow:[
-        {x:77,y:77},
-        {x:65,y:77},
-        {x:77,y:65},
-        {x:65,y:65}
-    ]
-
-};
-
-
-/* =========================================
-   ساخت مسیر
-========================================= */
-
-function createTrack(){
-
-    const track =
-        document.getElementById("track");
-
-
-    if(!track){
-
-        return;
-
-    }
-
-
-    track.innerHTML = "";
-
-
-    path.forEach(
-        function(position,index){
-
-            const cell =
-                document.createElement("div");
-
-
-            cell.className =
-                "cell";
-
-
-            const left =
-                (position.x - 20) / 60 * 100;
-
-
-            const top =
-                (position.y - 20) / 60 * 100;
-
-
-            cell.style.left =
-                left + "%";
-
-
-            cell.style.top =
-                top + "%";
-
-
-            cell.dataset.index =
-                index;
-
-
-            if(
-                safePositions.includes(index)
-            ){
-
-                cell.classList.add("safe");
-
-            }
-
-
-            track.appendChild(cell);
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   ساخت مهره‌ها
-========================================= */
-
-function createPieces(){
-
-    const board =
-        document.getElementById("board");
-
-
-    document
-        .querySelectorAll(".piece")
-        .forEach(
-            function(piece){
-
-                piece.remove();
-
-            }
+    const input =
+        document.getElementById(
+            "playerName"
         );
 
 
-    COLORS.forEach(
-        function(color){
+    const name =
+        input.value.trim();
 
-            for(
-                let i = 0;
-                i < 4;
-                i++
-            ){
 
-                const piece =
-                    document.createElement("div");
+    if(!name){
 
+        input.focus();
 
-                piece.className =
-                    "piece " + color;
+        input.style.borderColor =
+            "#e0a400";
 
 
-                piece.id =
-                    "piece-" +
-                    color +
-                    "-" +
-                    i;
-
-
-                piece.dataset.color =
-                    color;
-
-
-                piece.dataset.number =
-                    i;
-
-
-                piece.addEventListener(
-                    "click",
-                    function(){
-
-                        selectPiece(
-                            color,
-                            i
-                        );
-
-                    }
-                );
-
-
-                board.appendChild(piece);
-
-
-                positionPieceHome(
-                    piece,
-                    color,
-                    i
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   قرار دادن مهره در خانه
-========================================= */
-
-function positionPieceHome(
-    piece,
-    color,
-    number
-){
-
-    const position =
-        homePositions[color][number];
-
-
-    piece.style.left =
-        position.x + "%";
-
-
-    piece.style.top =
-        position.y + "%";
-
-}
-
-
-/* =========================================
-   قرار دادن مهره روی مسیر
-========================================= */
-
-function positionPieceOnPath(
-    piece,
-    color,
-    step
-){
-
-    const start =
-        startIndex[color];
-
-
-    const pathIndex =
-        (start + step)
-        % path.length;
-
-
-    const position =
-        path[pathIndex];
-
-
-    piece.style.left =
-        (position.x - 3.5) + "%";
-
-
-    piece.style.top =
-        (position.y - 3.5) + "%";
-
-}
-
-
-/* =========================================
-   تاس
-========================================= */
-
-function rollDice(){
-
-    if(gameFinished){
-
-        return;
-
-    }
-
-
-    if(waitingForPiece){
-
-        return;
-
-    }
-
-
-    diceValue =
-        Math.floor(
-            Math.random() * 6
-        ) + 1;
-
-
-    const dice =
-        document.getElementById("dice");
-
-
-    dice.textContent =
-        DICE_FACES[
-            diceValue - 1
-        ];
-
-
-    const color =
-        COLORS[currentPlayer];
-
-
-    const movable =
-        getMovablePieces(color);
-
-
-    if(movable.length === 0){
-
-        document
-            .getElementById("status")
-            .textContent =
-            "❌ مهره قابل حرکت نداری";
+        input.placeholder =
+            "اول نامت رو وارد کن 😉";
 
 
         setTimeout(
             function(){
 
-                nextTurn();
+                input.style.borderColor =
+                    "";
 
             },
-            1000
-        );
-
-
-        return;
-
-    }
-
-
-    waitingForPiece = true;
-
-
-    movable.forEach(
-        function(index){
-
-            highlightPiece(
-                color,
-                index
-            );
-
-        }
-    );
-
-
-    if(movable.length === 1){
-
-        document
-            .getElementById("status")
-            .textContent =
-            "👆 مهره را انتخاب کن";
-
-    }else{
-
-        document
-            .getElementById("status")
-            .textContent =
-            "👆 یکی از مهره‌ها را انتخاب کن";
-
-    }
-
-}
-
-
-/* =========================================
-   مهره‌های قابل حرکت
-========================================= */
-
-function getMovablePieces(color){
-
-    const result = [];
-
-
-    for(
-        let i = 0;
-        i < 4;
-        i++
-    ){
-
-        const position =
-            pieces[color][i];
-
-
-        /* مهره داخل خانه */
-
-        if(position === -1){
-
-            if(diceValue === 6){
-
-                result.push(i);
-
-            }
-
-            continue;
-
-        }
-
-
-        /* مهره روی مسیر */
-
-        if(
-            position + diceValue
-            <= path.length
-        ){
-
-            result.push(i);
-
-        }
-
-    }
-
-
-    return result;
-
-}
-
-
-/* =========================================
-   هایلایت مهره
-========================================= */
-
-function highlightPiece(
-    color,
-    number
-){
-
-    const piece =
-        document.getElementById(
-            "piece-" +
-            color +
-            "-" +
-            number
-        );
-
-
-    if(piece){
-
-        piece.classList.add(
-            "selectable"
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   پاک کردن هایلایت
-========================================= */
-
-function clearHighlights(){
-
-    document
-        .querySelectorAll(".piece")
-        .forEach(
-            function(piece){
-
-                piece.classList.remove(
-                    "selectable"
-                );
-
-                piece.classList.remove(
-                    "selected"
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================
-   انتخاب مهره
-========================================= */
-
-function selectPiece(
-    color,
-    number
-){
-
-    if(gameFinished){
-
-        return;
-
-    }
-
-
-    if(!waitingForPiece){
-
-        return;
-
-    }
-
-
-    if(
-        COLORS[currentPlayer]
-        !== color
-    ){
-
-        return;
-
-    }
-
-
-    const movable =
-        getMovablePieces(color);
-
-
-    if(
-        !movable.includes(number)
-    ){
-
-        return;
-
-    }
-
-
-    const piece =
-        document.getElementById(
-            "piece-" +
-            color +
-            "-" +
-            number
-        );
-
-
-    piece.classList.add(
-        "selected"
-    );
-
-
-    movePiece(
-        color,
-        number
-    );
-
-}
-
-
-/* =========================================
-   حرکت مهره
-========================================= */
-
-function movePiece(
-    color,
-    number
-){
-
-    const oldPosition =
-        pieces[color][number];
-
-
-    let newPosition;
-
-
-    if(oldPosition === -1){
-
-        newPosition = 0;
-
-    }else{
-
-        newPosition =
-            oldPosition +
-            diceValue;
-
-    }
-
-
-    if(
-        newPosition > path.length
-    ){
-
-        waitingForPiece = false;
-
-        clearHighlights();
-
-        document
-            .getElementById("status")
-            .textContent =
-            "❌ این مهره نمی‌تواند حرکت کند";
-
-        return;
-
-    }
-
-
-    pieces[color][number] =
-        newPosition;
-
-
-    const piece =
-        document.getElementById(
-            "piece-" +
-            color +
-            "-" +
-            number
-        );
-
-
-    if(
-        newPosition === path.length
-    ){
-
-        piece.style.left =
-            "46.5%";
-
-        piece.style.top =
-            "46.5%";
-
-    }else{
-
-        positionPieceOnPath(
-            piece,
-            color,
-            newPosition
-        );
-
-    }
-
-
-    moveCount++;
-
-
-    document
-        .getElementById("moveCount")
-        .textContent =
-        moveCount;
-
-
-    waitingForPiece = false;
-
-
-    clearHighlights();
-
-
-    captureOpponent(
-        color,
-        newPosition
-    );
-
-
-    if(
-        checkWinner(color)
-    ){
-
-        finishGame(
-            color
+            1200
         );
 
         return;
@@ -1716,660 +1252,37 @@ function movePiece(
     }
 
 
-    if(diceValue === 6){
-
-        document
-            .getElementById("status")
-            .textContent =
-            "🎉 شش آوردی! دوباره تاس بینداز";
-
-        diceValue = 0;
-
-        return;
-
-    }
-
-
-    diceValue = 0;
-
-
-    nextTurn();
-
-}
-
-
-/* =========================================
-   زدن مهره حریف
-========================================= */
-
-function captureOpponent(
-    color,
-    position
-){
-
-    const realIndex =
-        (
-            startIndex[color] +
-            position
-        )
-        % path.length;
-
-
-    if(
-        safePositions.includes(
-            realIndex
-        )
-    ){
-
-        return;
-
-    }
-
-
-    COLORS.forEach(
-        function(otherColor){
-
-            if(
-                otherColor === color
-            ){
-
-                return;
-
-            }
-
-
-            for(
-                let i = 0;
-                i < 4;
-                i++
-            ){
-
-                const otherPosition =
-                    pieces[otherColor][i];
-
-
-                if(
-                    otherPosition === -1
-                ){
-
-                    continue;
-
-                }
-
-
-                const otherIndex =
-                    (
-                        startIndex[otherColor] +
-                        otherPosition
-                    )
-                    % path.length;
-
-
-                if(
-                    otherIndex ===
-                    realIndex
-                ){
-
-                    pieces[otherColor][i] =
-                        -1;
-
-
-                    const opponentPiece =
-                        document.getElementById(
-                            "piece-" +
-                            otherColor +
-                            "-" +
-                            i
-                        );
-
-
-                    positionPieceHome(
-                        opponentPiece,
-                        otherColor,
-                        i
-                    );
-
-
-                    document
-                        .getElementById("status")
-                        .textContent =
-                        "💥 مهره حریف زده شد!";
-
-                }
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   نوبت بعدی
-========================================= */
-
-function nextTurn(){
-
-    if(gameFinished){
-
-        return;
-
-    }
-
-
-    currentPlayer++;
-
-
-    if(
-        currentPlayer >=
-        COLORS.length
-    ){
-
-        currentPlayer = 0;
-
-    }
-
-
-    turnNumber++;
-
-
-    document
-        .getElementById("turnNumber")
-        .textContent =
-        turnNumber;
-
-
-    updateTurnUI();
-
-
-    document
-        .getElementById("status")
-        .textContent =
-        "🎲 نوبت " +
-        PLAYER_NAMES[currentPlayer];
-
-
-    document
-        .getElementById("dice")
-        .textContent =
-        "🎲";
-
-
-    diceValue = 0;
-
-}
-
-
-/* =========================================
-   نمایش نوبت
-========================================= */
-
-function updateTurnUI(){
-
-    document
-        .getElementById("turn")
-        .textContent =
-        PLAYER_NAMES[currentPlayer];
-
-
-    COLORS.forEach(
-        function(color){
-
-            const player =
-                document.getElementById(
-                    "player-" +
-                    color
-                );
-
-
-            if(player){
-
-                player.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-
-    const active =
-        document.getElementById(
-            "player-" +
-            COLORS[currentPlayer]
-        );
-
-
-    if(active){
-
-        active.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   بررسی برنده
-========================================= */
-
-function checkWinner(color){
-
-    let finished = 0;
-
-
-    for(
-        let i = 0;
-        i < 4;
-        i++
-    ){
-
-        if(
-            pieces[color][i]
-            >= path.length
-        ){
-
-            finished++;
-
-        }
-
-    }
-
-
-    return finished === 4;
-
-}
-
-
-/* =========================================
-   پایان بازی
-========================================= */
-
-function finishGame(color){
-
-    gameFinished = true;
-
-
-    const name =
-        PLAYER_NAMES[
-            COLORS.indexOf(color)
-        ];
-
-
-    document
-        .getElementById("winnerText")
-        .textContent =
-        "🏆 " +
-        name +
-        " برنده شد!";
-
-
-    document
-        .getElementById("winModal")
-        .style.display =
-        "flex";
-
-
-    saveWin();
-
-}
-
-
-/* =========================================
-   ذخیره برد
-========================================= */
-
-function saveWin(){
-
-    const key =
-        "asalLudoWins";
-
-
-    let wins =
-        Number(
-            localStorage.getItem(key)
-        ) || 0;
-
-
-    wins++;
-
+    /* ذخیره نام */
 
     localStorage.setItem(
-        key,
-        wins
+        "playerName",
+        name
     );
 
 
-    document
-        .getElementById("winCount")
-        .textContent =
-        wins;
+    /* رفتن به صفحه بازی */
+
+    window.location.href =
+        "game.html";
 
 }
 
 
-/* =========================================
-   شروع بازی
-========================================= */
-
-function initGame(){
-
-    createTrack();
-
-    createPieces();
-
-    updateTurnUI();
-
-
-    const wins =
-        Number(
-            localStorage.getItem(
-                "asalLudoWins"
-            )
-        ) || 0;
-
-
-    document
-        .getElementById("winCount")
-        .textContent =
-        wins;
-
-
-    document
-        .getElementById("status")
-        .textContent =
-        "🎲 برای شروع تاس بینداز";
-
-}
-
-
-/* اجرای بازی */
-
-initGame();
-
-    </script>
-
-    <script>
-
-/* =========================================
-   ادامه عسل منچ
-   ذخیره و بازیابی اطلاعات
-========================================= */
-
-
-/* =========================================
-   ذخیره وضعیت بازی
-========================================= */
-
-function saveGame(){
-
-    const gameData = {
-
-        currentPlayer:
-            currentPlayer,
-
-        moveCount:
-            moveCount,
-
-        turnNumber:
-            turnNumber,
-
-        pieces:
-            pieces,
-
-        gameFinished:
-            gameFinished
-
-    };
-
-
-    localStorage.setItem(
-        "asalLudoGame",
-        JSON.stringify(gameData)
-    );
-
-}
-
-
-/* =========================================
-   بازیابی وضعیت
-========================================= */
-
-function loadGame(){
-
-    const saved =
-        localStorage.getItem(
-            "asalLudoGame"
-        );
-
-
-    if(!saved){
-
-        return false;
-
-    }
-
-
-    try{
-
-        const data =
-            JSON.parse(saved);
-
-
-        if(
-            !data ||
-            !data.pieces
-        ){
-
-            return false;
-
-        }
-
-
-        currentPlayer =
-            data.currentPlayer || 0;
-
-
-        moveCount =
-            data.moveCount || 0;
-
-
-        turnNumber =
-            data.turnNumber || 1;
-
-
-        gameFinished =
-            data.gameFinished || false;
-
-
-        COLORS.forEach(
-            function(color){
-
-                if(
-                    Array.isArray(
-                        data.pieces[color]
-                    )
-                ){
-
-                    pieces[color] =
-                        data.pieces[color];
-
-                }
-
-            }
-        );
-
-
-        document
-            .getElementById("moveCount")
-            .textContent =
-            moveCount;
-
-
-        document
-            .getElementById("turnNumber")
-            .textContent =
-            turnNumber;
-
-
-        createPieces();
-
-
-        updateTurnUI();
-
-
-        if(gameFinished){
-
-            document
-                .getElementById("status")
-                .textContent =
-                "🏆 بازی قبلی تمام شده است.";
-
-        }else{
-
-            document
-                .getElementById("status")
-                .textContent =
-                "💾 بازی قبلی بازیابی شد.";
-
-        }
-
-
-        return true;
-
-    }catch(error){
-
-        console.log(
-            "خطا در بازیابی:",
-            error
-        );
-
-
-        return false;
-
-    }
-
-}
-
-
-/* =========================================
-   ذخیره خودکار
-========================================= */
-
-setInterval(
-    function(){
-
-        if(!gameFinished){
-
-            saveGame();
-
-        }
-
-    },
-    2000
-);
-
-
-/* =========================================
-   ذخیره بعد از حرکت
-========================================= */
-
-const originalMovePiece =
-    movePiece;
-
-
-/* =========================================
-   بازی جدید
-========================================= */
-
-function restartGame(){
-
-    document
-        .getElementById("winModal")
-        .style.display =
-        "none";
-
-
-    currentPlayer = 0;
-
-    diceValue = 0;
-
-    waitingForPiece = false;
-
-    moveCount = 0;
-
-    turnNumber = 1;
-
-    gameFinished = false;
-
-
-    COLORS.forEach(
-        function(color){
-
-            pieces[color] =
-                [-1,-1,-1,-1];
-
-        }
-    );
-
-
-    localStorage.removeItem(
-        "asalLudoGame"
-    );
-
-
-    document
-        .getElementById("moveCount")
-        .textContent =
-        "0";
-
-
-    document
-        .getElementById("turnNumber")
-        .textContent =
-        "1";
-
-
-    document
-        .getElementById("dice")
-        .textContent =
-        "🎲";
-
-
-    document
-        .getElementById("status")
-        .textContent =
-        "🎲 برای شروع تاس بینداز";
-
-
-    createPieces();
-
-    updateTurnUI();
-
-}
-
-
-/* =========================================
-   بستن مودال با کلیک بیرون
-========================================= */
+/* =====================================================
+   Enter روی کیبورد
+===================================================== */
 
 document
-    .getElementById("winModal")
+    .getElementById("playerName")
     .addEventListener(
-        "click",
+        "keydown",
         function(event){
 
             if(
-                event.target ===
-                this
+                event.key === "Enter"
             ){
 
-                this.style.display =
-                    "none";
+                enterGame();
 
             }
 
@@ -2377,66 +1290,36 @@ document
     );
 
 
-/* =========================================
-   دکمه ESC
-========================================= */
+/* =====================================================
+   نمایش نام قبلی
+===================================================== */
 
-document.addEventListener(
-    "keydown",
-    function(event){
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-        if(
-            event.key === "Escape"
-        ){
+        const savedName =
+            localStorage.getItem(
+                "playerName"
+            );
+
+
+        if(savedName){
 
             document
                 .getElementById(
-                    "winModal"
+                    "playerName"
                 )
-                .style.display =
-                "none";
+                .value =
+                savedName;
 
         }
-
-    }
-);
-
-
-/* =========================================
-   جلوگیری از انتخاب ناخواسته
-========================================= */
-
-document.addEventListener(
-    "dragstart",
-    function(event){
-
-        event.preventDefault();
-
-    }
-);
-
-
-/* =========================================
-   شروع نهایی
-========================================= */
-
-loadGame();
-
-
-/* =========================================
-   ذخیره قبل از خروج
-========================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(){
-
-        saveGame();
 
     }
 );
 
 </script>
+
 
 </body>
 
