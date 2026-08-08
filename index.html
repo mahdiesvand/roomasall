@@ -1,369 +1,507 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>بازی من</title>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>بازی من</title>
+
 
 <style>
 
-    *{
-        box-sizing:border-box;
-        margin:0;
-        padding:0;
-    }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    body{
-        min-height:100vh;
-        font-family:Tahoma,Arial,sans-serif;
-        background:#101114;
-        color:white;
-    }
 
-    .container{
-        width:100%;
-        max-width:600px;
-        margin:auto;
-        padding:20px;
-    }
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#101114;
+    color:white;
+}
 
-    .top{
-        text-align:center;
-        padding:25px 10px;
-    }
 
-    .top h1{
-        font-size:30px;
-        margin-bottom:10px;
-    }
+.container{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    padding:20px;
+}
 
-    .top p{
-        color:#aaa;
-        font-size:14px;
-    }
 
-    /* اطلاعات بازیکن */
+.top{
+    text-align:center;
+    padding:25px 10px;
+}
 
-    .player-card{
-        background:#191b20;
-        border:1px solid #292c33;
-        border-radius:18px;
-        padding:18px;
-        margin-bottom:15px;
-    }
 
-    .player-name{
-        text-align:center;
-        font-size:20px;
-        font-weight:bold;
-        margin-bottom:18px;
+.top h1{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+
+.top p{
+    color:#aaa;
+    font-size:14px;
+}
+
+
+/* اطلاعات بازیکن */
+
+.player-card{
+    background:#191b20;
+    border:1px solid #292c33;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+
+.player-name{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+
+.stat{
+    background:#111318;
+    border-radius:12px;
+    padding:12px 5px;
+    text-align:center;
+}
+
+
+.stat-title{
+    color:#888;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+
+.stat-value{
+    font-size:20px;
+    font-weight:bold;
+}
+
+
+/* بازی */
+
+.game-card{
+    background:#191b20;
+    border:1px solid #292c33;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+}
+
+
+.score-title{
+    color:#aaa;
+    font-size:14px;
+}
+
+
+.score{
+    font-size:42px;
+    font-weight:bold;
+    margin:15px 0 20px;
+}
+
+
+.play-btn{
+    width:100%;
+    border:none;
+    border-radius:14px;
+    padding:16px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#f5b400;
+    color:#111;
+}
+
+
+.play-btn:active{
+    transform:scale(.97);
+}
+
+
+.status{
+    margin-top:15px;
+    color:#aaa;
+    font-size:13px;
+}
+
+
+/* پلن ها */
+
+.plans{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px;
+}
+
+
+.plan{
+    background:#191b20;
+    border:1px solid #292c33;
+    border-radius:16px;
+    padding:18px;
+    text-align:center;
+}
+
+
+.plan h3{
+    margin-bottom:10px;
+}
+
+
+.plan p{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.8;
+}
+
+
+.pro{
+    border-color:#f5b400;
+}
+
+
+.pro button{
+    margin-top:12px;
+    width:100%;
+    padding:11px;
+    border:0;
+    border-radius:10px;
+    background:#f5b400;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+
+.pro button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+.footer{
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    margin-top:30px;
+}
+
+
+@media(max-width:420px){
+
+    .plans{
+        grid-template-columns:1fr;
     }
 
     .stats{
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:10px;
+        gap:6px;
     }
 
-    .stat{
-        background:#111318;
-        border-radius:12px;
-        padding:12px 5px;
-        text-align:center;
+    .top h1{
+        font-size:26px;
     }
 
-    .stat-title{
-        color:#888;
-        font-size:11px;
-        margin-bottom:7px;
-    }
-
-    .stat-value{
-        font-size:20px;
-        font-weight:bold;
-    }
-
-    /* بازی */
-
-    .game-card{
-        background:#191b20;
-        border:1px solid #292c33;
-        border-radius:18px;
-        padding:25px;
-        text-align:center;
-    }
-
-    .score-title{
-        color:#aaa;
-        font-size:14px;
-    }
-
-    .score{
-        font-size:42px;
-        font-weight:bold;
-        margin:15px 0 20px;
-    }
-
-    .play-btn{
-        width:100%;
-        border:none;
-        border-radius:14px;
-        padding:16px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        background:#f5b400;
-        color:#111;
-    }
-
-    .play-btn:active{
-        transform:scale(.97);
-    }
-
-    .status{
-        margin-top:15px;
-        color:#aaa;
-        font-size:13px;
-    }
-
-    /* پلن ها */
-
-    .plans{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:12px;
-        margin-top:20px;
-    }
-
-    .plan{
-        background:#191b20;
-        border:1px solid #292c33;
-        border-radius:16px;
-        padding:18px;
-        text-align:center;
-    }
-
-    .plan h3{
-        margin-bottom:10px;
-    }
-
-    .plan p{
-        color:#aaa;
-        font-size:13px;
-        line-height:1.8;
-    }
-
-    .pro{
-        border-color:#f5b400;
-    }
-
-    .pro button{
-        margin-top:12px;
-        width:100%;
-        padding:11px;
-        border:0;
-        border-radius:10px;
-        background:#f5b400;
-        cursor:pointer;
-        font-weight:bold;
-    }
-
-    .pro button:disabled{
-        opacity:.6;
-        cursor:not-allowed;
-    }
-
-    .footer{
-        text-align:center;
-        color:#666;
-        font-size:12px;
-        margin-top:30px;
-    }
-
-    @media(max-width:420px){
-
-        .plans{
-            grid-template-columns:1fr;
-        }
-
-        .stats{
-            gap:6px;
-        }
-
-        .top h1{
-            font-size:26px;
-        }
-
-    }
+}
 
 </style>
 
-</head><body><div class="container"><div class="top">
-
-    <h1>🎮 بازی من</h1>
-
-    <p>
-        بازی کن، امتیاز بگیر و رکوردت را ثبت کن
-    </p>
-
-</div>
+</head>
 
 
-<!-- اطلاعات بازیکن -->
-
-<div class="player-card">
-
-    <div class="player-name">👤
-<span id="playerName">
-    بازیکن
-</span>
-
-<button
-    onclick="changePlayerName()"
-    style="
-        margin-right:8px;
-        padding:5px 9px;
-        border:0;
-        border-radius:8px;
-        cursor:pointer;
-    "
->
-    ✏️
-</button>
-
-    </div>
+<body>
 
 
-    <div class="stats">
-
-        <div class="stat">
-
-            <div class="stat-title">
-                امتیاز
-            </div>
-
-            <div
-                class="stat-value"
-                id="playerScore"
-            >
-                0
-            </div>
-
-        </div>
+<div class="container">
 
 
-        <div class="stat">
+    <!-- عنوان -->
 
-            <div class="stat-title">
-                رکورد
-            </div>
+    <div class="top">
 
-            <div
-                class="stat-value"
-                id="bestScore"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-title">
-                تعداد بازی
-            </div>
-
-            <div
-                class="stat-value"
-                id="gamesPlayed"
-            >
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- بازی -->
-
-<div class="game-card">
-
-    <div class="score-title">
-        امتیاز فعلی
-    </div>
-
-
-    <div
-        class="score"
-        id="score"
-    >
-        0
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playGame()"
-    >
-        🎮 شروع بازی
-    </button>
-
-
-    <div
-        class="status"
-        id="status"
-    >
-        آماده شروع
-    </div>
-
-</div>
-
-
-<!-- نسخه ها -->
-
-<div class="plans">
-
-
-    <div class="plan">
-
-        <h3>
-            🆓 معمولی
-        </h3>
+        <h1>🎮 بازی من</h1>
 
         <p>
-            دسترسی رایگان<br>
-            امکانات پایه<br>
-            بازی معمولی
+            بازی کن، امتیاز بگیر و رکوردت را ثبت کن
         </p>
 
     </div>
 
 
-    <div class="plan pro">
 
-        <h3>
-            ⭐ PRO
-        </h3>
+    <!-- اطلاعات بازیکن -->
 
-        <p>
-            امکانات ویژه<br>
-            بازی حرفه‌ای<br>
-            قابلیت‌های بیشتر
-        </p>
+    <div class="player-card">
 
-        <button onclick="buyPro()">
-            فعال‌سازی PRO
+
+        <div class="player-name">
+
+            👤
+
+            <span id="playerName">
+                بازیکن
+            </span>
+
+
+            <button
+                onclick="changePlayerName()"
+                style="
+                    margin-right:8px;
+                    padding:5px 9px;
+                    border:0;
+                    border-radius:8px;
+                    cursor:pointer;
+                "
+            >
+                ✏️
+            </button>
+
+        </div>
+
+
+
+        <div class="stats">
+
+
+            <!-- امتیاز -->
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    امتیاز
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="playerScore"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <!-- رکورد -->
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    رکورد
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="playerRecord"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <!-- تعداد بازی -->
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    تعداد بازی
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="playerGames"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- بازی -->
+
+    <div class="game-card">
+
+
+        <div class="score-title">
+            امتیاز فعلی
+        </div>
+
+
+        <div
+            class="score"
+            id="score"
+        >
+            0
+        </div>
+
+
+        <button
+            class="play-btn"
+            onclick="playGame()"
+        >
+            🎮 شروع بازی
         </button>
 
+
+        <div
+            class="status"
+            id="status"
+        >
+            آماده شروع
+        </div>
+
+
+    </div>
+
+
+
+    <!-- نسخه ها -->
+
+    <div class="plans">
+
+
+        <!-- معمولی -->
+
+        <div class="plan">
+
+            <h3>
+                🆓 معمولی
+            </h3>
+
+            <p>
+                دسترسی رایگان<br>
+                امکانات پایه<br>
+                بازی معمولی
+            </p>
+
+        </div>
+
+
+
+        <!-- PRO -->
+
+        <div class="plan pro">
+
+            <h3>
+                ⭐ PRO
+            </h3>
+
+            <p>
+                امکانات ویژه<br>
+                بازی حرفه‌ای<br>
+                قابلیت‌های بیشتر
+            </p>
+
+            <button onclick="buyPro()">
+                فعال‌سازی PRO
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer">
+
+        © 2026 بازی من
+
     </div>
 
 
 </div>
 
 
-<div class="footer">
-    © 2026 بازی من
-</div>
 
-</div><!-- فایل های جاوااسکریپت --><script src="player.js"></script><script src="game.js"></script><script src="pro.js"></script></body></html>
+<!-- فایل های جاوااسکریپت -->
+
+<script src="player.js"></script>
+
+<script src="game.js"></script>
+
+<script src="pro.js"></script>
+
+
+
+<!-- تغییر نام بازیکن -->
+
+<script>
+
+function changePlayerName(){
+
+    const oldName =
+        localStorage.getItem("playerName") || "بازیکن";
+
+
+    const newName =
+        prompt("نام جدید بازیکن را وارد کنید:", oldName);
+
+
+    if(
+        newName !== null &&
+        newName.trim() !== ""
+    ){
+
+        const name =
+            newName.trim();
+
+
+        localStorage.setItem(
+            "playerName",
+            name
+        );
+
+
+        const nameElement =
+            document.getElementById("playerName");
+
+
+        if(nameElement){
+
+            nameElement.textContent =
+                name;
+
+        }
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
