@@ -3,14 +3,20 @@ let gameStarted = false;
 let gameTime = 30;
 let timer = null;
 
-
-// عناصر صفحه
-
 const scoreElement =
     document.getElementById("score");
 
 const statusElement =
     document.getElementById("status");
+
+const targetElement =
+    document.getElementById("target");
+
+const gameAreaElement =
+    document.getElementById("gameArea");
+
+const playButtonElement =
+    document.getElementById("playButton");
 
 
 // شروع بازی
@@ -21,19 +27,21 @@ function startGame(){
         return;
     }
 
-
     gameStarted = true;
 
     score = 0;
 
     gameTime = 30;
 
-
     updateScore();
 
-
     statusElement.textContent =
-        "بازی شروع شد! سریع کلیک کن 🎮";
+        "🎯 هدف را سریع بزن!";
+
+    playButtonElement.textContent =
+        "🎯 بازی در حال اجرا";
+
+    showTarget();
 
 
     timer = setInterval(function(){
@@ -42,17 +50,12 @@ function startGame(){
 
 
         statusElement.textContent =
-            "زمان باقی‌مانده: " +
+            "⏱️ زمان باقی‌مانده: " +
             gameTime +
             " ثانیه";
 
 
         if(gameTime <= 0){
-
-            clearInterval(timer);
-
-            gameStarted = false;
-
 
             finishGame();
 
@@ -64,9 +67,60 @@ function startGame(){
 
 
 
-// کلیک داخل بازی
+// نمایش هدف در جای تصادفی
 
-function clickGame(){
+function showTarget(){
+
+    if(!gameStarted){
+        return;
+    }
+
+
+    const areaWidth =
+        gameAreaElement.clientWidth;
+
+    const areaHeight =
+        gameAreaElement.clientHeight;
+
+
+    const targetSize =
+        targetElement.offsetWidth;
+
+
+    const margin =
+        targetSize / 2 + 5;
+
+
+    const x =
+        Math.random() *
+        (areaWidth - margin * 2)
+        + margin;
+
+
+    const y =
+        Math.random() *
+        (areaHeight - margin * 2)
+        + margin;
+
+
+    targetElement.style.left =
+        x + "px";
+
+
+    targetElement.style.top =
+        y + "px";
+
+
+    targetElement.style.display =
+        "block";
+
+}
+
+
+
+// زدن هدف
+
+function hitTarget(){
 
     if(!gameStarted){
         return;
@@ -78,11 +132,14 @@ function clickGame(){
 
     updateScore();
 
+
+    showTarget();
+
 }
 
 
 
-// بروزرسانی امتیاز فعلی
+// بروزرسانی امتیاز
 
 function updateScore(){
 
@@ -101,12 +158,41 @@ function updateScore(){
 
 function finishGame(){
 
+    if(!gameStarted){
+        return;
+    }
+
+
+    clearInterval(timer);
+
+    timer = null;
+
+    gameStarted = false;
+
+
+    if(targetElement){
+
+        targetElement.style.display =
+            "none";
+
+    }
+
+
+    if(playButtonElement){
+
+        playButtonElement.textContent =
+            "🎮 دوباره بازی کن";
+
+    }
+
+
     statusElement.textContent =
         "⏰ بازی تمام شد! امتیاز: " +
         score;
 
 
-    // امتیاز قبلی
+
+    // اطلاعات قبلی بازیکن
 
     let totalScore =
         Number(
@@ -114,15 +200,11 @@ function finishGame(){
         ) || 0;
 
 
-    // رکورد قبلی
-
     let record =
         Number(
             localStorage.getItem("playerRecord")
         ) || 0;
 
-
-    // تعداد بازی قبلی
 
     let games =
         Number(
@@ -133,8 +215,7 @@ function finishGame(){
 
     // اضافه کردن امتیاز این بازی
 
-    totalScore =
-        totalScore + score;
+    totalScore += score;
 
 
     // افزایش تعداد بازی
@@ -142,7 +223,7 @@ function finishGame(){
     games++;
 
 
-    // بررسی رکورد
+    // ثبت رکورد
 
     if(score > record){
 
@@ -172,7 +253,6 @@ function finishGame(){
     );
 
 
-
     // نمایش اطلاعات جدید
 
     updatePlayerInfo();
@@ -181,7 +261,7 @@ function finishGame(){
 
 
 
-// بروزرسانی اطلاعات بازیکن روی صفحه
+// بروزرسانی اطلاعات بازیکن
 
 function updatePlayerInfo(){
 
@@ -201,7 +281,9 @@ function updatePlayerInfo(){
     if(playerScore){
 
         playerScore.textContent =
-            localStorage.getItem("playerScore") || 0;
+            localStorage.getItem(
+                "playerScore"
+            ) || 0;
 
     }
 
@@ -209,7 +291,9 @@ function updatePlayerInfo(){
     if(playerRecord){
 
         playerRecord.textContent =
-            localStorage.getItem("playerRecord") || 0;
+            localStorage.getItem(
+                "playerRecord"
+            ) || 0;
 
     }
 
@@ -217,7 +301,9 @@ function updatePlayerInfo(){
     if(playerGames){
 
         playerGames.textContent =
-            localStorage.getItem("playerGames") || 0;
+            localStorage.getItem(
+                "playerGames"
+            ) || 0;
 
     }
 
@@ -225,7 +311,7 @@ function updatePlayerInfo(){
 
 
 
-// دکمه اصلی بازی
+// دکمه شروع بازی
 
 function playGame(){
 
@@ -236,9 +322,6 @@ function playGame(){
         return;
 
     }
-
-
-    clickGame();
 
 }
 
@@ -256,17 +339,20 @@ function buyPro(){
 
 
 
-// در دسترس قرار دادن توابع برای HTML
+// اتصال توابع به HTML
 
 window.playGame =
     playGame;
+
+window.hitTarget =
+    hitTarget;
 
 window.buyPro =
     buyPro;
 
 
 
-// نمایش اطلاعات ذخیره‌شده هنگام باز شدن صفحه
+// نمایش اطلاعات ذخیره‌شده
 
 document.addEventListener(
     "DOMContentLoaded",
