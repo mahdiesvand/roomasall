@@ -214,3 +214,23 @@ window.finishGame = finishGame;
 window.resetScore = resetScore;
 window.setPlayerName = setPlayerName;
 window.getPlayer = getPlayer;
+function changePlayerName(){
+
+    const oldName =
+        player.name || "بازیکن";
+
+    const newName =
+        prompt(
+            "نام بازیکن را وارد کنید:",
+            oldName
+        );
+
+    if(newName === null){
+        return;
+    }
+
+    setPlayerName(newName);
+}
+
+window.changePlayerName =
+    changePlayerName;
