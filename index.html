@@ -5,10 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>بازی من</title>
-
+<title>🐝 عسل منچ | نسخه نهایی</title>
 
 <style>
 
@@ -18,343 +18,834 @@
     padding:0;
 }
 
-
 body{
+
     min-height:100vh;
-    font-family:Tahoma,Arial,sans-serif;
-    background:#101114;
-    color:white;
+
+    background:#0d0f12;
+
+    color:#fff;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    user-select:none;
+
 }
 
+.app{
 
-.container{
     width:100%;
-    max-width:600px;
+
+    max-width:650px;
+
     margin:auto;
-    padding:20px;
+
+    padding:10px;
+
 }
 
 
-.top{
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
     text-align:center;
-    padding:25px 10px;
+
+    padding:8px 0 12px;
+
 }
 
+.header h1{
 
-.top h1{
-    font-size:30px;
-    margin-bottom:10px;
+    font-size:27px;
+
 }
 
+.header p{
 
-.top p{
-    color:#aaa;
-    font-size:14px;
-}
-
-
-/* اطلاعات بازیکن */
-
-.player-card{
-    background:#191b20;
-    border:1px solid #292c33;
-    border-radius:18px;
-    padding:18px;
-    margin-bottom:15px;
-}
-
-
-.player-name{
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:18px;
-}
-
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-}
-
-
-.stat{
-    background:#111318;
-    border-radius:12px;
-    padding:12px 5px;
-    text-align:center;
-}
-
-
-.stat-title{
     color:#888;
-    font-size:11px;
-    margin-bottom:7px;
+
+    font-size:12px;
+
+    margin-top:5px;
+
 }
 
 
-.stat-value{
-    font-size:20px;
-    font-weight:bold;
-}
+/* =========================
+   GAME BOARD
+========================= */
 
-
-/* بازی */
-
-.game-card{
-    background:#191b20;
-    border:1px solid #292c33;
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-}
-
-
-.score-title{
-    color:#aaa;
-    font-size:14px;
-}
-
-
-.score{
-    font-size:42px;
-    font-weight:bold;
-    margin:10px 0 15px;
-}
-
-
-/* محدوده بازی */
-
-.game-area{
+.board{
 
     position:relative;
 
     width:100%;
 
-    height:300px;
+    aspect-ratio:1;
 
-    background:#111318;
+    background:#fff;
 
-    border:1px solid #292c33;
+    border:5px solid #272a30;
 
-    border-radius:16px;
+    border-radius:22px;
 
     overflow:hidden;
 
-    margin-bottom:15px;
+    box-shadow:
+    0 10px 35px
+    rgba(0,0,0,.35);
 
 }
 
 
-/* هدف */
+/* =========================
+   HOMES
+========================= */
 
-.target{
+.home{
 
     position:absolute;
 
-    width:55px;
+    width:40%;
 
-    height:55px;
+    height:40%;
+
+    padding:8%;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    grid-template-rows:1fr 1fr;
+
+    gap:8%;
+
+    z-index:2;
+
+}
+
+.home.red{
+
+    left:0;
+    top:0;
+
+    background:#e74c3c;
+
+}
+
+.home.green{
+
+    right:0;
+    top:0;
+
+    background:#2ecc71;
+
+}
+
+.home.blue{
+
+    left:0;
+    bottom:0;
+
+    background:#3498db;
+
+}
+
+.home.yellow{
+
+    right:0;
+    bottom:0;
+
+    background:#f1c40f;
+
+}
+
+
+.slot{
+
+    background:#fff;
 
     border-radius:50%;
 
-    background:#f5b400;
-
-    border:4px solid #fff;
+    border:3px solid
+    rgba(0,0,0,.22);
 
     box-shadow:
-        0 0 15px rgba(245,180,0,.7);
+    inset 0 2px 4px
+    rgba(0,0,0,.12);
+
+}
+
+
+/* =========================
+   MAIN TRACK
+========================= */
+
+.track{
+
+    position:absolute;
+
+    left:20%;
+
+    top:20%;
+
+    width:60%;
+
+    height:60%;
+
+    z-index:3;
+
+}
+
+
+/* =========================
+   TRACK CELLS
+========================= */
+
+.cell{
+
+    position:absolute;
+
+    width:8%;
+
+    height:8%;
+
+    background:#fff;
+
+    border:1px solid #aaa;
+
+    border-radius:4px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* =========================
+   SAFE CELLS
+========================= */
+
+.cell.safe{
+
+    background:#fff3bd;
+
+}
+
+
+.cell.safe::after{
+
+    content:"★";
+
+    color:#e0a500;
+
+    font-size:11px;
+
+}
+
+
+/* =========================
+   START CELLS
+========================= */
+
+.cell.red-start{
+
+    background:#f8a29a;
+
+}
+
+.cell.green-start{
+
+    background:#9de5b7;
+
+}
+
+.cell.blue-start{
+
+    background:#9dcff0;
+
+}
+
+.cell.yellow-start{
+
+    background:#f7e58a;
+
+}
+
+
+/* =========================
+   FINISH LANES
+========================= */
+
+.finish{
+
+    position:absolute;
+
+    z-index:4;
+
+}
+
+
+.finish.red{
+
+    left:40%;
+
+    top:20%;
+
+    width:20%;
+
+    height:20%;
+
+    background:#e74c3c;
+
+}
+
+.finish.green{
+
+    left:60%;
+
+    top:40%;
+
+    width:20%;
+
+    height:20%;
+
+    background:#2ecc71;
+
+}
+
+.finish.yellow{
+
+    left:40%;
+
+    top:60%;
+
+    width:20%;
+
+    height:20%;
+
+    background:#f1c40f;
+
+}
+
+.finish.blue{
+
+    left:20%;
+
+    top:40%;
+
+    width:20%;
+
+    height:20%;
+
+    background:#3498db;
+
+}
+
+
+/* =========================
+   CENTER
+========================= */
+
+.center{
+
+    position:absolute;
+
+    left:40%;
+
+    top:40%;
+
+    width:20%;
+
+    height:20%;
+
+    z-index:8;
+
+    background:
+    conic-gradient(
+
+        #e74c3c 0deg 90deg,
+
+        #2ecc71 90deg 180deg,
+
+        #f1c40f 180deg 270deg,
+
+        #3498db 270deg 360deg
+
+    );
+
+}
+
+
+/* =========================
+   PIECES
+========================= */
+
+.piece{
+
+    position:absolute;
+
+    width:7%;
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    border:3px solid #fff;
+
+    z-index:20;
 
     cursor:pointer;
 
-    display:none;
+    box-shadow:
+    0 3px 8px
+    rgba(0,0,0,.5);
 
-    transform:translate(-50%,-50%);
+    transition:
 
-    user-select:none;
+    left .25s ease,
 
-    -webkit-tap-highlight-color:transparent;
+    top .25s ease,
 
-}
-
-
-.target:active{
-
-    transform:
-        translate(-50%,-50%)
-        scale(.88);
+    transform .15s ease;
 
 }
 
 
-/* دکمه شروع */
+.piece.red{
 
-.play-btn{
+    background:#e74c3c;
+
+}
+
+.piece.green{
+
+    background:#2ecc71;
+
+}
+
+.piece.blue{
+
+    background:#3498db;
+
+}
+
+.piece.yellow{
+
+    background:#f1c40f;
+
+}
+
+
+.piece.selectable{
+
+    animation:
+    piecePulse
+    1s infinite;
+
+}
+
+
+@keyframes piecePulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+.piece.selected{
+
+    transform:scale(1.25);
+
+    box-shadow:
+
+    0 0 0 3px #fff,
+
+    0 0 18px
+    #f5b400;
+
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.panel{
+
+    margin-top:12px;
+
+    background:#181a1f;
+
+    border:1px solid #292c33;
+
+    border-radius:18px;
+
+    padding:14px;
+
+}
+
+
+.turn{
+
+    text-align:center;
+
+    color:#aaa;
+
+    font-size:13px;
+
+    margin-bottom:10px;
+
+}
+
+
+.turn strong{
+
+    color:#f5b400;
+
+}
+
+
+/* =========================
+   DICE
+========================= */
+
+.dice{
+
+    width:68px;
+
+    height:68px;
+
+    margin:0 auto 10px;
+
+    background:#fff;
+
+    color:#111;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:36px;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.25);
+
+}
+
+
+.roll-button{
 
     width:100%;
 
-    border:none;
+    border:0;
 
-    border-radius:14px;
+    border-radius:13px;
 
-    padding:16px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
+    padding:14px;
 
     background:#f5b400;
 
     color:#111;
 
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
 }
 
 
-.play-btn:active{
+.roll-button:active{
 
     transform:scale(.97);
 
 }
 
 
-.status{
+.roll-button:disabled{
 
-    margin-top:15px;
-
-    color:#aaa;
-
-    font-size:13px;
-
-}
-
-
-/* پلن ها */
-
-.plans{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
-
-    margin-top:20px;
-
-}
-
-
-.plan{
-
-    background:#191b20;
-
-    border:1px solid #292c33;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    text-align:center;
-
-}
-
-
-.plan h3{
-
-    margin-bottom:10px;
-
-}
-
-
-.plan p{
-
-    color:#aaa;
-
-    font-size:13px;
-
-    line-height:1.8;
-
-}
-
-
-.pro{
-
-    border-color:#f5b400;
-
-}
-
-
-.pro button{
-
-    margin-top:12px;
-
-    width:100%;
-
-    padding:11px;
-
-    border:0;
-
-    border-radius:10px;
-
-    background:#f5b400;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-}
-
-
-.pro button:disabled{
-
-    opacity:.6;
+    opacity:.45;
 
     cursor:not-allowed;
 
 }
 
 
-.footer{
+/* =========================
+   STATUS
+========================= */
+
+.status{
 
     text-align:center;
 
-    color:#666;
+    color:#999;
 
     font-size:12px;
 
-    margin-top:30px;
+    margin-top:9px;
+
+    min-height:18px;
 
 }
 
 
+/* =========================
+   PLAYER BAR
+========================= */
+
+.players{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:6px;
+
+    margin-top:12px;
+
+}
+
+
+.player{
+
+    padding:8px 3px;
+
+    text-align:center;
+
+    background:#101216;
+
+    border-radius:9px;
+
+    font-size:10px;
+
+    border:2px solid transparent;
+
+}
+
+
+.player.red{
+
+    border-color:#e74c3c;
+
+}
+
+.player.green{
+
+    border-color:#2ecc71;
+
+}
+
+.player.blue{
+
+    border-color:#3498db;
+
+}
+
+.player.yellow{
+
+    border-color:#f1c40f;
+
+}
+
+
+.player.active{
+
+    box-shadow:
+    0 0 0 2px #f5b400;
+
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:7px;
+
+    margin-top:10px;
+
+}
+
+
+.stat{
+
+    background:#101216;
+
+    border-radius:10px;
+
+    padding:8px;
+
+    text-align:center;
+
+}
+
+
+.stat-title{
+
+    color:#777;
+
+    font-size:10px;
+
+}
+
+
+.stat-value{
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    margin-top:4px;
+
+}
+
+
+/* =========================
+   WIN MODAL
+========================= */
+
+.win-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.82);
+
+    z-index:100;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.win-box{
+
+    width:88%;
+
+    max-width:360px;
+
+    background:#191b20;
+
+    border:2px solid #f5b400;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    text-align:center;
+
+}
+
+
+.win-box h2{
+
+    font-size:24px;
+
+    margin-bottom:8px;
+
+}
+
+
+.win-box p{
+
+    color:#aaa;
+
+    font-size:13px;
+
+}
+
+
+.restart{
+
+    width:100%;
+
+    margin-top:18px;
+
+    border:0;
+
+    border-radius:12px;
+
+    padding:13px;
+
+    background:#f5b400;
+
+    color:#111;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:420px){
 
-    .plans{
+    .app{
 
-        grid-template-columns:1fr;
-
-    }
-
-
-    .stats{
-
-        gap:6px;
+        padding:7px;
 
     }
 
+    .header h1{
 
-    .top h1{
-
-        font-size:26px;
+        font-size:23px;
 
     }
 
+    .board{
 
-    .game-area{
+        border-width:3px;
 
-        height:260px;
+        border-radius:17px;
+
+    }
+
+    .piece{
+
+        border-width:2px;
 
     }
 
@@ -368,282 +859,1280 @@ body{
 <body>
 
 
-<div class="container">
+<div class="app">
 
 
-    <!-- عنوان -->
+<div class="header">
 
-    <div class="top">
+<h1>
+🐝 عسل منچ
+</h1>
 
-        <h1>🎮 بازی من</h1>
+<p>
+نسخه نهایی — بازی منچ
+</p>
 
-        <p>
-            بازی کن، امتیاز بگیر و رکوردت را ثبت کن
-        </p>
+</div>
 
-    </div>
 
+<!-- =========================
+     BOARD
+========================= -->
 
+<div
+class="board"
+id="board"
+>
 
-    <!-- اطلاعات بازیکن -->
 
-    <div class="player-card">
+<!-- قرمز -->
 
+<div class="home red">
 
-        <div class="player-name">
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
 
-            👤
+</div>
 
-            <span id="playerName">
-                بازیکن
-            </span>
 
+<!-- سبز -->
 
-            <button
-                onclick="changePlayerName()"
-                style="
-                    margin-right:8px;
-                    padding:5px 9px;
-                    border:0;
-                    border-radius:8px;
-                    cursor:pointer;
-                "
-            >
-                ✏️
-            </button>
+<div class="home green">
 
-        </div>
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
 
+</div>
 
 
-        <div class="stats">
+<!-- آبی -->
 
+<div class="home blue">
 
-            <div class="stat">
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
 
-                <div class="stat-title">
-                    امتیاز
-                </div>
+</div>
 
-                <div
-                    class="stat-value"
-                    id="playerScore"
-                >
-                    0
-                </div>
 
-            </div>
+<!-- زرد -->
 
+<div class="home yellow">
 
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
+<div class="slot"></div>
 
-            <div class="stat">
+</div>
 
-                <div class="stat-title">
-                    رکورد
-                </div>
 
-                <div
-                    class="stat-value"
-                    id="playerRecord"
-                >
-                    0
-                </div>
+<!-- مسیر -->
 
-            </div>
+<div
+class="track"
+id="track"
+></div>
 
 
+<!-- مسیر پایانی -->
 
-            <div class="stat">
+<div class="finish red"></div>
 
-                <div class="stat-title">
-                    تعداد بازی
-                </div>
+<div class="finish green"></div>
 
-                <div
-                    class="stat-value"
-                    id="playerGames"
-                >
-                    0
-                </div>
+<div class="finish blue"></div>
 
-            </div>
+<div class="finish yellow"></div>
 
 
-        </div>
+<!-- مرکز -->
 
-    </div>
-
-
-
-    <!-- محیط بازی -->
-
-    <div class="game-card">
-
-
-        <div class="score-title">
-            امتیاز فعلی
-        </div>
-
-
-        <div
-            class="score"
-            id="score"
-        >
-            0
-        </div>
-
-
-
-        <!-- محدوده هدف -->
-
-        <div
-            class="game-area"
-            id="gameArea"
-        >
-
-            <div
-                class="target"
-                id="target"
-                onclick="hitTarget()"
-            >
-            </div>
-
-        </div>
-
-
-
-        <button
-            class="play-btn"
-            id="playButton"
-            onclick="playGame()"
-        >
-            🎮 شروع بازی
-        </button>
-
-
-        <div
-            class="status"
-            id="status"
-        >
-            آماده شروع
-        </div>
-
-
-    </div>
-
-
-
-    <!-- نسخه ها -->
-
-    <div class="plans">
-
-
-        <div class="plan">
-
-            <h3>
-                🆓 معمولی
-            </h3>
-
-            <p>
-                دسترسی رایگان<br>
-                امکانات پایه<br>
-                بازی معمولی
-            </p>
-
-        </div>
-
-
-
-        <div class="plan pro">
-
-            <h3>
-                ⭐ PRO
-            </h3>
-
-            <p>
-                امکانات ویژه<br>
-                بازی حرفه‌ای<br>
-                قابلیت‌های بیشتر
-            </p>
-
-            <button onclick="buyPro()">
-                فعال‌سازی PRO
-            </button>
-
-        </div>
-
-
-    </div>
-
-
-
-    <div class="footer">
-
-        © 2026 بازی من
-
-    </div>
+<div class="center"></div>
 
 
 </div>
 
 
+<!-- =========================
+     GAME PANEL
+========================= -->
 
-<!-- فایل های جاوااسکریپت -->
-
-<script src="player.js"></script>
-
-<script src="game.js"></script>
-
-<script src="pro.js"></script>
+<div class="panel">
 
 
+<div class="turn">
 
-<!-- تغییر نام بازیکن -->
+نوبت:
 
-<script>
+<strong id="turn">
+🔴 قرمز
+</strong>
 
-function changePlayerName(){
-
-    const oldName =
-        localStorage.getItem("playerName") || "بازیکن";
+</div>
 
 
-    const newName =
-        prompt(
-            "نام جدید بازیکن را وارد کنید:",
-            oldName
+<div
+class="dice"
+id="dice"
+>
+🎲
+</div>
+
+
+<button
+class="roll-button"
+id="rollButton"
+onclick="rollDice()"
+>
+
+🎲 انداختن تاس
+
+</button>
+
+
+<div
+class="status"
+id="status"
+>
+
+برای شروع بازی تاس بینداز
+
+</div>
+
+
+<div class="players">
+
+
+<div
+class="player red active"
+id="player-red"
+>
+
+🔴 قرمز
+
+</div>
+
+
+<div
+class="player green"
+id="player-green"
+>
+
+🟢 سبز
+
+</div>
+
+
+<div
+class="player blue"
+id="player-blue"
+>
+
+🔵 آبی
+
+</div>
+
+
+<div
+class="player yellow"
+id="player-yellow"
+>
+
+🟡 زرد
+
+</div>
+
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div class="stat-title">
+نوبت
+</div>
+
+<div
+class="stat-value"
+id="turnNumber"
+>
+1
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-title">
+حرکت
+</div>
+
+<div
+class="stat-value"
+id="moveCount"
+>
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-title">
+رکورد
+</div>
+
+<div
+class="stat-value"
+id="winCount"
+>
+0
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     WIN
+========================= -->
+
+<div
+class="win-modal"
+id="winModal"
+>
+
+
+<div class="win-box">
+
+
+<h2
+id="winnerText"
+>
+🏆 برنده!
+</h2>
+
+
+<p>
+تبریک! بازی تمام شد.
+</p>
+
+
+<button
+class="restart"
+onclick="restartGame()"
+>
+
+🔄 بازی دوباره
+
+</button>
+
+
+</div>
+
+
+    </div><script>
+
+/* =========================================
+   امکانات تکمیلی نسخه نهایی
+========================================= */
+
+
+/* جلوگیری از کلیک‌های اضافه روی تاس */
+
+const rollButton =
+    document.getElementById("rollButton");
+
+
+function updateRollButton(){
+
+    if(gameFinished){
+
+        rollButton.disabled = true;
+
+        return;
+
+    }
+
+
+    if(waitingForPiece){
+
+        rollButton.disabled = true;
+
+        return;
+
+    }
+
+
+    rollButton.disabled = false;
+
+}
+
+
+/* ذخیره وضعیت بازی */
+
+function saveGame(){
+
+    const data = {
+
+        currentPlayer:
+            currentPlayer,
+
+        diceValue:
+            diceValue,
+
+        moveCount:
+            moveCount,
+
+        turnNumber:
+            turnNumber,
+
+        pieces:
+            pieces
+
+    };
+
+
+    localStorage.setItem(
+        "asalLudoGame",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* بازیابی وضعیت */
+
+function loadGame(){
+
+    const saved =
+        localStorage.getItem(
+            "asalLudoGame"
         );
 
 
-    if(
-        newName !== null &&
-        newName.trim() !== ""
-    ){
+    if(!saved){
 
-        const name =
-            newName.trim();
+        return false;
+
+    }
 
 
-        localStorage.setItem(
-            "playerName",
-            name
-        );
+    try{
+
+        const data =
+            JSON.parse(saved);
 
 
-        const nameElement =
-            document.getElementById("playerName");
+        if(
+            !data.pieces ||
+            typeof data.currentPlayer !== "number"
+        ){
 
-
-        if(nameElement){
-
-            nameElement.textContent =
-                name;
+            return false;
 
         }
+
+
+        currentPlayer =
+            data.currentPlayer;
+
+
+        diceValue =
+            data.diceValue || 0;
+
+
+        moveCount =
+            data.moveCount || 0;
+
+
+        turnNumber =
+            data.turnNumber || 1;
+
+
+        COLORS.forEach(
+            function(color){
+
+                if(
+                    Array.isArray(
+                        data.pieces[color]
+                    )
+                ){
+
+                    pieces[color] =
+                        data.pieces[color];
+
+                }
+
+            }
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        return false;
 
     }
 
 }
+
+
+/* قرار دادن همه مهره‌ها بر اساس وضعیت ذخیره‌شده */
+
+function renderAllPieces(){
+
+    COLORS.forEach(
+        function(color){
+
+            for(
+                let i = 0;
+                i < 4;
+                i++
+            ){
+
+                const piece =
+                    document.getElementById(
+                        "piece-" +
+                        color +
+                        "-" +
+                        i
+                    );
+
+
+                const position =
+                    pieces[color][i];
+
+
+                if(!piece){
+
+                    continue;
+
+                }
+
+
+                if(position === -1){
+
+                    positionPieceHome(
+                        piece,
+                        color,
+                        i
+                    );
+
+                }
+
+                else if(
+                    position >= path.length
+                ){
+
+                    piece.style.left =
+                        "46.5%";
+
+                    piece.style.top =
+                        "46.5%";
+
+                }
+
+                else{
+
+                    positionPieceOnPath(
+                        piece,
+                        color,
+                        position
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* کنترل بهتر وضعیت دکمه */
+
+const oldRollDice =
+    rollDice;
+
+
+/*
+  نسخه جدید تابع تاس
+*/
+
+rollDice = function(){
+
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    if(waitingForPiece){
+
+        return;
+
+    }
+
+
+    oldRollDice();
+
+
+    updateRollButton();
+
+};
+
+
+/* ذخیره بعد از حرکت */
+
+const oldMovePiece =
+    movePiece;
+
+
+movePiece = function(
+    color,
+    number
+){
+
+    oldMovePiece(
+        color,
+        number
+    );
+
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* ذخیره بعد از تغییر نوبت */
+
+const oldNextTurn =
+    nextTurn;
+
+
+nextTurn = function(){
+
+    oldNextTurn();
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* بازی مجدد */
+
+const oldRestartGame =
+    restartGame;
+
+
+restartGame = function(){
+
+    oldRestartGame();
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* =========================================
+   دکمه پاک کردن بازی ذخیره‌شده
+========================================= */
+
+function clearSavedGame(){
+
+    localStorage.removeItem(
+        "asalLudoGame"
+    );
+
+    restartGame();
+
+    document
+        .getElementById("status")
+        .textContent =
+        "🆕 بازی کاملاً از اول شروع شد";
+
+}
+
+
+/* =========================================
+   بازی جدید با تأیید
+========================================= */
+
+function newGame(){
+
+    const answer =
+        confirm(
+            "بازی فعلی از اول شروع شود؟"
+        );
+
+
+    if(answer){
+
+        clearSavedGame();
+
+    }
+
+}
+
+
+/* =========================================
+   بازیابی در صورت وجود ذخیره
+========================================= */
+
+function restoreSavedGame(){
+
+    const loaded =
+        loadGame();
+
+
+    if(!loaded){
+
+        return;
+
+    }
+
+
+    renderAllPieces();
+
+
+    document
+        .getElementById("moveCount")
+        .textContent =
+        moveCount;
+
+
+    document
+        .getElementById("turnNumber")
+        .textContent =
+        turnNumber;
+
+
+    updateTurnUI();
+
+
+    document
+        .getElementById("status")
+        .textContent =
+        "💾 بازی قبلی بازیابی شد";
+
+
+    updateRollButton();
+
+}
+
+
+/* =========================================
+   به‌روزرسانی وضعیت بعد از انتخاب مهره
+========================================= */
+
+document
+    .querySelectorAll(".piece")
+    .forEach(
+        function(piece){
+
+            piece.addEventListener(
+                "click",
+                function(){
+
+                    setTimeout(
+                        updateRollButton,
+                        50
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================
+   ذخیره خودکار دوره‌ای
+========================================= */
+
+setInterval(
+    function(){
+
+        if(!gameFinished){
+
+            saveGame();
+
+        }
+
+    },
+    5000
+);
+
+
+/* =========================================
+   دکمه‌های کیبورد
+   برای تست روی کامپیوتر
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.code ===
+            "Space"
+        ){
+
+            event.preventDefault();
+
+
+            if(
+                !waitingForPiece &&
+                !gameFinished
+            ){
+
+                rollDice();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   راه‌اندازی نهایی
+========================================= */
+
+setTimeout(
+    function(){
+
+        restoreSavedGame();
+
+        updateRollButton();
+
+    },
+    100
+);
+
+</script>
+
+
+<script>
+
+/* =========================================
+   امکانات تکمیلی نسخه نهایی
+========================================= */
+
+
+/* جلوگیری از کلیک‌های اضافه روی تاس */
+
+const rollButton =
+    document.getElementById("rollButton");
+
+
+function updateRollButton(){
+
+    if(gameFinished){
+
+        rollButton.disabled = true;
+
+        return;
+
+    }
+
+
+    if(waitingForPiece){
+
+        rollButton.disabled = true;
+
+        return;
+
+    }
+
+
+    rollButton.disabled = false;
+
+}
+
+
+/* ذخیره وضعیت بازی */
+
+function saveGame(){
+
+    const data = {
+
+        currentPlayer:
+            currentPlayer,
+
+        diceValue:
+            diceValue,
+
+        moveCount:
+            moveCount,
+
+        turnNumber:
+            turnNumber,
+
+        pieces:
+            pieces
+
+    };
+
+
+    localStorage.setItem(
+        "asalLudoGame",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* بازیابی وضعیت */
+
+function loadGame(){
+
+    const saved =
+        localStorage.getItem(
+            "asalLudoGame"
+        );
+
+
+    if(!saved){
+
+        return false;
+
+    }
+
+
+    try{
+
+        const data =
+            JSON.parse(saved);
+
+
+        if(
+            !data.pieces ||
+            typeof data.currentPlayer !== "number"
+        ){
+
+            return false;
+
+        }
+
+
+        currentPlayer =
+            data.currentPlayer;
+
+
+        diceValue =
+            data.diceValue || 0;
+
+
+        moveCount =
+            data.moveCount || 0;
+
+
+        turnNumber =
+            data.turnNumber || 1;
+
+
+        COLORS.forEach(
+            function(color){
+
+                if(
+                    Array.isArray(
+                        data.pieces[color]
+                    )
+                ){
+
+                    pieces[color] =
+                        data.pieces[color];
+
+                }
+
+            }
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        return false;
+
+    }
+
+}
+
+
+/* قرار دادن همه مهره‌ها بر اساس وضعیت ذخیره‌شده */
+
+function renderAllPieces(){
+
+    COLORS.forEach(
+        function(color){
+
+            for(
+                let i = 0;
+                i < 4;
+                i++
+            ){
+
+                const piece =
+                    document.getElementById(
+                        "piece-" +
+                        color +
+                        "-" +
+                        i
+                    );
+
+
+                const position =
+                    pieces[color][i];
+
+
+                if(!piece){
+
+                    continue;
+
+                }
+
+
+                if(position === -1){
+
+                    positionPieceHome(
+                        piece,
+                        color,
+                        i
+                    );
+
+                }
+
+                else if(
+                    position >= path.length
+                ){
+
+                    piece.style.left =
+                        "46.5%";
+
+                    piece.style.top =
+                        "46.5%";
+
+                }
+
+                else{
+
+                    positionPieceOnPath(
+                        piece,
+                        color,
+                        position
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* کنترل بهتر وضعیت دکمه */
+
+const oldRollDice =
+    rollDice;
+
+
+/*
+  نسخه جدید تابع تاس
+*/
+
+rollDice = function(){
+
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    if(waitingForPiece){
+
+        return;
+
+    }
+
+
+    oldRollDice();
+
+
+    updateRollButton();
+
+};
+
+
+/* ذخیره بعد از حرکت */
+
+const oldMovePiece =
+    movePiece;
+
+
+movePiece = function(
+    color,
+    number
+){
+
+    oldMovePiece(
+        color,
+        number
+    );
+
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* ذخیره بعد از تغییر نوبت */
+
+const oldNextTurn =
+    nextTurn;
+
+
+nextTurn = function(){
+
+    oldNextTurn();
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* بازی مجدد */
+
+const oldRestartGame =
+    restartGame;
+
+
+restartGame = function(){
+
+    oldRestartGame();
+
+    saveGame();
+
+    updateRollButton();
+
+};
+
+
+/* =========================================
+   دکمه پاک کردن بازی ذخیره‌شده
+========================================= */
+
+function clearSavedGame(){
+
+    localStorage.removeItem(
+        "asalLudoGame"
+    );
+
+    restartGame();
+
+    document
+        .getElementById("status")
+        .textContent =
+        "🆕 بازی کاملاً از اول شروع شد";
+
+}
+
+
+/* =========================================
+   بازی جدید با تأیید
+========================================= */
+
+function newGame(){
+
+    const answer =
+        confirm(
+            "بازی فعلی از اول شروع شود؟"
+        );
+
+
+    if(answer){
+
+        clearSavedGame();
+
+    }
+
+}
+
+
+/* =========================================
+   بازیابی در صورت وجود ذخیره
+========================================= */
+
+function restoreSavedGame(){
+
+    const loaded =
+        loadGame();
+
+
+    if(!loaded){
+
+        return;
+
+    }
+
+
+    renderAllPieces();
+
+
+    document
+        .getElementById("moveCount")
+        .textContent =
+        moveCount;
+
+
+    document
+        .getElementById("turnNumber")
+        .textContent =
+        turnNumber;
+
+
+    updateTurnUI();
+
+
+    document
+        .getElementById("status")
+        .textContent =
+        "💾 بازی قبلی بازیابی شد";
+
+
+    updateRollButton();
+
+}
+
+
+/* =========================================
+   به‌روزرسانی وضعیت بعد از انتخاب مهره
+========================================= */
+
+document
+    .querySelectorAll(".piece")
+    .forEach(
+        function(piece){
+
+            piece.addEventListener(
+                "click",
+                function(){
+
+                    setTimeout(
+                        updateRollButton,
+                        50
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================
+   ذخیره خودکار دوره‌ای
+========================================= */
+
+setInterval(
+    function(){
+
+        if(!gameFinished){
+
+            saveGame();
+
+        }
+
+    },
+    5000
+);
+
+
+/* =========================================
+   دکمه‌های کیبورد
+   برای تست روی کامپیوتر
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.code ===
+            "Space"
+        ){
+
+            event.preventDefault();
+
+
+            if(
+                !waitingForPiece &&
+                !gameFinished
+            ){
+
+                rollDice();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   راه‌اندازی نهایی
+========================================= */
+
+setTimeout(
+    function(){
+
+        restoreSavedGame();
+
+        updateRollButton();
+
+    },
+    100
+);
 
 </script>
 
