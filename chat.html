@@ -15,9 +15,9 @@
 
 <style>
 
-/* =========================================
+/* =================================================
    RESET
-========================================= */
+================================================= */
 
 *{
     box-sizing:border-box;
@@ -29,62 +29,60 @@ html,
 body{
     width:100%;
     height:100%;
+    overflow:hidden;
 }
 
 body{
-
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
+    font-family:Tahoma,Arial,sans-serif;
 
     background:
-        repeating-linear-gradient(
-            0deg,
-            #53215f 0px,
-            #53215f 3px,
-            #8d3aa0 3px,
-            #8d3aa0 6px
-        );
+    repeating-linear-gradient(
+        0deg,
+        #53215f 0px,
+        #53215f 3px,
+        #8d3aa0 3px,
+        #8d3aa0 6px
+    );
 
     color:#222;
+}
+
+
+/* =================================================
+   PAGE
+================================================= */
+
+.chat-page{
+
+    width:100%;
+    height:100%;
+
+    height:100dvh;
+
+    padding:6px;
+
+    display:flex;
+    flex-direction:column;
 
     overflow:hidden;
 }
 
 
-/* =========================================
-   PAGE
-========================================= */
-
-.chat-page{
-
-    width:100vw;
-    height:100vh;
-
-    display:flex;
-    flex-direction:column;
-
-    padding:8px;
-
-    position:relative;
-}
-
-
-/* =========================================
+/* =================================================
    HEADER
-========================================= */
+================================================= */
 
 .top-header{
 
     height:38px;
-    flex-shrink:0;
+
+    flex:0 0 38px;
 
     background:
-        linear-gradient(
-            #383838,
-            #171717
-        );
+    linear-gradient(
+        #383838,
+        #171717
+    );
 
     border:2px solid #111;
 
@@ -117,9 +115,9 @@ body{
 }
 
 
-/* =========================================
-   MAIN
-========================================= */
+/* =================================================
+   MAIN LAYOUT
+================================================= */
 
 .main-layout{
 
@@ -127,26 +125,38 @@ body{
 
     min-height:0;
 
+    min-width:0;
+
     display:grid;
+
+    /*
+       IMPORTANT:
+       sidebar RIGHT
+       chat LEFT
+    */
 
     grid-template-columns:
         minmax(0,1fr)
-        265px;
+        240px;
 
-    gap:8px;
+    gap:6px;
 
     margin-top:5px;
+
+    overflow:hidden;
 }
 
 
-/* =========================================
-   CHAT
-========================================= */
+/* =================================================
+   CHAT PANEL
+================================================= */
 
 .chat-panel{
 
     min-width:0;
     min-height:0;
+
+    height:100%;
 
     background:#fff;
 
@@ -158,17 +168,20 @@ body{
     display:flex;
 
     flex-direction:column;
+
+    overflow:hidden;
 }
 
 
-/* =========================================
+/* =================================================
    MESSAGES
-========================================= */
+================================================= */
 
 .messages{
 
-    flex:1;
+    flex:1 1 auto;
 
+    min-width:0;
     min-height:0;
 
     overflow-y:auto;
@@ -178,13 +191,13 @@ body{
 
     background:
 
-        repeating-linear-gradient(
-            to bottom,
-            #fff 0px,
-            #fff 20px,
-            #e8e8e8 21px,
-            #fff 22px
-        );
+    repeating-linear-gradient(
+        to bottom,
+        #fff 0px,
+        #fff 20px,
+        #e8e8e8 21px,
+        #fff 22px
+    );
 }
 
 .messages::-webkit-scrollbar{
@@ -199,26 +212,26 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    MESSAGE
-========================================= */
+================================================= */
 
 .message{
 
     width:100%;
 
-    padding:8px 12px;
+    padding:7px 10px;
 
     border-bottom:
         1px solid
-        rgba(0,0,0,.04);
+        rgba(0,0,0,.05);
 
     font-size:12px;
 
-    line-height:2;
+    line-height:1.8;
 
     background:
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.8);
 }
 
 .message:hover{
@@ -231,7 +244,7 @@ body{
 
     align-items:center;
 
-    gap:6px;
+    gap:5px;
 
     margin-bottom:2px;
 }
@@ -252,16 +265,22 @@ body{
     font-size:12px;
 
     word-break:break-word;
+
+    overflow-wrap:anywhere;
 }
 
 
-/* =========================================
-   INPUT
-========================================= */
+/* =================================================
+   INPUT AREA
+================================================= */
 
 .chat-input-area{
 
-    flex-shrink:0;
+    flex:0 0 auto;
+
+    width:100%;
+
+    min-height:48px;
 
     background:
         linear-gradient(
@@ -276,18 +295,37 @@ body{
 
     display:flex;
 
+    flex-direction:row;
+
+    align-items:center;
+
     gap:5px;
+
+    direction:ltr;
+
+    position:relative;
+
+    z-index:10;
 }
+
+
+/* =================================================
+   INPUT
+================================================= */
 
 .message-input{
 
-    flex:1;
+    flex:1 1 auto;
+
+    min-width:0;
+
+    width:auto;
 
     height:38px;
 
     border:1px solid #999;
 
-    border-radius:3px;
+    border-radius:4px;
 
     outline:none;
 
@@ -298,13 +336,22 @@ body{
     font-size:12px;
 
     background:#fff;
+
+    direction:rtl;
 }
 
 .message-input:focus{
     border-color:#7421a0;
 }
 
+
+/* =================================================
+   SEND
+================================================= */
+
 .send-button{
+
+    flex:0 0 65px;
 
     width:65px;
 
@@ -325,6 +372,18 @@ body{
     font-family:Tahoma;
 
     font-size:11px;
+
+    color:#222;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    visibility:visible;
+
+    opacity:1;
 }
 
 .send-button:active{
@@ -332,13 +391,30 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
+   EMOJI BUTTON
+================================================= */
+
+.chat-input-area .action{
+
+    flex:0 0 38px;
+
+    width:38px;
+
+    height:38px;
+}
+
+
+/* =================================================
    SIDEBAR
-========================================= */
+================================================= */
 
 .sidebar{
 
+    min-width:0;
     min-height:0;
+
+    height:100%;
 
     background:#fff;
 
@@ -350,18 +426,25 @@ body{
     display:flex;
 
     flex-direction:column;
+
+    overflow:hidden;
+
+    /*
+       sidebar is RIGHT because
+       page is RTL
+    */
 }
 
 
-/* =========================================
+/* =================================================
    SIDEBAR INFO
-========================================= */
+================================================= */
 
 .sidebar-info{
 
-    flex-shrink:0;
+    flex:0 0 auto;
 
-    padding:8px;
+    padding:7px;
 
     text-align:center;
 
@@ -374,13 +457,13 @@ body{
 
     width:150px;
 
-    margin:0 auto 8px;
+    margin:0 auto 7px;
 
     padding:7px;
 
     border:0;
 
-    border-radius:2px;
+    border-radius:3px;
 
     background:#18ad31;
 
@@ -407,6 +490,8 @@ body{
     font-weight:bold;
 
     font-size:12px;
+
+    color:#1682a8;
 }
 
 .search-box{
@@ -431,13 +516,13 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    ROOM TITLE
-========================================= */
+================================================= */
 
 .room-title{
 
-    flex-shrink:0;
+    flex:0 0 31px;
 
     height:31px;
 
@@ -473,18 +558,17 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    USERS
-========================================= */
+================================================= */
 
 .users{
 
-    flex:1;
+    flex:1 1 auto;
 
     min-height:0;
 
     overflow-y:auto;
-
     overflow-x:hidden;
 
     background:#fff;
@@ -502,9 +586,9 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    USER
-========================================= */
+================================================= */
 
 .user{
 
@@ -514,10 +598,14 @@ body{
 
     display:grid;
 
+    /*
+       avatar | name | gender
+    */
+
     grid-template-columns:
-        22px
+        25px
         minmax(0,1fr)
-        25px;
+        22px;
 
     align-items:center;
 
@@ -527,6 +615,8 @@ body{
         1px solid #eee;
 
     background:#fff;
+
+    direction:ltr;
 }
 
 .user:hover{
@@ -538,6 +628,8 @@ body{
     font-size:16px;
 
     text-align:center;
+
+    direction:rtl;
 }
 
 .user-name{
@@ -555,6 +647,8 @@ body{
     color:#1682a8;
 
     text-align:right;
+
+    direction:rtl;
 }
 
 .user-name.female{
@@ -580,40 +674,42 @@ body{
     justify-content:center;
 
     background:#eee;
+
+    font-size:13px;
 }
 
 
-/* =========================================
+/* =================================================
    NOTICE
-========================================= */
+================================================= */
 
 .notice{
 
-    padding:5px 8px;
+    flex:0 0 auto;
+
+    padding:5px 6px;
 
     text-align:center;
 
-    font-size:10px;
+    font-size:9px;
 
     color:#e00000;
 
     background:#fff;
 
-    border-bottom:1px solid #eee;
+    border-top:1px solid #eee;
 }
 
 
-/* =========================================
+/* =================================================
    FOOTER
-========================================= */
+================================================= */
 
 .bottom-bar{
 
-    flex-shrink:0;
+    flex:0 0 43px;
 
-    margin-top:5px;
-
-    height:47px;
+    height:43px;
 
     background:
         linear-gradient(
@@ -629,12 +725,18 @@ body{
 
     gap:7px;
 
-    padding:4px 8px;
+    padding:4px 7px;
+
+    margin-top:5px;
+
+    direction:rtl;
 }
 
 .bottom-links{
 
     flex:1;
+
+    min-width:0;
 
     overflow:hidden;
 
@@ -643,6 +745,8 @@ body{
     color:#ddd;
 
     font-size:9px;
+
+    text-align:right;
 }
 
 .bottom-links span{
@@ -654,11 +758,11 @@ body{
 
 .action{
 
-    width:28px;
+    width:30px;
 
-    height:28px;
+    height:30px;
 
-    flex-shrink:0;
+    flex:0 0 30px;
 
     display:flex;
 
@@ -667,6 +771,8 @@ body{
     justify-content:center;
 
     background:#eee;
+
+    border:0;
 
     border-radius:5px;
 
@@ -684,9 +790,9 @@ body{
 }
 
 
-/* =========================================
-   EMOJI
-========================================= */
+/* =================================================
+   EMOJI PANEL
+================================================= */
 
 .emoji-panel{
 
@@ -748,9 +854,9 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    ONLINE DOT
-========================================= */
+================================================= */
 
 .online-dot{
 
@@ -770,9 +876,9 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    SYSTEM
-========================================= */
+================================================= */
 
 .system-message{
 
@@ -812,34 +918,77 @@ body{
 }
 
 
-/* =========================================
+/* =================================================
    MOBILE
-========================================= */
+================================================= */
 
 @media(max-width:700px){
 
     .chat-page{
-        padding:4px;
-    }
-
-    .main-layout{
-
-        grid-template-columns:
-            minmax(0,1fr)
-            190px;
-
-        gap:4px;
-    }
-
-    .sidebar{
-        width:190px;
+        padding:3px;
     }
 
     .top-header{
 
         height:34px;
 
+        flex-basis:34px;
+
         font-size:11px;
+    }
+
+    .main-layout{
+
+        grid-template-columns:
+            minmax(0,1fr)
+            175px;
+
+        gap:4px;
+    }
+
+    .sidebar{
+
+        width:175px;
+    }
+
+    .chat-input-area{
+
+        min-height:47px;
+
+        padding:4px;
+
+        gap:4px;
+    }
+
+    .message-input{
+
+        height:36px;
+
+        font-size:11px;
+
+        padding:0 7px;
+    }
+
+    .send-button{
+
+        flex-basis:55px;
+
+        width:55px;
+
+        height:36px;
+
+        font-size:10px;
+    }
+
+    .chat-input-area .action{
+
+        flex-basis:36px;
+
+        width:36px;
+
+        height:36px;
+
+        font-size:16px;
     }
 
     .message{
@@ -853,26 +1002,24 @@ body{
         font-size:11px;
     }
 
-    .message-input{
-        height:36px;
-    }
-
-    .send-button{
-
-        width:55px;
-
-        height:36px;
-    }
-
     .bottom-bar{
-        height:42px;
+
+        flex-basis:39px;
+
+        height:39px;
+
+        margin-top:3px;
+    }
+
+    .bottom-links{
+        font-size:8px;
     }
 }
 
 
-/* =========================================
+/* =================================================
    SMALL MOBILE
-========================================= */
+================================================= */
 
 @media(max-width:480px){
 
@@ -882,11 +1029,15 @@ body{
 
     .main-layout{
 
+        /*
+           RIGHT SIDEBAR
+        */
+
         grid-template-columns:
             minmax(0,1fr)
             145px;
 
-        gap:2px;
+        gap:3px;
     }
 
     .sidebar{
@@ -904,9 +1055,18 @@ body{
         font-size:9px;
     }
 
+    .search-box{
+
+        height:27px;
+
+        font-size:9px;
+    }
+
     .room-title{
 
         height:28px;
+
+        flex-basis:28px;
 
         font-size:11px;
     }
@@ -914,11 +1074,13 @@ body{
     .user{
 
         grid-template-columns:
-            20px
+            21px
             minmax(0,1fr)
-            22px;
+            19px;
 
         min-height:34px;
+
+        gap:2px;
     }
 
     .user-name{
@@ -932,15 +1094,55 @@ body{
         height:21px;
     }
 
-    .bottom-links{
-        font-size:8px;
+    .user-gender{
+        font-size:13px;
+    }
+
+    .chat-input-area{
+
+        min-height:46px;
+
+        padding:4px 3px;
+
+        gap:3px;
+    }
+
+    .message-input{
+
+        height:35px;
+
+        font-size:10px;
+
+        padding:0 6px;
+    }
+
+    .send-button{
+
+        flex:0 0 50px;
+
+        width:50px;
+
+        height:35px;
+
+        font-size:9px;
+    }
+
+    .chat-input-area .action{
+
+        flex:0 0 34px;
+
+        width:34px;
+
+        height:35px;
+
+        font-size:15px;
     }
 }
 
 
-/* =========================================
+/* =================================================
    EXTRA SMALL
-========================================= */
+================================================= */
 
 @media(max-width:360px){
 
@@ -968,10 +1170,32 @@ body{
     }
 
     .user-gender{
-        font-size:13px;
+        font-size:12px;
+    }
+
+    .send-button{
+
+        flex-basis:46px;
+
+        width:46px;
+
+        font-size:8px;
+    }
+
+    .chat-input-area .action{
+
+        flex-basis:31px;
+
+        width:31px;
+
+        font-size:14px;
     }
 }
 
+
+/* =================================================
+   MISC
+================================================= */
 
 ::selection{
 
@@ -980,30 +1204,15 @@ body{
     color:#fff;
 }
 
-
 .message-input::placeholder{
     color:#999;
 }
-
 
 button,
 .action,
 .user{
 
     touch-action:manipulation;
-}
-
-
-@supports(height:100dvh){
-
-    html,
-    body{
-        height:100dvh;
-    }
-
-    .chat-page{
-        height:100dvh;
-    }
 }
 
 </style>
@@ -1016,39 +1225,29 @@ button,
 <div class="chat-page">
 
 
-<!-- =====================================
-HEADER
-====================================== -->
+<!-- HEADER -->
 
 <div class="top-header">
 
-    <span>
-        عسل چت
-    </span>
+    <span>عسل چت</span>
 
     <div class="music">
 
         🎵
 
-        <span>
-            موزیک
-        </span>
+        <span>موزیک</span>
 
     </div>
 
 </div>
 
 
-<!-- =====================================
-MAIN
-====================================== -->
+<!-- MAIN -->
 
 <div class="main-layout">
 
 
-<!-- =====================================
-CHAT
-====================================== -->
+<!-- CHAT -->
 
 <section class="chat-panel">
 
@@ -1102,9 +1301,7 @@ CHAT
 </section>
 
 
-<!-- =====================================
-SIDEBAR
-====================================== -->
+<!-- SIDEBAR RIGHT -->
 
 <aside class="sidebar">
 
@@ -1180,9 +1377,7 @@ SIDEBAR
 </div>
 
 
-<!-- =====================================
-BOTTOM
-====================================== -->
+<!-- FOOTER -->
 
 <div class="bottom-bar">
 
@@ -1221,9 +1416,7 @@ BOTTOM
 </div>
 
 
-<!-- =====================================
-EMOJI PANEL
-====================================== -->
+<!-- EMOJI -->
 
 <div
     id="emojiPanel"
@@ -1263,10 +1456,6 @@ EMOJI PANEL
 </div>
 
 
-<!-- =====================================
-FIREBASE
-====================================== -->
-
 <script type="module">
 
 import { initializeApp }
@@ -1287,9 +1476,7 @@ import {
 from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
 
 
-/* =========================================
-FIREBASE CONFIG
-========================================= */
+/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -1320,125 +1507,69 @@ const firebaseConfig = {
 };
 
 
-/* =========================================
-INITIALIZE
-========================================= */
-
 const app =
     initializeApp(firebaseConfig);
-
 
 const db =
     getDatabase(app);
 
 
-/* =========================================
-ELEMENTS
-========================================= */
+/* ELEMENTS */
 
 const messages =
-    document.getElementById(
-        "messages"
-    );
-
+    document.getElementById("messages");
 
 const messageInput =
-    document.getElementById(
-        "messageInput"
-    );
-
+    document.getElementById("messageInput");
 
 const sendButton =
-    document.getElementById(
-        "sendButton"
-    );
-
+    document.getElementById("sendButton");
 
 const emojiButton =
-    document.getElementById(
-        "emojiButton"
-    );
-
+    document.getElementById("emojiButton");
 
 const emojiBottom =
-    document.getElementById(
-        "emojiBottom"
-    );
-
+    document.getElementById("emojiBottom");
 
 const emojiPanel =
-    document.getElementById(
-        "emojiPanel"
-    );
-
+    document.getElementById("emojiPanel");
 
 const searchUsers =
-    document.getElementById(
-        "searchUsers"
-    );
-
+    document.getElementById("searchUsers");
 
 const usersBox =
-    document.getElementById(
-        "users"
-    );
-
+    document.getElementById("users");
 
 const onlineNumber =
-    document.getElementById(
-        "onlineNumber"
-    );
-
+    document.getElementById("onlineNumber");
 
 const joinButton =
-    document.getElementById(
-        "joinButton"
-    );
-
+    document.getElementById("joinButton");
 
 const soundButton =
-    document.getElementById(
-        "soundButton"
-    );
+    document.getElementById("soundButton");
 
 
-/* =========================================
-USERNAME
-========================================= */
+/* USERNAME */
 
 let username =
-    localStorage.getItem(
-        "username"
-    );
-
+    localStorage.getItem("username");
 
 if(!username){
-
     username = "مهمان";
-
 }
 
 
-/* =========================================
-DATABASE REFERENCES
-========================================= */
+/* DATABASE */
 
 const messagesRef =
-    ref(
-        db,
-        "messages"
-    );
+    ref(db,"messages");
 
 
-/* =========================================
-ONLINE
-========================================= */
+/* ONLINE */
 
 const userKey =
-    encodeURIComponent(
-        username
-    );
-
+    encodeURIComponent(username);
 
 const onlineRef =
     ref(
@@ -1450,15 +1581,9 @@ const onlineRef =
 set(
     onlineRef,
     {
-
-        name:
-            username,
-
-        time:
-            serverTimestamp()
-
+        name:username,
+        time:serverTimestamp()
     }
-
 ).catch(function(error){
 
     console.error(
@@ -1469,55 +1594,36 @@ set(
 });
 
 
-/* =========================================
-REMOVE ONLINE
-========================================= */
-
 onDisconnect(
     onlineRef
 ).remove();
 
 
-/* =========================================
-SEND MESSAGE
-========================================= */
+/* SEND */
 
 async function sendMessage(){
 
     const text =
         messageInput.value.trim();
 
-
     if(!text){
-
         return;
-
     }
-
 
     try{
 
         await push(
             messagesRef,
             {
-
-                name:
-                    username,
-
-                text:
-                    text,
-
-                time:
-                    serverTimestamp()
-
+                name:username,
+                text:text,
+                time:serverTimestamp()
             }
         );
-
 
         messageInput.value = "";
 
         messageInput.focus();
-
 
     }
     catch(error){
@@ -1532,13 +1638,10 @@ async function sendMessage(){
         );
 
     }
-
 }
 
 
-/* =========================================
-SEND BUTTON
-========================================= */
+/* SEND BUTTON */
 
 sendButton.addEventListener(
     "click",
@@ -1546,9 +1649,7 @@ sendButton.addEventListener(
 );
 
 
-/* =========================================
-ENTER
-========================================= */
+/* ENTER */
 
 messageInput.addEventListener(
     "keydown",
@@ -1566,9 +1667,7 @@ messageInput.addEventListener(
 );
 
 
-/* =========================================
-RECEIVE MESSAGES
-========================================= */
+/* RECEIVE */
 
 onChildAdded(
     messagesRef,
@@ -1577,13 +1676,9 @@ onChildAdded(
         const data =
             snapshot.val();
 
-
         if(!data){
-
             return;
-
         }
-
 
         addMessage(
             data.name || "مهمان",
@@ -1594,24 +1689,15 @@ onChildAdded(
 );
 
 
-/* =========================================
-ADD MESSAGE
-========================================= */
+/* ADD MESSAGE */
 
-function addMessage(
-    name,
-    text
-){
+function addMessage(name,text){
 
     const div =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     div.className =
         "message";
-
 
     div.innerHTML = `
 
@@ -1635,101 +1721,74 @@ function addMessage(
 
     `;
 
-
     messages.appendChild(div);
-
 
     messages.scrollTop =
         messages.scrollHeight;
-
 }
 
 
-/* =========================================
-ESCAPE
-========================================= */
+/* ESCAPE */
 
 function escapeHTML(text){
 
     return String(text)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g,"&amp;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g,"&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+        .replace(/>/g,"&gt;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g,"&quot;")
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        .replace(/'/g,"&#039;");
 }
 
 
-/* =========================================
-ONLINE USERS
-========================================= */
+/* ONLINE USERS */
 
 onValue(
-    ref(db, "online"),
+    ref(db,"online"),
 
     function(snapshot){
 
         const data =
             snapshot.val();
 
-
         const list = [];
-
 
         if(data){
 
             Object.keys(data)
-                .forEach(function(key){
+            .forEach(function(key){
 
-                    const user =
-                        data[key];
+                const user =
+                    data[key];
 
+                if(user){
 
-                    if(user){
+                    list.push({
 
-                        list.push({
+                        name:
+                            user.name ||
+                            "مهمان",
 
-                            name:
-                                user.name ||
-                                "مهمان",
+                        gender:
+                            user.gender ||
+                            "♂",
 
-                            gender:
-                                user.gender ||
-                                "♂",
+                        avatar:
+                            user.avatar ||
+                            ""
 
-                            avatar:
-                                user.avatar ||
-                                ""
+                    });
 
-                        });
+                }
 
-                    }
-
-                });
+            });
 
         }
-
 
         renderUsers(list);
 
@@ -1741,7 +1800,6 @@ onValue(
             "Users error:",
             error
         );
-
 
         usersBox.innerHTML = `
 
@@ -1757,18 +1815,14 @@ onValue(
 );
 
 
-/* =========================================
-RENDER USERS
-========================================= */
+/* RENDER USERS */
 
 function renderUsers(list){
 
     usersBox.innerHTML = "";
 
-
     onlineNumber.textContent =
         list.length;
-
 
     if(!list.length){
 
@@ -1783,33 +1837,38 @@ function renderUsers(list){
         `;
 
         return;
-
     }
-
 
     list.forEach(function(user){
 
         const div =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         div.className =
             "user";
 
-
         div.dataset.name =
             user.name;
 
-
         div.innerHTML = `
 
-            <div class="user-gender">
+            ${
+                user.avatar
 
-                ${user.gender}
+                ?
 
-            </div>
+                `<img
+                    class="user-avatar"
+                    src="${escapeHTML(user.avatar)}"
+                    alt=""
+                >`
+
+                :
+
+                `<div class="user-avatar">
+                    👤
+                </div>`
+            }
 
             <div
                 class="user-name
@@ -1824,67 +1883,45 @@ function renderUsers(list){
 
             </div>
 
-            ${
-                user.avatar
+            <div class="user-gender">
 
-                ?
+                ${user.gender}
 
-                `<img
-                    class="user-avatar"
-                    src="${escapeHTML(
-                        user.avatar
-                    )}"
-                    alt=""
-                >`
-
-                :
-
-                `<div class="user-avatar">
-                    👤
-                </div>`
-            }
+            </div>
 
         `;
-
 
         usersBox.appendChild(div);
 
     });
 
-
     applyUserSearch();
-
 }
 
 
-/* =========================================
-SEARCH
-========================================= */
+/* SEARCH */
 
 function applyUserSearch(){
 
     const value =
         searchUsers.value
-            .trim()
-            .toLowerCase();
-
+        .trim()
+        .toLowerCase();
 
     document
-        .querySelectorAll(".user")
-        .forEach(function(user){
+    .querySelectorAll(".user")
+    .forEach(function(user){
 
-            const name =
-                user.dataset.name
-                    .toLowerCase();
+        const name =
+            user.dataset.name
+            .toLowerCase();
 
+        user.style.display =
+            name.includes(value)
+            ? "grid"
+            : "none";
 
-            user.style.display =
-                name.includes(value)
-                ? "grid"
-                : "none";
-
-        });
-
+    });
 }
 
 
@@ -1894,9 +1931,7 @@ searchUsers.addEventListener(
 );
 
 
-/* =========================================
-EMOJI
-========================================= */
+/* EMOJI */
 
 function toggleEmoji(){
 
@@ -1920,27 +1955,25 @@ emojiBottom.addEventListener(
 
 
 document
-    .querySelectorAll(".emoji")
-    .forEach(function(item){
+.querySelectorAll(".emoji")
+.forEach(function(item){
 
-        item.addEventListener(
-            "click",
-            function(){
+    item.addEventListener(
+        "click",
+        function(){
 
-                messageInput.value +=
-                    item.textContent;
+            messageInput.value +=
+                item.textContent;
 
-                messageInput.focus();
+            messageInput.focus();
 
-            }
-        );
+        }
+    );
 
-    });
+});
 
 
-/* =========================================
-JOIN
-========================================= */
+/* JOIN */
 
 joinButton.addEventListener(
     "click",
@@ -1953,12 +1986,9 @@ joinButton.addEventListener(
 );
 
 
-/* =========================================
-SOUND
-========================================= */
+/* SOUND */
 
 let soundEnabled = true;
-
 
 soundButton.addEventListener(
     "click",
@@ -1966,7 +1996,6 @@ soundButton.addEventListener(
 
         soundEnabled =
             !soundEnabled;
-
 
         soundButton.textContent =
             soundEnabled
@@ -1977,28 +2006,18 @@ soundButton.addEventListener(
 );
 
 
-/* =========================================
-CLOSE EMOJI
-========================================= */
+/* CLOSE EMOJI */
 
 document.addEventListener(
     "click",
     function(e){
 
         if(
-
-            !emojiPanel.contains(
-                e.target
-            )
-
+            !emojiPanel.contains(e.target)
             &&
-
             e.target !== emojiButton
-
             &&
-
             e.target !== emojiBottom
-
         ){
 
             emojiPanel.classList.remove(
@@ -2010,10 +2029,6 @@ document.addEventListener(
     }
 );
 
-
-/* =========================================
-READY
-========================================= */
 
 console.log(
     "🍯 Asal Chat Firebase Ready"
@@ -2027,5 +2042,4 @@ console.log(
 </script>
 
 </body>
-
       </html>
