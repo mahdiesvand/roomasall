@@ -1,175 +1,229 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>عسل چت</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>بازی من</title>
 
 <style>
+    *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
 
-*{
-    box-sizing:border-box;
-}
+    body{
+        min-height:100vh;
+        font-family:Tahoma, Arial, sans-serif;
+        background:#101114;
+        color:#fff;
+    }
 
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#111,#3a0015);
-    font-family:tahoma;
-}
+    .container{
+        width:100%;
+        max-width:600px;
+        min-height:100vh;
+        margin:auto;
+        padding:20px;
+    }
 
+    .top{
+        text-align:center;
+        padding:25px 10px;
+    }
 
-.box{
+    .top h1{
+        font-size:30px;
+        margin-bottom:10px;
+    }
 
-    width:90%;
-    max-width:400px;
-    background:#1c1c1c;
-    padding:35px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 0 30px #ff0055;
-}
+    .top p{
+        color:#aaa;
+        font-size:14px;
+    }
 
+    .game-card{
+        background:#191b20;
+        border:1px solid #292c33;
+        border-radius:18px;
+        padding:25px;
+        text-align:center;
+        box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
 
-.logo{
+    .score{
+        font-size:42px;
+        font-weight:bold;
+        margin:20px 0;
+    }
 
-    font-size:40px;
-    margin-bottom:15px;
+    .play-btn{
+        width:100%;
+        border:none;
+        border-radius:14px;
+        padding:16px;
+        font-size:18px;
+        font-weight:bold;
+        cursor:pointer;
+        background:#f5b400;
+        color:#111;
+        transition:.2s;
+    }
 
-}
+    .play-btn:active{
+        transform:scale(.97);
+    }
 
+    .status{
+        margin-top:15px;
+        color:#aaa;
+        font-size:13px;
+    }
 
-h1{
+    .plans{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+        margin-top:20px;
+    }
 
-    color:white;
-    margin-bottom:10px;
+    .plan{
+        background:#191b20;
+        border:1px solid #292c33;
+        border-radius:16px;
+        padding:18px;
+        text-align:center;
+    }
 
-}
+    .plan h3{
+        margin-bottom:10px;
+    }
 
+    .plan p{
+        color:#aaa;
+        font-size:13px;
+        line-height:1.8;
+    }
 
-p{
+    .free{
+        border-color:#333;
+    }
 
-    color:#ccc;
+    .pro{
+        border-color:#f5b400;
+    }
 
-}
+    .pro button{
+        margin-top:12px;
+        width:100%;
+        padding:11px;
+        border:0;
+        border-radius:10px;
+        background:#f5b400;
+        cursor:pointer;
+        font-weight:bold;
+    }
 
+    .footer{
+        text-align:center;
+        color:#666;
+        font-size:12px;
+        margin-top:30px;
+    }
 
+    @media(max-width:420px){
+        .plans{
+            grid-template-columns:1fr;
+        }
 
-input{
-
-    width:100%;
-    padding:15px;
-    margin-top:20px;
-    border:none;
-    border-radius:30px;
-    outline:none;
-    font-size:16px;
-    text-align:center;
-
-}
-
-
-
-button{
-
-    width:100%;
-    padding:15px;
-    margin-top:20px;
-    border:none;
-    border-radius:30px;
-    background:#cc0033;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-
-}
-
-
-
-button:hover{
-
-    background:#ff0055;
-
-}
-
-
+        .top h1{
+            font-size:26px;
+        }
+    }
 </style>
 
-</head>
-
-
-<body>
-
-
-<div class="box">
-
-
-<div class="logo">
-🍯
+</head><body><div class="container"><div class="top">
+    <h1>🎮 بازی من</h1>
+    <p>بازی کن، امتیاز بگیر و رکوردت را ثبت کن</p>
 </div>
 
+<div class="game-card">
 
-<h1>
-عسل چت
-</h1>
+    <div>امتیاز شما</div>
 
+    <div class="score" id="score">
+        0
+    </div>
 
-<p>
-به چت‌روم خوش آمدید
-</p>
+    <button class="play-btn" onclick="playGame()">
+        🎮 شروع بازی
+    </button>
 
-
-
-<input 
-id="username"
-placeholder="نام خود را وارد کنید"
->
-
-
-
-<button onclick="enterChat()">
-ورود به چت
-</button>
-
+    <div class="status" id="status">
+        آماده شروع
+    </div>
 
 </div>
 
 
+<div class="plans">
 
-<script>
+    <div class="plan free">
+
+        <h3>🆓 معمولی</h3>
+
+        <p>
+            دسترسی رایگان<br>
+            امکانات پایه<br>
+            بازی معمولی
+        </p>
+
+    </div>
 
 
-function enterChat(){
+    <div class="plan pro">
+
+        <h3>⭐ PRO</h3>
+
+        <p>
+            امکانات ویژه<br>
+            بازی حرفه‌ای<br>
+            قابلیت‌های بیشتر
+        </p>
+
+        <button onclick="buyPro()">
+            فعال‌سازی PRO
+        </button>
+
+    </div>
+
+</div>
 
 
-let name=document.getElementById("username").value;
+<div class="footer">
+    © 2026 بازی من
+</div>
 
+</div><script>
 
-if(name.trim()==""){
-alert("لطفاً نام خود را وارد کنید");
-return;
+let score = 0;
+
+function playGame(){
+
+    score++;
+
+    document.getElementById("score").textContent = score;
+
+    document.getElementById("status").textContent =
+        "آفرین! امتیاز گرفتی 🎉";
 }
 
 
+function buyPro(){
 
-localStorage.setItem("username",name);
-
-
-
-window.location.href="chat.html";
-
+    alert(
+        "بخش خرید PRO در مرحله بعد به سیستم پرداخت متصل می‌شود."
+    );
 
 }
 
-
-
-</script>
-
-
-</body>
+</script></body>
 </html>
