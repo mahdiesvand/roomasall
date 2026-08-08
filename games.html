@@ -1,11 +1,18 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-<title>عسل منچ | 3D</title><style>
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>منچ سه‌بعدی</title>
+
+<style>
 
 *{
     box-sizing:border-box;
@@ -18,1481 +25,789 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#05070b;
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
+    background:#080b10;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
 #game{
     position:fixed;
     inset:0;
+    width:100%;
+    height:100%;
 }
 
-/* ================================
-   LOADING
-================================ */
+canvas{
+    display:block;
+    width:100%;
+    height:100%;
+}
 
-.loading{
+#loading{
     position:fixed;
     inset:0;
-
-    z-index:999;
+    z-index:20;
 
     display:flex;
-    flex-direction:column;
-
     align-items:center;
     justify-content:center;
+    flex-direction:column;
 
     background:
         radial-gradient(
-            circle,
-            #18273a,
-            #05070b 70%
+            circle at center,
+            #202733 0%,
+            #0b0f15 55%,
+            #05070a 100%
         );
 
-    transition:
-        opacity .5s,
-        visibility .5s;
-}
-
-.loading.hide{
-    opacity:0;
-    visibility:hidden;
-}
-
-.loading-logo{
-    font-size:42px;
-    margin-bottom:18px;
-}
-
-.loading-title{
     color:white;
-    font-size:21px;
-    font-weight:bold;
-}
-
-.loading-title span{
-    color:#ffd34d;
-}
-
-.loading-bar{
-    width:220px;
-    height:5px;
-
-    margin-top:22px;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-    background:
-        rgba(255,255,255,.08);
-}
-
-.loading-progress{
-    width:0%;
-    height:100%;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff9d19,
-            #ffe56b
-        );
-
-    transition:
-        width .25s;
-}
-
-/* ================================
-   HUD
-================================ */
-
-.hud{
-    position:fixed;
-    inset:0;
-
-    z-index:20;
-
-    pointer-events:none;
-}
-
-/* TOP */
-
-.topbar{
-    position:absolute;
-
-    top:14px;
-    left:14px;
-    right:14px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
 }
 
 .logo{
+    font-size:42px;
+    font-weight:900;
+    color:#ffd45a;
 
-    padding:
-        10px
-        15px;
+    text-shadow:
+        0 0 10px rgba(255,210,70,.35),
+        0 0 30px rgba(255,180,30,.15);
 
-    border-radius:15px;
-
-    color:white;
-
-    background:
-        rgba(5,12,21,.78);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.35);
-
-    backdrop-filter:
-        blur(14px);
+    margin-bottom:14px;
 }
 
-.logo b{
-    color:#ffd34d;
+.loading-text{
+    color:#aeb7c5;
+    font-size:14px;
 }
 
-.status{
+.loader{
+    width:180px;
+    height:4px;
+    margin-top:20px;
 
-    padding:
-        9px
-        13px;
-
-    border-radius:15px;
-
-    color:#cbd7e5;
-
-    font-size:10px;
-
-    background:
-        rgba(5,12,21,.78);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    backdrop-filter:
-        blur(14px);
+    background:#252d38;
+    border-radius:10px;
+    overflow:hidden;
 }
 
-.status-dot{
-    display:inline-block;
-
-    width:7px;
-    height:7px;
-
-    margin-left:4px;
-
-    border-radius:50%;
-
-    background:#49df77;
-
-    box-shadow:
-        0 0 10px
-        #49df77;
-}
-
-/* ================================
-   PLAYER CARDS
-================================ */
-
-.player{
-
-    position:absolute;
-
-    width:145px;
-
-    padding:9px;
-
-    border-radius:16px;
-
-    color:white;
-
-    background:
-        rgba(5,13,22,.78);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    box-shadow:
-        0 15px 35px
-        rgba(0,0,0,.4);
-
-    backdrop-filter:
-        blur(15px);
-
-}
-
-.player.red{
-    top:82px;
-    left:12px;
-}
-
-.player.green{
-    top:82px;
-    right:12px;
-}
-
-.player.yellow{
-    bottom:80px;
-    right:12px;
-}
-
-.player.blue{
-    bottom:80px;
-    left:12px;
-
-    border-color:
-        rgba(75,180,255,.45);
-}
-
-.player-name{
-    font-size:10px;
-    font-weight:bold;
-}
-
-.player-state{
-    margin-top:4px;
-
-    font-size:8px;
-
-    color:#68e68a;
-}
-
-/* ================================
-   BOTTOM PANEL
-================================ */
-
-.bottom{
-
-    position:absolute;
-
-    left:50%;
-    bottom:16px;
-
-    transform:
-        translateX(-50%);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    min-width:205px;
-
-    padding:9px;
-
-    border-radius:18px;
-
-    background:
-        rgba(4,10,18,.88);
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.5);
-
-    backdrop-filter:
-        blur(18px);
-
-}
-
-.turn{
-    flex:1;
-
-    color:white;
-
-    font-size:10px;
-}
-
-.turn small{
+.loader span{
     display:block;
+    width:45%;
+    height:100%;
 
-    margin-bottom:4px;
+    background:linear-gradient(
+        90deg,
+        #d99b25,
+        #ffe18a
+    );
 
-    color:#8294a9;
+    border-radius:10px;
+
+    animation:load 1.2s infinite ease-in-out;
 }
 
-.dice{
-
-    width:54px;
-    height:54px;
-
-    border:0;
-
-    border-radius:15px;
-
-    font-size:25px;
-
-    cursor:pointer;
-
-    pointer-events:auto;
-
-    color:#162234;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #c2ccd7
-        );
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,.45),
-
-        inset 0 2px 4px
-        rgba(255,255,255,.9);
-
-}
-
-.dice.rolling{
-    animation:
-        diceRoll .65s
-        ease;
-}
-
-@keyframes diceRoll{
+@keyframes load{
 
     0%{
-        transform:
-            rotate(0)
-            scale(1);
-    }
-
-    30%{
-        transform:
-            rotate(120deg)
-            scale(.75);
-    }
-
-    60%{
-        transform:
-            rotate(270deg)
-            scale(1.1);
+        transform:translateX(230%);
     }
 
     100%{
-        transform:
-            rotate(360deg)
-            scale(1);
+        transform:translateX(-230%);
     }
 
 }
 
-/* ================================
-   MESSAGE
-================================ */
+#ui{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+}
 
-.message{
+.top-bar{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
 
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:12px 16px;
+
+    border-radius:16px;
+
+    background:rgba(12,16,23,.72);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    color:white;
+}
+
+.game-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.status{
+    font-size:12px;
+    color:#9da8b8;
+}
+
+#message{
     position:absolute;
 
-    top:82px;
     left:50%;
+    bottom:25px;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
-    padding:
-        9px
-        15px;
+    padding:10px 18px;
 
-    border-radius:13px;
+    border-radius:14px;
 
-    font-size:9px;
+    background:rgba(10,13,18,.78);
 
-    color:#dbe7f3;
+    border:1px solid rgba(255,255,255,.08);
 
-    background:
-        rgba(5,12,21,.85);
+    color:#dce3ed;
 
-    border:
-        1px solid
-        rgba(255,205,70,.2);
+    font-size:13px;
 
-    opacity:0;
+    white-space:nowrap;
 
-    transition:.3s;
-
+    backdrop-filter:blur(10px);
 }
 
-.message.show{
-    opacity:1;
-}
+</style>
 
-/* ================================
-   MOBILE
-================================ */
+</head>
 
-@media(max-width:650px){
 
-    .player{
-        width:110px;
-    }
+<body>
 
-    .player-name{
-        font-size:9px;
-    }
+<div id="game"></div>
 
-    .player-state{
-        font-size:7px;
-    }
 
-    .logo{
-        font-size:11px;
-    }
-
-    .status{
-        font-size:8px;
-    }
-
-}
-
-</style></head><body><!-- ================================
-     LOADING SCREEN
-================================ --><div class="loading" id="loading"><div class="loading-logo">
-    🍯
-</div>
-
-<div class="loading-title">
-    عسل <span>منچ</span>
-</div>
-
-<div class="loading-bar">
-
-    <div
-        class="loading-progress"
-        id="progress">
-    </div>
-
-</div>
-
-</div><!-- ================================
-     THREE.JS
-================================ --><div id="game"></div><!-- ================================
-     HUD
-================================ --><div class="hud"><div class="topbar">
+<div id="loading">
 
     <div class="logo">
-
-        🍯 عسل <b>منچ</b>
-
+        🎲 منچ
     </div>
 
+    <div class="loading-text">
+        در حال آماده‌سازی میز بازی...
+    </div>
 
-    <div class="status">
-
-        <span class="status-dot"></span>
-
-        آنلاین
-
+    <div class="loader">
+        <span></span>
     </div>
 
 </div>
 
 
-<!-- PLAYER 1 -->
+<div id="ui">
 
-<div class="player red">
+    <div class="top-bar">
 
-    <div class="player-name">
-        🔴 بازیکن قرمز
+        <div class="game-title">
+            منچ سه‌بعدی
+        </div>
+
+        <div class="status" id="status">
+            آماده‌سازی...
+        </div>
+
     </div>
 
-    <div class="player-state">
-        ● آنلاین
-    </div>
-
-</div>
-
-
-<!-- PLAYER 2 -->
-
-<div class="player green">
-
-    <div class="player-name">
-        🟢 بازیکن سبز
-    </div>
-
-    <div class="player-state">
-        ● آنلاین
+    <div id="message">
+        با لمس صفحه، میز را بچرخان
     </div>
 
 </div>
 
 
-<!-- PLAYER 3 -->
+<!-- THREE.JS -->
 
-<div class="player yellow">
-
-    <div class="player-name">
-        🟡 بازیکن زرد
-    </div>
-
-    <div class="player-state">
-        ● آنلاین
-    </div>
-
-</div>
-
-
-<!-- PLAYER 4 -->
-
-<div class="player blue">
-
-    <div class="player-name">
-        🔵 شما
-    </div>
-
-    <div class="player-state">
-        ● نوبت شما
-    </div>
-
-</div>
-
-
-<div
-    class="message"
-    id="message">
-</div>
-
-
-<div class="bottom">
-
-    <div class="turn">
-
-        <small>
-            نوبت بازی
-        </small>
-
-        شما — آبی
-
-    </div>
-
-
-    <button
-        class="dice"
-        id="dice">
-
-        ⚀
-
-    </button>
-
-</div>
-
-</div><!-- =====================================================
-     IMPORT MAP
-===================================================== --><script type="importmap">
-
+<script type="importmap">
 {
-
-    "imports":{
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
     }
+}
+</script>
+
+
+<script type="module">
+
+import * as THREE from "three";
+
+
+/* =========================================
+   BASIC VARIABLES
+========================================= */
+
+let scene;
+let camera;
+let renderer;
+
+let table;
+
+let isDragging = false;
+
+let previousX = 0;
+let previousY = 0;
+
+let targetRotationY = 0;
+let targetRotationX = 0;
+
+let currentRotationY = 0;
+let currentRotationX = 0;
+
+
+/* =========================================
+   START
+========================================= */
+
+init();
+
+
+function init(){
+
+    createScene();
+
+    createCamera();
+
+    createRenderer();
+
+    createLights();
+
+    createTable();
+
+    setupControls();
+
+    animate();
+
+    setTimeout(() => {
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("status").textContent =
+            "اتصال برقرار است";
+
+    },800);
 
 }
 
-</script><!-- =====================================================
-     MAIN GAME
-===================================================== --><script type="module">
 
-import * as THREE
-from "three";
-
-import {
-    GLTFLoader
-}
-from "three/addons/loaders/GLTFLoader.js";
-
-
-/* =====================================================
-   CONFIG
-===================================================== */
-
-const CONFIG = {
-
-    /* محل مدل Blender */
-
-    models:{
-
-        board:
-        "./models/board.glb",
-
-        pawn:
-        "./models/pawn.glb",
-
-        dice:
-        "./models/dice.glb"
-
-    },
-
-    /* Firebase را در مرحله بعد
-       اینجا قرار می‌دهیم */
-
-    firebase:{
-
-        enabled:false,
-
-        databaseURL:"",
-
-        projectId:""
-
-    }
-
-};
-
-
-/* =====================================================
+/* =========================================
    SCENE
-===================================================== */
+========================================= */
 
-const scene =
-new THREE.Scene();
+function createScene(){
 
-scene.background =
-new THREE.Color(
-    0x03070d
-);
+    scene = new THREE.Scene();
 
-scene.fog =
-new THREE.FogExp2(
-    0x03070d,
-    .035
-);
+    scene.background =
+        new THREE.Color(0x080b10);
+
+}
 
 
-/* =====================================================
+/* =========================================
    CAMERA
-===================================================== */
+========================================= */
 
-const camera =
-new THREE.PerspectiveCamera(
+function createCamera(){
 
-    42,
+    camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
 
-    innerWidth /
-    innerHeight,
+    camera.position.set(
+        0,
+        8.5,
+        9.5
+    );
 
-    .1,
+    camera.lookAt(
+        0,
+        0,
+        0
+    );
 
-    100
-
-);
-
-camera.position.set(
-    0,
-    12,
-    12
-);
-
-camera.lookAt(
-    0,
-    0,
-    0
-);
+}
 
 
-/* =====================================================
+/* =========================================
    RENDERER
-===================================================== */
+========================================= */
 
-const renderer =
-new THREE.WebGLRenderer({
+function createRenderer(){
 
-    antialias:true,
+    renderer = new THREE.WebGLRenderer({
 
-    powerPreference:
-    "high-performance"
+        antialias:true,
 
-});
-
-renderer.setSize(
-    innerWidth,
-    innerHeight
-);
-
-renderer.setPixelRatio(
-    Math.min(
-        devicePixelRatio,
-        2
-    )
-);
-
-renderer.shadowMap.enabled =
-true;
-
-renderer.shadowMap.type =
-THREE.PCFSoftShadowMap;
-
-renderer.outputColorSpace =
-THREE.SRGBColorSpace;
-
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
-
-renderer.toneMappingExposure =
-1.15;
-
-
-document
-.getElementById("game")
-.appendChild(
-    renderer.domElement
-);
-
-
-/* =====================================================
-   LIGHT
-===================================================== */
-
-const ambient =
-new THREE.HemisphereLight(
-
-    0xbad6ff,
-
-    0x241609,
-
-    2
-
-);
-
-scene.add(
-    ambient
-);
-
-
-const sun =
-new THREE.DirectionalLight(
-
-    0xffe3ad,
-
-    4
-
-);
-
-sun.position.set(
-    -7,
-    12,
-    8
-);
-
-sun.castShadow =
-true;
-
-sun.shadow.mapSize.width =
-2048;
-
-sun.shadow.mapSize.height =
-2048;
-
-scene.add(
-    sun
-);
-
-
-const blueLight =
-new THREE.PointLight(
-
-    0x258cff,
-
-    8,
-
-    18
-
-);
-
-blueLight.position.set(
-    -5,
-    4,
-    -4
-);
-
-scene.add(
-    blueLight
-);
-
-
-const goldLight =
-new THREE.PointLight(
-
-    0xffae20,
-
-    10,
-
-    15
-
-);
-
-goldLight.position.set(
-    4,
-    4,
-    3
-);
-
-scene.add(
-    goldLight
-);
-
-
-/* =====================================================
-   FLOOR
-===================================================== */
-
-const floorGeometry =
-new THREE.CylinderGeometry(
-
-    15,
-    15,
-    .6,
-    64
-
-);
-
-const floorMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:
-    0x08111a,
-
-    roughness:
-    .38,
-
-    metalness:
-    .45
-
-});
-
-const floor =
-new THREE.Mesh(
-
-    floorGeometry,
-
-    floorMaterial
-
-);
-
-floor.position.y =
--1;
-
-floor.receiveShadow =
-true;
-
-scene.add(
-    floor
-);
-
-
-/* =====================================================
-   TEMPORARY BOARD
-   بعداً board.glb جایگزین می‌شود
-===================================================== */
-
-const boardGeometry =
-new THREE.BoxGeometry(
-
-    9,
-    .45,
-    9
-
-);
-
-const boardMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:
-    0x9d7337,
-
-    roughness:
-    .38,
-
-    metalness:
-    .12
-
-});
-
-const board =
-new THREE.Mesh(
-
-    boardGeometry,
-
-    boardMaterial
-
-);
-
-board.position.y =
-.1;
-
-board.castShadow =
-true;
-
-board.receiveShadow =
-true;
-
-scene.add(
-    board
-);
-
-
-/* =====================================================
-   CENTER
-===================================================== */
-
-const centerGeometry =
-new THREE.CylinderGeometry(
-
-    1.3,
-    1.3,
-    .18,
-    64
-
-);
-
-const centerMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:
-    0xffbc30,
-
-    roughness:
-    .25,
-
-    metalness:
-    .2,
-
-    emissive:
-    0x4b2500,
-
-    emissiveIntensity:
-    .4
-
-});
-
-const center =
-new THREE.Mesh(
-
-    centerGeometry,
-
-    centerMaterial
-
-);
-
-center.position.y =
-.38;
-
-center.castShadow =
-true;
-
-scene.add(
-    center
-);
-
-
-/* =====================================================
-   TEMPORARY PAWNS
-   بعداً pawn.glb جایگزین می‌شود
-===================================================== */
-
-function createPawn(
-    color,
-    x,
-    z
-){
-
-    const group =
-    new THREE.Group();
-
-
-    const material =
-    new THREE.MeshStandardMaterial({
-
-        color:color,
-
-        roughness:.22,
-
-        metalness:.18
+        powerPreference:"high-performance"
 
     });
 
-
-    const body =
-    new THREE.Mesh(
-
-        new THREE.SphereGeometry(
-            .35,
-            32,
-            24
-        ),
-
-        material
-
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio,2)
     );
 
-    body.scale.y =
-    1.25;
-
-    body.position.y =
-    .55;
-
-    body.castShadow =
-    true;
-
-    group.add(
-        body
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
     );
 
+    renderer.shadowMap.enabled = true;
 
-    const head =
-    new THREE.Mesh(
+    renderer.shadowMap.type =
+        THREE.PCFSoftShadowMap;
 
-        new THREE.SphereGeometry(
-            .27,
-            32,
-            32
-        ),
+    renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
 
-        material
+    renderer.toneMapping =
+        THREE.ACESFilmicToneMapping;
 
-    );
-
-    head.position.y =
-    .98;
-
-    head.castShadow =
-    true;
-
-    group.add(
-        head
-    );
+    renderer.toneMappingExposure = 1.15;
 
 
-    const base =
-    new THREE.Mesh(
-
-        new THREE.CylinderGeometry(
-            .42,
-            .48,
-            .15,
-            40
-        ),
-
-        material
-
-    );
-
-    base.position.y =
-    .12;
-
-    base.castShadow =
-    true;
-
-    group.add(
-        base
-    );
-
-
-    group.position.set(
-        x,
-        0,
-        z
-    );
-
-
-    scene.add(
-        group
-    );
-
-
-    return group;
+    document
+        .getElementById("game")
+        .appendChild(renderer.domElement);
 
 }
 
 
-const pawnColors = [
-
-    0xe23b45,
-    0x28ad58,
-    0xe5b82d,
-    0x2998df
-
-];
-
-
-const pawnPositions = [
-
-    [-2.9,-2.9],
-    [-2.1,-2.9],
-    [-2.9,-2.1],
-    [-2.1,-2.1],
-
-    [2.1,-2.9],
-    [2.9,-2.9],
-    [2.1,-2.1],
-    [2.9,-2.1],
-
-    [2.1,2.1],
-    [2.9,2.1],
-    [2.1,2.9],
-    [2.9,2.9],
-
-    [-2.9,2.1],
-    [-2.1,2.1],
-    [-2.9,2.9],
-    [-2.1,2.9]
-
-];
-
-
-const pawns = [];
-
-
-for(
-    let i=0;
-    i<pawnPositions.length;
-    i++
-){
-
-    const color =
-    pawnColors[
-        Math.floor(i/4)
-    ];
-
-    const pos =
-    pawnPositions[i];
-
-    pawns.push(
-
-        createPawn(
-            color,
-            pos[0],
-            pos[1]
-        )
-
-    );
-
-}
-
-
-/* =====================================================
-   GLB LOADER
-===================================================== */
-
-const loader =
-new GLTFLoader();
-
-
-function loadGLB(
-    path,
-    onLoaded
-){
-
-    loader.load(
-
-        path,
-
-        gltf=>{
-
-            const model =
-            gltf.scene;
-
-            model.traverse(
-                object=>{
-
-                    if(
-                        object.isMesh
-                    ){
-
-                        object.castShadow =
-                        true;
-
-                        object.receiveShadow =
-                        true;
-
-                    }
-
-                }
-            );
-
-            onLoaded(
-                model
-            );
-
-        },
-
-        xhr=>{
-
-            if(xhr.total){
-
-                const percent =
-                Math.round(
-                    xhr.loaded /
-                    xhr.total *
-                    100
-                );
-
-                setProgress(
-                    percent
-                );
-
-            }
-
-        },
-
-        error=>{
-
-            console.log(
-                "GLB not loaded:",
-                path
-            );
-
-        }
-
-    );
-
-}
-
-
-/* =====================================================
-   GLB READY FUNCTIONS
-===================================================== */
-
-function useBoardGLB(
-    model
-){
-
-    /* وقتی board.glb آماده شد،
-       اینجا مدل واقعی را جایگزین
-       تخته موقت می‌کنیم */
-
-    model.scale.set(
-        1,
-        1,
-        1
-    );
-
-    model.position.y =
-    .3;
-
-    scene.add(
-        model
-    );
-
-    board.visible =
-    false;
-
-}
-
-
-function usePawnGLB(
-    model
-){
-
-    /*
-      مدل حرفه‌ای مهره Blender
-      در مرحله بعد به سیستم
-      حرکت مهره متصل می‌شود.
-    */
-
-    model.scale.set(
-        .8,
-        .8,
-        .8
-    );
-
-}
-
-
-/* =====================================================
-   LOADING
-===================================================== */
-
-const loading =
-document.getElementById(
-    "loading"
-);
-
-const progress =
-document.getElementById(
-    "progress"
-);
-
-
-function setProgress(
-    value
-){
-
-    progress.style.width =
-    value+"%";
-
-}
-
-
-setProgress(
-    25
-);
-
-
-/* =====================================================
-   DICE
-===================================================== */
-
-const dice =
-document.getElementById(
-    "dice"
-);
-
-const faces = [
-
-    "⚀",
-    "⚁",
-    "⚂",
-    "⚃",
-    "⚄",
-    "⚅"
-
-];
-
-let rolling =
-false;
-
-
-dice.addEventListener(
-    "click",
-    ()=>{
-
-        if(rolling)
-            return;
-
-        rolling =
-        true;
-
-        dice.classList.add(
-            "rolling"
+/* =========================================
+   LIGHTING
+========================================= */
+
+function createLights(){
+
+    const ambient =
+        new THREE.HemisphereLight(
+            0xffffff,
+            0x111827,
+            2
         );
 
-        let count =
-        0;
+    scene.add(ambient);
 
-        const interval =
-        setInterval(
-            ()=>{
 
-                dice.textContent =
-                faces[
-                    Math.floor(
-                        Math.random()*6
-                    )
-                ];
-
-                count++;
-
-                if(
-                    count>=10
-                ){
-
-                    clearInterval(
-                        interval
-                    );
-
-                    const result =
-                    Math.floor(
-                        Math.random()*6
-                    );
-
-                    dice.textContent =
-                    faces[result];
-
-                    dice.classList.remove(
-                        "rolling"
-                    );
-
-                    rolling =
-                    false;
-
-                    showMessage(
-
-                        "🎲 عدد تاس: "+
-                        (result+1)
-
-                    );
-
-                }
-
-            },
-            70
+    const mainLight =
+        new THREE.DirectionalLight(
+            0xfff4dc,
+            4
         );
 
-    }
-);
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-const message =
-document.getElementById(
-    "message"
-);
-
-
-function showMessage(
-    text
-){
-
-    message.textContent =
-    text;
-
-    message.classList.add(
-        "show"
+    mainLight.position.set(
+        4,
+        10,
+        5
     );
 
-    setTimeout(
-        ()=>{
+    mainLight.castShadow = true;
 
-            message.classList.remove(
-                "show"
-            );
+    mainLight.shadow.mapSize.width = 2048;
+    mainLight.shadow.mapSize.height = 2048;
 
-        },
-        1600
+    mainLight.shadow.camera.left = -10;
+    mainLight.shadow.camera.right = 10;
+    mainLight.shadow.camera.top = 10;
+    mainLight.shadow.camera.bottom = -10;
+
+    scene.add(mainLight);
+
+
+    const fillLight =
+        new THREE.PointLight(
+            0x6688ff,
+            18,
+            30
+        );
+
+    fillLight.position.set(
+        -6,
+        5,
+        -5
+    );
+
+    scene.add(fillLight);
+
+
+    const warmLight =
+        new THREE.PointLight(
+            0xffa52b,
+            15,
+            25
+        );
+
+    warmLight.position.set(
+        5,
+        3,
+        6
+    );
+
+    scene.add(warmLight);
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+function createTable(){
+
+    table = new THREE.Group();
+
+    scene.add(table);
+
+
+    /* TABLE TOP */
+
+    const topGeometry =
+        new THREE.BoxGeometry(
+            8,
+            0.45,
+            8
+        );
+
+
+    const topMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x613c20,
+
+            roughness:0.62,
+
+            metalness:0.05
+
+        });
+
+
+    const top =
+        new THREE.Mesh(
+            topGeometry,
+            topMaterial
+        );
+
+
+    top.position.y = -0.25;
+
+    top.receiveShadow = true;
+    top.castShadow = true;
+
+    table.add(top);
+
+
+    /* TABLE BORDER */
+
+    const borderGeometry =
+        new THREE.BoxGeometry(
+            8.5,
+            0.7,
+            8.5
+        );
+
+
+    const borderMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x2b160d,
+
+            roughness:0.5,
+
+            metalness:0.25
+
+        });
+
+
+    const border =
+        new THREE.Mesh(
+            borderGeometry,
+            borderMaterial
+        );
+
+
+    border.position.y = -0.65;
+
+    border.receiveShadow = true;
+    border.castShadow = true;
+
+    table.add(border);
+
+
+    /* INNER BOARD */
+
+    const boardGeometry =
+        new THREE.BoxGeometry(
+            7.3,
+            0.12,
+            7.3
+        );
+
+
+    const boardMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xead8ae,
+
+            roughness:0.7,
+
+            metalness:0
+
+        });
+
+
+    const board =
+        new THREE.Mesh(
+            boardGeometry,
+            boardMaterial
+        );
+
+
+    board.position.y = 0.02;
+
+    board.receiveShadow = true;
+
+    table.add(board);
+
+
+    /* GOLDEN EDGE */
+
+    const edgeGeometry =
+        new THREE.BoxGeometry(
+            7.55,
+            0.16,
+            7.55
+        );
+
+
+    const edgeMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xb98222,
+
+            roughness:0.35,
+
+            metalness:0.7
+
+        });
+
+
+    const edge =
+        new THREE.Mesh(
+            edgeGeometry,
+            edgeMaterial
+        );
+
+
+    edge.position.y = 0.09;
+
+    table.add(edge);
+
+
+    /* BOARD CENTER */
+
+    const centerGeometry =
+        new THREE.BoxGeometry(
+            7.15,
+            0.08,
+            7.15
+        );
+
+
+    const centerMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0xeee0bc,
+
+            roughness:0.65
+
+        });
+
+
+    const center =
+        new THREE.Mesh(
+            centerGeometry,
+            centerMaterial
+        );
+
+
+    center.position.y = 0.18;
+
+    center.receiveShadow = true;
+
+    table.add(center);
+
+
+    /* FLOOR */
+
+    const floorGeometry =
+        new THREE.PlaneGeometry(
+            80,
+            80
+        );
+
+
+    const floorMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x07090d,
+
+            roughness:0.8,
+
+            metalness:0
+
+        });
+
+
+    const floor =
+        new THREE.Mesh(
+            floorGeometry,
+            floorMaterial
+        );
+
+
+    floor.rotation.x =
+        -Math.PI / 2;
+
+    floor.position.y =
+        -1.05;
+
+    floor.receiveShadow = true;
+
+    scene.add(floor);
+
+}
+
+
+/* =========================================
+   TOUCH / MOUSE CONTROL
+========================================= */
+
+function setupControls(){
+
+    const canvas =
+        renderer.domElement;
+
+
+    canvas.addEventListener(
+        "pointerdown",
+        onPointerDown
+    );
+
+
+    window.addEventListener(
+        "pointermove",
+        onPointerMove
+    );
+
+
+    window.addEventListener(
+        "pointerup",
+        onPointerUp
+    );
+
+
+    window.addEventListener(
+        "resize",
+        onResize
     );
 
 }
 
 
-/* =====================================================
+function onPointerDown(event){
+
+    isDragging = true;
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+}
+
+
+function onPointerMove(event){
+
+    if(!isDragging) return;
+
+
+    const dx =
+        event.clientX - previousX;
+
+    const dy =
+        event.clientY - previousY;
+
+
+    targetRotationY += dx * 0.006;
+
+    targetRotationX += dy * 0.004;
+
+
+    targetRotationX =
+        THREE.MathUtils.clamp(
+            targetRotationX,
+            -0.35,
+            0.35
+        );
+
+
+    previousX =
+        event.clientX;
+
+    previousY =
+        event.clientY;
+
+}
+
+
+function onPointerUp(){
+
+    isDragging = false;
+
+}
+
+
+/* =========================================
+   RESIZE
+========================================= */
+
+function onResize(){
+
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+}
+
+
+/* =========================================
    ANIMATION
-===================================================== */
-
-const clock =
-new THREE.Clock();
-
+========================================= */
 
 function animate(){
 
@@ -1500,50 +815,27 @@ function animate(){
         animate
     );
 
-    const time =
-    clock.getElapsedTime();
+
+    if(table){
+
+        currentRotationY +=
+            (targetRotationY -
+             currentRotationY) * 0.08;
 
 
-    center.rotation.y =
-    time*.25;
+        currentRotationX +=
+            (targetRotationX -
+             currentRotationX) * 0.08;
 
 
-    center.material.emissiveIntensity =
-    .35 +
-    Math.sin(
-        time*2
-    )*.08;
+        table.rotation.y =
+            currentRotationY;
 
 
-    pawns.forEach(
-        (pawn,index)=>{
+        table.rotation.x =
+            currentRotationX;
 
-            pawn.rotation.y =
-            Math.sin(
-                time*.7+
-                index
-            )*.03;
-
-        }
-    );
-
-
-    camera.position.x =
-    Math.sin(
-        time*.12
-    )*.25;
-
-    camera.position.z =
-    12 +
-    Math.sin(
-        time*.15
-    )*.2;
-
-    camera.lookAt(
-        0,
-        .2,
-        0
-    );
+    }
 
 
     renderer.render(
@@ -1553,94 +845,7 @@ function animate(){
 
 }
 
+</script>
 
-animate();
-
-
-/* =====================================================
-   RESIZE
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        camera.aspect =
-        innerWidth /
-        innerHeight;
-
-        camera.updateProjectionMatrix();
-
-
-        renderer.setSize(
-            innerWidth,
-            innerHeight
-        );
-
-
-        renderer.setPixelRatio(
-
-            Math.min(
-                devicePixelRatio,
-                2
-            )
-
-        );
-
-    }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-setProgress(
-    100
-);
-
-
-setTimeout(
-    ()=>{
-
-        loading.classList.add(
-            "hide"
-        );
-
-    },
-    700
-);
-
-
-/* =====================================================
-   FIREBASE PLACEHOLDER
-===================================================== */
-
-/*
-
-مرحله بعد:
-
-Firebase App
-Firebase Authentication
-Realtime Database
-
-اینجا متصل می‌شود.
-
-ساختار پیشنهادی:
-
-rooms/
-    roomId/
-        players/
-        board/
-        turn/
-        dice/
-        status/
-
-users/
-    userId/
-
-*/
-
-
-</script></body>
-    </html>
+</body>
+</html>
