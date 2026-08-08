@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>عسل چت</title>
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #53215f 0px,
+            #53215f 3px,
+            #8d3aa0 3px,
+            #8d3aa0 6px
+        );
+
+    color:#222;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================================
+   کل صفحه
+========================================= */
+
+.chat-page{
+
+    width:100vw;
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:8px;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.top-header{
+
+    height:38px;
+
+    flex-shrink:0;
+
+    background:
+        linear-gradient(
+            #383838,
+            #171717
+        );
+
+    border:
+        2px solid #111;
+
+    box-shadow:
+        0 1px 4px #000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:12px;
+
+    position:relative;
+
+}
+
+
+.top-header span{
+
+    color:#eee;
+
+}
+
+
+.top-header .music{
+
+    position:absolute;
+
+    right:8px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main-layout{
+
+    flex:1;
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        265px;
+
+    gap:8px;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================================
+   CHAT AREA
+========================================= */
+
+.chat-panel{
+
+    min-width:0;
+
+    min-height:0;
+
+    background:#fff;
+
+    border:
+        2px solid #111;
+
+    box-shadow:
+        0 0 4px rgba(0,0,0,.8);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* =========================================
+   CHAT MESSAGES
+========================================= */
+
+.messages{
+
+    flex:1;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    direction:rtl;
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+            #fff 0px,
+            #fff 20px,
+            #e8e8e8 21px,
+            #fff 22px
+        );
+
+}
+
+
+/* scrollbar */
+
+.messages::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+.messages::-webkit-scrollbar-thumb{
+
+    background:#999;
+
+    border-radius:5px;
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message{
+
+    width:100%;
+
+    padding:8px 12px;
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.04);
+
+    font-size:12px;
+
+    line-height:2;
+
+    background:
+        rgba(255,255,255,.72);
+
+}
+
+
+.message:hover{
+
+    background:#f5f5f5;
+
+}
+
+
+.message-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-bottom:2px;
+
+}
+
+
+.message-avatar{
+
+    width:25px;
+
+    height:25px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:1px solid #bbb;
+
+}
+
+
+.message-name{
+
+    font-weight:bold;
+
+    color:#4c55c8;
+
+    font-size:11px;
+
+}
+
+
+.message-text{
+
+    color:#333;
+
+    font-size:12px;
+
+    word-break:break-word;
+
+}
+
+
+/* =========================================
+   CHAT INPUT
+========================================= */
+
+.chat-input-area{
+
+    flex-shrink:0;
+
+    background:
+        linear-gradient(
+            #eee,
+            #d6d6d6
+        );
+
+    border-top:
+        1px solid #888;
+
+    padding:5px;
+
+    display:flex;
+
+    gap:5px;
+
+}
+
+
+.message-input{
+
+    flex:1;
+
+    height:38px;
+
+    border:
+        1px solid #999;
+
+    border-radius:3px;
+
+    outline:none;
+
+    padding:
+        0 10px;
+
+    font-family:Tahoma;
+
+    font-size:12px;
+
+    background:#fff;
+
+}
+
+
+.message-input:focus{
+
+    border-color:#7421a0;
+
+}
+
+
+.send-button{
+
+    width:65px;
+
+    height:38px;
+
+    border:1px solid #555;
+
+    border-radius:4px;
+
+    background:
+        linear-gradient(
+            #fff,
+            #ccc
+        );
+
+    cursor:pointer;
+
+    font-family:Tahoma;
+
+    font-size:11px;
+
+}
+
+
+.send-button:active{
+
+    background:#bbb;
+
+}
+
+
+/* =========================================
+   RIGHT SIDEBAR
+========================================= */
+
+.sidebar{
+
+    min-height:0;
+
+    background:#fff;
+
+    border:
+        2px solid #111;
+
+    box-shadow:
+        0 0 4px rgba(0,0,0,.8);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* =========================================
+   LOGIN / INFO
+========================================= */
+
+.sidebar-info{
+
+    flex-shrink:0;
+
+    padding:8px;
+
+    text-align:center;
+
+    background:#fff;
+
+}
+
+
+.join-button{
+
+    display:block;
+
+    width:150px;
+
+    margin:
+        0 auto 8px;
+
+    padding:7px;
+
+    border:0;
+
+    border-radius:2px;
+
+    background:#18ad31;
+
+    color:#fff;
+
+    font-family:Tahoma;
+
+    font-size:11px;
+
+}
+
+
+.online-title{
+
+    font-size:11px;
+
+    color:#333;
+
+    margin-bottom:6px;
+
+}
+
+
+.online-number{
+
+    font-weight:bold;
+
+    font-size:12px;
+
+}
+
+
+.search-box{
+
+    width:100%;
+
+    height:30px;
+
+    border:
+        1px solid #ddd;
+
+    background:#fafafa;
+
+    padding:
+        0 8px;
+
+    outline:none;
+
+    font-family:Tahoma;
+
+    font-size:10px;
+
+    text-align:right;
+
+}
+
+
+/* =========================================
+   ROOM TITLE
+========================================= */
+
+.room-title{
+
+    flex-shrink:0;
+
+    height:31px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    text-shadow:
+        1px 1px 2px #000;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #6616b2,
+            #a52be2,
+            #6714ae
+        );
+
+    border-top:
+        1px solid #42106f;
+
+    border-bottom:
+        1px solid #42106f;
+
+}
+
+
+/* =========================================
+   USER LIST
+========================================= */
+
+.users{
+
+    flex:1;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    background:#fff;
+
+}
+
+
+.users::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.users::-webkit-scrollbar-thumb{
+
+    background:#aaa;
+
+    border-radius:5px;
+
+}
+
+
+/* =========================================
+   USER
+========================================= */
+
+.user{
+
+    min-height:37px;
+
+    padding:
+        4px 5px;
+
+    display:grid;
+
+    grid-template-columns:
+        22px
+        minmax(0,1fr)
+        25px;
+
+    align-items:center;
+
+    gap:4px;
+
+    border-bottom:
+        1px solid #eee;
+
+    background:#fff;
+
+}
+
+
+.user:hover{
+
+    background:#f7f7f7;
+
+}
+
+
+.user-gender{
+
+    font-size:16px;
+
+    text-align:center;
+
+}
+
+
+.user-name{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    font-size:10px;
+
+    color:#1682a8;
+
+    text-align:right;
+
+}
+
+
+.user-name.female{
+
+    color:#d83b91;
+
+}
+
+
+.user-avatar{
+
+    width:24px;
+
+    height:24px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+        1px solid #aaa;
+
+}
+
+
+.user-status{
+
+    font-size:9px;
+
+    color:#888;
+
+}
+
+
+/* =========================================
+   NOTICE
+========================================= */
+
+.notice{
+
+    padding:
+        5px 8px;
+
+    text-align:center;
+
+    font-size:10px;
+
+    color:#e00000;
+
+    background:#fff;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.bottom-bar{
+
+    flex-shrink:0;
+
+    margin-top:5px;
+
+    height:47px;
+
+    background:
+        linear-gradient(
+            #444,
+            #202020
+        );
+
+    border:
+        2px solid #111;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        4px 8px;
+
+}
+
+
+.bottom-links{
+
+    flex:1;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    color:#ddd;
+
+    font-size:9px;
+
+}
+
+
+.bottom-links span{
+
+    color:#e28aff;
+
+    margin-left:10px;
+
+}
+
+
+.action{
+
+    width:28px;
+
+    height:28px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#eee;
+
+    border-radius:5px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+
+/* =================================
+
+  ACTION BUTTONS
+========================================= */
+
+.action:hover{
+background:#fff;
+}
+
+.action:active{
+transform:scale(.94);
+}
+
+/* =========================================
+EMOJI PANEL
+========================================= */
+
+.emoji-panel{
+
+position:absolute;
+
+bottom:52px;
+
+right:8px;
+
+width:260px;
+
+max-height:190px;
+
+overflow-y:auto;
+
+display:none;
+
+padding:8px;
+
+background:#fff;
+
+border:2px solid #222;
+
+box-shadow:
+    0 2px 10px rgba(0,0,0,.45);
+
+z-index:1000;
+
+}
+
+.emoji-panel.show{
+display:grid;
+
+grid-template-columns:
+    repeat(8,1fr);
+
+gap:5px;
+
+}
+
+.emoji{
+
+height:28px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+font-size:18px;
+
+border-radius:3px;
+
+}
+
+.emoji:hover{
+
+background:#eee;
+
+}
+
+/* =========================================
+ONLINE DOT
+========================================= */
+
+.online-dot{
+
+width:7px;
+
+height:7px;
+
+border-radius:50%;
+
+background:#20bd3a;
+
+display:inline-block;
+
+margin-left:3px;
+
+}
+
+/* =========================================
+SYSTEM MESSAGE
+========================================= */
+
+.system-message{
+
+padding:6px;
+
+text-align:center;
+
+color:#777;
+
+font-size:10px;
+
+background:#f7f7f7;
+
+border-bottom:1px solid #eee;
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+.chat-page{
+
+    padding:4px;
+
+}
+
+.main-layout{
+
+    grid-template-columns:
+        minmax(0,1fr)
+        190px;
+
+    gap:4px;
+
+}
+
+.sidebar{
+
+    width:190px;
+
+}
+
+.top-header{
+
+    height:34px;
+
+    font-size:11px;
+
+}
+
+.message{
+
+    padding:
+        6px 8px;
+
+    font-size:11px;
+
+}
+
+.message-text{
+
+    font-size:11px;
+
+}
+
+.message-avatar{
+
+    width:22px;
+
+    height:22px;
+
+}
+
+.message-input{
+
+    height:36px;
+
+}
+
+.send-button{
+
+    width:55px;
+
+    height:36px;
+
+}
+
+.bottom-bar{
+
+    height:42px;
+
+}
+
+}
+
+/* =========================================
+SMALL PHONES
+========================================= */
+
+@media(max-width:480px){
+
+.chat-page{
+
+    padding:2px;
+
+}
+
+.main-layout{
+
+    grid-template-columns:
+        minmax(0,1fr)
+        145px;
+
+    gap:2px;
+
+}
+
+.sidebar{
+
+    width:145px;
+
+}
+
+.join-button{
+
+    width:115px;
+
+    font-size:9px;
+
+}
+
+.online-title{
+
+    font-size:9px;
+
+}
+
+.room-title{
+
+    height:28px;
+
+    font-size:11px;
+
+}
+
+.user{
+
+    grid-template-columns:
+        20px
+        minmax(0,1fr)
+        22px;
+
+    min-height:34px;
+
+}
+
+.user-name{
+
+    font-size:9px;
+
+}
+
+.user-avatar{
+
+    width:21px;
+
+    height:21px;
+
+}
+
+.bottom-links{
+
+    font-size:8px;
+
+}
+
+}
+
+/* =========================================
+EXTRA SMALL PHONES
+========================================= */
+
+@media(max-width:360px){
+
+.main-layout{
+
+    grid-template-columns:
+        minmax(0,1fr)
+        125px;
+
+}
+
+.sidebar{
+
+    width:125px;
+
+}
+
+.message{
+
+    font-size:10px;
+
+}
+
+.message-text{
+
+    font-size:10px;
+
+}
+
+.user-name{
+
+    font-size:8px;
+
+}
+
+.user-gender{
+
+    font-size:13px;
+
+}
+
+}
+
+/* =========================================
+SELECTION
+========================================= */
+
+::selection{
+
+background:#7d25a8;
+
+color:#fff;
+
+}
+
+/* =========================================
+INPUT PLACEHOLDER
+========================================= */
+
+.message-input::placeholder{
+
+color:#999;
+
+}
+
+/* =========================================
+NO USERS
+========================================= */
+
+.no-users{
+
+padding:20px 5px;
+
+text-align:center;
+
+color:#aaa;
+
+font-size:10px;
+
+}
+
+/* =========================================
+LOADING
+========================================= */
+
+.loading{
+
+padding:15px;
+
+text-align:center;
+
+color:#888;
+
+font-size:10px;
+
+}
+
+/* =========================================
+POSITION WRAPPER
+========================================= */
+
+.chat-page{
+
+position:relative;
+
+}
+
+/* =========================================
+FIX MOBILE HEIGHT
+========================================= */
+
+@supports(height:100dvh){
+
+html,
+body{
+
+    height:100dvh;
+
+}
+
+.chat-page{
+
+    height:100dvh;
+
+}
+
+}
+
+/* =========================================
+PREVENT DOUBLE TAP ZOOM
+========================================= */
+
+button,
+.action,
+.user{
+
+touch-action:manipulation;
+
+}
+
+/* =========================================
+END CSS
+========================================= */
+
+</style></head><body><div class="chat-page"><!-- =====================================
+     HEADER
+====================================== -->
+
+<div class="top-header">
+
+    <span>
+        عسل چت
+    </span>
+
+    <div class="music">
+
+        🎵
+        <span>
+            موزیک
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     MAIN
+====================================== -->
+
+<div class="main-layout">
+
+
+    <!-- =================================
+         CHAT
+    ================================== -->
+
+    <section class="chat-panel">
+
+
+        <!-- MESSAGES -->
+
+        <div
+            id="messages"
+            class="messages"
+        >
+
+            <div class="system-message">
+
+                به عسل چت خوش آمدید 🍯
+
+            </div>
+
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div class="chat-input-area">
+
+            <button
+                id="emojiButton"
+                class="action"
+                type="button"
+                title="ایموجی"
+            >
+                😊
+            </button>
+
+            <input
+                id="messageInput"
+                class="message-input"
+                type="text"
+                autocomplete="off"
+                placeholder="پیام خود را بنویسید..."
+            >
+
+            <button
+                id="sendButton"
+                class="send-button"
+                type="button"
+            >
+                ارسال
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================
+         SIDEBAR
+    ================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-info">
+
+            <button
+                id="joinButton"
+                class="join-button"
+                type="button"
+            >
+                ورود به چت
+            </button>
+
+
+            <div class="online-title">
+
+                کاربران آنلاین
+
+                <span
+                    id="onlineNumber"
+                    class="online-number"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <input
+                id="searchUsers"
+                class="search-box"
+                type="text"
+                placeholder="جستجوی کاربر..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="room-title">
+
+            کاربران آنلاین
+
+        </div>
+
+
+        <div
+            id="users"
+            class="users"
+        >
+
+            <div class="loading">
+
+                در حال دریافت کاربران...
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            لطفاً قوانین چت را رعایت کنید.
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+
+
+<!-- =====================================
+     BOTTOM BAR
+====================================== -->
+
+<div class="bottom-bar">
+
+
+    <div class="bottom-links">
+
+        <span>قوانین</span>
+
+        <span>راهنما</span>
+
+        <span>درباره ما</span>
+
+        <span>تماس با ما</span>
+
+    </div>
+
+
+    <button
+        id="emojiBottom"
+        class="action"
+        type="button"
+        title="ایموجی"
+    >
+        😊
+    </button>
+
+
+    <button
+        id="soundButton"
+        class="action"
+        type="button"
+        title="صدا"
+    >
+        🔊
+    </button>
+
+
+</div>
+
+
+<!-- =====================================
+     EMOJI PANEL
+====================================== -->
+
+<div
+    id="emojiPanel"
+    class="emoji-panel"
+>
+
+    <div class="emoji">😀</div>
+    <div class="emoji">😂</div>
+    <div class="emoji">🤣</div>
+    <div class="emoji">😊</div>
+    <div class="emoji">😍</div>
+    <div class="emoji">🥰</div>
+    <div class="emoji">😘</div>
+    <div class="emoji">😎</div>
+
+    <div class="emoji">🤩</div>
+    <div class="emoji">😜</div>
+    <div class="emoji">🤔</div>
+    <div class="emoji">😐</div>
+    <div class="emoji">😢</div>
+    <div class="emoji">😭</div>
+    <div class="emoji">😡</div>
+    <div class="emoji">🤬</div>
+
+    <div class="emoji">👍</div>
+    <div class="emoji">👎</div>
+    <div class="emoji">❤️</div>
+    <div class="emoji">💔</div>
+    <div class="emoji">🔥</div>
+    <div class="emoji">✨</div>
+    <div class="emoji">🎉</div>
+    <div class="emoji">🍯</div>
+
+</div>
+
+</div><script>
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const messages =
+    document.getElementById("messages");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const emojiButton =
+    document.getElementById("emojiButton");
+
+const emojiBottom =
+    document.getElementById("emojiBottom");
+
+const emojiPanel =
+    document.getElementById("emojiPanel");
+
+const searchUsers =
+    document.getElementById("searchUsers");
+
+const usersBox =
+    document.getElementById("users");
+
+const onlineNumber =
+    document.getElementById("onlineNumber");
+
+const joinButton =
+    document.getElementById("joinButton");
+
+const soundButton =
+    document.getElementById("soundButton");
+
+
+/* =========================================
+   USER
+========================================= */
+
+let username =
+    localStorage.getItem("username");
+
+if(!username){
+
+    username = "مهمان";
+
+}
+
+
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+function sendMessage(){
+
+    const text =
+        messageInput.value.trim();
+
+    if(!text){
+        return;
+    }
+
+
+    addMessage(
+        username,
+        text
+    );
+
+
+    messageInput.value = "";
+
+}
+
+
+/* =========================================
+   ADD MESSAGE
+========================================= */
+
+function addMessage(
+    name,
+    text
+){
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message";
+
+
+    div.innerHTML = `
+
+        <div class="message-header">
+
+            <div class="online-dot"></div>
+
+            <span class="message-name">
+                ${escapeHTML(name)}
+            </span>
+
+        </div>
+
+
+        <div class="message-text">
+
+            ${escapeHTML(text)}
+
+        </div>
+
+    `;
+
+
+    messages.appendChild(div);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+messageInput.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   EMOJI
+========================================= */
+
+function toggleEmoji(){
+
+    emojiPanel.classList.toggle("show");
+
+}
+
+
+emojiButton.addEventListener(
+    "click",
+    toggleEmoji
+);
+
+
+emojiBottom.addEventListener(
+    "click",
+    toggleEmoji
+);
+
+
+document
+    .querySelectorAll(".emoji")
+    .forEach(function(item){
+
+        item.addEventListener(
+            "click",
+            function(){
+
+                messageInput.value +=
+                    item.textContent;
+
+                messageInput.focus();
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   SEARCH USERS
+========================================= */
+
+searchUsers.addEventListener(
+    "input",
+    function(){
+
+        const value =
+            this.value
+                .trim()
+                .toLowerCase();
+
+
+        document
+            .querySelectorAll(".user")
+            .forEach(function(user){
+
+                const name =
+                    user.dataset.name
+                        .toLowerCase();
+
+
+                if(
+                    name.includes(value)
+                ){
+
+                    user.style.display =
+                        "grid";
+
+                }else{
+
+                    user.style.display =
+                        "none";
+
+                }
+
+            });
+
+    }
+);
+
+
+/* =========================================
+   JOIN
+========================================= */
+
+joinButton.addEventListener(
+    "click",
+    function(){
+
+        window.location.href =
+            "index.html";
+
+    }
+);
+
+
+/* =========================================
+   SOUND
+========================================= */
+
+let soundEnabled = true;
+
+
+soundButton.addEventListener(
+    "click",
+    function(){
+
+        soundEnabled =
+            !soundEnabled;
+
+
+        soundButton.textContent =
+            soundEnabled
+                ? "🔊"
+                : "🔇";
+
+    }
+);
+
+
+/* =========================================
+   DEMO USERS
+========================================= */
+
+const demoUsers = [
+
+    {
+        name:"مهدی",
+        gender:"♂",
+        avatar:""
+    },
+
+    {
+        name:"عسل",
+        gender:"♀",
+        avatar:""
+    },
+
+    {
+        name:"کاربر مهمان",
+        gender:"♂",
+        avatar:""
+    },
+
+    {
+        name:"سارا",
+        gender:"♀",
+        avatar:""
+    }
+
+];
+
+
+function renderUsers(list){
+
+    usersBox.innerHTML = "";
+
+
+    if(!list.length){
+
+        usersBox.innerHTML = `
+            <div class="no-users">
+                کاربری پیدا نشد
+            </div>
+        `;
+
+        onlineNumber.textContent =
+            "0";
+
+        return;
+
+    }
+
+
+    onlineNumber.textContent =
+        list.length;
+
+
+    list.forEach(function(user){
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "user";
+
+
+        div.dataset.name =
+            user.name;
+
+
+        div.innerHTML = `
+
+            <div class="user-gender">
+
+                ${user.gender}
+
+            </div>
+
+
+            <div
+                class="user-name
+                ${user.gender === "♀" ? "female" : ""}"
+            >
+
+                ${escapeHTML(user.name)}
+
+            </div>
+
+
+            ${
+                user.avatar
+                ?
+                `<img
+                    class="user-avatar"
+                    src="${user.avatar}"
+                >`
+                :
+                `<div class="user-avatar">
+                    👤
+                </div>`
+            }
+
+        `;
+
+
+        usersBox.appendChild(div);
+
+    });
+
+}
+
+
+renderUsers(demoUsers);
+
+
+/* =========================================
+   CLOSE EMOJI
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            !emojiPanel.contains(e.target) &&
+            e.target !== emojiButton &&
+            e.target !== emojiBottom
+        ){
+
+            emojiPanel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   END
+========================================= */
+
+</script></body></html>
