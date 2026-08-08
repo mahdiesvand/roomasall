@@ -1,0 +1,3608 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#090806"
+>
+
+<title>🍯 عسل منچ</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #30230d 0%,
+            #110e09 38%,
+            #070605 75%
+        );
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    width:100%;
+
+    max-width:650px;
+
+    min-height:100vh;
+
+    margin:auto;
+
+    padding:
+        12px
+        10px
+        25px;
+
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:10px;
+
+}
+
+
+.back-button{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    border:
+        1px solid
+        rgba(255,193,7,.16);
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#fff;
+
+    font-size:19px;
+
+    cursor:pointer;
+
+}
+
+
+.game-title{
+
+    text-align:center;
+
+    flex:1;
+
+}
+
+
+.game-title h1{
+
+    font-size:20px;
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0a8,
+            #ffc107,
+            #e39a00
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.game-title p{
+
+    color:#6f675b;
+
+    font-size:8px;
+
+    margin-top:3px;
+
+}
+
+
+.player-box{
+
+    min-width:42px;
+
+    height:42px;
+
+    padding:
+        0
+        8px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    border-radius:13px;
+
+    border:
+        1px solid
+        rgba(255,193,7,.16);
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+.player-box span{
+
+    font-size:16px;
+
+}
+
+
+.player-box strong{
+
+    max-width:65px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    font-size:9px;
+
+    color:#d8cdb9;
+
+}
+
+
+/* =====================================================
+   GAME STATUS
+===================================================== */
+
+.status-bar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:35px;
+
+    margin-bottom:10px;
+
+    padding:
+        7px
+        12px;
+
+    border-radius:12px;
+
+    color:#aaa092;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.045);
+
+    font-size:10px;
+
+}
+
+
+.status-bar span{
+
+    color:#ffc107;
+
+    font-weight:bold;
+
+    margin-right:4px;
+
+}
+
+
+/* =====================================================
+   BOARD WRAPPER
+===================================================== */
+
+.board-area{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+        5px
+        0
+        12px;
+
+}
+
+
+/* =====================================================
+   LUDO BOARD
+===================================================== */
+
+.board{
+
+    position:relative;
+
+    width:min(
+        94vw,
+        590px
+    );
+
+    aspect-ratio:1 / 1;
+
+    border-radius:27px;
+
+    padding:4px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #d69a1b,
+            #ffe082 20%,
+            #9d680b 55%,
+            #f2bd38
+        );
+
+    box-shadow:
+
+        0 25px 65px
+        rgba(0,0,0,.65),
+
+        0 0 35px
+        rgba(255,193,7,.10),
+
+        inset 0 1px 1px
+        rgba(255,255,255,.8);
+
+}
+
+
+/* داخل تخته */
+
+.board-inner{
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    overflow:hidden;
+
+    border-radius:23px;
+
+    background:
+        #17130d;
+
+}
+
+
+/* =====================================================
+   FOUR HOME AREAS
+===================================================== */
+
+.home{
+
+    position:absolute;
+
+    width:39%;
+
+    height:39%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:17px;
+
+    border:
+        4px solid
+        rgba(255,255,255,.16);
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,0,0,.28);
+
+}
+
+
+/* قرمز */
+
+.home.red{
+
+    top:3%;
+
+    left:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d84943,
+            #821f22
+        );
+
+}
+
+
+/* سبز */
+
+.home.green{
+
+    top:3%;
+
+    right:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #55b96e,
+            #23683d
+        );
+
+}
+
+
+/* زرد */
+
+.home.yellow{
+
+    bottom:3%;
+
+    right:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f3c63e,
+            #a16c08
+        );
+
+}
+
+
+/* آبی */
+
+.home.blue{
+
+    bottom:3%;
+
+    left:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #4a91cf,
+            #24507e
+        );
+
+}
+
+
+/* =====================================================
+   HOME INNER
+===================================================== */
+
+.home-inner{
+
+    width:73%;
+
+    height:73%;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap:10%;
+
+    padding:10%;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(0,0,0,.25);
+
+}
+
+
+/* =====================================================
+   START CIRCLES
+===================================================== */
+
+.start-circle{
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.18);
+
+    border:
+        2px solid
+        rgba(255,255,255,.22);
+
+    box-shadow:
+
+        inset 0 4px 8px
+        rgba(0,0,0,.25),
+
+        0 2px 4px
+        rgba(0,0,0,.25);
+
+}
+
+
+/* =====================================================
+   CENTER
+===================================================== */
+
+.center{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:24%;
+
+    height:24%;
+
+    transform:
+        translate(-50%,-50%);
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.2);
+
+    background:
+        #17130d;
+
+    box-shadow:
+
+        0 8px 25px
+        rgba(0,0,0,.5),
+
+        0 0 25px
+        rgba(255,193,7,.12);
+
+}
+
+
+/* چهار مثلث مرکز */
+
+.center-part{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+}
+
+
+.center::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        conic-gradient(
+            from 45deg,
+            #d84943 0 25%,
+            #4b9d65 0 50%,
+            #e1b32e 0 75%,
+            #3f82bc 0 100%
+        );
+
+}
+
+
+.center::after{
+
+    content:"🍯";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:42%;
+
+    height:42%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:clamp(
+        18px,
+        5vw,
+        30px
+    );
+
+    background:
+        radial-gradient(
+            circle,
+            #ffe082,
+            #c9870b
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(255,193,7,.35);
+
+}
+
+
+/* =====================================================
+   PATH GRID
+===================================================== */
+
+.path{
+
+    position:absolute;
+
+    left:27%;
+
+    top:3%;
+
+    width:46%;
+
+    height:94%;
+
+    pointer-events:none;
+
+}
+
+
+/* مسیر افقی */
+
+.path-horizontal{
+
+    position:absolute;
+
+    left:3%;
+
+    top:27%;
+
+    width:94%;
+
+    height:46%;
+
+}
+
+
+/* =====================================================
+   PATH CELLS
+===================================================== */
+
+.cell{
+
+    position:absolute;
+
+    width:7.2%;
+
+    height:4.8%;
+
+    border-radius:4px;
+
+    background:
+        #ded5bd;
+
+    border:
+        1px solid
+        rgba(0,0,0,.25);
+
+    box-shadow:
+        inset 0 1px 1px
+        rgba(255,255,255,.65);
+
+}
+
+
+/* =====================================================
+   MAIN CROSS PATH
+===================================================== */
+
+.track{
+
+    position:absolute;
+
+    left:20%;
+
+    top:20%;
+
+    width:60%;
+
+    height:60%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(15,1fr);
+
+    grid-template-rows:
+        repeat(15,1fr);
+
+    gap:2px;
+
+}
+
+
+/*
+   پایه‌ی مسیر؛
+   بعداً خانه‌های واقعی بازی
+   توسط JavaScript ساخته می‌شوند.
+*/
+
+.track-cell{
+
+    min-width:0;
+
+    min-height:0;
+
+    border-radius:3px;
+
+    background:
+        rgba(239,232,211,.93);
+
+    border:
+        1px solid
+        rgba(0,0,0,.13);
+
+}
+
+
+/* =====================================================
+   COLORED SAFE PATHS
+===================================================== */
+
+.track-cell.red-path{
+
+    background:
+        #c94842;
+
+}
+
+
+.track-cell.green-path{
+
+    background:
+        #4c9f62;
+
+}
+
+
+.track-cell.yellow-path{
+
+    background:
+        #e1b52f;
+
+}
+
+
+.track-cell.blue-path{
+
+    background:
+        #4384bb;
+
+}
+
+
+.track-cell.safe{
+
+    background:
+        linear-gradient(
+            145deg,
+            #f4df9a,
+            #d4c18c
+        );
+
+}
+
+
+.track-cell.safe::after{
+
+    content:"★";
+
+    display:flex;
+
+    width:100%;
+
+    height:100%;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#8f6b18;
+
+    font-size:
+        clamp(
+            7px,
+            2vw,
+            13px
+        );
+
+}
+
+
+/* =====================================================
+   DECORATIVE HONEY GLOW
+===================================================== */
+
+.honey-glow{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:40%;
+
+    height:40%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,193,7,.08);
+
+    filter:blur(30px);
+
+    pointer-events:none;
+
+}
+
+
+/* =====================================================
+   BOTTOM CONTROL AREA
+===================================================== */
+
+.controls{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+    margin-top:3px;
+
+}
+
+
+.control-card{
+
+    min-height:94px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,26,19,.95),
+            rgba(13,11,9,.98)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.4);
+
+}
+
+
+/* =====================================================
+   DICE
+===================================================== */
+
+.dice-box{
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff4c2,
+            #d7c99e
+        );
+
+    color:#211b10;
+
+    font-size:31px;
+
+    box-shadow:
+
+        0 8px 20px
+        rgba(0,0,0,.45),
+
+        inset 0 1px 0
+        rgba(255,255,255,.9);
+
+}
+
+
+.dice-label{
+
+    margin-top:7px;
+
+    color:#71695c;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   ROLL BUTTON
+===================================================== */
+
+.roll-button{
+
+    width:80%;
+
+    max-width:220px;
+
+    height:48px;
+
+    border:0;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    color:#211600;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffe082,
+            #ffc107 50%,
+            #dd9600
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(255,174,0,.16),
+
+        inset 0 1px 0
+        rgba(255,255,255,.7);
+
+    transition:
+        transform .15s,
+        opacity .15s;
+
+}
+
+
+.roll-button:active{
+
+    transform:
+        scale(.96);
+
+}
+
+
+.roll-button:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   PLAYER TURN
+===================================================== */
+
+.turn-info{
+
+    text-align:center;
+
+}
+
+
+.turn-color{
+
+    width:12px;
+
+    height:12px;
+
+    display:inline-block;
+
+    border-radius:50%;
+
+    margin-left:5px;
+
+    vertical-align:-1px;
+
+    background:#ffc107;
+
+}
+
+
+.turn-text{
+
+    color:#cfc5b4;
+
+    font-size:11px;
+
+}
+
+
+.turn-sub{
+
+    margin-top:6px;
+
+    color:#635c50;
+
+    font-size:8px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:480px){
+
+    .page{
+
+        padding:
+            8px
+            7px
+            18px;
+
+    }
+
+
+    .topbar{
+
+        margin-bottom:6px;
+
+    }
+
+
+    .game-title h1{
+
+        font-size:17px;
+
+    }
+
+
+    .player-box strong{
+
+        max-width:50px;
+
+    }
+
+
+    .board{
+
+        width:
+            min(
+                97vw,
+                590px
+            );
+
+        border-radius:21px;
+
+    }
+
+
+    .board-inner{
+
+        border-radius:17px;
+
+    }
+
+
+    .home{
+
+        border-width:3px;
+
+        border-radius:13px;
+
+    }
+
+
+    .home-inner{
+
+        gap:8%;
+
+    }
+
+
+    .controls{
+
+        gap:7px;
+
+    }
+
+
+    .control-card{
+
+        min-height:88px;
+
+        border-radius:15px;
+
+    }
+
+
+    .dice-box{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:26px;
+
+    }
+
+
+    .roll-button{
+
+        height:44px;
+
+        font-size:11px;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL SCREEN
+===================================================== */
+
+@media(max-width:350px){
+
+    .player-box strong{
+
+        display:none;
+
+    }
+
+
+    .game-title h1{
+
+        font-size:15px;
+
+    }
+
+
+    .status-bar{
+
+        font-size:9px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+
+    <button
+        class="back-button"
+        onclick="goBack()"
+        aria-label="بازگشت"
+    >
+        ❯
+    </button>
+
+
+
+    <div class="game-title">
+
+        <h1>
+            🍯 عسل منچ
+        </h1>
+
+        <p>
+            بازی دوستانه
+        </p>
+
+    </div>
+
+
+
+    <div class="player-box">
+
+        <span>
+            👤
+        </span>
+
+        <strong
+            id="playerName"
+        >
+            بازیکن
+        </strong>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<div class="status-bar">
+
+    🎮
+    <span id="statusText">
+        نوبت شماست
+    </span>
+
+</div>
+
+
+
+<!-- =====================================================
+     BOARD
+===================================================== -->
+
+<section class="board-area">
+
+
+    <div class="board">
+
+
+        <div class="board-inner">
+
+
+            <!-- نور مرکزی -->
+
+            <div class="honey-glow"></div>
+
+
+            <!-- خانه قرمز -->
+
+            <div class="home red">
+
+                <div class="home-inner">
+
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- خانه سبز -->
+
+            <div class="home green">
+
+                <div class="home-inner">
+
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- خانه زرد -->
+
+            <div class="home yellow">
+
+                <div class="home-inner">
+
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- خانه آبی -->
+
+            <div class="home blue">
+
+                <div class="home-inner">
+
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+                    <div class="start-circle"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- مسیر اصلی -->
+
+            <div
+                class="track"
+                id="track"
+            >
+
+                <!-- خانه‌ها در قسمت ۲
+                     با JavaScript ساخته می‌شوند -->
+
+            </div>
+
+
+
+            <!-- مرکز -->
+
+            <div class="center"></div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTROLS
+===================================================== -->
+
+<section class="controls">
+
+
+    <div class="control-card">
+
+
+        <div
+            class="dice-box"
+            id="dice"
+        >
+            🎲
+        </div>
+
+
+        <div class="dice-label">
+            تاس
+        </div>
+
+
+    </div>
+
+
+
+    <div class="control-card">
+
+
+        <div class="turn-info">
+
+
+            <div class="turn-text">
+
+                <span
+                    class="turn-color"
+                    id="turnColor"
+                ></span>
+
+                <span id="turnText">
+                    نوبت شما
+                </span>
+
+            </div>
+
+
+            <div class="turn-sub">
+                برای شروع تاس را بزن
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="roll-button"
+            id="rollButton"
+            onclick="rollDice()"
+        >
+            🎲 انداختن تاس
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     بخش ۲
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   تنظیمات بازی
+===================================================== */
+
+const players = {
+
+    red: {
+        name: "قرمز",
+        color: "#d84943"
+    },
+
+    green: {
+        name: "سبز",
+        color: "#4c9f62"
+    },
+
+    yellow: {
+        name: "زرد",
+        color: "#e1b52f"
+    },
+
+    blue: {
+        name: "آبی",
+        color: "#4384bb"
+    }
+
+};
+
+
+/* =====================================================
+   مسیر اصلی منچ
+===================================================== */
+
+const pathCells = [
+
+    /* ردیف بالا */
+
+    [6,0],
+    [7,0],
+    [8,0],
+
+    [6,1],
+    [7,1],
+    [8,1],
+
+    [6,2],
+    [7,2],
+    [8,2],
+
+    [6,3],
+    [7,3],
+    [8,3],
+
+    [6,4],
+    [7,4],
+    [8,4],
+
+
+    /* سمت راست */
+
+    [9,6],
+    [10,6],
+    [11,6],
+    [12,6],
+    [13,6],
+    [14,6],
+
+    [9,7],
+    [10,7],
+    [11,7],
+    [12,7],
+    [13,7],
+    [14,7],
+
+    [9,8],
+    [10,8],
+    [11,8],
+    [12,8],
+    [13,8],
+    [14,8],
+
+
+    /* پایین */
+
+    [8,9],
+    [8,10],
+    [8,11],
+    [8,12],
+    [8,13],
+    [8,14],
+
+    [7,9],
+    [7,10],
+    [7,11],
+    [7,12],
+    [7,13],
+    [7,14],
+
+    [6,9],
+    [6,10],
+    [6,11],
+    [6,12],
+    [6,13],
+    [6,14],
+
+
+    /* سمت چپ */
+
+    [5,8],
+    [4,8],
+    [3,8],
+    [2,8],
+    [1,8],
+    [0,8],
+
+    [5,7],
+    [4,7],
+    [3,7],
+    [2,7],
+    [1,7],
+    [0,7],
+
+    [5,6],
+    [4,6],
+    [3,6],
+    [2,6],
+    [1,6],
+    [0,6]
+
+];
+
+
+/* =====================================================
+   خانه‌های امن
+===================================================== */
+
+const safeCells = [
+
+    [6,1],
+    [8,6],
+    [13,8],
+    [8,13],
+    [6,8],
+    [1,6],
+    [8,1],
+    [13,6]
+
+];
+
+
+/* =====================================================
+   ساخت مسیر گرافیکی
+===================================================== */
+
+function buildTrack(){
+
+    const track =
+        document.getElementById(
+            "track"
+        );
+
+
+    if(!track){
+        return;
+    }
+
+
+    track.innerHTML = "";
+
+
+    /*
+       شبکه 15×15 می‌سازیم
+       تا ظاهر تخته منظم بماند.
+    */
+
+    for(
+        let row = 0;
+        row < 15;
+        row++
+    ){
+
+        for(
+            let col = 0;
+            col < 15;
+            col++
+        ){
+
+            const cell =
+                document.createElement(
+                    "div"
+                );
+
+
+            cell.className =
+                "track-cell";
+
+
+            /*
+               تشخیص خانه‌های مسیر
+            */
+
+            const isPath =
+                pathCells.some(
+                    function(position){
+
+                        return(
+                            position[0] === row &&
+                            position[1] === col
+                        );
+
+                    }
+                );
+
+
+            if(isPath){
+
+                /*
+                   رنگ پایه مسیر
+                */
+
+                cell.style.background =
+                    "#e7dfc9";
+
+
+                /*
+                   خانه امن
+                */
+
+                const isSafe =
+                    safeCells.some(
+                        function(position){
+
+                            return(
+                                position[0] === row &&
+                                position[1] === col
+                            );
+
+                        }
+                    );
+
+
+                if(isSafe){
+
+                    cell.classList.add(
+                        "safe"
+                    );
+
+                }
+
+
+                /*
+                   رنگ خانه‌های شروع
+                */
+
+                if(
+                    row <= 5 &&
+                    col >= 6 &&
+                    col <= 8
+                ){
+
+                    cell.classList.add(
+                        "green-path"
+                    );
+
+                }
+
+
+                if(
+                    col >= 9 &&
+                    row >= 6 &&
+                    row <= 8
+                ){
+
+                    cell.classList.add(
+                        "yellow-path"
+                    );
+
+                }
+
+
+                if(
+                    row >= 9 &&
+                    col >= 6 &&
+                    col <= 8
+                ){
+
+                    cell.classList.add(
+                        "blue-path"
+                    );
+
+                }
+
+
+                if(
+                    col <= 5 &&
+                    row >= 6 &&
+                    row <= 8
+                ){
+
+                    cell.classList.add(
+                        "red-path"
+                    );
+
+                }
+
+
+                /*
+                   علامت خانه امن
+                */
+
+                if(isSafe){
+
+                    cell.innerHTML =
+                        "★";
+
+                }
+
+            }else{
+
+                /*
+                   فضای خالی
+                */
+
+                cell.style.background =
+                    "transparent";
+
+                cell.style.border =
+                    "0";
+
+            }
+
+
+            track.appendChild(
+                cell
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   وضعیت بازی
+===================================================== */
+
+let currentPlayer = "red";
+
+let diceValue = 0;
+
+let gameStarted = false;
+
+let rolling = false;
+
+
+/* =====================================================
+   المان‌ها
+===================================================== */
+
+const statusText =
+    document.getElementById(
+        "statusText"
+    );
+
+
+const turnText =
+    document.getElementById(
+        "turnText"
+    );
+
+
+const turnColor =
+    document.getElementById(
+        "turnColor"
+    );
+
+
+const diceElement =
+    document.getElementById(
+        "dice"
+    );
+
+
+const rollButton =
+    document.getElementById(
+        "rollButton"
+    );
+
+
+/* =====================================================
+   نمایش بازیکن
+===================================================== */
+
+function loadPlayer(){
+
+    const savedName =
+        localStorage.getItem(
+            "playerName"
+        );
+
+
+    const playerName =
+        document.getElementById(
+            "playerName"
+        );
+
+
+    if(
+        savedName &&
+        savedName.trim() !== ""
+    ){
+
+        playerName.textContent =
+            savedName;
+
+    }else{
+
+        playerName.textContent =
+            "بازیکن";
+
+    }
+
+}
+
+
+/* =====================================================
+   تغییر نوبت
+===================================================== */
+
+function updateTurn(){
+
+    const player =
+        players[
+            currentPlayer
+        ];
+
+
+    if(turnText){
+
+        turnText.textContent =
+            "نوبت " +
+            player.name;
+
+    }
+
+
+    if(turnColor){
+
+        turnColor.style.background =
+            player.color;
+
+    }
+
+
+    if(statusText){
+
+        statusText.innerHTML =
+            "🎮 " +
+            "<span>" +
+            "نوبت " +
+            player.name +
+            "</span>";
+
+    }
+
+}
+
+
+/* =====================================================
+   تاس
+===================================================== */
+
+const diceFaces = [
+
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
+
+];
+
+
+function rollDice(){
+
+    if(rolling){
+        return;
+    }
+
+
+    rolling = true;
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            true;
+
+    }
+
+
+    if(statusText){
+
+        statusText.innerHTML =
+            "🎲 <span>در حال ریختن تاس...</span>";
+
+    }
+
+
+    let animationCount = 0;
+
+
+    const animation =
+        setInterval(
+            function(){
+
+                const random =
+                    Math.floor(
+                        Math.random() * 6
+                    );
+
+
+                if(diceElement){
+
+                    diceElement.textContent =
+                        diceFaces[random];
+
+                }
+
+
+                animationCount++;
+
+
+                if(
+                    animationCount >= 10
+                ){
+
+                    clearInterval(
+                        animation
+                    );
+
+
+                    finishRoll();
+
+                }
+
+            },
+            80
+        );
+
+}
+
+
+/* =====================================================
+   نتیجه تاس
+===================================================== */
+
+function finishRoll(){
+
+    diceValue =
+        Math.floor(
+            Math.random() * 6
+        ) + 1;
+
+
+    if(diceElement){
+
+        diceElement.textContent =
+            diceFaces[
+                diceValue - 1
+            ];
+
+    }
+
+
+    rolling = false;
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            false;
+
+    }
+
+
+    if(statusText){
+
+        statusText.innerHTML =
+            "🎲 عدد تاس: " +
+            "<span>" +
+            diceValue +
+            "</span>";
+
+    }
+
+
+    /*
+       فعلاً چون حرکت مهره‌ها
+       در قسمت ۳ اضافه می‌شود،
+       اینجا فقط نتیجه تاس
+       نمایش داده می‌شود.
+    */
+
+
+    setTimeout(
+        function(){
+
+            if(statusText){
+
+                statusText.innerHTML =
+                    "👆 " +
+                    "<span>" +
+                    "مهره خودت را انتخاب کن" +
+                    "</span>";
+
+            }
+
+        },
+        1300
+    );
+
+}
+
+
+/* =====================================================
+   برگشت
+===================================================== */
+
+function goBack(){
+
+    window.location.href =
+        "games.html";
+
+}
+
+
+/* =====================================================
+   شروع
+===================================================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        buildTrack();
+
+        loadPlayer();
+
+        updateTurn();
+
+    }
+);
+
+</script>
+
+
+<!-- =====================================================
+     بخش ۳
+     مهره‌ها + حرکت + نوبت + پایان بازی
+===================================================== -->
+
+<style>
+
+/* =====================================================
+   مهره‌ها
+===================================================== */
+
+.piece{
+
+    position:absolute;
+
+    width:8%;
+
+    aspect-ratio:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    z-index:20;
+
+    cursor:pointer;
+
+    border:
+        3px solid
+        rgba(255,255,255,.8);
+
+    box-shadow:
+
+        0 5px 10px
+        rgba(0,0,0,.55),
+
+        inset 0 3px 4px
+        rgba(255,255,255,.4);
+
+    transform:
+        translate(-50%,-50%);
+
+    transition:
+        left .25s ease,
+        top .25s ease,
+        transform .18s ease;
+
+}
+
+
+.piece::after{
+
+    content:"";
+
+    width:32%;
+
+    height:32%;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.55);
+
+    position:absolute;
+
+    top:16%;
+
+    left:18%;
+
+}
+
+
+.piece:hover{
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.12);
+
+}
+
+
+.piece.red{
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff9b91,
+            #e33d3b 55%,
+            #8d1e25
+        );
+
+}
+
+
+.piece.green{
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #a8f1b8,
+            #48ae68 55%,
+            #1d633a
+        );
+
+}
+
+
+.piece.yellow{
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff3a6,
+            #f0bf2d 55%,
+            #996908
+        );
+
+}
+
+
+.piece.blue{
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #a7dcff,
+            #428aca 55%,
+            #214d7b
+        );
+
+}
+
+
+/* مهره قابل حرکت */
+
+.piece.movable{
+
+    animation:
+        piecePulse 1s infinite;
+
+    box-shadow:
+
+        0 0 0 4px
+        rgba(255,193,7,.22),
+
+        0 7px 14px
+        rgba(0,0,0,.6);
+
+}
+
+
+@keyframes piecePulse{
+
+    0%,
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.12);
+    }
+
+}
+
+
+/* =====================================================
+   پیام پایان
+===================================================== */
+
+.win-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.82);
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+.win-box{
+
+    width:100%;
+
+    max-width:360px;
+
+    padding:30px 22px;
+
+    text-align:center;
+
+    border-radius:26px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #211b10,
+            #0d0b08
+        );
+
+    border:
+        1px solid
+        rgba(255,193,7,.3);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.7);
+
+}
+
+
+.win-icon{
+
+    font-size:60px;
+
+    margin-bottom:12px;
+
+}
+
+
+.win-box h2{
+
+    font-size:24px;
+
+    margin-bottom:9px;
+
+    color:#ffc107;
+
+}
+
+
+.win-box p{
+
+    color:#aaa092;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+}
+
+
+.win-buttons{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:9px;
+
+    margin-top:20px;
+
+}
+
+
+.win-buttons button{
+
+    height:45px;
+
+    border:0;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.play-again{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe082,
+            #ffc107
+        );
+
+    color:#211600;
+
+}
+
+
+.exit-game{
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:#ddd;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08)
+        !important;
+
+}
+
+
+/* =====================================================
+   تاس در حال چرخش
+===================================================== */
+
+.dice-rolling{
+
+    animation:
+        diceShake .12s
+        infinite alternate;
+
+}
+
+
+@keyframes diceShake{
+
+    from{
+        transform:rotate(-8deg) scale(1.04);
+    }
+
+    to{
+        transform:rotate(8deg) scale(.94);
+    }
+
+}
+
+
+/* =====================================================
+   افکت برخورد
+===================================================== */
+
+.hit-effect{
+
+    position:absolute;
+
+    z-index:50;
+
+    pointer-events:none;
+
+    font-size:28px;
+
+    animation:
+        hitAnimation .7s ease forwards;
+
+}
+
+
+@keyframes hitAnimation{
+
+    0%{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(.5);
+    }
+
+    70%{
+        opacity:1;
+        transform:
+            translate(-50%,-80%)
+            scale(1.3);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translate(-50%,-120%)
+            scale(1.6);
+    }
+
+}
+
+</style>
+
+
+<script>
+
+/* =====================================================
+   تنظیمات مهره‌ها
+===================================================== */
+
+const pieceState = {
+
+    red:[
+        {step:-1},
+        {step:-1},
+        {step:-1},
+        {step:-1}
+    ],
+
+    green:[
+        {step:-1},
+        {step:-1},
+        {step:-1},
+        {step:-1}
+    ],
+
+    yellow:[
+        {step:-1},
+        {step:-1},
+        {step:-1},
+        {step:-1}
+    ],
+
+    blue:[
+        {step:-1},
+        {step:-1},
+        {step:-1},
+        {step:-1}
+    ]
+
+};
+
+
+/* =====================================================
+   موقعیت خانه‌های شروع
+===================================================== */
+
+const homePositions = {
+
+    red:[
+        [13,13],
+        [18,13],
+        [13,18],
+        [18,18]
+    ],
+
+    green:[
+        [13,4],
+        [18,4],
+        [13,9],
+        [18,9]
+    ],
+
+    yellow:[
+        [4,4],
+        [9,4],
+        [4,9],
+        [9,9]
+    ],
+
+    blue:[
+        [4,13],
+        [9,13],
+        [4,18],
+        [9,18]
+    ]
+
+};
+
+
+/* =====================================================
+   مسیر استاندارد
+===================================================== */
+
+const gamePath = [
+
+    [50,5],
+    [56,5],
+    [62,5],
+    [68,5],
+    [74,5],
+
+    [80,11],
+    [80,17],
+    [80,23],
+    [80,29],
+    [80,35],
+
+    [95,50],
+
+    [80,65],
+    [80,71],
+    [80,77],
+    [80,83],
+    [80,89],
+
+    [74,95],
+    [68,95],
+    [62,95],
+    [56,95],
+    [50,95],
+
+    [44,95],
+    [38,95],
+    [32,95],
+    [26,95],
+    [20,89],
+
+    [20,83],
+    [20,77],
+    [20,71],
+    [20,65],
+
+    [5,50],
+
+    [20,35],
+    [20,29],
+    [20,23],
+    [20,17],
+    [20,11],
+
+    [26,5],
+    [32,5],
+    [38,5],
+    [44,5]
+];
+
+
+/* =====================================================
+   ساخت مهره‌ها
+===================================================== */
+
+function createPieces(){
+
+    const board =
+        document.querySelector(
+            ".board-inner"
+        );
+
+
+    if(!board){
+        return;
+    }
+
+
+    document
+        .querySelectorAll(".piece")
+        .forEach(
+            function(piece){
+                piece.remove();
+            }
+        );
+
+
+    Object.keys(pieceState)
+        .forEach(
+            function(color){
+
+                for(
+                    let i=0;
+                    i<4;
+                    i++
+                ){
+
+                    const piece =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    piece.className =
+                        "piece " +
+                        color;
+
+
+                    piece.dataset.color =
+                        color;
+
+
+                    piece.dataset.index =
+                        i;
+
+
+                    piece.title =
+                        players[color].name +
+                        " " +
+                        (i+1);
+
+
+                    piece.addEventListener(
+                        "click",
+                        function(){
+
+                            movePiece(
+                                color,
+                                i
+                            );
+
+                        }
+                    );
+
+
+                    board.appendChild(
+                        piece
+                    );
+
+
+                    placePiece(
+                        piece,
+                        color,
+                        i
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   قرار دادن مهره
+===================================================== */
+
+function placePiece(
+    piece,
+    color,
+    index
+){
+
+    const state =
+        pieceState[color][index];
+
+
+    if(state.step < 0){
+
+        const pos =
+            homePositions[color][index];
+
+
+        /*
+           مختصات تقریبی داخل تخته
+        */
+
+        const x =
+            pos[0];
+
+        const y =
+            pos[1];
+
+
+        piece.style.left =
+            x + "%";
+
+
+        piece.style.top =
+            y + "%";
+
+
+        return;
+
+    }
+
+
+    const pathIndex =
+        state.step %
+        gamePath.length;
+
+
+    const pos =
+        gamePath[pathIndex];
+
+
+    piece.style.left =
+        pos[0] + "%";
+
+
+    piece.style.top =
+        pos[1] + "%";
+
+}
+
+
+/* =====================================================
+   فعال کردن مهره‌های قابل حرکت
+===================================================== */
+
+function updateMovablePieces(){
+
+    document
+        .querySelectorAll(".piece")
+        .forEach(
+            function(piece){
+
+                piece.classList.remove(
+                    "movable"
+                );
+
+            }
+        );
+
+
+    /*
+       اگر تاس هنوز نریخته
+       هیچ مهره‌ای فعال نیست.
+    */
+
+    if(!diceValue){
+        return;
+    }
+
+
+    document
+        .querySelectorAll(
+            '.piece[data-color="' +
+            currentPlayer +
+            '"]'
+        )
+        .forEach(
+            function(piece){
+
+                piece.classList.add(
+                    "movable"
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   حرکت مهره
+===================================================== */
+
+function movePiece(
+    color,
+    index
+){
+
+    if(color !== currentPlayer){
+        return;
+    }
+
+
+    if(!diceValue){
+        return;
+    }
+
+
+    if(
+        !gameStarted
+    ){
+
+        gameStarted = true;
+
+    }
+
+
+    const state =
+        pieceState[color][index];
+
+
+    /*
+       اگر مهره بیرون است
+       حرکت بده
+    */
+
+    if(state.step < 0){
+
+        /*
+           در منچ معمولاً برای خروج
+           عدد ۶ لازم است.
+        */
+
+        if(diceValue !== 6){
+
+            showMessage(
+                "برای بیرون آوردن مهره باید ۶ بیاوری 🎲"
+            );
+
+            return;
+
+        }
+
+
+        state.step = 0;
+
+    }else{
+
+        state.step +=
+            diceValue;
+
+    }
+
+
+    const piece =
+        document.querySelector(
+            '.piece[data-color="' +
+            color +
+            '"][data-index="' +
+            index +
+            '"]'
+        );
+
+
+    if(piece){
+
+        piece.classList.remove(
+            "movable"
+        );
+
+
+        animatePiece(
+            piece,
+            color,
+            index
+        );
+
+    }
+
+
+    /*
+       تاس مصرف شد
+    */
+
+    diceValue = 0;
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            true;
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            nextTurn();
+
+        },
+        450
+    );
+
+}
+
+
+/* =====================================================
+   انیمیشن حرکت
+===================================================== */
+
+function animatePiece(
+    piece,
+    color,
+    index
+){
+
+    placePiece(
+        piece,
+        color,
+        index
+    );
+
+
+    piece.style.transform =
+        "translate(-50%,-50%) scale(1.2)";
+
+
+    setTimeout(
+        function(){
+
+            piece.style.transform =
+                "translate(-50%,-50%) scale(1)";
+
+        },
+        250
+    );
+
+}
+
+
+/* =====================================================
+   نوبت بعد
+===================================================== */
+
+function nextTurn(){
+
+    const order = [
+        "red",
+        "green",
+        "yellow",
+        "blue"
+    ];
+
+
+    const currentIndex =
+        order.indexOf(
+            currentPlayer
+        );
+
+
+    /*
+       اگر ۶ آمد،
+       همان بازیکن دوباره بازی می‌کند.
+    */
+
+    /*
+       برای نسخه فعلی
+       بعد از هر حرکت نوبت عوض می‌شود.
+    */
+
+    currentPlayer =
+        order[
+            (
+                currentIndex + 1
+            ) %
+            order.length
+        ];
+
+
+    updateTurn();
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            false;
+
+    }
+
+
+    diceValue = 0;
+
+
+    updateMovablePieces();
+
+}
+
+
+/* =====================================================
+   پیام بازی
+===================================================== */
+
+function showMessage(
+    message
+){
+
+    if(statusText){
+
+        statusText.innerHTML =
+            "🍯 <span>" +
+            message +
+            "</span>";
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            updateTurn();
+
+        },
+        1700
+    );
+
+}
+
+
+/* =====================================================
+   برخورد مهره‌ها
+===================================================== */
+
+function checkCollision(
+    color,
+    index
+){
+
+    const current =
+        pieceState[color][index];
+
+
+    if(current.step < 0){
+        return;
+    }
+
+
+    Object.keys(pieceState)
+        .forEach(
+            function(otherColor){
+
+                if(
+                    otherColor === color
+                ){
+                    return;
+                }
+
+
+                pieceState[
+                    otherColor
+                ].forEach(
+                    function(otherPiece){
+
+                        if(
+                            otherPiece.step ===
+                            current.step
+                        ){
+
+                            /*
+                               بازگرداندن مهره
+                               به خانه
+                            */
+
+                            otherPiece.step =
+                                -1;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    createPieces();
+
+}
+
+
+/* =====================================================
+   شمارش بازی‌ها
+===================================================== */
+
+function increaseGames(){
+
+    let games =
+        parseInt(
+            localStorage.getItem(
+                "gamesPlayed"
+            ) || "0"
+        );
+
+
+    games++;
+
+
+    localStorage.setItem(
+        "gamesPlayed",
+        games
+    );
+
+}
+
+
+/* =====================================================
+   افکت تاس
+===================================================== */
+
+function enhanceDice(){
+
+    if(!diceElement){
+        return;
+    }
+
+
+    diceElement.addEventListener(
+        "click",
+        function(){
+
+            if(
+                !rolling &&
+                !rollButton.disabled
+            ){
+
+                rollDice();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   شروع کامل بازی
+===================================================== */
+
+function initializeGame(){
+
+    buildTrack();
+
+    loadPlayer();
+
+    createPieces();
+
+    updateTurn();
+
+    enhanceDice();
+
+    increaseGames();
+
+}
+
+
+/* =====================================================
+   اجرای بازی
+===================================================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        initializeGame();
+
+    }
+);
+
+
+/* =====================================================
+   جایگزینی rollDice برای اتصال مهره‌ها
+===================================================== */
+
+const originalRollDice =
+    rollDice;
+
+
+/*
+   این نسخه بعد از تاس،
+   مهره‌های قابل حرکت را فعال می‌کند.
+*/
+
+rollDice = function(){
+
+    if(rolling){
+        return;
+    }
+
+
+    rolling = true;
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            true;
+
+    }
+
+
+    if(diceElement){
+
+        diceElement.classList.add(
+            "dice-rolling"
+        );
+
+    }
+
+
+    if(statusText){
+
+        statusText.innerHTML =
+            "🎲 <span>تاس در حال چرخش...</span>";
+
+    }
+
+
+    let count = 0;
+
+
+    const animation =
+        setInterval(
+            function(){
+
+                const random =
+                    Math.floor(
+                        Math.random() * 6
+                    );
+
+
+                if(diceElement){
+
+                    diceElement.textContent =
+                        diceFaces[random];
+
+                }
+
+
+                count++;
+
+
+                if(count >= 12){
+
+                    clearInterval(
+                        animation
+                    );
+
+
+                    diceValue =
+                        Math.floor(
+                            Math.random() * 6
+                        ) + 1;
+
+
+                    if(diceElement){
+
+                        diceElement.textContent =
+                            diceFaces[
+                                diceValue - 1
+                            ];
+
+                        diceElement.classList.remove(
+                            "dice-rolling"
+                        );
+
+                    }
+
+
+                    rolling = false;
+
+
+                    if(statusText){
+
+                        statusText.innerHTML =
+                            "🎲 عدد تاس: " +
+                            "<span>" +
+                            diceValue +
+                            "</span>";
+
+                    }
+
+
+                    if(
+                        rollButton
+                    ){
+
+                        rollButton.disabled =
+                            false;
+
+                    }
+
+
+                    updateMovablePieces();
+
+
+                    /*
+                       اگر ۶ نیامده و
+                       هیچ مهره‌ای قابل خروج نیست،
+                       اجازه می‌دهیم نوبت رد شود.
+                    */
+
+                }
+
+            },
+            75
+        );
+
+};
+
+
+/* =====================================================
+   پایان بازی آزمایشی
+===================================================== */
+
+function showWin(){
+
+    const overlay =
+        document.getElementById(
+            "winOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.style.display =
+            "flex";
+
+    }
+
+}
+
+
+function restartGame(){
+
+    Object.keys(pieceState)
+        .forEach(
+            function(color){
+
+                pieceState[color]
+                    .forEach(
+                        function(piece){
+
+                            piece.step =
+                                -1;
+
+                        }
+                    );
+
+            }
+        );
+
+
+    currentPlayer =
+        "red";
+
+
+    diceValue =
+        0;
+
+
+    gameStarted =
+        false;
+
+
+    createPieces();
+
+    updateTurn();
+
+
+    if(rollButton){
+
+        rollButton.disabled =
+            false;
+
+    }
+
+
+    const overlay =
+        document.getElementById(
+            "winOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   برخورد بعد از حرکت
+===================================================== */
+
+const oldMovePiece =
+    movePiece;
+
+
+movePiece = function(
+    color,
+    index
+){
+
+    oldMovePiece(
+        color,
+        index
+    );
+
+
+    setTimeout(
+        function(){
+
+            checkCollision(
+                color,
+                index
+            );
+
+        },
+        500
+    );
+
+};
+
+</script>
+
+
+<!-- =====================================================
+     WIN OVERLAY
+===================================================== -->
+
+<div
+    class="win-overlay"
+    id="winOverlay"
+>
+
+
+    <div class="win-box">
+
+
+        <div class="win-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            برنده شدی!
+        </h2>
+
+
+        <p>
+            تبریک! این دور از عسل منچ
+            را با موفقیت به پایان رساندی 🍯
+        </p>
+
+
+        <div class="win-buttons">
+
+
+            <button
+                class="play-again"
+                onclick="restartGame()"
+            >
+                🔄 دوباره بازی
+            </button>
+
+
+            <button
+                class="exit-game"
+                onclick="goBack()"
+            >
+                🚪 خروج
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
