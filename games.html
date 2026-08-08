@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>بازی | عسل گیم</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>HONEY GAMES</title><style>
 *{
     margin:0;
     padding:0;
@@ -16,278 +16,439 @@ html,body{
 }
 
 body{
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-    background:
-        radial-gradient(circle at 50% 15%,#273c62 0%,#111827 38%,#050811 100%);
-    color:#fff;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#030711;
+    color:white;
 }
 
-/* =========================
-   MAIN GAME CONTAINER
-========================= */
+/* =========================================
+   BACKGROUND
+========================================= */
 
-.game{
+.scene{
     position:relative;
     width:100%;
     height:100vh;
-    min-height:600px;
     overflow:hidden;
     background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.04),
-            transparent 35%
+        radial-gradient(
+            circle at 50% 30%,
+            #172d4c 0%,
+            #091425 32%,
+            #040914 67%,
+            #02040a 100%
         );
 }
 
-/* نورهای پس زمینه */
-
-.game::before{
+.scene::before{
     content:"";
     position:absolute;
-    width:420px;
-    height:420px;
-    top:-180px;
-    left:50%;
-    transform:translateX(-50%);
-    border-radius:50%;
-    background:rgba(71,155,255,.12);
-    filter:blur(60px);
-    pointer-events:none;
+    inset:-30%;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(36,155,255,.16),
+            transparent 48%
+        );
+    filter:blur(30px);
+    animation:ambient 8s ease-in-out infinite alternate;
 }
 
-.game::after{
-    content:"";
+@keyframes ambient{
+    from{
+        transform:scale(1);
+        opacity:.65;
+    }
+    to{
+        transform:scale(1.18);
+        opacity:1;
+    }
+}
+
+/* =========================================
+   STARS / PARTICLES
+========================================= */
+
+.particles{
     position:absolute;
-    width:300px;
-    height:300px;
-    bottom:-150px;
-    right:-100px;
-    border-radius:50%;
-    background:rgba(255,184,48,.08);
-    filter:blur(70px);
-    pointer-events:none;
+    inset:0;
+    overflow:hidden;
 }
 
-/* =========================
-   TOP BAR
-========================= */
+.particles i{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.45;
+    animation:starMove linear infinite;
+}
 
-.topbar{
+.particles i:nth-child(1){left:8%;top:18%;animation-duration:7s}
+.particles i:nth-child(2){left:18%;top:62%;animation-duration:11s}
+.particles i:nth-child(3){left:31%;top:26%;animation-duration:9s}
+.particles i:nth-child(4){left:44%;top:72%;animation-duration:13s}
+.particles i:nth-child(5){left:58%;top:17%;animation-duration:8s}
+.particles i:nth-child(6){left:72%;top:44%;animation-duration:10s}
+.particles i:nth-child(7){left:84%;top:22%;animation-duration:12s}
+.particles i:nth-child(8){left:93%;top:68%;animation-duration:9s}
+.particles i:nth-child(9){left:53%;top:52%;animation-duration:14s}
+.particles i:nth-child(10){left:27%;top:84%;animation-duration:8s}
+
+@keyframes starMove{
+    0%,100%{
+        transform:translateY(0) scale(.7);
+        opacity:.2;
+    }
+    50%{
+        transform:translateY(-35px) scale(1.5);
+        opacity:.9;
+    }
+}
+
+/* =========================================
+   TOP HUD
+========================================= */
+
+.hud{
     position:absolute;
     z-index:20;
     top:0;
     left:0;
     right:0;
-    height:76px;
-    padding:12px 14px;
+
+    height:82px;
+    padding:13px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
+    gap:9px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(7,12,24,.96),
-            rgba(7,12,24,.65)
+            rgba(2,7,17,.98),
+            rgba(2,7,17,.72),
+            transparent
         );
 
-    border-bottom:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(12px);
 }
 
-/* کارت های بالا */
+.hud-card{
+    position:relative;
+    height:54px;
+    min-width:92px;
 
-.info-box{
-    min-width:82px;
-    height:50px;
-    padding:6px 11px;
+    padding:6px 12px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    border-radius:15px;
+    border-radius:16px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.10),
+            rgba(255,255,255,.11),
             rgba(255,255,255,.035)
-        );
-
-    border:1px solid rgba(255,255,255,.09);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.06),
-        0 8px 25px rgba(0,0,0,.22);
-}
-
-.info-title{
-    font-size:10px;
-    color:#93a4c3;
-    margin-bottom:3px;
-}
-
-.info-value{
-    font-size:17px;
-    font-weight:900;
-    color:#fff;
-}
-
-/* امتیاز */
-
-.score-box .info-value{
-    color:#ffd45c;
-}
-
-/* رکورد */
-
-.best-box .info-value{
-    color:#70d8ff;
-}
-
-/* =========================
-   GAME TITLE
-========================= */
-
-.game-title{
-    position:absolute;
-    z-index:10;
-    top:88px;
-    left:0;
-    right:0;
-
-    text-align:center;
-    pointer-events:none;
-}
-
-.game-title h1{
-    font-size:26px;
-    font-weight:1000;
-    letter-spacing:.5px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #fff,
-            #a9c9ff
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-
-    text-shadow:
-        0 0 30px rgba(105,170,255,.18);
-}
-
-.game-title p{
-    margin-top:5px;
-    color:#7182a3;
-    font-size:11px;
-}
-
-/* =========================
-   GAME AREA
-========================= */
-
-.play-area{
-    position:absolute;
-    top:150px;
-    left:14px;
-    right:14px;
-    bottom:92px;
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(25,42,70,.92),
-            rgba(8,15,29,.97)
         );
 
     border:1px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 10px 30px rgba(0,0,0,.28);
+}
+
+.hud-label{
+    font-size:9px;
+    color:#7f91ad;
+    margin-bottom:3px;
+}
+
+.hud-number{
+    font-size:18px;
+    font-weight:900;
+}
+
+.score .hud-number{
+    color:#ffd34d;
+    text-shadow:0 0 18px rgba(255,190,30,.35);
+}
+
+.level .hud-number{
+    color:#72d5ff;
+}
+
+.time .hud-number{
+    color:#fff;
+}
+
+/* =========================================
+   PLAYER NAME
+========================================= */
+
+.player-name{
+    position:absolute;
+    z-index:15;
+
+    top:91px;
+    right:18px;
+
+    padding:8px 13px;
+
+    border-radius:12px;
+
+    font-size:11px;
+    color:#a9bad4;
+
+    background:rgba(5,12,25,.58);
+    border:1px solid rgba(255,255,255,.07);
+
+    backdrop-filter:blur(8px);
+}
+
+#playerName{
+    color:#fff;
+    font-weight:bold;
+}
+
+/* =========================================
+   GAME WORLD
+========================================= */
+
+.world{
+    position:absolute;
+    z-index:5;
+
+    top:125px;
+    left:12px;
+    right:12px;
+    bottom:98px;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(13,31,56,.82),
+            rgba(3,10,21,.98)
+        );
+
+    border:1px solid rgba(116,185,255,.12);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.55),
         inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-/* شبکه داخل زمین */
+/* =========================================
+   GRID FLOOR
+========================================= */
 
-.grid{
+.floor{
     position:absolute;
-    inset:0;
 
-    opacity:.22;
+    width:180%;
+    height:80%;
+
+    left:-40%;
+    bottom:-27%;
+
+    transform:
+        perspective(500px)
+        rotateX(63deg);
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,.045) 1px,
+            rgba(70,163,255,.18) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,.045) 1px,
+            rgba(70,163,255,.18) 1px,
             transparent 1px
         );
 
-    background-size:40px 40px;
+    background-size:42px 42px;
+
+    opacity:.5;
 
     mask-image:
         linear-gradient(
-            to bottom,
+            to top,
             black,
             transparent
         );
+
+    animation:gridMove 4s linear infinite;
 }
 
-/* نور مرکزی */
+@keyframes gridMove{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:0 42px;
+    }
+}
 
-.arena-glow{
+/* =========================================
+   HORIZON
+========================================= */
+
+.horizon{
     position:absolute;
-    width:280px;
-    height:280px;
-    top:50%;
-    left:50%;
+    left:0;
+    right:0;
+    top:42%;
 
-    transform:
-        translate(-50%,-50%);
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(71,182,255,.7),
+            transparent
+        );
+
+    box-shadow:
+        0 0 30px rgba(41,151,255,.5);
+}
+
+/* =========================================
+   CENTER ENERGY
+========================================= */
+
+.energy-core{
+    position:absolute;
+
+    left:50%;
+    top:42%;
+
+    width:170px;
+    height:170px;
+
+    transform:translate(-50%,-50%);
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(63,146,255,.18),
-            transparent 68%
+            rgba(61,181,255,.20),
+            rgba(30,111,255,.08) 40%,
+            transparent 70%
         );
 
-    filter:blur(5px);
+    filter:blur(3px);
+
+    animation:corePulse 3s ease-in-out infinite;
 }
 
-/* =========================
+@keyframes corePulse{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.9);
+    }
+    50%{
+        transform:translate(-50%,-50%) scale(1.2);
+    }
+}
+
+/* =========================================
+   TARGET
+========================================= */
+
+.target{
+    position:absolute;
+    z-index:12;
+
+    width:76px;
+    height:76px;
+
+    border-radius:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe875,
+            #ff9b1f
+        );
+
+    border:2px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        0 0 0 8px rgba(255,181,35,.06),
+        0 0 35px rgba(255,157,28,.48),
+        0 18px 40px rgba(0,0,0,.35);
+
+    transform:rotate(45deg);
+
+    transition:
+        left .25s cubic-bezier(.2,.8,.2,1),
+        top .25s cubic-bezier(.2,.8,.2,1);
+}
+
+.target span{
+    transform:rotate(-45deg);
+
+    font-size:29px;
+
+    filter:
+        drop-shadow(
+            0 3px 5px rgba(0,0,0,.25)
+        );
+}
+
+.target::before{
+    content:"";
+
+    position:absolute;
+    inset:-8px;
+
+    border-radius:28px;
+
+    border:1px solid rgba(255,205,75,.25);
+
+    animation:ring 1.6s ease-out infinite;
+}
+
+@keyframes ring{
+    0%{
+        transform:scale(.8);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1.5);
+        opacity:0;
+    }
+}
+
+/* =========================================
    PLAYER
-========================= */
+========================================= */
 
 .player{
     position:absolute;
+    z-index:13;
 
     left:50%;
-    bottom:38px;
+    bottom:35px;
 
-    width:74px;
-    height:74px;
+    width:72px;
+    height:72px;
 
     transform:translateX(-50%);
 
@@ -300,17 +461,16 @@ body{
     background:
         linear-gradient(
             145deg,
-            #ffe27b,
-            #ffad26
+            #4bc7ff,
+            #1769ff
         );
 
-    border:3px solid rgba(255,255,255,.85);
+    border:2px solid rgba(255,255,255,.72);
 
     box-shadow:
-        0 0 0 7px rgba(255,187,50,.08),
-        0 12px 35px rgba(255,164,25,.28);
-
-    z-index:8;
+        0 0 0 9px rgba(37,140,255,.08),
+        0 0 40px rgba(25,135,255,.45),
+        0 18px 40px rgba(0,0,0,.4);
 
     transition:
         left .12s ease,
@@ -318,93 +478,104 @@ body{
 }
 
 .player::before{
-    content:"";
-    width:30px;
-    height:30px;
+    content:"✦";
 
-    border-radius:50%;
+    font-size:34px;
+    color:white;
 
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #fff 0 5%,
-            #272727 6% 24%,
-            transparent 25%
-        );
-
-    box-shadow:
-        18px 0 0 -5px #272727;
+    text-shadow:
+        0 0 18px rgba(255,255,255,.8);
 }
 
-.player.active{
+.player.hit{
     transform:
         translateX(-50%)
-        scale(1.08);
+        scale(1.16);
 }
 
-/* =========================
-   TARGET
-========================= */
+/* =========================================
+   BOTTOM HUD
+========================================= */
 
-.target{
+.bottom{
     position:absolute;
+    z-index:25;
 
-    width:62px;
-    height:62px;
+    left:0;
+    right:0;
+    bottom:0;
 
-    border-radius:50%;
+    height:90px;
 
     display:flex;
     align-items:center;
     justify-content:center;
+    gap:10px;
+
+    padding:10px 14px;
 
     background:
-        radial-gradient(
-            circle at 35% 30%,
-            #fff7bf 0 7%,
-            #ffd34f 8% 42%,
-            #ff8b20 43% 70%,
-            #d94d18 71%
+        linear-gradient(
+            0deg,
+            rgba(2,6,14,1),
+            rgba(2,6,14,.82),
+            transparent
         );
 
-    border:3px solid rgba(255,255,255,.72);
+    backdrop-filter:blur(12px);
+}
+
+.action{
+    width:58px;
+    height:58px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.035)
+        );
+
+    color:white;
+
+    font-size:21px;
 
     box-shadow:
-        0 0 25px rgba(255,170,40,.45);
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 12px 30px rgba(0,0,0,.28);
 
-    z-index:7;
-
-    animation:
-        targetFloat 1.4s ease-in-out infinite;
+    cursor:pointer;
 }
 
-.target::after{
-    content:"★";
-
-    color:#fff;
-    font-size:22px;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.3);
+.action:active{
+    transform:scale(.92);
 }
 
-@keyframes targetFloat{
-    0%,100%{
-        transform:translateY(0) scale(1);
-    }
+.main-action{
+    width:72px;
 
-    50%{
-        transform:translateY(-8px) scale(1.04);
-    }
+    background:
+        linear-gradient(
+            145deg,
+            #2e8fff,
+            #1551d6
+        );
+
+    box-shadow:
+        0 0 30px rgba(28,113,255,.28);
 }
 
-/* =========================
+/* =========================================
    START SCREEN
-========================= */
+========================================= */
 
-.start-screen{
+.overlay{
     position:absolute;
-    z-index:30;
+    z-index:50;
     inset:0;
 
     display:flex;
@@ -414,24 +585,25 @@ body{
     padding:25px;
 
     background:
-        rgba(3,8,18,.72);
+        rgba(1,5,13,.74);
 
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(16px);
 
     transition:
-        opacity .35s ease,
-        visibility .35s ease;
+        opacity .4s ease,
+        visibility .4s ease;
 }
 
-.start-screen.hidden{
+.overlay.hide{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
 }
 
 .start-card{
-    width:min(360px,100%);
-    padding:30px 24px;
+    width:min(380px,100%);
+
+    padding:30px 25px;
 
     text-align:center;
 
@@ -440,19 +612,19 @@ body{
     background:
         linear-gradient(
             145deg,
-            rgba(31,49,81,.97),
-            rgba(9,17,31,.98)
+            rgba(22,43,72,.97),
+            rgba(4,11,23,.98)
         );
 
-    border:1px solid rgba(255,255,255,.11);
+    border:1px solid rgba(111,184,255,.14);
 
     box-shadow:
-        0 35px 100px rgba(0,0,0,.55);
+        0 40px 120px rgba(0,0,0,.65);
 }
 
-.start-icon{
-    width:82px;
-    height:82px;
+.logo{
+    width:88px;
+    height:88px;
 
     margin:0 auto 18px;
 
@@ -460,254 +632,211 @@ body{
     align-items:center;
     justify-content:center;
 
-    border-radius:26px;
+    border-radius:28px;
 
-    font-size:40px;
+    font-size:43px;
 
     background:
         linear-gradient(
             145deg,
-            #ffd85a,
-            #ff8c20
+            #ffe45d,
+            #ff8b19
         );
 
     box-shadow:
-        0 12px 35px rgba(255,157,30,.25);
+        0 0 50px rgba(255,161,29,.28);
 }
 
-.start-card h2{
-    font-size:25px;
+.start-card h1{
+    font-size:28px;
     margin-bottom:8px;
 }
 
+.start-card h1 span{
+    color:#ffd24c;
+}
+
 .start-card p{
-    color:#8e9db9;
+    color:#8fa1bd;
     font-size:12px;
     line-height:2;
 }
 
-/* =========================
-   START BUTTON
-========================= */
-
-.start-btn{
+.start-button{
     width:100%;
-    height:55px;
+    height:58px;
 
-    margin-top:22px;
+    margin-top:23px;
 
     border:0;
-    border-radius:17px;
-
-    cursor:pointer;
+    border-radius:18px;
 
     font-family:inherit;
+
     font-size:16px;
     font-weight:900;
 
-    color:#17100a;
+    color:#07101d;
 
     background:
         linear-gradient(
             135deg,
-            #ffe36b,
-            #ffab25
+            #ffe875,
+            #ff9d25
         );
 
     box-shadow:
-        0 12px 30px rgba(255,169,38,.25);
-
-    transition:
-        transform .15s ease,
-        box-shadow .15s ease;
-}
-
-.start-btn:active{
-    transform:scale(.96);
-}
-
-/* =========================
-   BOTTOM CONTROLS
-========================= */
-
-.bottom{
-    position:absolute;
-    z-index:20;
-
-    bottom:0;
-    left:0;
-    right:0;
-
-    height:82px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-
-    padding:10px 14px;
-
-    background:
-        linear-gradient(
-            0deg,
-            rgba(5,10,20,.98),
-            rgba(5,10,20,.72)
-        );
-
-    border-top:1px solid rgba(255,255,255,.07);
-    backdrop-filter:blur(12px);
-}
-
-.control-btn{
-    width:56px;
-    height:56px;
-
-    border-radius:18px;
-
-    border:1px solid rgba(255,255,255,.09);
-
-    background:
-        rgba(255,255,255,.055);
-
-    color:#dbe7ff;
-
-    font-size:21px;
+        0 15px 35px rgba(255,165,30,.25);
 
     cursor:pointer;
-
-    transition:
-        transform .12s ease,
-        background .12s ease;
 }
 
-.control-btn:active{
-    transform:scale(.9);
+.start-button:active{
+    transform:scale(.97);
 }
 
-.pause-btn{
-    width:70px;
-    background:
-        linear-gradient(
-            145deg,
-            #315d9d,
-            #1c355e
-        );
+/* =========================================
+   GAME OVER
+========================================= */
 
-    color:#fff;
+.result{
+    margin-top:18px;
+
+    display:none;
+
+    padding:14px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,255,255,.07);
 }
 
-/* =========================
+.result.show{
+    display:block;
+}
+
+.result small{
+    color:#8294af;
+}
+
+.result strong{
+    display:block;
+
+    margin-top:5px;
+
+    font-size:25px;
+
+    color:#ffd34d;
+}
+
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media(max-width:430px){
 
-    .topbar{
-        height:70px;
+    .hud{
+        height:74px;
         padding:10px;
     }
 
-    .info-box{
-        min-width:72px;
-        height:46px;
+    .hud-card{
+        min-width:76px;
+        height:49px;
+        padding:5px 8px;
     }
 
-    .info-value{
+    .hud-number{
         font-size:15px;
     }
 
-    .game-title{
-        top:80px;
+    .player-name{
+        top:82px;
+        right:12px;
     }
 
-    .game-title h1{
-        font-size:22px;
+    .world{
+        top:116px;
+        bottom:92px;
+        left:8px;
+        right:8px;
+        border-radius:25px;
     }
 
-    .play-area{
-        top:135px;
-        bottom:88px;
-        left:9px;
-        right:9px;
-        border-radius:23px;
+    .target{
+        width:66px;
+        height:66px;
+        border-radius:21px;
     }
 
     .player{
         width:66px;
         height:66px;
-        bottom:30px;
     }
 
-    .target{
-        width:56px;
-        height:56px;
+    .bottom{
+        height:86px;
     }
 }
-</style></head><body><div class="game"><!-- TOP BAR -->
+</style></head><body><div class="scene"><div class="particles">
+    <i></i><i></i><i></i><i></i><i></i>
+    <i></i><i></i><i></i><i></i><i></i>
+</div>
 
-<div class="topbar">
 
-    <div class="info-box score-box">
-        <div class="info-title">امتیاز</div>
-        <div class="info-value" id="score">0</div>
+<!-- HUD -->
+
+<div class="hud">
+
+    <div class="hud-card score">
+        <div class="hud-label">امتیاز</div>
+        <div class="hud-number" id="score">0000</div>
     </div>
 
-    <div class="info-box">
-        <div class="info-title">زمان</div>
-        <div class="info-value" id="timer">30</div>
+    <div class="hud-card level">
+        <div class="hud-label">مرحله</div>
+        <div class="hud-number" id="level">01</div>
     </div>
 
-    <div class="info-box best-box">
-        <div class="info-title">رکورد</div>
-        <div class="info-value" id="best">0</div>
+    <div class="hud-card time">
+        <div class="hud-label">زمان</div>
+        <div class="hud-number" id="time">30</div>
     </div>
 
 </div>
 
 
-<!-- TITLE -->
+<!-- PLAYER NAME -->
 
-<div class="game-title">
-    <h1>HONEY ARENA</h1>
-    <p>هدف‌ها را بگیر و رکورد خودت را بشکن</p>
+<div class="player-name">
+    بازیکن:
+    <span id="playerName">مهمان</span>
 </div>
 
 
-<!-- GAME AREA -->
+<!-- WORLD -->
 
-<div class="play-area" id="playArea">
+<div class="world">
 
-    <div class="grid"></div>
-    <div class="arena-glow"></div>
+    <div class="floor"></div>
 
-    <div class="target" id="target"></div>
+    <div class="horizon"></div>
 
-    <div class="player" id="player"></div>
+    <div class="energy-core"></div>
 
-</div>
+    <div
+        class="target"
+        id="target">
 
+        <span>★</span>
 
-<!-- START SCREEN -->
+    </div>
 
-<div class="start-screen" id="startScreen">
-
-    <div class="start-card">
-
-        <div class="start-icon">🎮</div>
-
-        <h2>آماده‌ای؟</h2>
-
-        <p>
-            هدف‌های داخل زمین را لمس کن،
-            امتیاز بگیر و رکوردت را ثبت کن.
-        </p>
-
-        <button
-            class="start-btn"
-            id="startBtn">
-            شروع بازی
-        </button>
-
+    <div
+        class="player"
+        id="player">
     </div>
 
 </div>
@@ -718,57 +847,114 @@ body{
 <div class="bottom">
 
     <button
-        class="control-btn"
-        id="backBtn"
-        aria-label="بازگشت">
+        class="action"
+        id="back">
         ↩
     </button>
 
     <button
-        class="control-btn pause-btn"
-        id="pauseBtn"
-        aria-label="توقف">
+        class="action main-action"
+        id="pause">
         ⏸
     </button>
 
     <button
-        class="control-btn"
-        id="soundBtn"
-        aria-label="صدا">
+        class="action"
+        id="sound">
         🔊
     </button>
 
 </div>
 
+
+<!-- START -->
+
+<div
+    class="overlay"
+    id="overlay">
+
+    <div class="start-card">
+
+        <div class="logo">🎮</div>
+
+        <h1>
+            HONEY <span>ARENA</span>
+        </h1>
+
+        <p>
+            وارد میدان شو، هدف‌ها را شکار کن
+            و رکورد خودت را بشکن.
+        </p>
+
+        <div
+            class="result"
+            id="result">
+
+            <small>
+                امتیاز بازی قبلی
+            </small>
+
+            <strong id="lastScore">
+                0
+            </strong>
+
+        </div>
+
+        <button
+            class="start-button"
+            id="start">
+
+            شروع بازی
+
+        </button>
+
+    </div>
+
+</div>
+
 </div><script>
 
-/* =========================
+/* =========================================
+   PLAYER
+========================================= */
+
+const playerName =
+    localStorage.getItem("username") ||
+    localStorage.getItem("playerName") ||
+    "مهمان";
+
+document.getElementById("playerName")
+    .textContent = playerName;
+
+
+/* =========================================
    GAME VARIABLES
-========================= */
+========================================= */
 
 let score = 0;
 let time = 30;
-let best = Number(localStorage.getItem("honeyBest") || 0);
+let level = 1;
 
 let playing = false;
 let paused = false;
-let soundOn = true;
 
-let timerInterval = null;
+let timer = null;
+
+let best =
+    Number(
+        localStorage.getItem("honeyGameBest") || 0
+    );
 
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
-const scoreEl =
-    document.getElementById("score");
+const overlay =
+    document.getElementById("overlay");
 
-const timerEl =
-    document.getElementById("timer");
-
-const bestEl =
-    document.getElementById("best");
+const start =
+    document.getElementById("start");
 
 const target =
     document.getElementById("target");
@@ -776,120 +962,143 @@ const target =
 const player =
     document.getElementById("player");
 
-const playArea =
-    document.getElementById("playArea");
+const scoreEl =
+    document.getElementById("score");
 
-const startScreen =
-    document.getElementById("startScreen");
+const timeEl =
+    document.getElementById("time");
 
-const startBtn =
-    document.getElementById("startBtn");
+const levelEl =
+    document.getElementById("level");
 
-const pauseBtn =
-    document.getElementById("pauseBtn");
+const pause =
+    document.getElementById("pause");
 
-const soundBtn =
-    document.getElementById("soundBtn");
+const sound =
+    document.getElementById("sound");
 
-const backBtn =
-    document.getElementById("backBtn");
+const back =
+    document.getElementById("back");
+
+const result =
+    document.getElementById("result");
+
+const lastScore =
+    document.getElementById("lastScore");
+
+const world =
+    document.querySelector(".world");
 
 
-bestEl.textContent = best;
-
-
-/* =========================
-   RANDOM TARGET
-========================= */
+/* =========================================
+   TARGET POSITION
+========================================= */
 
 function moveTarget(){
 
-    const rect =
-        playArea.getBoundingClientRect();
+    const w = world.clientWidth;
+    const h = world.clientHeight;
 
-    const targetSize =
-        target.offsetWidth;
+    const size = target.offsetWidth;
 
-    const padding = 18;
-
-    const maxX =
-        rect.width -
-        targetSize -
-        padding;
-
-    const maxY =
-        rect.height -
-        targetSize -
-        padding;
+    const padding = 20;
 
     const x =
         padding +
-        Math.random() * Math.max(0,maxX-padding);
+        Math.random() *
+        Math.max(
+            10,
+            w - size - padding * 2
+        );
 
     const y =
-        padding +
-        Math.random() * Math.max(0,maxY-padding);
+        40 +
+        Math.random() *
+        Math.max(
+            10,
+            h - size - 110
+        );
 
-    target.style.left = x + "px";
-    target.style.top = y + "px";
+    target.style.left =
+        x + "px";
+
+    target.style.top =
+        y + "px";
 }
 
 
-/* =========================
-   HIT TARGET
-========================= */
+/* =========================================
+   HIT
+========================================= */
 
-function hitTarget(){
+function hit(){
 
-    if(!playing || paused) return;
+    if(!playing || paused)
+        return;
 
     score++;
 
-    scoreEl.textContent = score;
+    scoreEl.textContent =
+        String(score).padStart(4,"0");
 
-    player.classList.add("active");
+    player.classList.add("hit");
 
     setTimeout(()=>{
-        player.classList.remove("active");
+        player.classList.remove("hit");
     },120);
+
+    if(score % 10 === 0){
+
+        level++;
+
+        levelEl.textContent =
+            String(level).padStart(2,"0");
+    }
 
     moveTarget();
 }
 
 
-/* =========================
-   START GAME
-========================= */
+/* =========================================
+   START
+========================================= */
 
 function startGame(){
 
     score = 0;
     time = 30;
+    level = 1;
 
     playing = true;
     paused = false;
 
-    scoreEl.textContent = score;
-    timerEl.textContent = time;
+    scoreEl.textContent = "0000";
+    timeEl.textContent = "30";
+    levelEl.textContent = "01";
 
-    startScreen.classList.add("hidden");
+    pause.textContent = "⏸";
 
-    pauseBtn.textContent = "⏸";
+    result.classList.remove("show");
+
+    overlay.classList.add("hide");
 
     moveTarget();
 
-    clearInterval(timerInterval);
+    clearInterval(timer);
 
-    timerInterval =
+    timer =
         setInterval(()=>{
 
-            if(!playing || paused) return;
+            if(!playing || paused)
+                return;
 
             time--;
 
-            timerEl.textContent = time;
+            timeEl.textContent =
+                String(time).padStart(2,"0");
 
             if(time <= 0){
+
                 endGame();
             }
 
@@ -897,125 +1106,127 @@ function startGame(){
 }
 
 
-/* =========================
-   END GAME
-========================= */
+/* =========================================
+   END
+========================================= */
 
 function endGame(){
 
     playing = false;
 
-    clearInterval(timerInterval);
+    clearInterval(timer);
+
+    lastScore.textContent =
+        score;
+
+    result.classList.add("show");
+
+    start.textContent =
+        "بازی دوباره";
+
+    overlay.classList.remove("hide");
 
     if(score > best){
 
         best = score;
 
         localStorage.setItem(
-            "honeyBest",
+            "honeyGameBest",
             best
         );
-
-        bestEl.textContent = best;
     }
-
-    setTimeout(()=>{
-
-        startBtn.textContent =
-            "دوباره بازی کن";
-
-        startScreen.classList.remove(
-            "hidden"
-        );
-
-    },300);
 }
 
 
-/* =========================
+/* =========================================
    PAUSE
-========================= */
+========================================= */
 
 function togglePause(){
 
-    if(!playing) return;
+    if(!playing)
+        return;
 
     paused = !paused;
 
-    pauseBtn.textContent =
+    pause.textContent =
         paused ? "▶" : "⏸";
 }
 
 
-/* =========================
+/* =========================================
    SOUND
-========================= */
+========================================= */
+
+let soundOn = true;
 
 function toggleSound(){
 
     soundOn = !soundOn;
 
-    soundBtn.textContent =
+    sound.textContent =
         soundOn ? "🔊" : "🔇";
 }
 
 
-/* =========================
+/* =========================================
    EVENTS
-========================= */
+========================================= */
 
-target.addEventListener(
-    "pointerdown",
-    hitTarget
-);
-
-startBtn.addEventListener(
+start.addEventListener(
     "click",
     startGame
 );
 
-pauseBtn.addEventListener(
+target.addEventListener(
+    "pointerdown",
+    hit
+);
+
+pause.addEventListener(
     "click",
     togglePause
 );
 
-soundBtn.addEventListener(
+sound.addEventListener(
     "click",
     toggleSound
 );
 
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* =========================================
+   BACK
+========================================= */
 
-backBtn.addEventListener(
+back.addEventListener(
     "click",
     ()=>{
 
-        /*
-         * اگر صفحه بازی‌هایت games.html است
-         * همین مسیر را نگه دار.
-         */
-
         window.location.href =
             "games.html";
+
     }
 );
 
 
-/* =========================
-   INITIAL POSITION
-========================= */
+/* =========================================
+   RESIZE
+========================================= */
 
 window.addEventListener(
     "resize",
     ()=>{
-        if(!playing){
+
+        if(!playing)
             moveTarget();
-        }
+
     }
 );
+
+
+/* =========================================
+   INIT
+========================================= */
 
 moveTarget();
 
