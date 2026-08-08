@@ -1,19 +1,28 @@
 <!DOCTYPE html><html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>عسل منچ 3D</title><style>
+<head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>عسل منچ | 3D</title><style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#02050a;
-    font-family:Tahoma,Arial,sans-serif;
+    background:#05070b;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
 }
 
 #game{
@@ -21,179 +30,188 @@ html,body{
     inset:0;
 }
 
-canvas{
-    display:block;
+/* ================================
+   LOADING
+================================ */
+
+.loading{
+    position:fixed;
+    inset:0;
+
+    z-index:999;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #18273a,
+            #05070b 70%
+        );
+
+    transition:
+        opacity .5s,
+        visibility .5s;
 }
+
+.loading.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loading-logo{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.loading-title{
+    color:white;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.loading-title span{
+    color:#ffd34d;
+}
+
+.loading-bar{
+    width:220px;
+    height:5px;
+
+    margin-top:22px;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+.loading-progress{
+    width:0%;
+    height:100%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9d19,
+            #ffe56b
+        );
+
+    transition:
+        width .25s;
+}
+
+/* ================================
+   HUD
+================================ */
 
 .hud{
     position:fixed;
     inset:0;
+
+    z-index:20;
+
     pointer-events:none;
-    z-index:10;
 }
 
-.top{
+/* TOP */
+
+.topbar{
     position:absolute;
+
     top:14px;
     left:14px;
     right:14px;
 
     display:flex;
+
     align-items:center;
     justify-content:space-between;
 }
 
-.brand{
-    padding:11px 16px;
+.logo{
+
+    padding:
+        10px
+        15px;
 
     border-radius:15px;
 
-    background:rgba(5,12,21,.72);
-    border:1px solid rgba(255,255,255,.12);
+    color:white;
 
-    color:#fff;
+    background:
+        rgba(5,12,21,.78);
 
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-    backdrop-filter:blur(14px);
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.35);
+
+    backdrop-filter:
+        blur(14px);
 }
 
-.brand b{
+.logo b{
     color:#ffd34d;
 }
 
-.info{
-    padding:10px 15px;
+.status{
+
+    padding:
+        9px
+        13px;
 
     border-radius:15px;
 
-    background:rgba(5,12,21,.72);
-    border:1px solid rgba(255,255,255,.12);
+    color:#cbd7e5;
 
-    color:#d9e5f2;
-
-    font-size:11px;
-
-    backdrop-filter:blur(14px);
-}
-
-.turn{
-    position:absolute;
-
-    left:50%;
-    bottom:22px;
-
-    transform:translateX(-50%);
-
-    min-width:205px;
-
-    padding:9px 10px;
-
-    border-radius:18px;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    background:rgba(4,10,18,.86);
-
-    border:1px solid rgba(255,255,255,.13);
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.5),
-        0 0 25px rgba(255,190,50,.08);
-
-    backdrop-filter:blur(18px);
-}
-
-.turnText{
-    flex:1;
-    color:#fff;
     font-size:10px;
-}
-
-.turnText small{
-    display:block;
-    color:#8294a9;
-    margin-bottom:4px;
-}
-
-.diceButton{
-    width:52px;
-    height:52px;
-
-    border:0;
-    border-radius:15px;
 
     background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #bfcbd8
-        );
+        rgba(5,12,21,.78);
 
-    color:#162234;
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-    font-size:25px;
+    backdrop-filter:
+        blur(14px);
+}
+
+.status-dot{
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    margin-left:4px;
+
+    border-radius:50%;
+
+    background:#49df77;
 
     box-shadow:
-        0 7px 18px rgba(0,0,0,.45),
-        inset 0 2px 4px rgba(255,255,255,.9);
-
-    cursor:pointer;
-
-    pointer-events:auto;
+        0 0 10px
+        #49df77;
 }
 
-.diceButton.roll{
-    animation:roll .6s ease;
-}
-
-@keyframes roll{
-    0%{
-        transform:rotate(0) scale(1);
-    }
-    35%{
-        transform:rotate(140deg) scale(.75);
-    }
-    70%{
-        transform:rotate(290deg) scale(1.12);
-    }
-    100%{
-        transform:rotate(360deg) scale(1);
-    }
-}
-
-.hint{
-    position:absolute;
-
-    left:50%;
-    top:85px;
-
-    transform:translateX(-50%);
-
-    padding:9px 16px;
-
-    border-radius:13px;
-
-    background:rgba(4,10,18,.82);
-
-    border:1px solid rgba(255,211,77,.2);
-
-    color:#dce7f3;
-
-    font-size:9px;
-
-    opacity:0;
-
-    transition:.3s;
-}
-
-.hint.show{
-    opacity:1;
-}
+/* ================================
+   PLAYER CARDS
+================================ */
 
 .player{
+
     position:absolute;
 
     width:145px;
@@ -202,169 +220,495 @@ canvas{
 
     border-radius:16px;
 
-    background:rgba(5,13,22,.78);
+    color:white;
 
-    border:1px solid rgba(255,255,255,.10);
+    background:
+        rgba(5,13,22,.78);
 
-    backdrop-filter:blur(15px);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-    box-shadow:0 15px 35px rgba(0,0,0,.4);
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.4);
+
+    backdrop-filter:
+        blur(15px);
+
 }
 
 .player.red{
-    top:85px;
+    top:82px;
     left:12px;
 }
 
 .player.green{
-    top:85px;
+    top:82px;
     right:12px;
 }
 
 .player.yellow{
-    bottom:85px;
+    bottom:80px;
     right:12px;
 }
 
 .player.blue{
-    bottom:85px;
+    bottom:80px;
     left:12px;
-    border-color:rgba(85,190,255,.4);
+
+    border-color:
+        rgba(75,180,255,.45);
 }
 
-.playerName{
+.player-name{
     font-size:10px;
-    color:white;
+    font-weight:bold;
 }
 
-.playerStatus{
+.player-state{
     margin-top:4px;
+
     font-size:8px;
-    color:#6be58b;
+
+    color:#68e68a;
 }
+
+/* ================================
+   BOTTOM PANEL
+================================ */
+
+.bottom{
+
+    position:absolute;
+
+    left:50%;
+    bottom:16px;
+
+    transform:
+        translateX(-50%);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-width:205px;
+
+    padding:9px;
+
+    border-radius:18px;
+
+    background:
+        rgba(4,10,18,.88);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.5);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+.turn{
+    flex:1;
+
+    color:white;
+
+    font-size:10px;
+}
+
+.turn small{
+    display:block;
+
+    margin-bottom:4px;
+
+    color:#8294a9;
+}
+
+.dice{
+
+    width:54px;
+    height:54px;
+
+    border:0;
+
+    border-radius:15px;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    color:#162234;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #c2ccd7
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.45),
+
+        inset 0 2px 4px
+        rgba(255,255,255,.9);
+
+}
+
+.dice.rolling{
+    animation:
+        diceRoll .65s
+        ease;
+}
+
+@keyframes diceRoll{
+
+    0%{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+
+    30%{
+        transform:
+            rotate(120deg)
+            scale(.75);
+    }
+
+    60%{
+        transform:
+            rotate(270deg)
+            scale(1.1);
+    }
+
+    100%{
+        transform:
+            rotate(360deg)
+            scale(1);
+    }
+
+}
+
+/* ================================
+   MESSAGE
+================================ */
+
+.message{
+
+    position:absolute;
+
+    top:82px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        9px
+        15px;
+
+    border-radius:13px;
+
+    font-size:9px;
+
+    color:#dbe7f3;
+
+    background:
+        rgba(5,12,21,.85);
+
+    border:
+        1px solid
+        rgba(255,205,70,.2);
+
+    opacity:0;
+
+    transition:.3s;
+
+}
+
+.message.show{
+    opacity:1;
+}
+
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:650px){
 
     .player{
-        width:112px;
-        padding:7px;
+        width:110px;
     }
 
-    .player.red,
-    .player.green{
-        top:75px;
+    .player-name{
+        font-size:9px;
     }
 
-    .player.yellow,
-    .player.blue{
-        bottom:75px;
+    .player-state{
+        font-size:7px;
     }
 
-    .brand{
+    .logo{
         font-size:11px;
     }
 
-    .info{
-        font-size:9px;
+    .status{
+        font-size:8px;
     }
+
 }
-</style></head><body><div id="game"></div><div class="hud"><div class="top">
 
-    <div class="brand">
-        🍯 عسل <b>منچ</b>
-    </div>
+</style></head><body><!-- ================================
+     LOADING SCREEN
+================================ --><div class="loading" id="loading"><div class="loading-logo">
+    🍯
+</div>
 
-    <div class="info">
-        🟢 آنلاین
-        &nbsp; • &nbsp;
-        4 بازیکن
+<div class="loading-title">
+    عسل <span>منچ</span>
+</div>
+
+<div class="loading-bar">
+
+    <div
+        class="loading-progress"
+        id="progress">
     </div>
 
 </div>
 
+</div><!-- ================================
+     THREE.JS
+================================ --><div id="game"></div><!-- ================================
+     HUD
+================================ --><div class="hud"><div class="topbar">
+
+    <div class="logo">
+
+        🍯 عسل <b>منچ</b>
+
+    </div>
+
+
+    <div class="status">
+
+        <span class="status-dot"></span>
+
+        آنلاین
+
+    </div>
+
+</div>
+
+
+<!-- PLAYER 1 -->
 
 <div class="player red">
-    <div class="playerName">🔴 آرش</div>
-    <div class="playerStatus">● آنلاین</div>
-</div>
 
-<div class="player green">
-    <div class="playerName">🟢 علی</div>
-    <div class="playerStatus">● آنلاین</div>
-</div>
-
-<div class="player yellow">
-    <div class="playerName">🟡 محمد</div>
-    <div class="playerStatus">● آنلاین</div>
-</div>
-
-<div class="player blue">
-    <div class="playerName">🔵 شما</div>
-    <div class="playerStatus">● نوبت شما</div>
-</div>
-
-
-<div class="hint" id="hint">
-    🎲 تاس را پرتاب کن
-</div>
-
-
-<div class="turn">
-
-    <div class="turnText">
-        <small>نوبت بازیکن</small>
-        شما — آبی
+    <div class="player-name">
+        🔴 بازیکن قرمز
     </div>
 
-    <button class="diceButton" id="dice">
+    <div class="player-state">
+        ● آنلاین
+    </div>
+
+</div>
+
+
+<!-- PLAYER 2 -->
+
+<div class="player green">
+
+    <div class="player-name">
+        🟢 بازیکن سبز
+    </div>
+
+    <div class="player-state">
+        ● آنلاین
+    </div>
+
+</div>
+
+
+<!-- PLAYER 3 -->
+
+<div class="player yellow">
+
+    <div class="player-name">
+        🟡 بازیکن زرد
+    </div>
+
+    <div class="player-state">
+        ● آنلاین
+    </div>
+
+</div>
+
+
+<!-- PLAYER 4 -->
+
+<div class="player blue">
+
+    <div class="player-name">
+        🔵 شما
+    </div>
+
+    <div class="player-state">
+        ● نوبت شما
+    </div>
+
+</div>
+
+
+<div
+    class="message"
+    id="message">
+</div>
+
+
+<div class="bottom">
+
+    <div class="turn">
+
+        <small>
+            نوبت بازی
+        </small>
+
+        شما — آبی
+
+    </div>
+
+
+    <button
+        class="dice"
+        id="dice">
+
         ⚀
+
     </button>
 
 </div>
 
-</div><script type="importmap">
+</div><!-- =====================================================
+     IMPORT MAP
+===================================================== --><script type="importmap">
+
 {
+
     "imports":{
-        "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+
     }
+
 }
-</script><script type="module">
 
-import * as THREE from "three";
+</script><!-- =====================================================
+     MAIN GAME
+===================================================== --><script type="module">
+
+import * as THREE
+from "three";
+
+import {
+    GLTFLoader
+}
+from "three/addons/loaders/GLTFLoader.js";
 
 
-/* ==================================================
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const CONFIG = {
+
+    /* محل مدل Blender */
+
+    models:{
+
+        board:
+        "./models/board.glb",
+
+        pawn:
+        "./models/pawn.glb",
+
+        dice:
+        "./models/dice.glb"
+
+    },
+
+    /* Firebase را در مرحله بعد
+       اینجا قرار می‌دهیم */
+
+    firebase:{
+
+        enabled:false,
+
+        databaseURL:"",
+
+        projectId:""
+
+    }
+
+};
+
+
+/* =====================================================
    SCENE
-================================================== */
+===================================================== */
 
-const scene = new THREE.Scene();
+const scene =
+new THREE.Scene();
 
 scene.background =
-    new THREE.Color(0x02060c);
+new THREE.Color(
+    0x03070d
+);
 
 scene.fog =
-    new THREE.FogExp2(
-        0x02060c,
-        0.035
-    );
+new THREE.FogExp2(
+    0x03070d,
+    .035
+);
 
 
-/* ==================================================
+/* =====================================================
    CAMERA
-================================================== */
+===================================================== */
 
 const camera =
-    new THREE.PerspectiveCamera(
-        42,
-        innerWidth / innerHeight,
-        0.1,
-        100
-    );
+new THREE.PerspectiveCamera(
+
+    42,
+
+    innerWidth /
+    innerHeight,
+
+    .1,
+
+    100
+
+);
 
 camera.position.set(
     0,
-    13,
-    13
+    12,
+    12
 );
 
 camera.lookAt(
@@ -374,15 +718,24 @@ camera.lookAt(
 );
 
 
-/* ==================================================
+/* =====================================================
    RENDERER
-================================================== */
+===================================================== */
 
 const renderer =
-    new THREE.WebGLRenderer({
-        antialias:true,
-        powerPreference:"high-performance"
-    });
+new THREE.WebGLRenderer({
+
+    antialias:true,
+
+    powerPreference:
+    "high-performance"
+
+});
+
+renderer.setSize(
+    innerWidth,
+    innerHeight
+);
 
 renderer.setPixelRatio(
     Math.min(
@@ -391,75 +744,88 @@ renderer.setPixelRatio(
     )
 );
 
-renderer.setSize(
-    innerWidth,
-    innerHeight
-);
-
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled =
+true;
 
 renderer.shadowMap.type =
-    THREE.PCFSoftShadowMap;
+THREE.PCFSoftShadowMap;
 
 renderer.outputColorSpace =
-    THREE.SRGBColorSpace;
+THREE.SRGBColorSpace;
 
 renderer.toneMapping =
-    THREE.ACESFilmicToneMapping;
+THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-    1.18;
+1.15;
+
 
 document
-    .getElementById("game")
-    .appendChild(renderer.domElement);
+.getElementById("game")
+.appendChild(
+    renderer.domElement
+);
 
 
-/* ==================================================
-   LIGHTING
-================================================== */
+/* =====================================================
+   LIGHT
+===================================================== */
 
 const ambient =
-    new THREE.HemisphereLight(
-        0xaecfff,
-        0x201507,
-        2.2
-    );
+new THREE.HemisphereLight(
 
-scene.add(ambient);
+    0xbad6ff,
+
+    0x241609,
+
+    2
+
+);
+
+scene.add(
+    ambient
+);
 
 
-const key =
-    new THREE.DirectionalLight(
-        0xffe5b0,
-        4.2
-    );
+const sun =
+new THREE.DirectionalLight(
 
-key.position.set(
+    0xffe3ad,
+
+    4
+
+);
+
+sun.position.set(
     -7,
     12,
     8
 );
 
-key.castShadow = true;
+sun.castShadow =
+true;
 
-key.shadow.mapSize.width = 2048;
-key.shadow.mapSize.height = 2048;
+sun.shadow.mapSize.width =
+2048;
 
-key.shadow.camera.left = -12;
-key.shadow.camera.right = 12;
-key.shadow.camera.top = 12;
-key.shadow.camera.bottom = -12;
+sun.shadow.mapSize.height =
+2048;
 
-scene.add(key);
+scene.add(
+    sun
+);
 
 
 const blueLight =
-    new THREE.PointLight(
-        0x338cff,
-        10,
-        18
-    );
+new THREE.PointLight(
+
+    0x258cff,
+
+    8,
+
+    18
+
+);
 
 blueLight.position.set(
     -5,
@@ -467,354 +833,190 @@ blueLight.position.set(
     -4
 );
 
-scene.add(blueLight);
+scene.add(
+    blueLight
+);
 
 
 const goldLight =
-    new THREE.PointLight(
-        0xffb52e,
-        12,
-        15
-    );
+new THREE.PointLight(
+
+    0xffae20,
+
+    10,
+
+    15
+
+);
 
 goldLight.position.set(
     4,
-    5,
+    4,
     3
 );
 
-scene.add(goldLight);
+scene.add(
+    goldLight
+);
 
 
-/* ==================================================
+/* =====================================================
    FLOOR
-================================================== */
+===================================================== */
 
-const floorGeo =
-    new THREE.CylinderGeometry(
-        15,
-        15,
-        .6,
-        64
-    );
+const floorGeometry =
+new THREE.CylinderGeometry(
 
-const floorMat =
-    new THREE.MeshStandardMaterial({
-        color:0x08111a,
-        roughness:.38,
-        metalness:.5
-    });
+    15,
+    15,
+    .6,
+    64
+
+);
+
+const floorMaterial =
+new THREE.MeshStandardMaterial({
+
+    color:
+    0x08111a,
+
+    roughness:
+    .38,
+
+    metalness:
+    .45
+
+});
 
 const floor =
-    new THREE.Mesh(
-        floorGeo,
-        floorMat
-    );
+new THREE.Mesh(
 
-floor.position.y = -1;
+    floorGeometry,
 
-floor.receiveShadow = true;
+    floorMaterial
 
-scene.add(floor);
+);
 
+floor.position.y =
+-1;
 
-/* ==================================================
-   TABLE BASE
-================================================== */
+floor.receiveShadow =
+true;
 
-const tableGeo =
-    new THREE.BoxGeometry(
-        10,
-        .85,
-        10
-    );
-
-const tableMat =
-    new THREE.MeshStandardMaterial({
-        color:0x2b1710,
-        roughness:.27,
-        metalness:.12
-    });
-
-const table =
-    new THREE.Mesh(
-        tableGeo,
-        tableMat
-    );
-
-table.position.y = -0.25;
-
-table.castShadow = true;
-table.receiveShadow = true;
-
-scene.add(table);
+scene.add(
+    floor
+);
 
 
-/* ==================================================
-   BOARD
-================================================== */
+/* =====================================================
+   TEMPORARY BOARD
+   بعداً board.glb جایگزین می‌شود
+===================================================== */
 
-const boardGeo =
-    new THREE.BoxGeometry(
-        9.45,
-        .28,
-        9.45
-    );
+const boardGeometry =
+new THREE.BoxGeometry(
 
-const boardMat =
-    new THREE.MeshStandardMaterial({
-        color:0xb88b43,
-        roughness:.43,
-        metalness:.08
-    });
+    9,
+    .45,
+    9
+
+);
+
+const boardMaterial =
+new THREE.MeshStandardMaterial({
+
+    color:
+    0x9d7337,
+
+    roughness:
+    .38,
+
+    metalness:
+    .12
+
+});
 
 const board =
-    new THREE.Mesh(
-        boardGeo,
-        boardMat
-    );
+new THREE.Mesh(
 
-board.position.y = .35;
+    boardGeometry,
 
-board.receiveShadow = true;
-board.castShadow = true;
+    boardMaterial
 
-scene.add(board);
+);
 
+board.position.y =
+.1;
 
-/* ==================================================
-   BOARD FRAME
-================================================== */
+board.castShadow =
+true;
 
-const frameMat =
-    new THREE.MeshStandardMaterial({
-        color:0x4b2b18,
-        roughness:.3,
-        metalness:.15
-    });
+board.receiveShadow =
+true;
 
-function frame(
-    x,
-    z,
-    sx,
-    sz
-){
-
-    const geo =
-        new THREE.BoxGeometry(
-            sx,
-            .45,
-            sz
-        );
-
-    const mesh =
-        new THREE.Mesh(
-            geo,
-            frameMat
-        );
-
-    mesh.position.set(
-        x,
-        .55,
-        z
-    );
-
-    mesh.castShadow = true;
-
-    scene.add(mesh);
-}
-
-frame(0,-4.75,10,.35);
-frame(0,4.75,10,.35);
-frame(-4.75,0,.35,10);
-frame(4.75,0,.35,10);
+scene.add(
+    board
+);
 
 
-/* ==================================================
-   HOME AREAS
-================================================== */
-
-const homeData = [
-
-    {
-        x:-2.9,
-        z:-2.9,
-        color:0xd8323e
-    },
-
-    {
-        x:2.9,
-        z:-2.9,
-        color:0x23a957
-    },
-
-    {
-        x:2.9,
-        z:2.9,
-        color:0xe5ae25
-    },
-
-    {
-        x:-2.9,
-        z:2.9,
-        color:0x238fd4
-    }
-
-];
-
-
-const homes = [];
-
-
-for(
-    const data of homeData
-){
-
-    const geo =
-        new THREE.BoxGeometry(
-            3.15,
-            .18,
-            3.15
-        );
-
-    const mat =
-        new THREE.MeshStandardMaterial({
-            color:data.color,
-            roughness:.34,
-            metalness:.12
-        });
-
-    const mesh =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-    mesh.position.set(
-        data.x,
-        .57,
-        data.z
-    );
-
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-
-    scene.add(mesh);
-
-    homes.push(mesh);
-}
-
-
-/* ==================================================
-   PATH CELLS
-================================================== */
-
-const pathCells = [];
-
-const cellSize = .52;
-
-for(
-    let row=-5;
-    row<=5;
-    row++
-){
-
-    for(
-        let col=-5;
-        col<=5;
-        col++
-    ){
-
-        if(
-            Math.abs(row)<=1 &&
-            Math.abs(col)<=1
-        ){
-            continue;
-        }
-
-        const edge =
-            Math.abs(row)===5 ||
-            Math.abs(col)===5;
-
-        if(!edge){
-            continue;
-        }
-
-        const geo =
-            new THREE.BoxGeometry(
-                cellSize,
-                .12,
-                cellSize
-            );
-
-        const mat =
-            new THREE.MeshStandardMaterial({
-                color:0xe5d29a,
-                roughness:.55,
-                metalness:.03
-            });
-
-        const cell =
-            new THREE.Mesh(
-                geo,
-                mat
-            );
-
-        cell.position.set(
-            col*.73,
-            .72,
-            row*.73
-        );
-
-        cell.castShadow = true;
-        cell.receiveShadow = true;
-
-        scene.add(cell);
-
-        pathCells.push(cell);
-
-    }
-
-}
-
-
-/* ==================================================
+/* =====================================================
    CENTER
-================================================== */
+===================================================== */
 
-const centerGeo =
-    new THREE.CylinderGeometry(
-        1.35,
-        1.35,
-        .18,
-        64
-    );
+const centerGeometry =
+new THREE.CylinderGeometry(
 
-const centerMat =
-    new THREE.MeshStandardMaterial({
-        color:0xffbd32,
-        roughness:.25,
-        metalness:.25,
-        emissive:0x4c2600,
-        emissiveIntensity:.35
-    });
+    1.3,
+    1.3,
+    .18,
+    64
+
+);
+
+const centerMaterial =
+new THREE.MeshStandardMaterial({
+
+    color:
+    0xffbc30,
+
+    roughness:
+    .25,
+
+    metalness:
+    .2,
+
+    emissive:
+    0x4b2500,
+
+    emissiveIntensity:
+    .4
+
+});
 
 const center =
-    new THREE.Mesh(
-        centerGeo,
-        centerMat
-    );
+new THREE.Mesh(
 
-center.position.y = .78;
+    centerGeometry,
 
-center.castShadow = true;
+    centerMaterial
 
-scene.add(center);
+);
+
+center.position.y =
+.38;
+
+center.castShadow =
+true;
+
+scene.add(
+    center
+);
 
 
-/* ==================================================
-   PAWN FUNCTION
-================================================== */
+/* =====================================================
+   TEMPORARY PAWNS
+   بعداً pawn.glb جایگزین می‌شود
+===================================================== */
 
 function createPawn(
     color,
@@ -823,105 +1025,95 @@ function createPawn(
 ){
 
     const group =
-        new THREE.Group();
+    new THREE.Group();
 
-    /* body */
 
-    const bodyGeo =
-        new THREE.SphereGeometry(
-            .28,
-            32,
-            24
-        );
+    const material =
+    new THREE.MeshStandardMaterial({
 
-    const bodyMat =
-        new THREE.MeshStandardMaterial({
-            color:color,
-            roughness:.22,
-            metalness:.18
-        });
+        color:color,
+
+        roughness:.22,
+
+        metalness:.18
+
+    });
+
 
     const body =
-        new THREE.Mesh(
-            bodyGeo,
-            bodyMat
-        );
+    new THREE.Mesh(
 
-    body.scale.y = 1.25;
-
-    body.position.y = .42;
-
-    body.castShadow = true;
-
-    group.add(body);
-
-
-    /* neck */
-
-    const neckGeo =
-        new THREE.CylinderGeometry(
-            .18,
-            .23,
-            .25,
-            32
-        );
-
-    const neck =
-        new THREE.Mesh(
-            neckGeo,
-            bodyMat
-        );
-
-    neck.position.y = .65;
-
-    neck.castShadow = true;
-
-    group.add(neck);
-
-
-    /* head */
-
-    const headGeo =
         new THREE.SphereGeometry(
-            .24,
+            .35,
             32,
-            32
-        );
+            24
+        ),
+
+        material
+
+    );
+
+    body.scale.y =
+    1.25;
+
+    body.position.y =
+    .55;
+
+    body.castShadow =
+    true;
+
+    group.add(
+        body
+    );
+
 
     const head =
-        new THREE.Mesh(
-            headGeo,
-            bodyMat
-        );
+    new THREE.Mesh(
 
-    head.position.y = .88;
+        new THREE.SphereGeometry(
+            .27,
+            32,
+            32
+        ),
 
-    head.castShadow = true;
+        material
 
-    group.add(head);
+    );
 
+    head.position.y =
+    .98;
 
-    /* base */
+    head.castShadow =
+    true;
 
-    const baseGeo =
-        new THREE.CylinderGeometry(
-            .38,
-            .44,
-            .13,
-            48
-        );
+    group.add(
+        head
+    );
+
 
     const base =
-        new THREE.Mesh(
-            baseGeo,
-            bodyMat
-        );
+    new THREE.Mesh(
 
-    base.position.y = .08;
+        new THREE.CylinderGeometry(
+            .42,
+            .48,
+            .15,
+            40
+        ),
 
-    base.castShadow = true;
+        material
 
-    group.add(base);
+    );
+
+    base.position.y =
+    .12;
+
+    base.castShadow =
+    true;
+
+    group.add(
+        base
+    );
 
 
     group.position.set(
@@ -930,242 +1122,377 @@ function createPawn(
         z
     );
 
-    scene.add(group);
+
+    scene.add(
+        group
+    );
+
 
     return group;
 
 }
 
 
-/* ==================================================
-   PAWNS
-================================================== */
-
 const pawnColors = [
-    0xe43a45,
-    0x2bb65b,
-    0xf0bd2c,
-    0x2998e5
+
+    0xe23b45,
+    0x28ad58,
+    0xe5b82d,
+    0x2998df
+
 ];
+
 
 const pawnPositions = [
 
-    [-3.25,-3.25],
-    [-2.45,-3.25],
-    [-3.25,-2.45],
-    [-2.45,-2.45],
+    [-2.9,-2.9],
+    [-2.1,-2.9],
+    [-2.9,-2.1],
+    [-2.1,-2.1],
 
-    [2.45,-3.25],
-    [3.25,-3.25],
-    [2.45,-2.45],
-    [3.25,-2.45],
+    [2.1,-2.9],
+    [2.9,-2.9],
+    [2.1,-2.1],
+    [2.9,-2.1],
 
-    [2.45,2.45],
-    [3.25,2.45],
-    [2.45,3.25],
-    [3.25,3.25],
+    [2.1,2.1],
+    [2.9,2.1],
+    [2.1,2.9],
+    [2.9,2.9],
 
-    [-3.25,2.45],
-    [-2.45,2.45],
-    [-3.25,3.25],
-    [-2.45,3.25]
+    [-2.9,2.1],
+    [-2.1,2.1],
+    [-2.9,2.9],
+    [-2.1,2.9]
 
 ];
 
 
 const pawns = [];
 
+
 for(
     let i=0;
-    i<16;
+    i<pawnPositions.length;
     i++
 ){
 
     const color =
-        pawnColors[
-            Math.floor(i/4)
-        ];
+    pawnColors[
+        Math.floor(i/4)
+    ];
 
-    const p =
-        pawnPositions[i];
+    const pos =
+    pawnPositions[i];
 
-    const pawn =
+    pawns.push(
+
         createPawn(
             color,
-            p[0],
-            p[1]
-        );
+            pos[0],
+            pos[1]
+        )
 
-    pawns.push(pawn);
+    );
 
 }
 
 
-/* ==================================================
-   DICE
-================================================== */
+/* =====================================================
+   GLB LOADER
+===================================================== */
 
-const diceGroup =
-    new THREE.Group();
+const loader =
+new GLTFLoader();
 
-diceGroup.position.set(
-    0,
-    1.05,
-    0
+
+function loadGLB(
+    path,
+    onLoaded
+){
+
+    loader.load(
+
+        path,
+
+        gltf=>{
+
+            const model =
+            gltf.scene;
+
+            model.traverse(
+                object=>{
+
+                    if(
+                        object.isMesh
+                    ){
+
+                        object.castShadow =
+                        true;
+
+                        object.receiveShadow =
+                        true;
+
+                    }
+
+                }
+            );
+
+            onLoaded(
+                model
+            );
+
+        },
+
+        xhr=>{
+
+            if(xhr.total){
+
+                const percent =
+                Math.round(
+                    xhr.loaded /
+                    xhr.total *
+                    100
+                );
+
+                setProgress(
+                    percent
+                );
+
+            }
+
+        },
+
+        error=>{
+
+            console.log(
+                "GLB not loaded:",
+                path
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   GLB READY FUNCTIONS
+===================================================== */
+
+function useBoardGLB(
+    model
+){
+
+    /* وقتی board.glb آماده شد،
+       اینجا مدل واقعی را جایگزین
+       تخته موقت می‌کنیم */
+
+    model.scale.set(
+        1,
+        1,
+        1
+    );
+
+    model.position.y =
+    .3;
+
+    scene.add(
+        model
+    );
+
+    board.visible =
+    false;
+
+}
+
+
+function usePawnGLB(
+    model
+){
+
+    /*
+      مدل حرفه‌ای مهره Blender
+      در مرحله بعد به سیستم
+      حرکت مهره متصل می‌شود.
+    */
+
+    model.scale.set(
+        .8,
+        .8,
+        .8
+    );
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+const loading =
+document.getElementById(
+    "loading"
 );
 
-scene.add(diceGroup);
+const progress =
+document.getElementById(
+    "progress"
+);
 
 
-const diceGeo =
-    new THREE.BoxGeometry(
-        .85,
-        .85,
-        .85,
-        4,
-        4,
-        4
-    );
+function setProgress(
+    value
+){
 
-const diceMat =
-    new THREE.MeshStandardMaterial({
-        color:0xf4f5f7,
-        roughness:.17,
-        metalness:.05
-    });
+    progress.style.width =
+    value+"%";
 
-const diceMesh =
-    new THREE.Mesh(
-        diceGeo,
-        diceMat
-    );
-
-diceMesh.castShadow = true;
-
-diceGroup.add(diceMesh);
+}
 
 
-/* ==================================================
-   DICE ROLL
-================================================== */
+setProgress(
+    25
+);
 
-const diceButton =
-    document.getElementById(
-        "dice"
-    );
 
-let rolling = false;
+/* =====================================================
+   DICE
+===================================================== */
+
+const dice =
+document.getElementById(
+    "dice"
+);
 
 const faces = [
+
     "⚀",
     "⚁",
     "⚂",
     "⚃",
     "⚄",
     "⚅"
+
 ];
 
-diceButton.addEventListener(
+let rolling =
+false;
+
+
+dice.addEventListener(
     "click",
     ()=>{
 
         if(rolling)
             return;
 
-        rolling = true;
+        rolling =
+        true;
 
-        diceButton.classList.add(
-            "roll"
+        dice.classList.add(
+            "rolling"
         );
 
-        let frame = 0;
+        let count =
+        0;
 
-        const timer =
-            setInterval(
-                ()=>{
+        const interval =
+        setInterval(
+            ()=>{
 
-                    diceMesh.rotation.x += .45;
-                    diceMesh.rotation.z += .55;
+                dice.textContent =
+                faces[
+                    Math.floor(
+                        Math.random()*6
+                    )
+                ];
 
-                    diceButton.textContent =
-                        faces[
-                            Math.floor(
-                                Math.random()*6
-                            )
-                        ];
+                count++;
 
-                    frame++;
+                if(
+                    count>=10
+                ){
 
-                    if(frame>14){
+                    clearInterval(
+                        interval
+                    );
 
-                        clearInterval(timer);
+                    const result =
+                    Math.floor(
+                        Math.random()*6
+                    );
 
-                        const result =
-                            Math.floor(
-                                Math.random()*6
-                            );
+                    dice.textContent =
+                    faces[result];
 
-                        diceButton.textContent =
-                            faces[result];
+                    dice.classList.remove(
+                        "rolling"
+                    );
 
-                        diceMesh.rotation.x =
-                            0;
+                    rolling =
+                    false;
 
-                        diceMesh.rotation.z =
-                            0;
+                    showMessage(
 
-                        rolling = false;
+                        "🎲 عدد تاس: "+
+                        (result+1)
 
-                        showHint(
-                            "🎲 عدد تاس: "+
-                            (result+1)
-                        );
+                    );
 
-                    }
+                }
 
-                },
-                55
-            );
+            },
+            70
+        );
 
     }
 );
 
 
-/* ==================================================
-   HINT
-================================================== */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-const hint =
-    document.getElementById(
-        "hint"
-    );
+const message =
+document.getElementById(
+    "message"
+);
 
-function showHint(text){
 
-    hint.textContent = text;
+function showMessage(
+    text
+){
 
-    hint.classList.add(
+    message.textContent =
+    text;
+
+    message.classList.add(
         "show"
     );
 
     setTimeout(
         ()=>{
-            hint.classList.remove(
+
+            message.classList.remove(
                 "show"
             );
+
         },
-        1700
+        1600
     );
 
 }
 
 
-/* ==================================================
+/* =====================================================
    ANIMATION
-================================================== */
+===================================================== */
 
 const clock =
-    new THREE.Clock();
+new THREE.Clock();
+
 
 function animate(){
 
@@ -1173,39 +1500,44 @@ function animate(){
         animate
     );
 
-    const t =
-        clock.getElapsedTime();
+    const time =
+    clock.getElapsedTime();
 
 
-    /* subtle pawn animation */
+    center.rotation.y =
+    time*.25;
+
+
+    center.material.emissiveIntensity =
+    .35 +
+    Math.sin(
+        time*2
+    )*.08;
+
 
     pawns.forEach(
-        (pawn,i)=>{
+        (pawn,index)=>{
 
             pawn.rotation.y =
-                Math.sin(
-                    t*.8+i
-                )*.025;
+            Math.sin(
+                time*.7+
+                index
+            )*.03;
 
         }
     );
 
 
-    /* center glow */
-
-    center.material.emissiveIntensity =
-        .32 +
-        Math.sin(t*2)*.08;
-
-
-    /* slow camera breathing */
-
     camera.position.x =
-        Math.sin(t*.12)*.35;
+    Math.sin(
+        time*.12
+    )*.25;
 
     camera.position.z =
-        13 +
-        Math.sin(t*.16)*.25;
+    12 +
+    Math.sin(
+        time*.15
+    )*.2;
 
     camera.lookAt(
         0,
@@ -1221,37 +1553,94 @@ function animate(){
 
 }
 
+
 animate();
 
 
-/* ==================================================
+/* =====================================================
    RESIZE
-================================================== */
+===================================================== */
 
-addEventListener(
+window.addEventListener(
     "resize",
     ()=>{
 
         camera.aspect =
-            innerWidth /
-            innerHeight;
+        innerWidth /
+        innerHeight;
 
         camera.updateProjectionMatrix();
+
 
         renderer.setSize(
             innerWidth,
             innerHeight
         );
 
+
         renderer.setPixelRatio(
+
             Math.min(
                 devicePixelRatio,
                 2
             )
+
         );
 
     }
 );
+
+
+/* =====================================================
+   START
+===================================================== */
+
+setProgress(
+    100
+);
+
+
+setTimeout(
+    ()=>{
+
+        loading.classList.add(
+            "hide"
+        );
+
+    },
+    700
+);
+
+
+/* =====================================================
+   FIREBASE PLACEHOLDER
+===================================================== */
+
+/*
+
+مرحله بعد:
+
+Firebase App
+Firebase Authentication
+Realtime Database
+
+اینجا متصل می‌شود.
+
+ساختار پیشنهادی:
+
+rooms/
+    roomId/
+        players/
+        board/
+        turn/
+        dice/
+        status/
+
+users/
+    userId/
+
+*/
+
 
 </script></body>
     </html>
