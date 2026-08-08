@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#080706"
+>
+
+<title>عسل گیم | بازی‌ها</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    color:#fff;
+
+    background:#070605;
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-10;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,193,7,.12),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 0% 70%,
+            rgba(255,145,0,.06),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 100% 60%,
+            rgba(255,193,7,.05),
+            transparent 28%
+        ),
+
+        #070605;
+
+}
+
+
+.background::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 15%,
+            rgba(0,0,0,.78) 90%
+        );
+
+}
+
+
+/* =====================================================
+   DECORATIVE GAME ICONS
+===================================================== */
+
+.bg-icon{
+
+    position:absolute;
+
+    opacity:.055;
+
+    font-size:90px;
+
+    filter:blur(1px);
+
+    user-select:none;
+
+}
+
+
+.bg-icon.one{
+    top:7%;
+    left:5%;
+    transform:rotate(-15deg);
+}
+
+.bg-icon.two{
+    top:20%;
+    right:4%;
+    transform:rotate(12deg);
+}
+
+.bg-icon.three{
+    bottom:12%;
+    left:7%;
+    transform:rotate(10deg);
+}
+
+.bg-icon.four{
+    bottom:5%;
+    right:8%;
+    transform:rotate(-18deg);
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    width:100%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:
+        18px
+        16px
+        35px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:
+        12px
+        4px
+        24px;
+
+}
+
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.brand-logo{
+
+    width:48px;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:25px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffe082,
+            #ffc107 50%,
+            #c47f00
+        );
+
+    box-shadow:
+
+        0 8px 25px
+        rgba(255,174,0,.18),
+
+        inset 0 1px 0
+        rgba(255,255,255,.65);
+
+}
+
+
+.brand-text h1{
+
+    font-size:21px;
+
+    font-weight:900;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff4bc,
+            #ffc107
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.brand-text p{
+
+    margin-top:3px;
+
+    color:#71695c;
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+   PLAYER PROFILE
+===================================================== */
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:
+        8px
+        11px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,193,7,.12);
+
+}
+
+
+.avatar{
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#19150d;
+
+    border:
+        1px solid
+        rgba(255,193,7,.25);
+
+}
+
+
+.profile-info{
+
+    text-align:right;
+
+}
+
+
+.profile-name{
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    color:#e8dfd0;
+
+}
+
+
+.profile-label{
+
+    font-size:8px;
+
+    color:#6f675b;
+
+    margin-top:2px;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    position:relative;
+
+    min-height:245px;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    padding:
+        30px;
+
+    margin-bottom:22px;
+
+    border:
+        1px solid
+        rgba(255,193,7,.22);
+
+    background:
+
+        linear-gradient(
+            120deg,
+            rgba(49,37,17,.92),
+            rgba(18,14,9,.96)
+        );
+
+    box-shadow:
+
+        0 25px 65px
+        rgba(0,0,0,.55),
+
+        inset 0 1px 0
+        rgba(255,255,255,.06);
+
+}
+
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+
+    height:320px;
+
+    left:-100px;
+
+    top:-130px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,193,7,.08);
+
+    filter:blur(20px);
+
+}
+
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:58%;
+
+}
+
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:
+        6px
+        10px;
+
+    border-radius:20px;
+
+    color:#e9bd49;
+
+    background:
+        rgba(255,193,7,.08);
+
+    border:
+        1px solid
+        rgba(255,193,7,.15);
+
+    font-size:9px;
+
+    margin-bottom:12px;
+
+}
+
+
+.hero h2{
+
+    font-size:29px;
+
+    line-height:1.4;
+
+    margin-bottom:9px;
+
+}
+
+
+.hero h2 span{
+
+    color:#ffc107;
+
+}
+
+
+.hero p{
+
+    color:#928877;
+
+    font-size:12px;
+
+    line-height:1.9;
+
+}
+
+
+.hero-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    margin-top:18px;
+
+    padding:
+        12px
+        18px;
+
+    border-radius:13px;
+
+    border:0;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    color:#211600;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffe082,
+            #ffc107,
+            #df9800
+        );
+
+    box-shadow:
+        0 9px 25px
+        rgba(255,174,0,.18);
+
+}
+
+
+/* =====================================================
+   HERO BOARD
+===================================================== */
+
+.hero-board{
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    left:62%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(8deg);
+
+    border-radius:30px;
+
+    opacity:.65;
+
+    background:
+
+        conic-gradient(
+            #d94a43 0 25%,
+            #3ba66a 0 50%,
+            #e3b52d 0 75%,
+            #4387c1 0 100%
+        );
+
+    border:
+        7px solid
+        rgba(255,193,7,.55);
+
+    box-shadow:
+
+        0 25px 60px
+        rgba(0,0,0,.65),
+
+        0 0 50px
+        rgba(255,193,7,.08);
+
+}
+
+
+.hero-board::after{
+
+    content:"🍯";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:78px;
+
+    height:78px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:38px;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd54f,
+            #b87508
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(255,193,7,.3);
+
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+
+    display:flex;
+
+    align-items:end;
+
+    justify-content:space-between;
+
+    margin:
+        8px
+        2px
+        12px;
+
+}
+
+
+.section-title h3{
+
+    font-size:17px;
+
+}
+
+
+.section-title span{
+
+    color:#625b50;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   GAMES GRID
+===================================================== */
+
+.games-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:13px;
+
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+.game-card{
+
+    position:relative;
+
+    min-height:215px;
+
+    overflow:hidden;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            #1a1815,
+            #0f0e0c
+        );
+
+    box-shadow:
+        0 16px 40px
+        rgba(0,0,0,.38);
+
+    transition:
+        transform .2s,
+        border-color .2s;
+
+}
+
+
+.game-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,193,7,.3);
+
+}
+
+
+.game-card:active{
+
+    transform:
+        scale(.98);
+
+}
+
+
+/* تصویر/آیکون بازی */
+
+.game-icon{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    width:105px;
+
+    height:105px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:28px;
+
+    font-size:58px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+}
+
+
+/* حالت ویژه */
+
+.game-card.featured{
+
+    grid-column:
+        span 2;
+
+    min-height:270px;
+
+    background:
+
+        radial-gradient(
+            circle at 75% 20%,
+            rgba(255,193,7,.16),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            #211b10,
+            #0f0e0b
+        );
+
+    border-color:
+        rgba(255,193,7,.23);
+
+}
+
+
+.game-card.featured .game-icon{
+
+    width:180px;
+
+    height:180px;
+
+    top:18px;
+
+    left:18px;
+
+    font-size:100px;
+
+}
+
+
+/* متن */
+
+.game-info{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+.game-info h4{
+
+    font-size:17px;
+
+    margin-bottom:7px;
+
+}
+
+
+.game-info p{
+
+    color:#777063;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+}
+
+
+.play-mini{
+
+    display:inline-flex;
+
+    margin-top:11px;
+
+    padding:
+        7px
+        12px;
+
+    border-radius:10px;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    color:#ffc107;
+
+    background:
+        rgba(255,193,7,.08);
+
+    border:
+        1px solid
+        rgba(255,193,7,.15);
+
+}
+
+
+/* =====================================================
+   COMING SOON
+===================================================== */
+
+.locked{
+
+    opacity:.72;
+
+}
+
+
+.locked::after{
+
+    content:"به‌زودی";
+
+    position:absolute;
+
+    top:13px;
+
+    right:13px;
+
+    padding:
+        5px
+        8px;
+
+    border-radius:8px;
+
+    color:#777063;
+
+    background:
+        rgba(0,0,0,.45);
+
+    font-size:8px;
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin-top:22px;
+
+}
+
+
+.stat{
+
+    padding:
+        16px;
+
+    border-radius:17px;
+
+    text-align:center;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+}
+
+
+.stat-icon{
+
+    font-size:20px;
+
+    margin-bottom:6px;
+
+}
+
+
+.stat-value{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+}
+
+
+.stat-label{
+
+    margin-top:4px;
+
+    color:#625b50;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#48423a;
+
+    font-size:9px;
+
+}
+
+
+.footer strong{
+
+    color:#806a39;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:700px){
+
+    .hero{
+
+        min-height:390px;
+
+        align-items:flex-start;
+
+    }
+
+
+    .hero-content{
+
+        max-width:100%;
+
+        position:relative;
+
+        z-index:3;
+
+    }
+
+
+    .hero-board{
+
+        width:230px;
+
+        height:230px;
+
+        left:50%;
+
+        top:67%;
+
+        opacity:.32;
+
+    }
+
+
+    .games-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .game-card.featured{
+
+        grid-column:
+            span 2;
+
+    }
+
+}
+
+
+@media(max-width:450px){
+
+    .page{
+
+        padding:
+            12px
+            11px
+            25px;
+
+    }
+
+
+    .header{
+
+        padding-bottom:18px;
+
+    }
+
+
+    .brand-logo{
+
+        width:43px;
+
+        height:43px;
+
+        font-size:22px;
+
+    }
+
+
+    .brand-text h1{
+
+        font-size:18px;
+
+    }
+
+
+    .profile{
+
+        padding:6px 8px;
+
+    }
+
+
+    .profile-label{
+
+        display:none;
+
+    }
+
+
+    .hero{
+
+        padding:23px;
+
+        border-radius:23px;
+
+    }
+
+
+    .hero h2{
+
+        font-size:24px;
+
+    }
+
+
+    .hero-board{
+
+        width:205px;
+
+        height:205px;
+
+    }
+
+
+    .game-card{
+
+        min-height:185px;
+
+        padding:14px;
+
+        border-radius:18px;
+
+    }
+
+
+    .game-card.featured{
+
+        min-height:235px;
+
+    }
+
+
+    .game-icon{
+
+        width:80px;
+
+        height:80px;
+
+        font-size:44px;
+
+    }
+
+
+    .game-card.featured .game-icon{
+
+        width:130px;
+
+        height:130px;
+
+        font-size:75px;
+
+    }
+
+
+    .game-info h4{
+
+        font-size:14px;
+
+    }
+
+
+    .game-info p{
+
+        font-size:9px;
+
+    }
+
+
+    .stats{
+
+        gap:7px;
+
+    }
+
+
+    .stat{
+
+        padding:12px 5px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+
+    <div class="bg-icon one">🃏</div>
+    <div class="bg-icon two">🎮</div>
+    <div class="bg-icon three">🎲</div>
+    <div class="bg-icon four">♟️</div>
+
+</div>
+
+
+<main class="page">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+    <div class="brand">
+
+
+        <div class="brand-logo">
+            🐝
+        </div>
+
+
+        <div class="brand-text">
+
+            <h1>
+                عسل گیم
+            </h1>
+
+            <p>
+                دنیای بازی‌ها، یکجا
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="profile">
+
+
+        <div class="avatar">
+            👤
+        </div>
+
+
+        <div class="profile-info">
+
+            <div
+                class="profile-name"
+                id="profileName"
+            >
+                بازیکن
+            </div>
+
+            <div class="profile-label">
+                بازیکن عسل گیم
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</header>
+
+
+<!-- ادامه در قسمت ۲ -->
+
+  <!-- =====================================================
+     HERO / بازی ویژه
+===================================================== -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <div class="hero-badge">
+            🔥 بازی ویژه عسل گیم
+        </div>
+
+
+        <h2>
+            آماده‌ای برای
+            <span>عسل منچ؟</span>
+        </h2>
+
+
+        <p>
+            تاس بنداز، مهره‌هات رو حرکت بده،
+            حریف‌هات رو پشت سر بگذار و
+            قهرمان عسل منچ شو!
+        </p>
+
+
+        <button
+            class="hero-button"
+            onclick="openLudo()"
+        >
+            🎮 شروع عسل منچ
+        </button>
+
+
+    </div>
+
+
+
+    <!-- تخته تزئینی -->
+
+    <div class="hero-board"></div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     عنوان بازی‌ها
+===================================================== -->
+
+<div class="section-title">
+
+
+    <h3>
+        🎮 بازی‌های عسل گیم
+    </h3>
+
+
+    <span>
+        انتخاب کن و بازی کن
+    </span>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     GAME GRID
+===================================================== -->
+
+<section class="games-grid">
+
+
+    <!-- =============================================
+         عسل منچ
+    ============================================== -->
+
+    <article
+        class="game-card featured"
+        onclick="openLudo()"
+    >
+
+
+        <div class="game-icon">
+            🎲
+        </div>
+
+
+        <div class="game-info">
+
+
+            <h4>
+                🍯 عسل منچ
+            </h4>
+
+
+            <p>
+                منچ حرفه‌ای با مهره‌های
+                رنگی، تاس و رقابت جذاب
+            </p>
+
+
+            <span class="play-mini">
+                ▶ بازی کن
+            </span>
+
+
+        </div>
+
+
+    </article>
+
+
+
+    <!-- =============================================
+         بازی ورق
+    ============================================== -->
+
+    <article
+        class="game-card locked"
+    >
+
+
+        <div class="game-icon">
+            🃏
+        </div>
+
+
+        <div class="game-info">
+
+
+            <h4>
+                بازی ورق
+            </h4>
+
+
+            <p>
+                بازی‌های کارتی جذاب
+                و رقابتی
+            </p>
+
+
+        </div>
+
+
+    </article>
+
+
+
+    <!-- =============================================
+         تاس
+    ============================================== -->
+
+    <article
+        class="game-card locked"
+    >
+
+
+        <div class="game-icon">
+            🎲
+        </div>
+
+
+        <div class="game-info">
+
+
+            <h4>
+                نبرد تاس
+            </h4>
+
+
+            <p>
+                شانس خودت را
+                امتحان کن!
+            </p>
+
+
+        </div>
+
+
+    </article>
+
+
+
+    <!-- =============================================
+         شطرنج
+    ============================================== -->
+
+    <article
+        class="game-card locked"
+    >
+
+
+        <div class="game-icon">
+            ♟️
+        </div>
+
+
+        <div class="game-info">
+
+
+            <h4>
+                شطرنج
+            </h4>
+
+
+            <p>
+                رقابت فکری
+                برای حرفه‌ای‌ها
+            </p>
+
+
+        </div>
+
+
+    </article>
+
+
+
+    <!-- =============================================
+         چهار در یک ردیف
+    ============================================== -->
+
+    <article
+        class="game-card locked"
+    >
+
+
+        <div class="game-icon">
+            🔴
+        </div>
+
+
+        <div class="game-info">
+
+
+            <h4>
+                چهار در یک ردیف
+            </h4>
+
+
+            <p>
+                مهره‌ها را کنار هم
+                بچین و برنده شو
+            </p>
+
+
+        </div>
+
+
+    </article>
+
+
+
+</section>
+
+
+
+<!-- =====================================================
+     PLAYER STATS
+===================================================== -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+
+        <div class="stat-icon">
+            🏆
+        </div>
+
+
+        <div
+            class="stat-value"
+            id="bestScore"
+        >
+            0
+        </div>
+
+
+        <div class="stat-label">
+            بهترین رکورد
+        </div>
+
+
+    </div>
+
+
+
+    <div class="stat">
+
+
+        <div class="stat-icon">
+            🎮
+        </div>
+
+
+        <div
+            class="stat-value"
+            id="gamesPlayed"
+        >
+            0
+        </div>
+
+
+        <div class="stat-label">
+            تعداد بازی
+        </div>
+
+
+    </div>
+
+
+
+    <div class="stat">
+
+
+        <div class="stat-icon">
+            ⭐
+        </div>
+
+
+        <div
+            class="stat-value"
+            id="playerLevel"
+        >
+            1
+        </div>
+
+
+        <div class="stat-label">
+            سطح بازیکن
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    © 2026
+    <strong>
+        عسل گیم
+    </strong>
+
+    •
+    ساخته شده برای بازی و سرگرمی 🍯🐝
+
+</footer>
+
+
+<!-- قسمت ۳ ادامه دارد -->
+
+  <!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   نمایش نام بازیکن
+===================================================== */
+
+function loadPlayerName(){
+
+    const savedName =
+        localStorage.getItem(
+            "playerName"
+        );
+
+
+    const profileName =
+        document.getElementById(
+            "profileName"
+        );
+
+
+    if(
+        savedName &&
+        savedName.trim() !== ""
+    ){
+
+        profileName.textContent =
+            savedName;
+
+    }else{
+
+        profileName.textContent =
+            "بازیکن";
+
+    }
+
+}
+
+
+/* =====================================================
+   آمار بازیکن
+===================================================== */
+
+function loadStats(){
+
+    const bestScore =
+        localStorage.getItem(
+            "bestScore"
+        ) || "0";
+
+
+    const gamesPlayed =
+        localStorage.getItem(
+            "gamesPlayed"
+        ) || "0";
+
+
+    const playerLevel =
+        localStorage.getItem(
+            "playerLevel"
+        ) || "1";
+
+
+    const bestElement =
+        document.getElementById(
+            "bestScore"
+        );
+
+
+    const gamesElement =
+        document.getElementById(
+            "gamesPlayed"
+        );
+
+
+    const levelElement =
+        document.getElementById(
+            "playerLevel"
+        );
+
+
+    if(bestElement){
+
+        bestElement.textContent =
+            bestScore;
+
+    }
+
+
+    if(gamesElement){
+
+        gamesElement.textContent =
+            gamesPlayed;
+
+    }
+
+
+    if(levelElement){
+
+        levelElement.textContent =
+            playerLevel;
+
+    }
+
+}
+
+
+/* =====================================================
+   ورود به عسل منچ
+===================================================== */
+
+function openLudo(){
+
+    /*
+       فعلاً صفحه منچ را
+       ludo.html در نظر می‌گیریم.
+
+       وقتی بازی نهایی آماده شد،
+       همینجا فقط مسیر را تغییر می‌دهیم.
+    */
+
+
+    window.location.href =
+        "ludo.html";
+
+}
+
+
+/* =====================================================
+   ورود به منچ از کیبورد
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        /*
+           اگر کاربر کلید Enter را زد
+           و فوکوس روی input نبود،
+           بازی اصلی باز شود.
+        */
+
+        if(
+            event.key === "Enter" &&
+            document.activeElement.tagName !== "INPUT"
+        ){
+
+            openLudo();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   انیمیشن ورود کارت‌ها
+===================================================== */
+
+function animateCards(){
+
+    const cards =
+        document.querySelectorAll(
+            ".game-card"
+        );
+
+
+    cards.forEach(
+        function(card,index){
+
+            card.style.opacity =
+                "0";
+
+            card.style.transform =
+                "translateY(15px)";
+
+
+            setTimeout(
+                function(){
+
+                    card.style.transition =
+                        "opacity .45s ease, transform .45s ease";
+
+                    card.style.opacity =
+                        "1";
+
+                    card.style.transform =
+                        "translateY(0)";
+
+                },
+                80 * index
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   جلوگیری از خطای نبودن نام
+===================================================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadPlayerName();
+
+        loadStats();
+
+        animateCards();
+
+    }
+);
+
+
+/* =====================================================
+   بررسی نام بازیکن
+===================================================== */
+
+const playerName =
+    localStorage.getItem(
+        "playerName"
+    );
+
+
+/*
+   اگر کاربر مستقیم games.html را باز کند
+   ولی نامی نداشته باشد،
+   برگردد صفحه ورود.
+*/
+
+if(
+    !playerName ||
+    playerName.trim() === ""
+){
+
+    /*
+       کمی تأخیر برای جلوگیری
+       از پرش ناگهانی صفحه
+    */
+
+    setTimeout(
+        function(){
+
+            window.location.href =
+                "index.html";
+
+        },
+        300
+    );
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
