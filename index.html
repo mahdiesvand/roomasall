@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
-<head>
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>بازی من</title>
 
 <style>
+
     *{
         box-sizing:border-box;
         margin:0;
@@ -12,15 +12,14 @@
 
     body{
         min-height:100vh;
-        font-family:Tahoma, Arial, sans-serif;
+        font-family:Tahoma,Arial,sans-serif;
         background:#101114;
-        color:#fff;
+        color:white;
     }
 
     .container{
         width:100%;
         max-width:600px;
-        min-height:100vh;
         margin:auto;
         padding:20px;
     }
@@ -40,19 +39,66 @@
         font-size:14px;
     }
 
+    /* اطلاعات بازیکن */
+
+    .player-card{
+        background:#191b20;
+        border:1px solid #292c33;
+        border-radius:18px;
+        padding:18px;
+        margin-bottom:15px;
+    }
+
+    .player-name{
+        text-align:center;
+        font-size:20px;
+        font-weight:bold;
+        margin-bottom:18px;
+    }
+
+    .stats{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:10px;
+    }
+
+    .stat{
+        background:#111318;
+        border-radius:12px;
+        padding:12px 5px;
+        text-align:center;
+    }
+
+    .stat-title{
+        color:#888;
+        font-size:11px;
+        margin-bottom:7px;
+    }
+
+    .stat-value{
+        font-size:20px;
+        font-weight:bold;
+    }
+
+    /* بازی */
+
     .game-card{
         background:#191b20;
         border:1px solid #292c33;
         border-radius:18px;
         padding:25px;
         text-align:center;
-        box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .score-title{
+        color:#aaa;
+        font-size:14px;
     }
 
     .score{
         font-size:42px;
         font-weight:bold;
-        margin:20px 0;
+        margin:15px 0 20px;
     }
 
     .play-btn{
@@ -65,7 +111,6 @@
         cursor:pointer;
         background:#f5b400;
         color:#111;
-        transition:.2s;
     }
 
     .play-btn:active{
@@ -77,6 +122,8 @@
         color:#aaa;
         font-size:13px;
     }
+
+    /* پلن ها */
 
     .plans{
         display:grid;
@@ -103,10 +150,6 @@
         line-height:1.8;
     }
 
-    .free{
-        border-color:#333;
-    }
-
     .pro{
         border-color:#f5b400;
     }
@@ -122,6 +165,11 @@
         font-weight:bold;
     }
 
+    .pro button:disabled{
+        opacity:.6;
+        cursor:not-allowed;
+    }
+
     .footer{
         text-align:center;
         color:#666;
@@ -130,45 +178,147 @@
     }
 
     @media(max-width:420px){
+
         .plans{
             grid-template-columns:1fr;
+        }
+
+        .stats{
+            gap:6px;
         }
 
         .top h1{
             font-size:26px;
         }
+
     }
+
 </style>
 
 </head><body><div class="container"><div class="top">
+
     <h1>🎮 بازی من</h1>
-    <p>بازی کن، امتیاز بگیر و رکوردت را ثبت کن</p>
+
+    <p>
+        بازی کن، امتیاز بگیر و رکوردت را ثبت کن
+    </p>
+
 </div>
+
+
+<!-- اطلاعات بازیکن -->
+
+<div class="player-card">
+
+    <div class="player-name">
+
+        👤
+        <span id="playerName">
+            بازیکن
+        </span>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-title">
+                امتیاز
+            </div>
+
+            <div
+                class="stat-value"
+                id="playerScore"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                رکورد
+            </div>
+
+            <div
+                class="stat-value"
+                id="bestScore"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                تعداد بازی
+            </div>
+
+            <div
+                class="stat-value"
+                id="gamesPlayed"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- بازی -->
 
 <div class="game-card">
 
-    <div>امتیاز شما</div>
+    <div class="score-title">
+        امتیاز فعلی
+    </div>
 
-    <div class="score" id="score">
+
+    <div
+        class="score"
+        id="score"
+    >
         0
     </div>
 
-    <button class="play-btn" onclick="playGame()">
+
+    <button
+        class="play-btn"
+        onclick="playGame()"
+    >
         🎮 شروع بازی
     </button>
 
-    <div class="status" id="status">
+
+    <div
+        class="status"
+        id="status"
+    >
         آماده شروع
     </div>
 
 </div>
 
 
+<!-- نسخه ها -->
+
 <div class="plans">
 
-    <div class="plan free">
 
-        <h3>🆓 معمولی</h3>
+    <div class="plan">
+
+        <h3>
+            🆓 معمولی
+        </h3>
 
         <p>
             دسترسی رایگان<br>
@@ -181,7 +331,9 @@
 
     <div class="plan pro">
 
-        <h3>⭐ PRO</h3>
+        <h3>
+            ⭐ PRO
+        </h3>
 
         <p>
             امکانات ویژه<br>
@@ -195,6 +347,7 @@
 
     </div>
 
+
 </div>
 
 
@@ -202,28 +355,4 @@
     © 2026 بازی من
 </div>
 
-</div><script>
-
-let score = 0;
-
-function playGame(){
-
-    score++;
-
-    document.getElementById("score").textContent = score;
-
-    document.getElementById("status").textContent =
-        "آفرین! امتیاز گرفتی 🎉";
-}
-
-
-function buyPro(){
-
-    alert(
-        "بخش خرید PRO در مرحله بعد به سیستم پرداخت متصل می‌شود."
-    );
-
-}
-
-</script></body>
-</html>
+</div><!-- فایل های جاوااسکریپت --><script src="player.js"></script><script src="game.js"></script><script src="pro.js"></script></body></html>
