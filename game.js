@@ -19,7 +19,9 @@ const playButtonElement =
     document.getElementById("playButton");
 
 
+// ==============================
 // شروع بازی
+// ==============================
 
 function startGame(){
 
@@ -41,13 +43,14 @@ function startGame(){
     playButtonElement.textContent =
         "🎯 بازی در حال اجرا";
 
+    resetTargetSize();
+
     showTarget();
 
 
     timer = setInterval(function(){
 
         gameTime--;
-
 
         statusElement.textContent =
             "⏱️ زمان باقی‌مانده: " +
@@ -67,7 +70,9 @@ function startGame(){
 
 
 
+// ==============================
 // نمایش هدف در جای تصادفی
+// ==============================
 
 function showTarget(){
 
@@ -118,7 +123,9 @@ function showTarget(){
 
 
 
+// ==============================
 // زدن هدف
+// ==============================
 
 function hitTarget(){
 
@@ -133,13 +140,103 @@ function hitTarget(){
     updateScore();
 
 
+    // کوچک‌تر شدن هدف
+
+    changeTargetSize();
+
+
+    // افکت برخورد
+
+    hitEffect();
+
+
+    // نمایش هدف در جای جدید
+
     showTarget();
 
 }
 
 
 
+// ==============================
+// کوچک شدن هدف
+// ==============================
+
+function changeTargetSize(){
+
+    let newSize =
+        55 - (score * 1.5);
+
+
+    // حداقل اندازه
+
+    if(newSize < 28){
+
+        newSize = 28;
+
+    }
+
+
+    targetElement.style.width =
+        newSize + "px";
+
+
+    targetElement.style.height =
+        newSize + "px";
+
+}
+
+
+
+// ==============================
+// بازگرداندن اندازه هدف
+// ==============================
+
+function resetTargetSize(){
+
+    targetElement.style.width =
+        "55px";
+
+
+    targetElement.style.height =
+        "55px";
+
+}
+
+
+
+// ==============================
+// افکت برخورد
+// ==============================
+
+function hitEffect(){
+
+    targetElement.style.transform =
+        "translate(-50%,-50%) scale(1.35)";
+
+
+    targetElement.style.opacity =
+        "0.5";
+
+
+    setTimeout(function(){
+
+        targetElement.style.transform =
+            "translate(-50%,-50%) scale(1)";
+
+
+        targetElement.style.opacity =
+            "1";
+
+    },100);
+
+}
+
+
+
+// ==============================
 // بروزرسانی امتیاز
+// ==============================
 
 function updateScore(){
 
@@ -154,7 +251,9 @@ function updateScore(){
 
 
 
+// ==============================
 // پایان بازی
+// ==============================
 
 function finishGame(){
 
@@ -170,20 +269,15 @@ function finishGame(){
     gameStarted = false;
 
 
-    if(targetElement){
-
-        targetElement.style.display =
-            "none";
-
-    }
+    targetElement.style.display =
+        "none";
 
 
-    if(playButtonElement){
+    resetTargetSize();
 
-        playButtonElement.textContent =
-            "🎮 دوباره بازی کن";
 
-    }
+    playButtonElement.textContent =
+        "🎮 دوباره بازی کن";
 
 
     statusElement.textContent =
@@ -192,7 +286,7 @@ function finishGame(){
 
 
 
-    // اطلاعات قبلی بازیکن
+    // اطلاعات قبلی
 
     let totalScore =
         Number(
@@ -213,7 +307,7 @@ function finishGame(){
 
 
 
-    // اضافه کردن امتیاز این بازی
+    // اضافه کردن امتیاز
 
     totalScore += score;
 
@@ -233,7 +327,7 @@ function finishGame(){
 
 
 
-    // ذخیره اطلاعات
+    // ذخیره
 
     localStorage.setItem(
         "playerScore",
@@ -261,7 +355,9 @@ function finishGame(){
 
 
 
+// ==============================
 // بروزرسانی اطلاعات بازیکن
+// ==============================
 
 function updatePlayerInfo(){
 
@@ -311,7 +407,9 @@ function updatePlayerInfo(){
 
 
 
-// دکمه شروع بازی
+// ==============================
+// دکمه بازی
+// ==============================
 
 function playGame(){
 
@@ -327,7 +425,9 @@ function playGame(){
 
 
 
+// ==============================
 // خرید PRO
+// ==============================
 
 function buyPro(){
 
@@ -339,7 +439,9 @@ function buyPro(){
 
 
 
+// ==============================
 // اتصال توابع به HTML
+// ==============================
 
 window.playGame =
     playGame;
@@ -352,7 +454,9 @@ window.buyPro =
 
 
 
-// نمایش اطلاعات ذخیره‌شده
+// ==============================
+// اطلاعات ذخیره‌شده
+// ==============================
 
 document.addEventListener(
     "DOMContentLoaded",
