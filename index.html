@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>عسل گیم | ورود</title>
- 
+<title>عسل گیم</title>
+
 <style>
 
 *{
@@ -17,93 +17,50 @@
 
 body{
     min-height:100vh;
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-
+    font-family:Tahoma,Arial,sans-serif;
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,193,7,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(255,152,0,.10),
-            transparent 30%
-        ),
+        radial-gradient(circle at 20% 20%,rgba(255,193,7,.12),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(255,152,0,.10),transparent 30%),
         #080808;
-
-    color:#fff;
+    color:white;
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* صفحه ورود */
 
 #loginPage{
     min-height:100vh;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     padding:20px;
 }
 
 .login-card{
     width:100%;
     max-width:430px;
-
     padding:40px 28px;
-
     border-radius:28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35,35,35,.95),
-            rgba(15,15,15,.98)
-        );
-
+    background:linear-gradient(145deg,#242424,#111);
     border:1px solid rgba(255,193,7,.25);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.65),
-        inset 0 1px 0 rgba(255,255,255,.04);
-
+    box-shadow:0 30px 80px rgba(0,0,0,.65);
     text-align:center;
 }
 
 .logo{
     width:90px;
     height:90px;
-
     margin:0 auto 20px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:26px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffc107,
-            #ff9800
-        );
-
+    background:linear-gradient(135deg,#ffc107,#ff9800);
     font-size:45px;
-
-    box-shadow:
-        0 15px 40px rgba(255,193,7,.18);
 }
 
-.login-card h1{
-    font-size:30px;
+h1{
     color:#ffc107;
+    font-size:30px;
     margin-bottom:10px;
 }
 
@@ -113,389 +70,196 @@ body{
     margin-bottom:30px;
 }
 
-.input-box{
-    position:relative;
-    margin-bottom:14px;
-}
-
-.input-box input{
+input{
     width:100%;
-
-    padding:17px 18px;
-
-    border-radius:16px;
-
-    border:1px solid #333;
-
-    outline:none;
-
-    background:#0d0d0d;
-
-    color:white;
-
-    font-size:16px;
-
-    text-align:center;
-
-    transition:.25s;
-}
-
-.input-box input:focus{
-    border-color:#ffc107;
-
-    box-shadow:
-        0 0 0 3px rgba(255,193,7,.08);
-}
-
-.login-btn{
-    width:100%;
-
     padding:17px;
-
-    border:0;
-
     border-radius:16px;
+    border:1px solid #333;
+    outline:none;
+    background:#0d0d0d;
+    color:white;
+    font-size:16px;
+    text-align:center;
+}
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffc107,
-            #ff9800
-        );
+input:focus{
+    border-color:#ffc107;
+}
 
+button{
+    width:100%;
+    margin-top:15px;
+    padding:17px;
+    border:0;
+    border-radius:16px;
+    background:linear-gradient(135deg,#ffc107,#ff9800);
     color:#151515;
-
     font-size:17px;
-
     font-weight:bold;
-
     cursor:pointer;
-
-    transition:.2s;
-
-    box-shadow:
-        0 10px 25px rgba(255,193,7,.15);
-}
-
-.login-btn:hover{
-    transform:translateY(-2px);
-}
-
-.login-btn:active{
-    transform:scale(.98);
 }
 
 .error{
     display:none;
-
-    margin-top:14px;
-
+    margin-top:12px;
     color:#ff7070;
-
     font-size:13px;
 }
 
 
-/* =========================
-   GAMES PAGE
-========================= */
+/* صفحه بازی */
 
 #gamesPage{
     display:none;
-
     min-height:100vh;
-
     padding:20px;
 }
 
-.games-container{
+.container{
     width:100%;
     max-width:1000px;
-
     margin:auto;
 }
 
-
-/* HEADER */
-
-.games-header{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:25px;
-
-    padding:20px;
-
+.header{
+    padding:22px;
     border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35,35,35,.96),
-            rgba(15,15,15,.96)
-        );
-
+    background:linear-gradient(145deg,#242424,#111);
     border:1px solid rgba(255,193,7,.2);
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.35);
+    margin-bottom:20px;
 }
 
-.welcome h2{
+.header h2{
     color:#ffc107;
-
-    font-size:24px;
-
-    margin-bottom:6px;
+    margin-bottom:8px;
 }
 
-.welcome p{
+.header p{
     color:#999;
-
-    font-size:13px;
 }
 
-.player-name{
-    color:#fff;
+.name{
+    color:white;
 }
-
-.logout-btn{
-    border:1px solid #333;
-
-    background:#111;
-
-    color:#aaa;
-
-    padding:10px 15px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.logout-btn:hover{
-    color:#fff;
-
-    border-color:#ffc107;
-}
-
-
-/* PLAYER STATS */
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:12px;
-
     margin-bottom:25px;
 }
 
 .stat{
-    padding:18px 10px;
-
+    padding:18px 8px;
     text-align:center;
-
     border-radius:18px;
-
     background:#111;
-
     border:1px solid #292929;
 }
 
-.stat-icon{
-    font-size:24px;
-
+.icon{
+    font-size:25px;
     margin-bottom:8px;
 }
 
-.stat-number{
+.number{
+    color:#ffc107;
     font-size:20px;
-
     font-weight:bold;
-
-    color:#ffc107;
 }
 
-.stat-title{
-    margin-top:5px;
-
+.title{
     color:#888;
-
     font-size:12px;
+    margin-top:5px;
 }
 
-
-/* TITLE */
-
-.section-title{
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
+.games-title{
+    font-size:21px;
     margin-bottom:15px;
-
-    font-size:20px;
-
-    color:#fff;
 }
 
-.section-title span{
-    color:#ffc107;
-}
-
-
-/* GAMES */
-
-.games-grid{
+.games{
     display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:16px;
 }
 
-.game-card{
-    position:relative;
-
-    overflow:hidden;
-
+.game{
     padding:25px 20px;
-
     border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b1b1b,
-            #0e0e0e
-        );
-
+    background:linear-gradient(145deg,#1d1d1d,#0e0e0e);
     border:1px solid #292929;
-
-    transition:.25s;
-
-    cursor:pointer;
+    transition:.2s;
 }
 
-.game-card:hover{
-    transform:translateY(-5px);
-
-    border-color:
-        rgba(255,193,7,.5);
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.4);
+.game:hover{
+    transform:translateY(-4px);
+    border-color:#ffc107;
 }
 
 .game-icon{
-    width:65px;
-    height:65px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:19px;
-
-    background:
-        rgba(255,193,7,.1);
-
-    font-size:34px;
-
-    margin-bottom:18px;
+    font-size:40px;
+    margin-bottom:15px;
 }
 
-.game-card h3{
+.game h3{
     margin-bottom:8px;
-
-    font-size:18px;
 }
 
-.game-card p{
+.game p{
     color:#888;
-
     font-size:13px;
-
     line-height:1.8;
 }
 
-.play-btn{
+.play{
     display:inline-block;
-
-    margin-top:18px;
-
+    margin-top:15px;
     padding:10px 18px;
-
-    border-radius:11px;
-
+    border-radius:10px;
     background:#ffc107;
-
     color:#111;
-
     font-weight:bold;
-
     font-size:13px;
 }
 
-
-/* MOBILE */
+.logout{
+    width:auto;
+    padding:10px 18px;
+    margin-top:15px;
+    background:#222;
+    color:#ccc;
+    border:1px solid #444;
+}
 
 @media(max-width:600px){
 
-    .login-card{
-        padding:32px 20px;
-    }
-
-    .games-header{
-        align-items:flex-start;
-    }
-
-    .welcome h2{
-        font-size:20px;
-    }
-
     .stats{
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns:repeat(3,1fr);
     }
 
     .stat{
         padding:14px 5px;
     }
 
-    .stat-number{
+    .number{
         font-size:17px;
     }
 
-    .games-grid{
+    .games{
         grid-template-columns:1fr;
     }
 }
 
 </style>
-
 </head>
-
 
 <body>
 
 
 <!-- =========================
-     LOGIN PAGE
+     صفحه ورود
 ========================= -->
 
 <section id="loginPage">
@@ -514,29 +278,19 @@ body{
             وارد دنیای بازی‌های عسل شو
         </div>
 
-        <div class="input-box">
-
-            <input
-                id="playerName"
-                type="text"
-                maxlength="20"
-                autocomplete="off"
-                placeholder="نام بازیکن را وارد کنید"
-            >
-
-        </div>
-
-        <button
-            class="login-btn"
-            onclick="loginPlayer()"
+        <input
+            id="playerName"
+            type="text"
+            maxlength="20"
+            placeholder="نام بازیکن را وارد کنید"
+            autocomplete="off"
         >
+
+        <button onclick="login()">
             ورود به بازی 🎮
         </button>
 
-        <div
-            id="loginError"
-            class="error"
-        >
+        <div id="error" class="error">
             لطفاً نام خود را وارد کنید
         </div>
 
@@ -547,137 +301,68 @@ body{
 
 
 <!-- =========================
-     GAMES PAGE
+     صفحه بازی‌ها
 ========================= -->
 
 <section id="gamesPage">
 
-    <div class="games-container">
+    <div class="container">
 
+        <div class="header">
 
-        <!-- HEADER -->
-
-        <header class="games-header">
-
-            <div class="welcome">
-
-                <h2>
-                    سلام،
-                    <span
-                        class="player-name"
-                        id="playerNameDisplay"
-                    >
+            <h2>
+                سلام
+                <span id="nameDisplay" class="name">
                     بازیکن
-                    </span>
-                    👋
-                </h2>
+                </span>
+                👋
+            </h2>
 
-                <p>
-                    آماده‌ای بازی کنی؟
-                </p>
-
-            </div>
-
+            <p>
+                آماده‌ای بازی کنی؟
+            </p>
 
             <button
-                class="logout-btn"
-                onclick="logoutPlayer()"
+                class="logout"
+                onclick="logout()"
             >
                 خروج
             </button>
 
-        </header>
+        </div>
 
-
-
-        <!-- STATS -->
 
         <div class="stats">
 
             <div class="stat">
-
-                <div class="stat-icon">
-                    🎮
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="gamesCount"
-                >
-                    0
-                </div>
-
-                <div class="stat-title">
-                    تعداد بازی
-                </div>
-
+                <div class="icon">🎮</div>
+                <div id="gamesCount" class="number">0</div>
+                <div class="title">تعداد بازی</div>
             </div>
 
-
             <div class="stat">
-
-                <div class="stat-icon">
-                    🏆
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="recordScore"
-                >
-                    0
-                </div>
-
-                <div class="stat-title">
-                    رکورد
-                </div>
-
+                <div class="icon">🏆</div>
+                <div id="record" class="number">0</div>
+                <div class="title">رکورد</div>
             </div>
 
-
             <div class="stat">
-
-                <div class="stat-icon">
-                    ⭐
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="totalScore"
-                >
-                    0
-                </div>
-
-                <div class="stat-title">
-                    امتیاز
-                </div>
-
+                <div class="icon">⭐</div>
+                <div id="score" class="number">0</div>
+                <div class="title">امتیاز</div>
             </div>
 
         </div>
 
 
-
-        <!-- GAME TITLE -->
-
-        <div class="section-title">
-
-            <span>🎯</span>
-
-            بازی‌های عسل
-
+        <div class="games-title">
+            🎯 بازی‌های عسل
         </div>
 
 
+        <div class="games">
 
-        <!-- GAME CARDS -->
-
-        <div class="games-grid">
-
-
-            <div
-                class="game-card"
-                onclick="startGame('بازی اول')"
-            >
+            <div class="game">
 
                 <div class="game-icon">
                     🐝
@@ -688,21 +373,20 @@ body{
                 </h3>
 
                 <p>
-                    یک بازی سرگرم‌کننده برای شروع.
+                    اولین بازی عسل گیم.
                 </p>
 
-                <span class="play-btn">
+                <span
+                    class="play"
+                    onclick="startGame('بازی زنبور')"
+                >
                     شروع بازی
                 </span>
 
             </div>
 
 
-
-            <div
-                class="game-card"
-                onclick="startGame('بازی دوم')"
-            >
+            <div class="game">
 
                 <div class="game-icon">
                     🧠
@@ -713,21 +397,20 @@ body{
                 </h3>
 
                 <p>
-                    مهارت و سرعت فکرت را امتحان کن.
+                    هوش و سرعت فکر خودت را امتحان کن.
                 </p>
 
-                <span class="play-btn">
+                <span
+                    class="play"
+                    onclick="startGame('بازی هوش')"
+                >
                     شروع بازی
                 </span>
 
             </div>
 
 
-
-            <div
-                class="game-card"
-                onclick="startGame('بازی سوم')"
-            >
+            <div class="game">
 
                 <div class="game-icon">
                     ⚡
@@ -738,21 +421,20 @@ body{
                 </h3>
 
                 <p>
-                    ببین چقدر سریع می‌توانی واکنش نشان بدهی.
+                    سرعت واکنش خودت را آزمایش کن.
                 </p>
 
-                <span class="play-btn">
+                <span
+                    class="play"
+                    onclick="startGame('سرعت عمل')"
+                >
                     شروع بازی
                 </span>
 
             </div>
 
 
-
-            <div
-                class="game-card"
-                onclick="startGame('بازی چهارم')"
-            >
+            <div class="game">
 
                 <div class="game-icon">
                     🎯
@@ -766,12 +448,14 @@ body{
                     دقت خودت را به چالش بکش.
                 </p>
 
-                <span class="play-btn">
+                <span
+                    class="play"
+                    onclick="startGame('هدف‌گیری')"
+                >
                     شروع بازی
                 </span>
 
             </div>
-
 
         </div>
 
@@ -783,17 +467,21 @@ body{
 
 <script>
 
-/* =========================
-   LOGIN
-========================= */
+/* اطلاعات بازیکن */
 
-function loginPlayer(){
+let playerName =
+    localStorage.getItem("playerName");
+
+
+/* ورود */
+
+function login(){
 
     const input =
         document.getElementById("playerName");
 
     const error =
-        document.getElementById("loginError");
+        document.getElementById("error");
 
     const name =
         input.value.trim();
@@ -810,59 +498,50 @@ function loginPlayer(){
     error.style.display = "none";
 
 
-    /* ذخیره نام بازیکن */
-
     localStorage.setItem(
         "playerName",
         name
     );
 
 
-    /* ساخت اطلاعات اولیه بازیکن */
-
-    if(
-        !localStorage.getItem("gamesCount")
-    ){
+    if(!localStorage.getItem("gamesCount")){
 
         localStorage.setItem(
             "gamesCount",
             "0"
         );
+
     }
 
 
-    if(
-        !localStorage.getItem("recordScore")
-    ){
+    if(!localStorage.getItem("score")){
 
         localStorage.setItem(
-            "recordScore",
+            "score",
             "0"
         );
+
     }
 
 
-    if(
-        !localStorage.getItem("totalScore")
-    ){
+    if(!localStorage.getItem("record")){
 
         localStorage.setItem(
-            "totalScore",
+            "record",
             "0"
         );
+
     }
 
 
-    showGamesPage();
+    showGames();
+
 }
 
 
+/* نمایش بازی‌ها */
 
-/* =========================
-   SHOW GAMES
-========================= */
-
-function showGamesPage(){
+function showGames(){
 
     const name =
         localStorage.getItem("playerName");
@@ -879,6 +558,7 @@ function showGamesPage(){
         ).style.display = "none";
 
         return;
+
     }
 
 
@@ -893,18 +573,16 @@ function showGamesPage(){
 
 
     document.getElementById(
-        "playerNameDisplay"
+        "nameDisplay"
     ).textContent = name;
 
 
     updateStats();
+
 }
 
 
-
-/* =========================
-   STATS
-========================= */
+/* آمار */
 
 function updateStats(){
 
@@ -915,39 +593,34 @@ function updateStats(){
 
 
     document.getElementById(
-        "recordScore"
+        "score"
     ).textContent =
-        localStorage.getItem("recordScore") || "0";
+        localStorage.getItem("score") || "0";
 
 
     document.getElementById(
-        "totalScore"
+        "record"
     ).textContent =
-        localStorage.getItem("totalScore") || "0";
+        localStorage.getItem("record") || "0";
+
 }
 
 
+/* شروع بازی */
 
-/* =========================
-   START GAME
-========================= */
-
-function startGame(gameName){
+function startGame(name){
 
     alert(
-        "🎮 " +
-        gameName +
-        "\n\nاین بازی به‌زودی فعال می‌شود."
+        "🎮 " + name +
+        "\n\nاین بازی هنوز فعال نشده است."
     );
+
 }
 
 
+/* خروج */
 
-/* =========================
-   LOGOUT
-========================= */
-
-function logoutPlayer(){
+function logout(){
 
     localStorage.removeItem(
         "playerName"
@@ -964,13 +637,11 @@ function logoutPlayer(){
     document.getElementById(
         "playerName"
     ).value = "";
+
 }
 
 
-
-/* =========================
-   ENTER KEY
-========================= */
+/* دکمه Enter */
 
 document
 .getElementById("playerName")
@@ -980,7 +651,7 @@ document
 
         if(event.key === "Enter"){
 
-            loginPlayer();
+            login();
 
         }
 
@@ -988,15 +659,11 @@ document
 );
 
 
-/* =========================
-   CHECK PLAYER
-========================= */
+/* اجرای اولیه */
 
-showGamesPage();
+showGames();
 
 </script>
 
-
 </body>
-
-</html>
+                                                 </html>
