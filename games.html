@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>HONEY GAMES</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Honey Ludo</title><style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
@@ -17,362 +17,171 @@ html,body{
 
 body{
     font-family:Tahoma,Arial,sans-serif;
-    background:#030711;
-    color:white;
+    background:
+        radial-gradient(circle at 50% 40%,#263c59,#0a111c 55%,#02050a);
 }
 
-/* =========================================
-   BACKGROUND
-========================================= */
+/* =====================================
+   APP
+===================================== */
 
-.scene{
-    position:relative;
+.app{
     width:100%;
     height:100vh;
-    overflow:hidden;
-    background:
-        radial-gradient(
-            circle at 50% 30%,
-            #172d4c 0%,
-            #091425 32%,
-            #040914 67%,
-            #02040a 100%
-        );
-}
-
-.scene::before{
-    content:"";
-    position:absolute;
-    inset:-30%;
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(36,155,255,.16),
-            transparent 48%
-        );
-    filter:blur(30px);
-    animation:ambient 8s ease-in-out infinite alternate;
-}
-
-@keyframes ambient{
-    from{
-        transform:scale(1);
-        opacity:.65;
-    }
-    to{
-        transform:scale(1.18);
-        opacity:1;
-    }
-}
-
-/* =========================================
-   STARS / PARTICLES
-========================================= */
-
-.particles{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-}
-
-.particles i{
-    position:absolute;
-    width:3px;
-    height:3px;
-    border-radius:50%;
-    background:#fff;
-    opacity:.45;
-    animation:starMove linear infinite;
-}
-
-.particles i:nth-child(1){left:8%;top:18%;animation-duration:7s}
-.particles i:nth-child(2){left:18%;top:62%;animation-duration:11s}
-.particles i:nth-child(3){left:31%;top:26%;animation-duration:9s}
-.particles i:nth-child(4){left:44%;top:72%;animation-duration:13s}
-.particles i:nth-child(5){left:58%;top:17%;animation-duration:8s}
-.particles i:nth-child(6){left:72%;top:44%;animation-duration:10s}
-.particles i:nth-child(7){left:84%;top:22%;animation-duration:12s}
-.particles i:nth-child(8){left:93%;top:68%;animation-duration:9s}
-.particles i:nth-child(9){left:53%;top:52%;animation-duration:14s}
-.particles i:nth-child(10){left:27%;top:84%;animation-duration:8s}
-
-@keyframes starMove{
-    0%,100%{
-        transform:translateY(0) scale(.7);
-        opacity:.2;
-    }
-    50%{
-        transform:translateY(-35px) scale(1.5);
-        opacity:.9;
-    }
-}
-
-/* =========================================
-   TOP HUD
-========================================= */
-
-.hud{
-    position:absolute;
-    z-index:20;
-    top:0;
-    left:0;
-    right:0;
-
-    height:82px;
-    padding:13px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:9px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(2,7,17,.98),
-            rgba(2,7,17,.72),
-            transparent
-        );
-
-    backdrop-filter:blur(12px);
-}
-
-.hud-card{
     position:relative;
-    height:54px;
-    min-width:92px;
-
-    padding:6px 12px;
-
+    overflow:hidden;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
+}
 
-    border-radius:16px;
+/* =====================================
+   AMBIENT LIGHT
+===================================== */
+
+.light{
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    background:rgba(68,163,255,.08);
+    filter:blur(90px);
+    pointer-events:none;
+}
+
+/* =====================================
+   GAME TABLE
+===================================== */
+
+.table{
+    position:relative;
+    width:min(94vw,760px);
+    aspect-ratio:1/1;
+
+    padding:18px;
+
+    border-radius:42px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.11),
-            rgba(255,255,255,.035)
+            #172b3d,
+            #07111c
         );
 
-    border:1px solid rgba(255,255,255,.10);
-
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.07),
-        0 10px 30px rgba(0,0,0,.28);
+        0 35px 100px rgba(0,0,0,.65),
+        inset 0 2px 0 rgba(255,255,255,.10),
+        inset 0 -10px 30px rgba(0,0,0,.35);
+
+    border:1px solid rgba(255,255,255,.08);
 }
 
-.hud-label{
-    font-size:9px;
-    color:#7f91ad;
-    margin-bottom:3px;
-}
+/* قاب داخلی */
 
-.hud-number{
-    font-size:18px;
-    font-weight:900;
-}
-
-.score .hud-number{
-    color:#ffd34d;
-    text-shadow:0 0 18px rgba(255,190,30,.35);
-}
-
-.level .hud-number{
-    color:#72d5ff;
-}
-
-.time .hud-number{
-    color:#fff;
-}
-
-/* =========================================
-   PLAYER NAME
-========================================= */
-
-.player-name{
-    position:absolute;
-    z-index:15;
-
-    top:91px;
-    right:18px;
-
-    padding:8px 13px;
-
-    border-radius:12px;
-
-    font-size:11px;
-    color:#a9bad4;
-
-    background:rgba(5,12,25,.58);
-    border:1px solid rgba(255,255,255,.07);
-
-    backdrop-filter:blur(8px);
-}
-
-#playerName{
-    color:#fff;
-    font-weight:bold;
-}
-
-/* =========================================
-   GAME WORLD
-========================================= */
-
-.world{
-    position:absolute;
-    z-index:5;
-
-    top:125px;
-    left:12px;
-    right:12px;
-    bottom:98px;
-
+.board{
+    position:relative;
+    width:100%;
+    height:100%;
     overflow:hidden;
 
     border-radius:30px;
 
     background:
         linear-gradient(
-            180deg,
-            rgba(13,31,56,.82),
-            rgba(3,10,21,.98)
-        );
-
-    border:1px solid rgba(116,185,255,.12);
-
-    box-shadow:
-        0 35px 100px rgba(0,0,0,.55),
-        inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-/* =========================================
-   GRID FLOOR
-========================================= */
-
-.floor{
-    position:absolute;
-
-    width:180%;
-    height:80%;
-
-    left:-40%;
-    bottom:-27%;
-
-    transform:
-        perspective(500px)
-        rotateX(63deg);
-
-    background-image:
-        linear-gradient(
-            rgba(70,163,255,.18) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(70,163,255,.18) 1px,
-            transparent 1px
-        );
-
-    background-size:42px 42px;
-
-    opacity:.5;
-
-    mask-image:
-        linear-gradient(
-            to top,
-            black,
-            transparent
-        );
-
-    animation:gridMove 4s linear infinite;
-}
-
-@keyframes gridMove{
-    from{
-        background-position:0 0;
-    }
-    to{
-        background-position:0 42px;
-    }
-}
-
-/* =========================================
-   HORIZON
-========================================= */
-
-.horizon{
-    position:absolute;
-    left:0;
-    right:0;
-    top:42%;
-
-    height:2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(71,182,255,.7),
-            transparent
+            145deg,
+            #e8d6a1,
+            #b89b5b
         );
 
     box-shadow:
-        0 0 30px rgba(41,151,255,.5);
+        inset 0 0 0 3px rgba(72,43,12,.18),
+        inset 0 0 45px rgba(55,33,8,.28);
 }
 
-/* =========================================
-   CENTER ENERGY
-========================================= */
+/* =====================================
+   CENTER BOARD
+===================================== */
 
-.energy-core{
+.center{
     position:absolute;
-
     left:50%;
-    top:42%;
+    top:50%;
 
-    width:170px;
-    height:170px;
+    width:34%;
+    height:34%;
 
     transform:translate(-50%,-50%);
 
-    border-radius:50%;
-
     background:
-        radial-gradient(
-            circle,
-            rgba(61,181,255,.20),
-            rgba(30,111,255,.08) 40%,
-            transparent 70%
+        linear-gradient(
+            145deg,
+            #f7e7b0,
+            #d5bd7c
         );
 
-    filter:blur(3px);
+    clip-path:polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
 
-    animation:corePulse 3s ease-in-out infinite;
+    box-shadow:
+        inset 0 0 25px rgba(70,40,10,.18);
+
+    z-index:5;
 }
 
-@keyframes corePulse{
-    0%,100%{
-        transform:translate(-50%,-50%) scale(.9);
-    }
-    50%{
-        transform:translate(-50%,-50%) scale(1.2);
-    }
-}
+/* =====================================
+   CENTER TRIANGLES
+===================================== */
 
-/* =========================================
-   TARGET
-========================================= */
-
-.target{
+.center:before,
+.center:after{
+    content:"";
     position:absolute;
-    z-index:12;
+    inset:0;
+}
 
-    width:76px;
-    height:76px;
+.center:before{
+    background:
+        linear-gradient(
+            135deg,
+            transparent 49%,
+            #edc92e 50%,
+            #edc92e 100%
+        );
+    clip-path:polygon(
+        0 0,
+        100% 0,
+        50% 50%
+    );
+}
+
+.center:after{
+    background:
+        linear-gradient(
+            45deg,
+            transparent 49%,
+            #ff5151 50%,
+            #ff5151 100%
+        );
+    clip-path:polygon(
+        0 100%,
+        100% 100%,
+        50% 50%
+    );
+}
+
+/* =====================================
+   PLAYER ZONES
+===================================== */
+
+.zone{
+    position:absolute;
+    width:38%;
+    height:38%;
 
     border-radius:24px;
 
@@ -380,533 +189,542 @@ body{
     align-items:center;
     justify-content:center;
 
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,.12),
+        0 5px 12px rgba(0,0,0,.10);
+
+    border:3px solid rgba(255,255,255,.4);
+}
+
+.zone.red{
+    top:2%;
+    left:2%;
     background:
         linear-gradient(
             145deg,
-            #ffe875,
-            #ff9b1f
-        );
-
-    border:2px solid rgba(255,255,255,.85);
-
-    box-shadow:
-        0 0 0 8px rgba(255,181,35,.06),
-        0 0 35px rgba(255,157,28,.48),
-        0 18px 40px rgba(0,0,0,.35);
-
-    transform:rotate(45deg);
-
-    transition:
-        left .25s cubic-bezier(.2,.8,.2,1),
-        top .25s cubic-bezier(.2,.8,.2,1);
-}
-
-.target span{
-    transform:rotate(-45deg);
-
-    font-size:29px;
-
-    filter:
-        drop-shadow(
-            0 3px 5px rgba(0,0,0,.25)
+            #ff6868,
+            #c72828
         );
 }
 
-.target::before{
-    content:"";
-
-    position:absolute;
-    inset:-8px;
-
-    border-radius:28px;
-
-    border:1px solid rgba(255,205,75,.25);
-
-    animation:ring 1.6s ease-out infinite;
-}
-
-@keyframes ring{
-    0%{
-        transform:scale(.8);
-        opacity:1;
-    }
-    100%{
-        transform:scale(1.5);
-        opacity:0;
-    }
-}
-
-/* =========================================
-   PLAYER
-========================================= */
-
-.player{
-    position:absolute;
-    z-index:13;
-
-    left:50%;
-    bottom:35px;
-
-    width:72px;
-    height:72px;
-
-    transform:translateX(-50%);
-
-    border-radius:22px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+.zone.green{
+    top:2%;
+    right:2%;
     background:
         linear-gradient(
             145deg,
-            #4bc7ff,
-            #1769ff
+            #70e88a,
+            #149d48
         );
-
-    border:2px solid rgba(255,255,255,.72);
-
-    box-shadow:
-        0 0 0 9px rgba(37,140,255,.08),
-        0 0 40px rgba(25,135,255,.45),
-        0 18px 40px rgba(0,0,0,.4);
-
-    transition:
-        left .12s ease,
-        transform .12s ease;
 }
 
-.player::before{
-    content:"✦";
-
-    font-size:34px;
-    color:white;
-
-    text-shadow:
-        0 0 18px rgba(255,255,255,.8);
-}
-
-.player.hit{
-    transform:
-        translateX(-50%)
-        scale(1.16);
-}
-
-/* =========================================
-   BOTTOM HUD
-========================================= */
-
-.bottom{
-    position:absolute;
-    z-index:25;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    height:90px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-
-    padding:10px 14px;
-
-    background:
-        linear-gradient(
-            0deg,
-            rgba(2,6,14,1),
-            rgba(2,6,14,.82),
-            transparent
-        );
-
-    backdrop-filter:blur(12px);
-}
-
-.action{
-    width:58px;
-    height:58px;
-
-    border:1px solid rgba(255,255,255,.10);
-
-    border-radius:19px;
-
+.zone.yellow{
+    bottom:2%;
+    right:2%;
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.10),
-            rgba(255,255,255,.035)
+            #ffe66a,
+            #d99d16
         );
-
-    color:white;
-
-    font-size:21px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.06),
-        0 12px 30px rgba(0,0,0,.28);
-
-    cursor:pointer;
 }
 
-.action:active{
-    transform:scale(.92);
-}
-
-.main-action{
-    width:72px;
-
+.zone.blue{
+    bottom:2%;
+    left:2%;
     background:
         linear-gradient(
             145deg,
-            #2e8fff,
-            #1551d6
+            #61c8ff,
+            #1873d1
         );
-
-    box-shadow:
-        0 0 30px rgba(28,113,255,.28);
 }
 
-/* =========================================
-   START SCREEN
-========================================= */
+/* =====================================
+   HOME CIRCLES
+===================================== */
 
-.overlay{
-    position:absolute;
-    z-index:50;
-    inset:0;
+.home{
+    width:68%;
+    height:68%;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    border-radius:20px;
 
-    padding:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
 
-    background:
-        rgba(1,5,13,.74);
-
-    backdrop-filter:blur(16px);
-
-    transition:
-        opacity .4s ease,
-        visibility .4s ease;
-}
-
-.overlay.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.start-card{
-    width:min(380px,100%);
-
-    padding:30px 25px;
-
-    text-align:center;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(22,43,72,.97),
-            rgba(4,11,23,.98)
-        );
-
-    border:1px solid rgba(111,184,255,.14);
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.65);
-}
-
-.logo{
-    width:88px;
-    height:88px;
-
-    margin:0 auto 18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:28px;
-
-    font-size:43px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe45d,
-            #ff8b19
-        );
-
-    box-shadow:
-        0 0 50px rgba(255,161,29,.28);
-}
-
-.start-card h1{
-    font-size:28px;
-    margin-bottom:8px;
-}
-
-.start-card h1 span{
-    color:#ffd24c;
-}
-
-.start-card p{
-    color:#8fa1bd;
-    font-size:12px;
-    line-height:2;
-}
-
-.start-button{
-    width:100%;
-    height:58px;
-
-    margin-top:23px;
-
-    border:0;
-    border-radius:18px;
-
-    font-family:inherit;
-
-    font-size:16px;
-    font-weight:900;
-
-    color:#07101d;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffe875,
-            #ff9d25
-        );
-
-    box-shadow:
-        0 15px 35px rgba(255,165,30,.25);
-
-    cursor:pointer;
-}
-
-.start-button:active{
-    transform:scale(.97);
-}
-
-/* =========================================
-   GAME OVER
-========================================= */
-
-.result{
-    margin-top:18px;
-
-    display:none;
+    gap:12px;
 
     padding:14px;
 
-    border-radius:15px;
+    background:
+        rgba(255,255,255,.22);
 
-    background:rgba(255,255,255,.045);
-
-    border:1px solid rgba(255,255,255,.07);
+    box-shadow:
+        inset 0 3px 12px rgba(255,255,255,.18),
+        inset 0 -8px 20px rgba(0,0,0,.12);
 }
 
-.result.show{
-    display:block;
+/* =====================================
+   PAWNS
+===================================== */
+
+.pawn-slot{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.result small{
-    color:#8294af;
+.pawn{
+    position:relative;
+
+    width:clamp(25px,6vw,44px);
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    border:3px solid rgba(255,255,255,.75);
+
+    box-shadow:
+        inset 0 5px 5px rgba(255,255,255,.4),
+        inset 0 -7px 9px rgba(0,0,0,.28),
+        0 7px 10px rgba(0,0,0,.3);
+
+    transform:
+        translateY(-3px);
+
+    transition:.2s;
 }
 
-.result strong{
-    display:block;
+.pawn:before{
+    content:"";
+    position:absolute;
 
-    margin-top:5px;
+    width:45%;
+    height:25%;
 
-    font-size:25px;
+    left:18%;
+    top:12%;
 
-    color:#ffd34d;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.5);
+
+    filter:blur(2px);
 }
 
-/* =========================================
+.red .pawn{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #ffb0b0,
+            #e72e2e 45%,
+            #8d1010
+        );
+}
+
+.green .pawn{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #c2ffd0,
+            #23b957 45%,
+            #08752e
+        );
+}
+
+.yellow .pawn{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff8b0,
+            #f2c52b 45%,
+            #a56d00
+        );
+}
+
+.blue .pawn{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #c6efff,
+            #2699e8 45%,
+            #084b91
+        );
+}
+
+/* =====================================
+   PATH
+===================================== */
+
+.path{
+    position:absolute;
+    inset:0;
+
+    z-index:3;
+
+    pointer-events:none;
+}
+
+.cell{
+    position:absolute;
+
+    width:6.1%;
+    height:6.1%;
+
+    border-radius:7px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff6d4,
+            #d9c58c
+        );
+
+    border:1px solid rgba(88,59,19,.2);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.6),
+        0 2px 3px rgba(0,0,0,.12);
+}
+
+/* =====================================
+   COLORED PATH CELLS
+===================================== */
+
+.cell.red{
+    background:
+        linear-gradient(
+            145deg,
+            #ff8d8d,
+            #d92f2f
+        );
+}
+
+.cell.green{
+    background:
+        linear-gradient(
+            145deg,
+            #8af09f,
+            #24b957
+        );
+}
+
+.cell.yellow{
+    background:
+        linear-gradient(
+            145deg,
+            #fff080,
+            #e3ad22
+        );
+}
+
+.cell.blue{
+    background:
+        linear-gradient(
+            145deg,
+            #7bd8ff,
+            #2489db
+        );
+}
+
+/* =====================================
+   DECORATION
+===================================== */
+
+.table::after{
+    content:"";
+
+    position:absolute;
+    inset:7px;
+
+    border-radius:37px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    pointer-events:none;
+}
+
+/* =====================================
+   DICE
+===================================== */
+
+.dice-wrap{
+    position:absolute;
+
+    z-index:20;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.dice{
+    width:76px;
+    height:76px;
+
+    border-radius:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #d8e2ee
+        );
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35),
+        inset 0 3px 5px rgba(255,255,255,.8);
+
+    font-size:30px;
+    font-weight:900;
+
+    color:#172238;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:
+        transform .2s;
+}
+
+.dice:active{
+    transform:
+        scale(.9)
+        rotate(8deg);
+}
+
+/* =====================================
+   PLAYER LABEL
+===================================== */
+
+.player-label{
+    position:absolute;
+
+    z-index:30;
+
+    padding:7px 12px;
+
+    border-radius:12px;
+
+    font-size:10px;
+    font-weight:bold;
+
+    color:white;
+
+    background:
+        rgba(0,0,0,.35);
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.label-red{
+    top:3%;
+    left:4%;
+}
+
+.label-green{
+    top:3%;
+    right:4%;
+}
+
+.label-yellow{
+    bottom:3%;
+    right:4%;
+}
+
+.label-blue{
+    bottom:3%;
+    left:4%;
+}
+
+/* =====================================
    MOBILE
-========================================= */
+===================================== */
 
-@media(max-width:430px){
+@media(max-width:600px){
 
-    .hud{
-        height:74px;
-        padding:10px;
+    .table{
+        width:96vw;
+        padding:11px;
+        border-radius:29px;
     }
 
-    .hud-card{
-        min-width:76px;
-        height:49px;
-        padding:5px 8px;
+    .board{
+        border-radius:22px;
     }
 
-    .hud-number{
-        font-size:15px;
+    .zone{
+        border-radius:17px;
     }
 
-    .player-name{
-        top:82px;
-        right:12px;
+    .home{
+        gap:7px;
+        padding:8px;
     }
 
-    .world{
-        top:116px;
-        bottom:92px;
-        left:8px;
-        right:8px;
-        border-radius:25px;
-    }
-
-    .target{
-        width:66px;
-        height:66px;
-        border-radius:21px;
-    }
-
-    .player{
-        width:66px;
-        height:66px;
-    }
-
-    .bottom{
-        height:86px;
+    .dice{
+        width:63px;
+        height:63px;
+        border-radius:16px;
+        font-size:25px;
     }
 }
-</style></head><body><div class="scene"><div class="particles">
-    <i></i><i></i><i></i><i></i><i></i>
-    <i></i><i></i><i></i><i></i><i></i>
-</div>
+</style></head><body><div class="app"><div class="light"></div>
 
+<div class="table">
 
-<!-- HUD -->
+    <div class="board">
 
-<div class="hud">
+        <!-- RED -->
+        <div class="zone red">
 
-    <div class="hud-card score">
-        <div class="hud-label">امتیاز</div>
-        <div class="hud-number" id="score">0000</div>
-    </div>
+            <div class="home">
 
-    <div class="hud-card level">
-        <div class="hud-label">مرحله</div>
-        <div class="hud-number" id="level">01</div>
-    </div>
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
 
-    <div class="hud-card time">
-        <div class="hud-label">زمان</div>
-        <div class="hud-number" id="time">30</div>
-    </div>
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
 
-</div>
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
 
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
 
-<!-- PLAYER NAME -->
-
-<div class="player-name">
-    بازیکن:
-    <span id="playerName">مهمان</span>
-</div>
-
-
-<!-- WORLD -->
-
-<div class="world">
-
-    <div class="floor"></div>
-
-    <div class="horizon"></div>
-
-    <div class="energy-core"></div>
-
-    <div
-        class="target"
-        id="target">
-
-        <span>★</span>
-
-    </div>
-
-    <div
-        class="player"
-        id="player">
-    </div>
-
-</div>
-
-
-<!-- BOTTOM -->
-
-<div class="bottom">
-
-    <button
-        class="action"
-        id="back">
-        ↩
-    </button>
-
-    <button
-        class="action main-action"
-        id="pause">
-        ⏸
-    </button>
-
-    <button
-        class="action"
-        id="sound">
-        🔊
-    </button>
-
-</div>
-
-
-<!-- START -->
-
-<div
-    class="overlay"
-    id="overlay">
-
-    <div class="start-card">
-
-        <div class="logo">🎮</div>
-
-        <h1>
-            HONEY <span>ARENA</span>
-        </h1>
-
-        <p>
-            وارد میدان شو، هدف‌ها را شکار کن
-            و رکورد خودت را بشکن.
-        </p>
-
-        <div
-            class="result"
-            id="result">
-
-            <small>
-                امتیاز بازی قبلی
-            </small>
-
-            <strong id="lastScore">
-                0
-            </strong>
+            </div>
 
         </div>
 
-        <button
-            class="start-button"
-            id="start">
 
-            شروع بازی
+        <!-- GREEN -->
+        <div class="zone green">
 
-        </button>
+            <div class="home">
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- YELLOW -->
+        <div class="zone yellow">
+
+            <div class="home">
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BLUE -->
+        <div class="zone blue">
+
+            <div class="home">
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+                <div class="pawn-slot">
+                    <div class="pawn"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CENTER -->
+
+        <div class="center"></div>
+
+
+        <!-- DICE -->
+
+        <div class="dice-wrap">
+
+            <div
+                class="dice"
+                id="dice">
+                ⚄
+            </div>
+
+        </div>
+
+
+        <!-- PLAYER LABELS -->
+
+        <div class="player-label label-red">
+            بازیکن ۱
+        </div>
+
+        <div class="player-label label-green">
+            بازیکن ۲
+        </div>
+
+        <div class="player-label label-yellow">
+            بازیکن ۳
+        </div>
+
+        <div class="player-label label-blue">
+            شما
+        </div>
 
     </div>
 
@@ -914,321 +732,46 @@ body{
 
 </div><script>
 
-/* =========================================
-   PLAYER
-========================================= */
-
-const playerName =
-    localStorage.getItem("username") ||
-    localStorage.getItem("playerName") ||
-    "مهمان";
-
-document.getElementById("playerName")
-    .textContent = playerName;
-
-
-/* =========================================
-   GAME VARIABLES
-========================================= */
-
-let score = 0;
-let time = 30;
-let level = 1;
-
-let playing = false;
-let paused = false;
-
-let timer = null;
-
-let best =
-    Number(
-        localStorage.getItem("honeyGameBest") || 0
-    );
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const overlay =
-    document.getElementById("overlay");
-
-const start =
-    document.getElementById("start");
-
-const target =
-    document.getElementById("target");
-
-const player =
-    document.getElementById("player");
-
-const scoreEl =
-    document.getElementById("score");
-
-const timeEl =
-    document.getElementById("time");
-
-const levelEl =
-    document.getElementById("level");
-
-const pause =
-    document.getElementById("pause");
-
-const sound =
-    document.getElementById("sound");
-
-const back =
-    document.getElementById("back");
-
-const result =
-    document.getElementById("result");
-
-const lastScore =
-    document.getElementById("lastScore");
-
-const world =
-    document.querySelector(".world");
-
-
-/* =========================================
-   TARGET POSITION
-========================================= */
-
-function moveTarget(){
-
-    const w = world.clientWidth;
-    const h = world.clientHeight;
-
-    const size = target.offsetWidth;
-
-    const padding = 20;
-
-    const x =
-        padding +
-        Math.random() *
-        Math.max(
-            10,
-            w - size - padding * 2
-        );
-
-    const y =
-        40 +
-        Math.random() *
-        Math.max(
-            10,
-            h - size - 110
-        );
-
-    target.style.left =
-        x + "px";
-
-    target.style.top =
-        y + "px";
-}
-
-
-/* =========================================
-   HIT
-========================================= */
-
-function hit(){
-
-    if(!playing || paused)
-        return;
-
-    score++;
-
-    scoreEl.textContent =
-        String(score).padStart(4,"0");
-
-    player.classList.add("hit");
-
-    setTimeout(()=>{
-        player.classList.remove("hit");
-    },120);
-
-    if(score % 10 === 0){
-
-        level++;
-
-        levelEl.textContent =
-            String(level).padStart(2,"0");
-    }
-
-    moveTarget();
-}
-
-
-/* =========================================
-   START
-========================================= */
-
-function startGame(){
-
-    score = 0;
-    time = 30;
-    level = 1;
-
-    playing = true;
-    paused = false;
-
-    scoreEl.textContent = "0000";
-    timeEl.textContent = "30";
-    levelEl.textContent = "01";
-
-    pause.textContent = "⏸";
-
-    result.classList.remove("show");
-
-    overlay.classList.add("hide");
-
-    moveTarget();
-
-    clearInterval(timer);
-
-    timer =
-        setInterval(()=>{
-
-            if(!playing || paused)
-                return;
-
-            time--;
-
-            timeEl.textContent =
-                String(time).padStart(2,"0");
-
-            if(time <= 0){
-
-                endGame();
-            }
-
-        },1000);
-}
-
-
-/* =========================================
-   END
-========================================= */
-
-function endGame(){
-
-    playing = false;
-
-    clearInterval(timer);
-
-    lastScore.textContent =
-        score;
-
-    result.classList.add("show");
-
-    start.textContent =
-        "بازی دوباره";
-
-    overlay.classList.remove("hide");
-
-    if(score > best){
-
-        best = score;
-
-        localStorage.setItem(
-            "honeyGameBest",
-            best
-        );
-    }
-}
-
-
-/* =========================================
-   PAUSE
-========================================= */
-
-function togglePause(){
-
-    if(!playing)
-        return;
-
-    paused = !paused;
-
-    pause.textContent =
-        paused ? "▶" : "⏸";
-}
-
-
-/* =========================================
-   SOUND
-========================================= */
-
-let soundOn = true;
-
-function toggleSound(){
-
-    soundOn = !soundOn;
-
-    sound.textContent =
-        soundOn ? "🔊" : "🔇";
-}
-
-
-/* =========================================
-   EVENTS
-========================================= */
-
-start.addEventListener(
-    "click",
-    startGame
-);
-
-target.addEventListener(
-    "pointerdown",
-    hit
-);
-
-pause.addEventListener(
-    "click",
-    togglePause
-);
-
-sound.addEventListener(
-    "click",
-    toggleSound
-);
-
-
-/* =========================================
-   BACK
-========================================= */
-
-back.addEventListener(
+/* =====================================
+   DICE
+===================================== */
+
+const dice =
+    document.getElementById("dice");
+
+const faces = [
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
+];
+
+dice.addEventListener(
     "click",
     ()=>{
 
-        window.location.href =
-            "games.html";
+        dice.style.transform =
+            "rotate(360deg) scale(.9)";
+
+        setTimeout(()=>{
+
+            const number =
+                Math.floor(
+                    Math.random()*6
+                );
+
+            dice.textContent =
+                faces[number];
+
+            dice.style.transform =
+                "rotate(0deg) scale(1)";
+
+        },350);
 
     }
 );
-
-
-/* =========================================
-   RESIZE
-========================================= */
-
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        if(!playing)
-            moveTarget();
-
-    }
-);
-
-
-/* =========================================
-   INIT
-========================================= */
-
-moveTarget();
 
 </script></body>
-</html>
+                        </html>
