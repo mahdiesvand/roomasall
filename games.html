@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
-
-<title>عسل چت | بازی</title>
-
-<style>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>بازی | عسل گیم</title><style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
@@ -23,61 +13,62 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#090909;
+}
+
+body{
     font-family:
         Tahoma,
         Arial,
         sans-serif;
-}
-
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:
+        radial-gradient(circle at 50% 15%,#273c62 0%,#111827 38%,#050811 100%);
+    color:#fff;
 }
 
 /* =========================
-   GAME CONTAINER
+   MAIN GAME CONTAINER
 ========================= */
 
 .game{
     position:relative;
     width:100%;
-    height:100%;
-    max-width:600px;
+    height:100vh;
+    min-height:600px;
     overflow:hidden;
-
     background:
-        radial-gradient(
-            circle at 50% 45%,
-            #5a301f 0%,
-            #29150f 65%,
-            #100806 100%
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.04),
+            transparent 35%
         );
-
-    color:white;
 }
 
-/* =========================
-   WOOD TEXTURE
-========================= */
+/* نورهای پس زمینه */
 
 .game::before{
     content:"";
     position:absolute;
-    inset:0;
+    width:420px;
+    height:420px;
+    top:-180px;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:rgba(71,155,255,.12);
+    filter:blur(60px);
+    pointer-events:none;
+}
 
-    opacity:.18;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            rgba(255,255,255,.05) 2px,
-            transparent 5px,
-            rgba(0,0,0,.08) 9px
-        );
-
+.game::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    bottom:-150px;
+    right:-100px;
+    border-radius:50%;
+    background:rgba(255,184,48,.08);
+    filter:blur(70px);
     pointer-events:none;
 }
 
@@ -87,2958 +78,946 @@ body{
 
 .topbar{
     position:absolute;
+    z-index:20;
     top:0;
     left:0;
     right:0;
-
-    height:92px;
-
-    z-index:20;
+    height:76px;
+    padding:12px 14px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:8px 12px;
+    gap:10px;
 
     background:
         linear-gradient(
             180deg,
-            #132a32,
-            #102029 70%,
-            #0b161b
+            rgba(7,12,24,.96),
+            rgba(7,12,24,.65)
         );
 
-    border-bottom:
-        5px solid #d69b35;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.7);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
 }
 
-/* =========================
-   TOP BUTTON
-========================= */
+/* کارت های بالا */
 
-.top-btn{
-    width:68px;
-    height:68px;
-
-    border-radius:18px;
-
-    border:
-        2px solid #8e6327;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1d3138,
-            #0c171c
-        );
-
-    color:#e8ae3c;
+.info-box{
+    min-width:82px;
+    height:50px;
+    padding:6px 11px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
-    font-size:28px;
-
-    box-shadow:
-        inset 0 0 12px rgba(255,190,50,.12),
-        0 4px 10px rgba(0,0,0,.5);
-}
-
-.top-btn span{
-    font-size:11px;
-    margin-top:2px;
-    color:#e8c477;
-}
-
-/* =========================
-   TITLE
-========================= */
-
-.title{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-
-    top:7px;
-
-    min-width:210px;
-
-    text-align:center;
-
-    padding:8px 22px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #432115,
-            #160d0a
-        );
-
-    border:
-        2px solid #a8752d;
-
-    box-shadow:
-        0 0 15px rgba(0,0,0,.7),
-        inset 0 0 12px rgba(220,160,50,.15);
-}
-
-.title strong{
-    display:block;
-
-    color:#f0b83e;
-
-    font-size:25px;
-
-    text-shadow:
-        0 2px 3px #000;
-}
-
-.title small{
-    display:block;
-
-    color:#d8b96e;
-
-    font-size:10px;
-
-    margin-top:1px;
-}
-
-/* =========================
-   PLAYER PANELS
-========================= */
-
-.players{
-    position:absolute;
-
-    top:98px;
-    left:8px;
-    right:8px;
-
-    height:118px;
-
-    z-index:15;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:8px;
-}
-
-.player{
-    position:relative;
-
-    min-width:0;
-
-    border-radius:18px;
-
-    border:
-        2px solid #68431c;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(60,32,20,.97),
-            rgba(18,10,7,.97)
-        );
-
-    box-shadow:
-        inset 0 0 15px rgba(255,190,70,.08),
-        0 5px 12px rgba(0,0,0,.65);
-
-    overflow:hidden;
-
-    padding:10px 8px;
-}
-
-/* PLAYER AVATAR */
-
-.avatar{
-    position:absolute;
-
-    width:58px;
-    height:58px;
-
-    top:9px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:30px;
-
-    background:
-        radial-gradient(
-            circle,
-            #54258a,
-            #180c2c
-        );
-
-    border:
-        4px solid #d69b2d;
-
-    box-shadow:
-        0 0 10px rgba(230,170,45,.5),
-        inset 0 0 12px rgba(255,255,255,.1);
-}
-
-.player:nth-child(1) .avatar,
-.player:nth-child(3) .avatar{
-    background:
-        radial-gradient(
-            circle,
-            #239f31,
-            #063d12
-        );
-}
-
-.player:nth-child(2) .avatar{
-    background:
-        radial-gradient(
-            circle,
-            #742ca8,
-            #21072d
-        );
-}
-
-.player:nth-child(4) .avatar{
-    background:
-        radial-gradient(
-            circle,
-            #c52c27,
-            #430b09
-        );
-}
-
-.player:nth-child(odd) .avatar{
-    right:8px;
-}
-
-.player:nth-child(even) .avatar{
-    left:8px;
-}
-
-/* PLAYER INFO */
-
-.player-info{
-    position:absolute;
-
-    top:15px;
-
-    right:74px;
-    left:8px;
-
-    text-align:right;
-}
-
-.player:nth-child(even) .player-info{
-    text-align:left;
-
-    left:74px;
-    right:8px;
-}
-
-.player-name{
-    font-size:13px;
-    font-weight:bold;
-
-    color:#fff;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.score{
-    margin-top:7px;
-
-    color:#f2bd43;
-
-    font-size:13px;
-}
-
-.status{
-    margin-top:5px;
-
-    font-size:9px;
-
-    color:#69d86a;
-}
-
-/* =========================
-   BOARD AREA
-========================= */
-
-.board-area{
-    position:absolute;
-
-    top:215px;
-    left:0;
-    right:0;
-    bottom:105px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    z-index:5;
-}
-
-/* =========================
-   BOARD
-========================= */
-
-.board{
-    position:relative;
-
-    width:min(94vw,570px);
-    height:min(94vw,570px);
-
-    max-width:570px;
-    max-height:570px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 45%,
-            #d99b55 0%,
-            #b96f39 55%,
-            #6e351f 100%
-        );
-
-    border:
-        12px solid #4b2517;
-
-    box-shadow:
-        0 0 0 4px #bd7b2d,
-        0 0 0 8px #2a150d,
-        0 15px 35px rgba(0,0,0,.75),
-        inset 0 0 30px rgba(60,20,5,.55);
-
-    overflow:visible;
-}
-
-/* WOOD GRAIN */
-
-.board::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    border-radius:50%;
-
-    opacity:.25;
-
-    background:
-        repeating-radial-gradient(
-            ellipse at center,
-            transparent 0px,
-            transparent 15px,
-            rgba(70,30,10,.12) 17px,
-            transparent 20px
-        );
-
-    pointer-events:none;
-}
-
-/* =========================
-   TRACK
-========================= */
-
-.track{
-    position:absolute;
-
-    inset:9%;
-
-    border-radius:50%;
-
-    border:
-        4px solid rgba(70,32,15,.7);
-
-    box-shadow:
-        inset 0 0 20px rgba(40,10,0,.45);
-
-}
-
-/* =========================
-   BOARD CENTER
-========================= */
-
-.board-center{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:29%;
-    height:29%;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #63351f,
-            #25120c
-        );
-
-    border:
-        8px solid #6b391f;
-
-    box-shadow:
-        0 0 0 3px #c48a35,
-        inset 0 0 20px #000,
-        0 5px 15px rgba(0,0,0,.7);
-
-    z-index:4;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-}
-
-/* CENTER ORNAMENT */
-
-.board-center::before{
-    content:"✦";
-
-    font-size:45px;
-
-    color:#d39a38;
-
-    text-shadow:
-        0 0 10px #f5c557;
-}
-
-/* =========================
-   PLAYER HOME AREAS
-========================= */
-
-.home{
-    position:absolute;
-
-    width:29%;
-    height:29%;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border:5px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        inset 0 0 20px rgba(0,0,0,.45),
-        0 4px 10px rgba(0,0,0,.35);
-}
-
-.home.green{
-    left:10%;
-    top:10%;
-
-    background:
-        radial-gradient(
-            circle,
-            #1b921e,
-            #06450b
-        );
-}
-
-.home.purple{
-    right:10%;
-    top:10%;
-
-    background:
-        radial-gradient(
-            circle,
-            #7823a1,
-            #30083e
-        );
-}
-
-.home.blue{
-    left:10%;
-    bottom:10%;
-
-    background:
-        radial-gradient(
-            circle,
-            #1388c7,
-            #063d64
-        );
-}
-
-.home.red{
-    right:10%;
-    bottom:10%;
-
-    background:
-        radial-gradient(
-            circle,
-            #d6382d,
-            #5a0e0a
-        );
-}
-
-/* =========================
-   HOME PAWNS
-========================= */
-
-.home-pawns{
-    width:72%;
-    height:72%;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    grid-template-rows:
-        1fr 1fr;
-
-    gap:7px;
-}
-
-.pawn-home{
-    position:relative;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            #ffffff 0%,
-            var(--pawn) 13%,
-            #111 100%
-        );
-
-    border:
-        3px solid rgba(255,255,255,.35);
-
-    box-shadow:
-        0 5px 8px rgba(0,0,0,.6),
-        inset -4px -5px 7px rgba(0,0,0,.4);
-
-    transform:
-        translateZ(0);
-}
-
-.pawn-home::after{
-    content:"";
-
-    position:absolute;
-
-    width:35%;
-    height:20%;
-
-    left:20%;
-    top:14%;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.75);
-
-    filter:blur(2px);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:420px){
-
-    .topbar{
-        height:82px;
-    }
-
-    .top-btn{
-        width:58px;
-        height:58px;
-        font-size:24px;
-    }
-
-    .title{
-        min-width:155px;
-        padding:6px 12px;
-    }
-
-    .title strong{
-        font-size:19px;
-    }
-
-    .title small{
-        font-size:8px;
-    }
-
-    .players{
-        top:88px;
-        height:100px;
-    }
-
-    .player{
-        padding:7px;
-    }
-
-    .avatar{
-        width:48px;
-        height:48px;
-        font-size:23px;
-    }
-
-    .player-info{
-        right:60px;
-    }
-
-    .player:nth-child(even) .player-info{
-        left:60px;
-    }
-
-    .player-name{
-        font-size:10px;
-    }
-
-    .score{
-        font-size:10px;
-    }
-
-    .board-area{
-        top:188px;
-        bottom:92px;
-    }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="game">
-
-    <!-- TOP BAR -->
-
-    <div class="topbar">
-
-        <div class="top-btn">
-            ↩
-            <span>خروج</span>
-        </div>
-
-        <div class="top-btn">
-            💬
-            <span>چت</span>
-        </div>
-
-        <div class="title">
-            <strong>👑 عسل چت</strong>
-            <small>تاس و تخته آنلاین</small>
-        </div>
-
-        <div class="top-btn">
-            🔊
-            <span>صدا</span>
-        </div>
-
-        <div class="top-btn">
-            ?
-            <span>راهنما</span>
-        </div>
-
-    </div>
-
-
-    <!-- PLAYERS -->
-
-    <div class="players">
-
-        <div class="player">
-
-            <div class="avatar">♟</div>
-
-            <div class="player-info">
-                <div class="player-name">
-                    mozhaNN
-                </div>
-
-                <div class="score">
-                    ⭐ 1,250
-                </div>
-
-                <div class="status">
-                    ● آنلاین
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="player">
-
-            <div class="avatar">♟</div>
-
-            <div class="player-info">
-
-                <div class="player-name">
-                    guest_7PXP67ZX3
-                </div>
-
-                <div class="score">
-                    ⭐ 980
-                </div>
-
-                <div class="status">
-                    ● آنلاین
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="player">
-
-            <div class="avatar">♟</div>
-
-            <div class="player-info">
-
-                <div class="player-name">
-                    silent128
-                </div>
-
-                <div class="score">
-                    ⭐ 1,100
-                </div>
-
-                <div class="status">
-                    ● آنلاین
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="player">
-
-            <div class="avatar">♟</div>
-
-            <div class="player-info">
-
-                <div class="player-name">
-                    guest_P448R24X7
-                </div>
-
-                <div class="score">
-                    ⭐ 870
-                </div>
-
-                <div class="status">
-                    ● آنلاین
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- BOARD -->
-
-    <div class="board-area">
-
-        <div class="board">
-
-            <div class="track"></div>
-
-
-            <!-- GREEN -->
-
-            <div class="home green">
-
-                <div class="home-pawns">
-
-                    <div class="pawn-home"
-                         style="--pawn:#27d32c"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#27d32c"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#27d32c"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#27d32c"></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PURPLE -->
-
-            <div class="home purple">
-
-                <div class="home-pawns">
-
-                    <div class="pawn-home"
-                         style="--pawn:#b63cff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#b63cff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#b63cff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#b63cff"></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- BLUE -->
-
-            <div class="home blue">
-
-                <div class="home-pawns">
-
-                    <div class="pawn-home"
-                         style="--pawn:#20aaff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#20aaff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#20aaff"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#20aaff"></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- RED -->
-
-            <div class="home red">
-
-                <div class="home-pawns">
-
-                    <div class="pawn-home"
-                         style="--pawn:#ff4038"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#ff4038"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#ff4038"></div>
-
-                    <div class="pawn-home"
-                         style="--pawn:#ff4038"></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CENTER -->
-
-            <div class="board-center"></div>
-
-        </div>
-
-    </div>
-
-
-</div>
-
-</body>
-    </html>
-
-<!-- =========================
-     GAME BOARD ENGINE
-========================= -->
-
-<style>
-
-/* مسیر اصلی خانه‌ها */
-.board-track{
-    position:absolute;
-    inset:0;
-
-    z-index:3;
-
-    pointer-events:none;
-}
-
-/* هر خانه دقیقاً با مختصات خودش */
-.track-cell{
-    position:absolute;
-
-    width:8.2%;
-    aspect-ratio:1/1;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #dca06a,
-            #9a5632 65%,
-            #4d2418 100%
-        );
-
-    border:
-        3px solid #542719;
-
-    box-shadow:
-        inset 2px 3px 5px rgba(255,255,255,.18),
-        inset -3px -4px 7px rgba(0,0,0,.55),
-        0 2px 4px rgba(0,0,0,.5);
-}
-
-/* خانه‌های رنگی */
-.track-cell.green{
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #7dff62,
-            #168b20 55%,
-            #063e0c
-        );
-
-    border-color:#15591b;
-
-    box-shadow:
-        0 0 9px rgba(35,255,45,.5),
-        inset 2px 3px 5px rgba(255,255,255,.25),
-        inset -3px -4px 7px rgba(0,0,0,.5);
-}
-
-.track-cell.purple{
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #e69aff,
-            #8523a7 55%,
-            #35043f
-        );
-
-    border-color:#5c1873;
-
-    box-shadow:
-        0 0 9px rgba(210,60,255,.45),
-        inset 2px 3px 5px rgba(255,255,255,.25),
-        inset -3px -4px 7px rgba(0,0,0,.5);
-}
-
-.track-cell.blue{
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #9cecff,
-            #147fc0 55%,
-            #053b63
-        );
-
-    border-color:#0c527d;
-
-    box-shadow:
-        0 0 9px rgba(20,180,255,.45),
-        inset 2px 3px 5px rgba(255,255,255,.25),
-        inset -3px -4px 7px rgba(0,0,0,.5);
-}
-
-.track-cell.red{
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #ff9b92,
-            #c92d28 55%,
-            #5b0908
-        );
-
-    border-color:#7e1715;
-
-    box-shadow:
-        0 0 9px rgba(255,50,40,.45),
-        inset 2px 3px 5px rgba(255,255,255,.25),
-        inset -3px -4px 7px rgba(0,0,0,.5);
-}
-
-
-/* =========================
-   REAL PAWN
-========================= */
-
-.game-pawn{
-
-    position:absolute;
-
-    width:8.8%;
-    aspect-ratio:1/1;
-
-    transform:
-        translate(-50%,-58%);
-
-    z-index:10;
-
-    border-radius:50% 50% 45% 45%;
-
-    background:
-        radial-gradient(
-            circle at 34% 18%,
-            #ffffff 0%,
-            var(--pawn-color) 12%,
-            var(--pawn-color) 48%,
-            #551000 100%
-        );
-
-    border:
-        3px solid rgba(255,255,255,.4);
-
-    box-shadow:
-        0 5px 8px rgba(0,0,0,.7),
-        inset -5px -7px 8px rgba(0,0,0,.45),
-        inset 3px 3px 5px rgba(255,255,255,.35);
-}
-
-/* تاج بالای مهره */
-.game-pawn::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:42%;
-    height:23%;
-
-    left:29%;
-    top:-17%;
-
-    border-radius:
-        50% 50% 30% 30%;
-
-    background:
-        linear-gradient(
-            180deg,
-            #fff,
-            var(--pawn-color) 35%,
-            #631000
-        );
-
-    border:
-        2px solid rgba(255,255,255,.35);
-
-    box-shadow:
-        0 2px 4px rgba(0,0,0,.5);
-}
-
-/* برق روی مهره */
-.game-pawn::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:27%;
-    height:14%;
-
-    left:18%;
-    top:14%;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    opacity:.9;
-
-    filter:blur(1px);
-}
-
-
-/* =========================
-   3D DICE
-========================= */
-
-.dice-zone{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    z-index:20;
-
-    width:27%;
-    aspect-ratio:1/1;
-
-    perspective:700px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.dice{
-
-    width:58%;
-    aspect-ratio:1/1;
-
-    position:relative;
-
-    transform-style:preserve-3d;
-
-    transform:
-        rotateX(-18deg)
-        rotateY(25deg)
-        rotateZ(-4deg);
-
-    transition:
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-.dice-face{
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:18%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #d7d7d7 45%,
-            #999
-        );
-
-    border:
-        2px solid #777;
-
-    box-shadow:
-        inset 5px 5px 9px rgba(255,255,255,.8),
-        inset -7px -8px 12px rgba(0,0,0,.25),
-        0 8px 12px rgba(0,0,0,.6);
-
-    display:grid;
-
-    padding:15%;
-
-    gap:5%;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    grid-template-rows:
-        repeat(3,1fr);
-}
-
-/* نقاط تاس */
-.dot{
-
-    width:70%;
-    aspect-ratio:1/1;
-
-    justify-self:center;
-    align-self:center;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #555,
-            #050505
-        );
-
-    box-shadow:
-        inset 2px 2px 3px rgba(255,255,255,.2),
-        0 1px 2px rgba(0,0,0,.7);
-}
-
-/* حالت سه بعدی */
-.dice-face.front{
-    transform:
-        translateZ(30px);
-}
-
-.dice-face.back{
-    transform:
-        rotateY(180deg)
-        translateZ(30px);
-}
-
-.dice-face.right{
-    transform:
-        rotateY(90deg)
-        translateZ(30px);
-}
-
-.dice-face.left{
-    transform:
-        rotateY(-90deg)
-        translateZ(30px);
-}
-
-.dice-face.top{
-    transform:
-        rotateX(90deg)
-        translateZ(30px);
-}
-
-.dice-face.bottom{
-    transform:
-        rotateX(-90deg)
-        translateZ(30px);
-}
-
-
-/* =========================
-   DICE GLOW
-========================= */
-
-.dice-zone::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:130%;
-    height:130%;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,185,45,.35),
-            transparent 65%
-        );
-
-    filter:blur(8px);
-
-    z-index:-1;
-
-    animation:
-        diceGlow 2s infinite alternate;
-}
-
-@keyframes diceGlow{
-
-    from{
-        opacity:.45;
-        transform:scale(.92);
-    }
-
-    to{
-        opacity:.9;
-        transform:scale(1.08);
-    }
-}
-
-
-/* =========================
-   TURN INDICATOR
-========================= */
-
-.turn-box{
-
-    position:absolute;
-
-    top:4%;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:18;
-
-    min-width:110px;
-
-    padding:6px 18px;
-
-    text-align:center;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #3b2114,
-            #120906
-        );
-
-    border:
-        2px solid #c38b32;
-
-    box-shadow:
-        0 4px 8px rgba(0,0,0,.6),
-        inset 0 0 10px rgba(255,180,50,.15);
-}
-
-.turn-box small{
-
-    display:block;
-
-    color:#d9bd7b;
-
-    font-size:9px;
-}
-
-.turn-box strong{
-
-    display:block;
-
-    color:#54e84e;
-
-    font-size:14px;
-
-    margin-top:2px;
-}
-
-
-/* =========================
-   BOTTOM CONTROLS
-========================= */
-
-.controls{
-
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    height:105px;
-
-    z-index:30;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:8px 15px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(15,8,5,.15),
-            #100906 70%
-        );
-}
-
-.action{
-
-    width:95px;
-    height:75px;
-
-    border-radius:20px;
-
-    border:
-        2px solid #a36c25;
-
-    background:
-        linear-gradient(
-            145deg,
-            #3a2114,
-            #100907
-        );
-
-    color:#f3c04b;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    box-shadow:
-        0 5px 12px rgba(0,0,0,.65),
-        inset 0 0 10px rgba(255,180,50,.1);
-
-    font-size:25px;
-
-    user-select:none;
-}
-
-.action span{
-
-    font-size:10px;
-
-    color:#dfc17d;
-
-    margin-top:3px;
-}
-
-.roll{
-
-    width:115px;
-    height:88px;
-
-    border-radius:50%;
-
-    border:
-        5px solid #d79a31;
-
-    background:
-        radial-gradient(
-            circle,
-            #1e6d28,
-            #07330d
-        );
-
-    box-shadow:
-        0 0 0 3px #4d2a12,
-        0 0 18px rgba(60,255,80,.3),
-        inset 0 0 20px rgba(0,0,0,.5);
-
-    font-size:27px;
-
-    color:#fff;
-}
-
-.roll span{
-
-    color:#f3c44d;
-
-    font-size:11px;
-}
-
-
-/* =========================
-   STATUS BAR
-========================= */
-
-.status-bar{
-
-    position:absolute;
-
-    bottom:5px;
-
-    left:10px;
-    right:10px;
-
-    height:28px;
-
-    z-index:40;
-
-    border-radius:10px;
-
-    background:
-        rgba(5,10,12,.85);
-
-    border:
-        1px solid #6f4b20;
-
-    display:flex;
-
-    justify-content:space-around;
-
-    align-items:center;
-
-    color:#d8bc7b;
-
-    font-size:9px;
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:420px){
-
-    .game-pawn{
-        width:8.5%;
-    }
-
-    .dice-zone{
-        width:29%;
-    }
-
-    .controls{
-        height:88px;
-    }
-
-    .action{
-        width:72px;
-        height:60px;
-        font-size:20px;
-    }
-
-    .roll{
-        width:90px;
-        height:70px;
-    }
-
-    .status-bar{
-        bottom:2px;
-    }
-
-}
-
-</style>
-
-
-<script>
-
-/* ======================================
-   BOARD PATH
-====================================== */
-
-const board = document.querySelector(".board");
-
-
-/*
-   مختصات خانه‌ها به صورت درصدی
-   نسبت به خود صفحه بازی
-
-   این روش باعث می‌شود
-   خانه‌ها در موبایل هم دقیق بمانند.
-*/
-
-const path = [
-
-    /* بالا */
-    [50,8],
-    [50,12],
-    [50,16],
-    [50,20],
-    [50,24],
-
-    [58,8],
-    [64,10],
-    [70,14],
-    [75,20],
-    [80,27],
-
-    /* راست */
-    [88,32],
-    [88,38],
-    [88,44],
-    [88,50],
-    [88,56],
-    [88,62],
-    [86,68],
-
-    /* پایین راست */
-    [80,75],
-    [75,81],
-    [69,86],
-    [63,89],
-    [57,92],
-
-    [50,92],
-    [50,88],
-    [50,84],
-    [50,80],
-
-    /* پایین چپ */
-    [43,92],
-    [37,89],
-    [31,86],
-    [25,81],
-    [20,75],
-
-    [14,68],
-    [12,62],
-    [12,56],
-    [12,50],
-    [12,44],
-    [12,38],
-    [12,32],
-
-    /* بالا چپ */
-    [20,27],
-    [25,20],
-    [30,14],
-    [36,10],
-    [42,8],
-
-    [44,16],
-    [44,21],
-    [44,26],
-    [44,31],
-    [44,36],
-
-    [56,16],
-    [56,21],
-    [56,26],
-    [56,31],
-    [56,36]
-];
-
-
-/* ساخت خانه‌ها */
-
-path.forEach((pos,index)=>{
-
-    const cell =
-        document.createElement("div");
-
-    cell.className="track-cell";
-
-    cell.dataset.index=index;
-
-    cell.style.left=pos[0]+"%";
-    cell.style.top=pos[1]+"%";
-
-    /*
-       خانه‌های رنگی
-    */
-
-    if(index>=43 && index<=47)
-        cell.classList.add("green");
-
-    if(index>=48 && index<=52)
-        cell.classList.add("purple");
-
-    if(index>=53 && index<=57)
-        cell.classList.add("blue");
-
-    if(index>=58 && index<=62)
-        cell.classList.add("red");
-
-
-    /*
-       ستاره‌های امن
-    */
-
-    if(
-        index===0 ||
-        index===12 ||
-        index===24 ||
-        index===36
-    ){
-        cell.innerHTML="★";
-
-        cell.style.color="#f4c14d";
-
-        cell.style.fontSize="18px";
-
-        cell.style.display="flex";
-
-        cell.style.alignItems="center";
-
-        cell.style.justifyContent="center";
-
-        cell.style.textShadow=
-            "0 0 7px #ffd65a";
-    }
-
-    board
-        .querySelector(".track")
-        .appendChild(cell);
-
-});
-
-
-/* ======================================
-   PAWNS
-====================================== */
-
-const pawnData=[
-
-    {
-        color:"#23d42e",
-        pathIndex:8
-    },
-
-    {
-        color:"#a52ee0",
-        pathIndex:20
-    },
-
-    {
-        color:"#159ee4",
-        pathIndex:32
-    },
-
-    {
-        color:"#ed342c",
-        pathIndex:40
-    }
-
-];
-
-
-/*
-   مهره‌ها دقیقاً در مرکز خانه قرار می‌گیرند
-*/
-
-pawnData.forEach((data)=>{
-
-    const cell =
-        board.querySelector(
-            `[data-index="${data.pathIndex}"]`
-        );
-
-    if(!cell) return;
-
-    const pawn =
-        document.createElement("div");
-
-    pawn.className="game-pawn";
-
-    pawn.style.setProperty(
-        "--pawn-color",
-        data.color
-    );
-
-    pawn.style.left=
-        cell.style.left;
-
-    pawn.style.top=
-        cell.style.top;
-
-    board.appendChild(pawn);
-
-});
-
-
-/* ======================================
-   DICE
-====================================== */
-
-const diceZone=
-    document.createElement("div");
-
-diceZone.className="dice-zone";
-
-diceZone.innerHTML=`
-
-<div class="dice">
-
-    <div class="dice-face front">
-        <i class="dot"></i>
-        <i></i>
-        <i></i>
-
-        <i></i>
-        <i class="dot"></i>
-        <i></i>
-
-        <i></i>
-        <i></i>
-        <i class="dot"></i>
-    </div>
-
-    <div class="dice-face back"></div>
-    <div class="dice-face right"></div>
-    <div class="dice-face left"></div>
-    <div class="dice-face top"></div>
-    <div class="dice-face bottom"></div>
-
-</div>
-
-`;
-
-board.appendChild(diceZone);
-
-
-/* ======================================
-   TURN BOX
-====================================== */
-
-const turn=
-    document.createElement("div");
-
-turn.className="turn-box";
-
-turn.innerHTML=`
-
-<small>نوبت بازیکن</small>
-
-<strong>🟢 mozhaNN</strong>
-
-`;
-
-board.appendChild(turn);
-
-
-/* ======================================
-   BOTTOM CONTROLS
-====================================== */
-
-const controls=
-    document.createElement("div");
-
-controls.className="controls";
-
-controls.innerHTML=`
-
-<div class="action">
-
-    ↩
-
-    <span>
-        برگشت
-    </span>
-
-</div>
-
-
-<div class="roll">
-
-    🎲
-
-    <span>
-        تاس بینداز
-    </span>
-
-</div>
-
-
-<div class="action">
-
-    ⚡
-
-    <span>
-        دو بار تاس
-    </span>
-
-</div>
-
-`;
-
-document.querySelector(".game")
-    .appendChild(controls);
-
-
-/* ======================================
-   STATUS BAR
-====================================== */
-
-const status=
-    document.createElement("div");
-
-status.className="status-bar";
-
-status.innerHTML=`
-
-<span>
-    👥 آنلاین: 12 نفر
-</span>
-
-<span>
-    🏆 اتاق: عسل چت
-</span>
-
-<span>
-    🟢 26ms
-</span>
-
-`;
-
-document.querySelector(".game")
-    .appendChild(status);
-
-
-/* ======================================
-   DICE ANIMATION
-====================================== */
-
-const dice=
-    diceZone.querySelector(".dice");
-
-const rollButton=
-    controls.querySelector(".roll");
-
-rollButton.addEventListener(
-    "click",
-    ()=>{
-
-        const x=
-            360 +
-            Math.floor(
-                Math.random()*720
-            );
-
-        const y=
-            360 +
-            Math.floor(
-                Math.random()*720
-            );
-
-        const z=
-            Math.floor(
-                Math.random()*360
-            );
-
-        dice.style.transform=
-            `
-            rotateX(${x}deg)
-            rotateY(${y}deg)
-            rotateZ(${z}deg)
-            `;
-
-    }
-);
-
-</script>    
-
-<style>
-
-/* =========================================
-   ACTIVE TURN EFFECT
-========================================= */
-
-.board.active-turn{
-    animation:
-        boardPulse 2s infinite;
-}
-
-@keyframes boardPulse{
-
-    0%,100%{
-        box-shadow:
-            0 0 0 4px #bd7b2d,
-            0 0 0 8px #2a150d,
-            0 15px 35px rgba(0,0,0,.75),
-            inset 0 0 30px rgba(60,20,5,.55);
-    }
-
-    50%{
-        box-shadow:
-            0 0 0 4px #e5b449,
-            0 0 25px rgba(255,190,50,.3),
-            0 15px 35px rgba(0,0,0,.75),
-            inset 0 0 30px rgba(60,20,5,.55);
-    }
-}
-
-
-/* =========================================
-   SELECTED PAWN
-========================================= */
-
-.game-pawn.selected{
-
-    animation:
-        pawnSelect .65s infinite alternate;
-
-    filter:
-        brightness(1.25);
-
-    z-index:30;
-}
-
-@keyframes pawnSelect{
-
-    from{
-        transform:
-            translate(-50%,-58%)
-            scale(1);
-    }
-
-    to{
-        transform:
-            translate(-50%,-70%)
-            scale(1.12);
-    }
-
-}
-
-
-/* =========================================
-   PAWN MOVEMENT
-========================================= */
-
-.game-pawn.moving{
-
-    transition:
-        left .28s cubic-bezier(.2,.8,.2,1),
-        top .28s cubic-bezier(.2,.8,.2,1),
-        transform .28s ease;
-
-    filter:
-        brightness(1.3)
-        drop-shadow(
-            0 0 9px
-            rgba(255,220,80,.9)
-        );
-}
-
-
-/* =========================================
-   MOVE TRAIL
-========================================= */
-
-.move-trail{
-
-    position:absolute;
-
-    width:5%;
-
-    aspect-ratio:1/1;
-
-    transform:
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,220,80,.9),
-            rgba(255,170,30,.2),
-            transparent 70%
-        );
-
-    pointer-events:none;
-
-    z-index:6;
-
-    animation:
-        trailFade .5s forwards;
-}
-
-@keyframes trailFade{
-
-    0%{
-        opacity:1;
-        transform:
-            translate(-50%,-50%)
-            scale(1);
-    }
-
-    100%{
-        opacity:0;
-        transform:
-            translate(-50%,-50%)
-            scale(2.2);
-    }
-}
-
-
-/* =========================================
-   DICE BUTTON PRESSED
-========================================= */
-
-.roll.pressed{
-
-    transform:
-        scale(.94);
-
-    box-shadow:
-        0 0 25px rgba(80,255,90,.8),
-        inset 0 0 25px rgba(0,0,0,.7);
-}
-
-
-/* =========================================
-   DICE LIGHT
-========================================= */
-
-.dice-zone.rolling::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-25%;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,210,80,.5),
-            transparent 65%
-        );
-
-    filter:blur(10px);
-
-    animation:
-        diceLight .7s ease-out forwards;
-}
-
-@keyframes diceLight{
-
-    0%{
-        opacity:0;
-        transform:scale(.5);
-    }
-
-    50%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(1.4);
-    }
-}
-
-
-/* =========================================
-   WIN / SAFE HOUSE EFFECT
-========================================= */
-
-.safe-cell{
-
-    animation:
-        safeGlow 1.4s infinite alternate;
-}
-
-@keyframes safeGlow{
-
-    from{
-        filter:
-            brightness(1);
-    }
-
-    to{
-        filter:
-            brightness(1.5)
-            drop-shadow(
-                0 0 8px
-                rgba(255,215,70,.8)
-            );
-    }
-}
-
-
-/* =========================================
-   PLAYER ONLINE LIGHT
-========================================= */
-
-.status::first-letter{
-    color:#43e44c;
-}
-
-
-/* =========================================
-   SMALL GEM DECORATIONS
-========================================= */
-
-.gem{
-
-    position:absolute;
-
-    width:20px;
-    height:20px;
-
-    transform:
-        rotate(45deg);
-
-    border:
-        2px solid rgba(255,255,255,.35);
-
-    background:
-        linear-gradient(
-            135deg,
-            #8efcff,
-            #0874a0
-        );
-
-    box-shadow:
-        0 0 10px rgba(0,220,255,.5);
-
-    z-index:4;
-}
-
-.gem.one{
-    left:4%;
-    top:42%;
-}
-
-.gem.two{
-    right:4%;
-    top:42%;
-}
-
-.gem.three{
-    left:8%;
-    bottom:17%;
-}
-
-.gem.four{
-    right:8%;
-    bottom:17%;
-}
-
-
-/* =========================================
-   TOAST
-========================================= */
-
-.game-toast{
-
-    position:absolute;
-
-    left:50%;
-
-    top:51%;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.8);
-
-    opacity:0;
-
-    z-index:100;
-
-    min-width:170px;
-
-    padding:12px 20px;
-
-    text-align:center;
 
     border-radius:15px;
 
     background:
         linear-gradient(
             145deg,
-            #432716,
-            #120805
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.035)
         );
 
-    border:
-        2px solid #d19a37;
-
-    color:#ffd76a;
-
-    font-size:13px;
+    border:1px solid rgba(255,255,255,.09);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.7),
-        0 0 20px rgba(255,190,50,.25);
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 8px 25px rgba(0,0,0,.22);
+}
 
+.info-title{
+    font-size:10px;
+    color:#93a4c3;
+    margin-bottom:3px;
+}
+
+.info-value{
+    font-size:17px;
+    font-weight:900;
+    color:#fff;
+}
+
+/* امتیاز */
+
+.score-box .info-value{
+    color:#ffd45c;
+}
+
+/* رکورد */
+
+.best-box .info-value{
+    color:#70d8ff;
+}
+
+/* =========================
+   GAME TITLE
+========================= */
+
+.game-title{
+    position:absolute;
+    z-index:10;
+    top:88px;
+    left:0;
+    right:0;
+
+    text-align:center;
     pointer-events:none;
 }
 
-.game-toast.show{
+.game-title h1{
+    font-size:26px;
+    font-weight:1000;
+    letter-spacing:.5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #a9c9ff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    text-shadow:
+        0 0 30px rgba(105,170,255,.18);
+}
+
+.game-title p{
+    margin-top:5px;
+    color:#7182a3;
+    font-size:11px;
+}
+
+/* =========================
+   GAME AREA
+========================= */
+
+.play-area{
+    position:absolute;
+    top:150px;
+    left:14px;
+    right:14px;
+    bottom:92px;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(25,42,70,.92),
+            rgba(8,15,29,.97)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* شبکه داخل زمین */
+
+.grid{
+    position:absolute;
+    inset:0;
+
+    opacity:.22;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.045) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+}
+
+/* نور مرکزی */
+
+.arena-glow{
+    position:absolute;
+    width:280px;
+    height:280px;
+    top:50%;
+    left:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(63,146,255,.18),
+            transparent 68%
+        );
+
+    filter:blur(5px);
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+.player{
+    position:absolute;
+
+    left:50%;
+    bottom:38px;
+
+    width:74px;
+    height:74px;
+
+    transform:translateX(-50%);
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe27b,
+            #ffad26
+        );
+
+    border:3px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        0 0 0 7px rgba(255,187,50,.08),
+        0 12px 35px rgba(255,164,25,.28);
+
+    z-index:8;
+
+    transition:
+        left .12s ease,
+        transform .12s ease;
+}
+
+.player::before{
+    content:"";
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff 0 5%,
+            #272727 6% 24%,
+            transparent 25%
+        );
+
+    box-shadow:
+        18px 0 0 -5px #272727;
+}
+
+.player.active{
+    transform:
+        translateX(-50%)
+        scale(1.08);
+}
+
+/* =========================
+   TARGET
+========================= */
+
+.target{
+    position:absolute;
+
+    width:62px;
+    height:62px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff7bf 0 7%,
+            #ffd34f 8% 42%,
+            #ff8b20 43% 70%,
+            #d94d18 71%
+        );
+
+    border:3px solid rgba(255,255,255,.72);
+
+    box-shadow:
+        0 0 25px rgba(255,170,40,.45);
+
+    z-index:7;
 
     animation:
-        toastShow 1.5s forwards;
+        targetFloat 1.4s ease-in-out infinite;
 }
 
-@keyframes toastShow{
+.target::after{
+    content:"★";
 
-    0%{
-        opacity:0;
-        transform:
-            translate(-50%,-50%)
-            scale(.8);
+    color:#fff;
+    font-size:22px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.3);
+}
+
+@keyframes targetFloat{
+    0%,100%{
+        transform:translateY(0) scale(1);
     }
 
-    15%{
-        opacity:1;
-        transform:
-            translate(-50%,-50%)
-            scale(1);
-    }
-
-    75%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-        transform:
-            translate(-50%,-65%)
-            scale(1);
+    50%{
+        transform:translateY(-8px) scale(1.04);
     }
 }
 
+/* =========================
+   START SCREEN
+========================= */
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+.start-screen{
+    position:absolute;
+    z-index:30;
+    inset:0;
 
-@media(max-width:420px){
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    .gem{
-        width:14px;
-        height:14px;
-    }
+    padding:25px;
 
-    .game-toast{
-        min-width:145px;
-        font-size:11px;
-    }
+    background:
+        rgba(3,8,18,.72);
 
+    backdrop-filter:blur(10px);
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
 }
 
-</style>
-
-
-<script>
-
-/* =========================================
-   DECORATIVE GEMS
-========================================= */
-
-const gemPositions = [
-
-    ["one"],
-    ["two"],
-    ["three"],
-    ["four"]
-
-];
-
-gemPositions.forEach(item => {
-
-    const gem =
-        document.createElement("div");
-
-    gem.className =
-        "gem " + item[0];
-
-    board.appendChild(gem);
-
-});
-
-
-/* =========================================
-   SAFE CELLS
-========================================= */
-
-[
-    0,
-    12,
-    24,
-    36
-].forEach(index => {
-
-    const cell =
-        board.querySelector(
-            `[data-index="${index}"]`
-        );
-
-    if(cell){
-
-        cell.classList.add(
-            "safe-cell"
-        );
-
-    }
-
-});
-
-
-/* =========================================
-   TOAST MESSAGE
-========================================= */
-
-const toast =
-    document.createElement("div");
-
-toast.className =
-    "game-toast";
-
-document.querySelector(".game")
-    .appendChild(toast);
-
-
-function showToast(text){
-
-    toast.textContent = text;
-
-    toast.classList.remove("show");
-
-    void toast.offsetWidth;
-
-    toast.classList.add("show");
-
+.start-screen.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
+.start-card{
+    width:min(360px,100%);
+    padding:30px 24px;
 
-/* =========================================
-   ACTIVE TURN
-========================================= */
+    text-align:center;
 
-board.classList.add(
-    "active-turn"
-);
+    border-radius:30px;
 
-
-/* =========================================
-   PAWN REFERENCES
-========================================= */
-
-const pawns =
-    [...document.querySelectorAll(
-        ".game-pawn"
-    )];
-
-
-/* =========================================
-   SELECT PAWN
-========================================= */
-
-pawns.forEach((pawn,index)=>{
-
-    pawn.addEventListener(
-        "click",
-        (event)=>{
-
-            event.stopPropagation();
-
-            pawns.forEach(p =>
-                p.classList.remove(
-                    "selected"
-                )
-            );
-
-            pawn.classList.add(
-                "selected"
-            );
-
-            showToast(
-                "مهره انتخاب شد"
-            );
-
-        }
-    );
-
-});
-
-
-/* =========================================
-   DICE ROLL SYSTEM
-========================================= */
-
-let rolling = false;
-
-let diceValue = 1;
-
-
-/*
-   اعداد واقعی تاس
-*/
-
-const diceRotations = {
-
-    1:{
-        x:-18,
-        y:25,
-        z:0
-    },
-
-    2:{
-        x:72,
-        y:25,
-        z:0
-    },
-
-    3:{
-        x:-18,
-        y:115,
-        z:0
-    },
-
-    4:{
-        x:-18,
-        y:-65,
-        z:0
-    },
-
-    5:{
-        x:162,
-        y:25,
-        z:0
-    },
-
-    6:{
-        x:252,
-        y:25,
-        z:0
-    }
-
-};
-
-
-/* =========================================
-   ROLL FUNCTION
-========================================= */
-
-function rollDice(){
-
-    if(rolling)
-        return;
-
-    rolling = true;
-
-    rollButton.classList.add(
-        "pressed"
-    );
-
-    diceZone.classList.add(
-        "rolling"
-    );
-
-
-    /*
-       عدد تصادفی
-    */
-
-    diceValue =
-        Math.floor(
-            Math.random()*6
-        ) + 1;
-
-
-    /*
-       چرخش بزرگ برای حس سه‌بعدی
-    */
-
-    const rotation =
-        diceRotations[diceValue];
-
-
-    dice.style.transition =
-        "transform 1.15s cubic-bezier(.15,.8,.2,1)";
-
-
-    dice.style.transform = `
-
-        rotateX(
-            ${rotation.x + 720}deg
-        )
-
-        rotateY(
-            ${rotation.y + 720}deg
-        )
-
-        rotateZ(
-            ${rotation.z + 360}deg
-        )
-
-    `;
-
-
-    setTimeout(()=>{
-
-        dice.style.transform = `
-
-            rotateX(${rotation.x}deg)
-
-            rotateY(${rotation.y}deg)
-
-            rotateZ(${rotation.z}deg)
-
-        `;
-
-    },850);
-
-
-    setTimeout(()=>{
-
-        rolling = false;
-
-        rollButton.classList.remove(
-            "pressed"
+    background:
+        linear-gradient(
+            145deg,
+            rgba(31,49,81,.97),
+            rgba(9,17,31,.98)
         );
 
-        diceZone.classList.remove(
-            "rolling"
-        );
+    border:1px solid rgba(255,255,255,.11);
 
-        showToast(
-            "🎲 عدد تاس: " +
-            diceValue
-        );
-
-
-        /*
-           اگر مهره انتخاب شده باشد،
-           حرکت را شروع کن
-        */
-
-        const selected =
-            document.querySelector(
-                ".game-pawn.selected"
-            );
-
-        if(selected){
-
-            movePawn(
-                selected,
-                diceValue
-            );
-
-        }
-
-    },1200);
-
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.55);
 }
 
+.start-icon{
+    width:82px;
+    height:82px;
 
-rollButton.addEventListener(
-    "click",
-    rollDice
-);
+    margin:0 auto 18px;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-/* =========================================
-   MOVE PAWN
-========================================= */
+    border-radius:26px;
 
-function movePawn(
-    pawn,
-    steps
-){
+    font-size:40px;
 
-    const currentCell =
-        findNearestCell(pawn);
-
-    if(
-        currentCell < 0
-    )
-        return;
-
-
-    const targetIndex =
-        (
-            currentCell +
-            steps
-        ) %
-        path.length;
-
-
-    const start =
-        currentCell;
-
-
-    let step = 1;
-
-
-    function nextStep(){
-
-        if(step > steps){
-
-            pawn.classList.remove(
-                "moving"
-            );
-
-            showToast(
-                "🏁 حرکت انجام شد"
-            );
-
-            return;
-        }
-
-
-        const index =
-            (
-                start +
-                step
-            ) %
-            path.length;
-
-
-        const position =
-            path[index];
-
-
-        /*
-           رد نور هنگام حرکت
-        */
-
-        createTrail(
-            position[0],
-            position[1]
+    background:
+        linear-gradient(
+            145deg,
+            #ffd85a,
+            #ff8c20
         );
 
-
-        pawn.style.left =
-            position[0] + "%";
-
-        pawn.style.top =
-            position[1] + "%";
-
-
-        step++;
-
-
-        setTimeout(
-            nextStep,
-            300
-        );
-
-    }
-
-
-    pawn.classList.add(
-        "moving"
-    );
-
-
-    nextStep();
-
+    box-shadow:
+        0 12px 35px rgba(255,157,30,.25);
 }
 
+.start-card h2{
+    font-size:25px;
+    margin-bottom:8px;
+}
 
-/* =========================================
-   FIND PAWN CELL
-========================================= */
+.start-card p{
+    color:#8e9db9;
+    font-size:12px;
+    line-height:2;
+}
 
-function findNearestCell(pawn){
+/* =========================
+   START BUTTON
+========================= */
+
+.start-btn{
+    width:100%;
+    height:55px;
+
+    margin-top:22px;
+
+    border:0;
+    border-radius:17px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+    font-size:16px;
+    font-weight:900;
+
+    color:#17100a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe36b,
+            #ffab25
+        );
+
+    box-shadow:
+        0 12px 30px rgba(255,169,38,.25);
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+.start-btn:active{
+    transform:scale(.96);
+}
+
+/* =========================
+   BOTTOM CONTROLS
+========================= */
+
+.bottom{
+    position:absolute;
+    z-index:20;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:82px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+
+    padding:10px 14px;
+
+    background:
+        linear-gradient(
+            0deg,
+            rgba(5,10,20,.98),
+            rgba(5,10,20,.72)
+        );
+
+    border-top:1px solid rgba(255,255,255,.07);
+    backdrop-filter:blur(12px);
+}
+
+.control-btn{
+    width:56px;
+    height:56px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.055);
+
+    color:#dbe7ff;
+
+    font-size:21px;
+
+    cursor:pointer;
+
+    transition:
+        transform .12s ease,
+        background .12s ease;
+}
+
+.control-btn:active{
+    transform:scale(.9);
+}
+
+.pause-btn{
+    width:70px;
+    background:
+        linear-gradient(
+            145deg,
+            #315d9d,
+            #1c355e
+        );
+
+    color:#fff;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:430px){
+
+    .topbar{
+        height:70px;
+        padding:10px;
+    }
+
+    .info-box{
+        min-width:72px;
+        height:46px;
+    }
+
+    .info-value{
+        font-size:15px;
+    }
+
+    .game-title{
+        top:80px;
+    }
+
+    .game-title h1{
+        font-size:22px;
+    }
+
+    .play-area{
+        top:135px;
+        bottom:88px;
+        left:9px;
+        right:9px;
+        border-radius:23px;
+    }
+
+    .player{
+        width:66px;
+        height:66px;
+        bottom:30px;
+    }
+
+    .target{
+        width:56px;
+        height:56px;
+    }
+}
+</style></head><body><div class="game"><!-- TOP BAR -->
+
+<div class="topbar">
+
+    <div class="info-box score-box">
+        <div class="info-title">امتیاز</div>
+        <div class="info-value" id="score">0</div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">زمان</div>
+        <div class="info-value" id="timer">30</div>
+    </div>
+
+    <div class="info-box best-box">
+        <div class="info-title">رکورد</div>
+        <div class="info-value" id="best">0</div>
+    </div>
+
+</div>
+
+
+<!-- TITLE -->
+
+<div class="game-title">
+    <h1>HONEY ARENA</h1>
+    <p>هدف‌ها را بگیر و رکورد خودت را بشکن</p>
+</div>
+
+
+<!-- GAME AREA -->
+
+<div class="play-area" id="playArea">
+
+    <div class="grid"></div>
+    <div class="arena-glow"></div>
+
+    <div class="target" id="target"></div>
+
+    <div class="player" id="player"></div>
+
+</div>
+
+
+<!-- START SCREEN -->
+
+<div class="start-screen" id="startScreen">
+
+    <div class="start-card">
+
+        <div class="start-icon">🎮</div>
+
+        <h2>آماده‌ای؟</h2>
+
+        <p>
+            هدف‌های داخل زمین را لمس کن،
+            امتیاز بگیر و رکوردت را ثبت کن.
+        </p>
+
+        <button
+            class="start-btn"
+            id="startBtn">
+            شروع بازی
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BOTTOM -->
+
+<div class="bottom">
+
+    <button
+        class="control-btn"
+        id="backBtn"
+        aria-label="بازگشت">
+        ↩
+    </button>
+
+    <button
+        class="control-btn pause-btn"
+        id="pauseBtn"
+        aria-label="توقف">
+        ⏸
+    </button>
+
+    <button
+        class="control-btn"
+        id="soundBtn"
+        aria-label="صدا">
+        🔊
+    </button>
+
+</div>
+
+</div><script>
+
+/* =========================
+   GAME VARIABLES
+========================= */
+
+let score = 0;
+let time = 30;
+let best = Number(localStorage.getItem("honeyBest") || 0);
+
+let playing = false;
+let paused = false;
+let soundOn = true;
+
+let timerInterval = null;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const scoreEl =
+    document.getElementById("score");
+
+const timerEl =
+    document.getElementById("timer");
+
+const bestEl =
+    document.getElementById("best");
+
+const target =
+    document.getElementById("target");
+
+const player =
+    document.getElementById("player");
+
+const playArea =
+    document.getElementById("playArea");
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const pauseBtn =
+    document.getElementById("pauseBtn");
+
+const soundBtn =
+    document.getElementById("soundBtn");
+
+const backBtn =
+    document.getElementById("backBtn");
+
+
+bestEl.textContent = best;
+
+
+/* =========================
+   RANDOM TARGET
+========================= */
+
+function moveTarget(){
+
+    const rect =
+        playArea.getBoundingClientRect();
+
+    const targetSize =
+        target.offsetWidth;
+
+    const padding = 18;
+
+    const maxX =
+        rect.width -
+        targetSize -
+        padding;
+
+    const maxY =
+        rect.height -
+        targetSize -
+        padding;
 
     const x =
-        parseFloat(
-            pawn.style.left
-        );
+        padding +
+        Math.random() * Math.max(0,maxX-padding);
 
     const y =
-        parseFloat(
-            pawn.style.top
-        );
+        padding +
+        Math.random() * Math.max(0,maxY-padding);
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+}
 
 
-    let nearest = -1;
+/* =========================
+   HIT TARGET
+========================= */
 
-    let distance =
-        Infinity;
+function hitTarget(){
+
+    if(!playing || paused) return;
+
+    score++;
+
+    scoreEl.textContent = score;
+
+    player.classList.add("active");
+
+    setTimeout(()=>{
+        player.classList.remove("active");
+    },120);
+
+    moveTarget();
+}
 
 
-    path.forEach(
-        (position,index)=>{
+/* =========================
+   START GAME
+========================= */
 
-            const dx =
-                position[0] - x;
+function startGame(){
 
-            const dy =
-                position[1] - y;
+    score = 0;
+    time = 30;
 
-            const d =
-                Math.sqrt(
-                    dx*dx +
-                    dy*dy
-                );
+    playing = true;
+    paused = false;
 
+    scoreEl.textContent = score;
+    timerEl.textContent = time;
 
-            if(d < distance){
+    startScreen.classList.add("hidden");
 
-                distance = d;
+    pauseBtn.textContent = "⏸";
 
-                nearest = index;
+    moveTarget();
 
+    clearInterval(timerInterval);
+
+    timerInterval =
+        setInterval(()=>{
+
+            if(!playing || paused) return;
+
+            time--;
+
+            timerEl.textContent = time;
+
+            if(time <= 0){
+                endGame();
             }
 
-        }
-    );
-
-
-    return nearest;
-
+        },1000);
 }
 
 
-/* =========================================
-   MOVEMENT TRAIL
-========================================= */
+/* =========================
+   END GAME
+========================= */
 
-function createTrail(
-    x,
-    y
-){
+function endGame(){
 
-    const trail =
-        document.createElement(
-            "div"
+    playing = false;
+
+    clearInterval(timerInterval);
+
+    if(score > best){
+
+        best = score;
+
+        localStorage.setItem(
+            "honeyBest",
+            best
         );
 
-    trail.className =
-        "move-trail";
+        bestEl.textContent = best;
+    }
 
-    trail.style.left =
-        x + "%";
+    setTimeout(()=>{
 
-    trail.style.top =
-        y + "%";
+        startBtn.textContent =
+            "دوباره بازی کن";
 
+        startScreen.classList.remove(
+            "hidden"
+        );
 
-    board.appendChild(
-        trail
-    );
-
-
-    setTimeout(
-        ()=>{
-            trail.remove();
-        },
-        600
-    );
-
+    },300);
 }
 
 
-/* =========================================
-   DESELECT
-========================================= */
+/* =========================
+   PAUSE
+========================= */
 
-board.addEventListener(
+function togglePause(){
+
+    if(!playing) return;
+
+    paused = !paused;
+
+    pauseBtn.textContent =
+        paused ? "▶" : "⏸";
+}
+
+
+/* =========================
+   SOUND
+========================= */
+
+function toggleSound(){
+
+    soundOn = !soundOn;
+
+    soundBtn.textContent =
+        soundOn ? "🔊" : "🔇";
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+target.addEventListener(
+    "pointerdown",
+    hitTarget
+);
+
+startBtn.addEventListener(
+    "click",
+    startGame
+);
+
+pauseBtn.addEventListener(
+    "click",
+    togglePause
+);
+
+soundBtn.addEventListener(
+    "click",
+    toggleSound
+);
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+backBtn.addEventListener(
     "click",
     ()=>{
-        pawns.forEach(
-            pawn=>{
-                pawn.classList.remove(
-                    "selected"
-                );
-            }
-        );
+
+        /*
+         * اگر صفحه بازی‌هایت games.html است
+         * همین مسیر را نگه دار.
+         */
+
+        window.location.href =
+            "games.html";
     }
 );
 
 
-/* =========================================
-   PLAYER TURN TIMER
-========================================= */
+/* =========================
+   INITIAL POSITION
+========================= */
 
-let seconds = 28;
-
-const turnStrong =
-    document.querySelector(
-        ".turn-box strong"
-    );
-
-const turnSmall =
-    document.querySelector(
-        ".turn-box small"
-    );
-
-
-const timer =
-    document.createElement("div");
-
-timer.style.color =
-    "#ffd05a";
-
-timer.style.fontSize =
-    "10px";
-
-timer.style.marginTop =
-    "3px";
-
-timer.textContent =
-    "00:28";
-
-
-document
-    .querySelector(".turn-box")
-    .appendChild(timer);
-
-
-setInterval(()=>{
-
-    if(seconds > 0){
-
-        seconds--;
-
-    }else{
-
-        seconds = 28;
-
-        showToast(
-            "⏱ نوبت بعدی"
-        );
-
-    }
-
-
-    const min =
-        String(
-            Math.floor(
-                seconds / 60
-            )
-        ).padStart(2,"0");
-
-
-    const sec =
-        String(
-            seconds % 60
-        ).padStart(2,"0");
-
-
-    timer.textContent =
-        `${min}:${sec}`;
-
-},1000);
-
-
-/* =========================================
-   BUTTON EFFECTS
-========================================= */
-
-document
-.querySelectorAll(".top-btn")
-.forEach(button=>{
-
-    button.addEventListener(
-        "click",
-        ()=>{
-
-            button.style.transform =
-                "scale(.92)";
-
-            setTimeout(
-                ()=>{
-                    button.style.transform =
-                        "";
-                },
-                120
-            );
-
-        }
-    );
-
-});
-
-
-/* =========================================
-   INITIAL MESSAGE
-========================================= */
-
-setTimeout(
+window.addEventListener(
+    "resize",
     ()=>{
-        showToast(
-            "🎮 نوبت mozhaNN است"
-        );
-    },
-    700
+        if(!playing){
+            moveTarget();
+        }
+    }
 );
 
-    </script>
+moveTarget();
+
+</script></body>
+</html>
