@@ -1,980 +1,1256 @@
 <!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>عسل منچ | Honey Ludo</title><style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden}
-body{
-font-family:Tahoma,Arial,sans-serif;
-background:
-radial-gradient(circle at 50% 45%,#28435b 0,#0b1724 45%,#02060b 100%);
-color:#fff;
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>عسل منچ | AAA Game UI</title><style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #263f59 0%,
+            #0b1726 38%,
+            #03070d 75%,
+            #010204 100%
+        );
+
+    color:white;
+}
+
+/* =========================================
+   APP
+========================================= */
 
 .app{
-width:100%;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow:hidden;
+    width:100%;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
 }
 
-.app:before{
-content:"";
-position:absolute;
-width:650px;height:650px;
-border-radius:50%;
-background:rgba(44,155,255,.08);
-filter:blur(100px);
+/* cinematic light */
+
+.app::before{
+    content:"";
+    position:absolute;
+
+    width:800px;
+    height:800px;
+
+    left:50%;
+    top:42%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,190,65,.16),
+            rgba(60,130,255,.05) 45%,
+            transparent 70%
+        );
+
+    filter:blur(30px);
+
+    pointer-events:none;
 }
 
-/* TABLE */
+/* =========================================
+   TOP HUD
+========================================= */
 
-.table{
-position:relative;
-width:min(94vw,720px);
-aspect-ratio:1;
-padding:15px;
-border-radius:40px;
-background:
-linear-gradient(145deg,#263e4d,#07111a 70%);
-border:1px solid rgba(255,255,255,.12);
-box-shadow:
-0 40px 100px rgba(0,0,0,.7),
-inset 0 2px 2px rgba(255,255,255,.12),
-inset 0 -15px 35px rgba(0,0,0,.45);
+.topbar{
+    position:absolute;
+
+    top:14px;
+    left:14px;
+    right:14px;
+
+    height:62px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    z-index:100;
 }
 
-.board{
-position:relative;
-width:100%;
-height:100%;
-overflow:hidden;
-border-radius:29px;
-background:
-linear-gradient(145deg,#f5dfa9,#b99553);
-box-shadow:
-inset 0 0 35px rgba(70,40,10,.3),
-inset 0 0 0 3px rgba(80,45,10,.18);
-}
-
-/* BOARD GRID */
-
-.board:before{
-content:"";
-position:absolute;
-inset:0;
-opacity:.18;
-background-image:
-linear-gradient(rgba(90,50,10,.15) 1px,transparent 1px),
-linear-gradient(90deg,rgba(90,50,10,.15) 1px,transparent 1px);
-background-size:24px 24px;
-pointer-events:none;
-}
-
-/* ZONES */
-
-.zone{
-position:absolute;
-width:38%;
-height:38%;
-border-radius:24px;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:2;
-border:3px solid rgba(255,255,255,.38);
-box-shadow:
-inset 0 5px 15px rgba(255,255,255,.2),
-inset 0 -12px 25px rgba(0,0,0,.16),
-0 5px 12px rgba(0,0,0,.1);
-}
-
-.red{top:2%;left:2%;background:linear-gradient(145deg,#ff6868,#b91f27)}
-.green{top:2%;right:2%;background:linear-gradient(145deg,#7bea92,#119346)}
-.yellow{bottom:2%;right:2%;background:linear-gradient(145deg,#ffe66d,#d39712)}
-.blue{bottom:2%;left:2%;background:linear-gradient(145deg,#6bd0ff,#166dc8)}
-
-.home{
-width:67%;
-height:67%;
-padding:12px;
-display:grid;
-grid-template-columns:1fr 1fr;
-grid-template-rows:1fr 1fr;
-gap:10px;
-border-radius:19px;
-background:rgba(255,255,255,.20);
-box-shadow:inset 0 2px 10px rgba(255,255,255,.2);
-}
-
-.home-slot{
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:rgba(255,255,255,.18);
-box-shadow:inset 0 3px 7px rgba(0,0,0,.15);
-}
-
-/* PAWNS */
-
-.pawn{
-width:clamp(23px,5.5vw,40px);
-height:clamp(23px,5.5vw,40px);
-border-radius:50%;
-border:3px solid rgba(255,255,255,.78);
-box-shadow:
-inset 4px 5px 7px rgba(255,255,255,.45),
-inset -6px -7px 9px rgba(0,0,0,.32),
-0 7px 10px rgba(0,0,0,.32);
-position:relative;
-cursor:pointer;
-z-index:15;
-transition:.2s;
-}
-
-.pawn:before{
-content:"";
-position:absolute;
-width:42%;height:25%;
-left:18%;top:10%;
-border-radius:50%;
-background:rgba(255,255,255,.6);
-filter:blur(1px);
-}
-
-.pawn.redPawn{background:radial-gradient(circle at 35% 25%,#ffc1c1,#e83238 48%,#8e1119)}
-.pawn.greenPawn{background:radial-gradient(circle at 35% 25%,#d2ffda,#20b956 48%,#08702d)}
-.pawn.yellowPawn{background:radial-gradient(circle at 35% 25%,#fffbc1,#f1c62e 48%,#9c6500)}
-.pawn.bluePawn{background:radial-gradient(circle at 35% 25%,#d2f4ff,#269ce9 48%,#084a8d)}
-
-.pawn.movable{
-animation:pulse .8s infinite alternate;
-}
-
-@keyframes pulse{
-from{transform:scale(1)}
-to{transform:scale(1.15);filter:brightness(1.25)}
-}
-
-.pawn.moving{
-transform:scale(1.25);
-z-index:50;
-}
-
-/* PATH */
-
-.path{
-position:absolute;
-inset:0;
-z-index:8;
-pointer-events:none;
-}
-
-.cell{
-position:absolute;
-width:6.15%;
-height:6.15%;
-border-radius:7px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(145deg,#fff5cf,#d4bd82);
-border:1px solid rgba(80,45,10,.22);
-box-shadow:
-inset 0 1px 2px rgba(255,255,255,.8),
-0 2px 4px rgba(0,0,0,.12);
-font-size:7px;
-}
-
-.cell.safe:after{
-content:"★";
-color:rgba(100,75,25,.5);
-font-size:11px;
-}
-
-.cell.redPath{background:linear-gradient(145deg,#ff9797,#dc3838)}
-.cell.greenPath{background:linear-gradient(145deg,#a1f4ac,#30ba59)}
-.cell.yellowPath{background:linear-gradient(145deg,#fff391,#e8b72b)}
-.cell.bluePath{background:linear-gradient(145deg,#9ae0ff,#399ddd)}
-
-.finish{
-position:absolute;
-left:50%;
-top:50%;
-width:33%;
-height:33%;
-transform:translate(-50%,-50%);
-z-index:4;
-background:#ead69e;
-box-shadow:inset 0 0 20px rgba(70,40,10,.15);
-clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%);
-}
-
-.finish.redFinish{
-background:linear-gradient(135deg,#ff5454 0 25%,transparent 25%);
-}
-.finish.greenFinish{
-background:
-linear-gradient(45deg,transparent 0 50%,#34ba61 50%);
-}
-.finish.yellowFinish{
-background:
-linear-gradient(135deg,transparent 0 50%,#e6b52a 50%);
-}
-.finish.blueFinish{
-background:
-linear-gradient(45deg,#2d91dd 0 50%,transparent 50%);
-}
-
-.center{
-position:absolute;
-z-index:12;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-width:15%;
-height:15%;
-border-radius:50%;
-background:
-radial-gradient(circle at 35% 25%,#fff,#ffe36a 30%,#ff9c20 70%,#bd5010);
-border:3px solid rgba(255,255,255,.8);
-box-shadow:
-0 0 25px rgba(255,171,30,.55),
-0 10px 20px rgba(0,0,0,.25);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:clamp(15px,4vw,27px);
-z-index:30;
-}
-
-/* PLAYER LABELS */
-
-.label{
-position:absolute;
-z-index:35;
-padding:6px 10px;
-border-radius:10px;
-font-size:9px;
-font-weight:bold;
-background:rgba(0,0,0,.35);
-border:1px solid rgba(255,255,255,.15);
-backdrop-filter:blur(6px);
-}
-
-.lred{top:3%;left:4%}
-.lgreen{top:3%;right:4%}
-.lyellow{bottom:3%;right:4%}
-.lblue{bottom:3%;left:4%}
-
-/* DICE PANEL */
-
-.dicePanel{
-position:absolute;
-z-index:80;
-left:50%;
-bottom:12px;
-transform:translateX(-50%);
-display:flex;
-align-items:center;
-gap:10px;
-padding:7px 9px;
-border-radius:17px;
-background:rgba(3,10,18,.82);
-border:1px solid rgba(255,255,255,.13);
-box-shadow:0 10px 25px rgba(0,0,0,.3);
-backdrop-filter:blur(10px);
-}
-
-.dice{
-width:55px;
-height:55px;
-border-radius:14px;
-background:linear-gradient(145deg,#fff,#cdd9e5);
-color:#152238;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:27px;
-font-weight:900;
-cursor:pointer;
-box-shadow:
-0 8px 20px rgba(0,0,0,.3),
-inset 0 3px 5px rgba(255,255,255,.8);
-transition:.25s;
-}
-
-.dice.rolling{
-animation:roll .55s ease;
-}
-
-@keyframes roll{
-0%{transform:rotate(0) scale(1)}
-30%{transform:rotate(120deg) scale(.8)}
-65%{transform:rotate(250deg) scale(1.12)}
-100%{transform:rotate(360deg) scale(1)}
-}
-
-.turn{
-font-size:10px;
-color:#c4d3e8;
-min-width:70px;
-text-align:center;
-}
-
-.turn strong{
-display:block;
-margin-top:3px;
-font-size:11px;
-color:#fff;
-}
-
-/* TOP BAR */
-
-.top{
-position:absolute;
-z-index:100;
-top:10px;
-left:10px;
-right:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-pointer-events:none;
-}
-
-.status{
-padding:8px 12px;
-border-radius:13px;
-background:rgba(2,9,17,.72);
-border:1px solid rgba(255,255,255,.1);
-font-size:10px;
-backdrop-filter:blur(10px);
-}
-
-.status b{color:#ffd34e}
-
-.back{
-pointer-events:auto;
-border:0;
-width:40px;
-height:40px;
-border-radius:13px;
-background:rgba(2,9,17,.72);
-color:white;
-font-size:18px;
-border:1px solid rgba(255,255,255,.1);
-}
-
-/* OVERLAY */
-
-.overlay{
-position:absolute;
-inset:0;
-z-index:200;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(1,5,10,.74);
-backdrop-filter:blur(14px);
-}
-
-.card{
-width:min(340px,88%);
-padding:27px 22px;
-border-radius:27px;
-text-align:center;
-background:linear-gradient(145deg,#17314b,#07111d);
-border:1px solid rgba(255,255,255,.12);
-box-shadow:0 35px 90px rgba(0,0,0,.65);
-}
+/* logo */
 
 .logo{
-width:72px;height:72px;
-margin:auto auto 15px;
-border-radius:23px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:36px;
-background:linear-gradient(145deg,#ffe568,#f2911b);
-box-shadow:0 0 35px rgba(255,167,29,.25);
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.card h1{
-font-size:25px;
-margin-bottom:8px;
+.logo-icon{
+    width:46px;
+    height:46px;
+
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe66c,
+            #ff8e19
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255,145,25,.28),
+        inset 0 2px 4px rgba(255,255,255,.65);
 }
 
-.card h1 span{color:#ffd34e}
-
-.card p{
-font-size:11px;
-line-height:2;
-color:#94a7c0;
+.logo-name{
+    font-size:18px;
+    font-weight:900;
 }
 
-.start{
-margin-top:19px;
-width:100%;
-height:53px;
-border:0;
-border-radius:16px;
-font-family:inherit;
-font-size:15px;
-font-weight:bold;
-background:linear-gradient(135deg,#ffe56a,#ff981d);
-color:#17100a;
-cursor:pointer;
+.logo-name span{
+    color:#ffd64d;
 }
 
-/* WIN */
+/* currency */
 
-.win{
-display:none;
+.currency{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 12px;
+
+    border-radius:15px;
+
+    background:
+        rgba(7,14,24,.76);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    backdrop-filter:blur(14px);
 }
 
-.win.show{
-display:flex;
+.coin{
+    width:27px;
+    height:27px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff7a7,
+            #ffc928 48%,
+            #a76b00
+        );
+
+    color:#5c3900;
+
+    font-size:13px;
+
+    box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.7),
+        0 3px 8px rgba(0,0,0,.35);
 }
 
-/* MOBILE */
+.currency strong{
+    font-size:12px;
+}
 
-@media(max-width:600px){
+/* =========================================
+   PLAYER CARDS
+========================================= */
+
+.player{
+    position:absolute;
+
+    z-index:80;
+
+    width:170px;
+
+    padding:10px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,34,51,.94),
+            rgba(5,12,21,.94)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.35);
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s;
+}
+
+.player.active{
+    border-color:rgba(255,210,74,.65);
+
+    box-shadow:
+        0 0 25px rgba(255,190,40,.17),
+        0 15px 35px rgba(0,0,0,.45);
+}
+
+.player.red{
+    top:88px;
+    left:14px;
+}
+
+.player.green{
+    top:88px;
+    right:14px;
+}
+
+.player.yellow{
+    bottom:85px;
+    right:14px;
+}
+
+.player.blue{
+    bottom:85px;
+    left:14px;
+}
+
+.player-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+
+    border:2px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        inset 0 2px 5px rgba(255,255,255,.25),
+        0 5px 12px rgba(0,0,0,.3);
+}
+
+.red .avatar{
+    background:linear-gradient(145deg,#ff6262,#a9111b);
+}
+
+.green .avatar{
+    background:linear-gradient(145deg,#75ef91,#108b40);
+}
+
+.yellow .avatar{
+    background:linear-gradient(145deg,#ffe66c,#c48a0c);
+}
+
+.blue .avatar{
+    background:linear-gradient(145deg,#66ceff,#166dc5);
+}
+
+.player-info{
+    min-width:0;
+}
+
+.player-name{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.player-status{
+    margin-top:4px;
+
+    font-size:8px;
+
+    color:#8498af;
+}
+
+.online{
+    color:#65e98b;
+}
+
+.player-stats{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:9px;
+
+    font-size:8px;
+
+    color:#7f93aa;
+}
+
+.player-stats b{
+    color:#fff;
+}
+
+/* =========================================
+   MAIN GAME AREA
+========================================= */
+
+.game-area{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:min(74vw,650px);
+
+    aspect-ratio:1;
+
+    transform:translate(-50%,-50%);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* table shadow */
+
+.game-area::before{
+    content:"";
+
+    position:absolute;
+
+    inset:5%;
+
+    border-radius:35px;
+
+    background:#000;
+
+    filter:blur(40px);
+
+    opacity:.65;
+}
+
+/* =========================================
+   3D TABLE
+========================================= */
 
 .table{
-width:97vw;
-padding:9px;
-border-radius:29px;
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    border-radius:38px;
+
+    padding:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3d5667,
+            #0a121b 65%
+        );
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+        0 35px 70px rgba(0,0,0,.65),
+        inset 0 2px 2px rgba(255,255,255,.12);
 }
 
 .board{
-border-radius:22px;
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #e9ce89,
+            #b18b45 70%,
+            #80612d
+        );
+
+    box-shadow:
+        inset 0 0 45px rgba(45,25,5,.38),
+        inset 0 2px 2px rgba(255,255,255,.4);
 }
 
-.zone{
-border-radius:16px;
+/* wooden texture */
+
+.board::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    opacity:.18;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 8px,
+            rgba(70,40,10,.15) 9px,
+            transparent 11px
+        );
+
+    pointer-events:none;
 }
 
-.home{
-gap:6px;
-padding:7px;
+/* =========================================
+   FOUR AREAS
+========================================= */
+
+.home-area{
+    position:absolute;
+
+    width:36%;
+    height:36%;
+
+    border-radius:23px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:3px solid rgba(255,255,255,.28);
+
+    box-shadow:
+        inset 0 7px 18px rgba(255,255,255,.2),
+        inset 0 -14px 25px rgba(0,0,0,.18);
 }
 
-.dicePanel{
-bottom:7px;
+.home-red{
+    top:3%;
+    left:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6c6c,
+            #b81925
+        );
 }
+
+.home-green{
+    top:3%;
+    right:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #72ec8c,
+            #128d43
+        );
+}
+
+.home-yellow{
+    bottom:3%;
+    right:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe66c,
+            #c68d0e
+        );
+}
+
+.home-blue{
+    bottom:3%;
+    left:3%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #67ceff,
+            #176cc3
+        );
+}
+
+/* =========================================
+   PAWN GRID
+========================================= */
+
+.pawn-grid{
+    width:68%;
+    height:68%;
+
+    padding:10px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+
+    gap:9px;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        inset 0 3px 10px rgba(255,255,255,.18);
+}
+
+.pawn-slot{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,0,0,.12);
+}
+
+/* =========================================
+   PAWNS
+========================================= */
+
+.pawn{
+    width:clamp(24px,4.5vw,39px);
+    height:clamp(24px,4.5vw,39px);
+
+    border-radius:50%;
+
+    position:relative;
+
+    border:3px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        inset 5px 6px 8px rgba(255,255,255,.5),
+        inset -7px -8px 10px rgba(0,0,0,.3),
+        0 8px 12px rgba(0,0,0,.35);
+
+    transition:.25s;
+}
+
+.pawn::after{
+    content:"";
+
+    position:absolute;
+
+    width:38%;
+    height:22%;
+
+    left:19%;
+    top:10%;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.62);
+
+    filter:blur(1px);
+}
+
+.pawn-red{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #ffd0d0,
+            #e92f38 45%,
+            #8d1118
+        );
+}
+
+.pawn-green{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #d3ffdc,
+            #25bb59 45%,
+            #08702e
+        );
+}
+
+.pawn-yellow{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fffbc4,
+            #f0c52c 45%,
+            #986500
+        );
+}
+
+.pawn-blue{
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #d5f5ff,
+            #299be9 45%,
+            #084c91
+        );
+}
+
+/* =========================================
+   CENTER
+========================================= */
+
+.center{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:25%;
+    height:25%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff8c4,
+            #ffc934 35%,
+            #e67c13 70%,
+            #873b0c
+        );
+
+    border:4px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        0 0 35px rgba(255,181,30,.45),
+        inset 0 4px 8px rgba(255,255,255,.5),
+        0 12px 20px rgba(0,0,0,.35);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:clamp(20px,4vw,34px);
+}
+
+/* =========================================
+   TURN PANEL
+========================================= */
+
+.turn-panel{
+    position:absolute;
+
+    left:50%;
+    bottom:22px;
+
+    transform:translateX(-50%);
+
+    z-index:120;
+
+    min-width:210px;
+
+    padding:8px 10px;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    background:
+        rgba(4,11,19,.88);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45);
+
+    backdrop-filter:blur(15px);
+}
+
+.turn-avatar{
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #62cbff,
+            #176cc5
+        );
+
+    font-size:19px;
+}
+
+.turn-info{
+    flex:1;
+}
+
+.turn-info small{
+    display:block;
+
+    color:#8194aa;
+
+    font-size:8px;
+}
+
+.turn-info strong{
+    display:block;
+
+    margin-top:3px;
+
+    font-size:11px;
+}
+
+/* =========================================
+   DICE
+========================================= */
 
 .dice{
-width:49px;
-height:49px;
-font-size:23px;
+    width:58px;
+    height:58px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    color:#172337;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #cbd6e2
+        );
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.4),
+        inset 0 3px 5px rgba(255,255,255,.9);
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.cell{
-border-radius:5px;
+.dice:hover{
+    transform:translateY(-2px);
 }
 
+.dice.roll{
+    animation:diceRoll .6s ease;
 }
-</style></head><body><div class="app"><div class="table"><div class="board"><!-- PLAYER HOMES --><div class="zone red">
-<div class="home">
-<div class="home-slot"><div class="pawn redPawn" data-color="red" data-index="0"></div></div>
-<div class="home-slot"><div class="pawn redPawn" data-color="red" data-index="1"></div></div>
-<div class="home-slot"><div class="pawn redPawn" data-color="red" data-index="2"></div></div>
-<div class="home-slot"><div class="pawn redPawn" data-color="red" data-index="3"></div></div>
+
+@keyframes diceRoll{
+    0%{transform:rotate(0) scale(1)}
+    30%{transform:rotate(120deg) scale(.75)}
+    60%{transform:rotate(270deg) scale(1.12)}
+    100%{transform:rotate(360deg) scale(1)}
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.actions{
+    position:absolute;
+
+    z-index:110;
+
+    right:50%;
+
+    transform:translateX(50%);
+
+    bottom:92px;
+
+    display:flex;
+
+    gap:8px;
+}
+
+.action{
+    height:34px;
+
+    padding:0 13px;
+
+    border-radius:11px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    color:#dce7f3;
+
+    background:
+        rgba(8,17,28,.78);
+
+    font-family:inherit;
+
+    font-size:8px;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+}
+
+.action.primary{
+    color:#171008;
+
+    font-weight:bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe66b,
+            #ff971b
+        );
+}
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.notification{
+    position:absolute;
+
+    left:50%;
+
+    top:82px;
+
+    transform:
+        translateX(-50%)
+        translateY(-20px);
+
+    z-index:200;
+
+    padding:10px 17px;
+
+    border-radius:14px;
+
+    background:
+        rgba(5,13,22,.9);
+
+    border:
+        1px solid rgba(255,214,74,.25);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4);
+
+    font-size:10px;
+
+    opacity:0;
+
+    transition:.35s;
+
+    pointer-events:none;
+}
+
+.notification.show{
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+    .game-area{
+        width:94vw;
+    }
+
+    .player{
+        width:135px;
+        padding:8px;
+    }
+
+    .player.red{
+        top:78px;
+        left:8px;
+    }
+
+    .player.green{
+        top:78px;
+        right:8px;
+    }
+
+    .player.yellow{
+        bottom:74px;
+        right:8px;
+    }
+
+    .player.blue{
+        bottom:74px;
+        left:8px;
+    }
+
+    .player-name{
+        font-size:9px;
+    }
+
+    .player-stats{
+        font-size:7px;
+    }
+
+    .avatar{
+        width:34px;
+        height:34px;
+        font-size:17px;
+    }
+
+    .topbar{
+        top:8px;
+        left:8px;
+        right:8px;
+    }
+
+    .logo-name{
+        display:none;
+    }
+
+    .turn-panel{
+        bottom:12px;
+        min-width:190px;
+    }
+
+    .actions{
+        bottom:76px;
+    }
+
+    .action{
+        padding:0 10px;
+    }
+}
+
+@media(max-height:650px){
+
+    .player{
+        transform:scale(.82);
+        transform-origin:top;
+    }
+
+    .player.yellow,
+    .player.blue{
+        transform-origin:bottom;
+    }
+}
+</style></head><body><div class="app"><!-- TOP HUD --><div class="topbar"><div class="logo">
+
+    <div class="logo-icon">
+        🎲
+    </div>
+
+    <div class="logo-name">
+        عسل <span>منچ</span>
+    </div>
+
 </div>
-</div><div class="zone green">
-<div class="home">
-<div class="home-slot"><div class="pawn greenPawn" data-color="green" data-index="0"></div></div>
-<div class="home-slot"><div class="pawn greenPawn" data-color="green" data-index="1"></div></div>
-<div class="home-slot"><div class="pawn greenPawn" data-color="green" data-index="2"></div></div>
-<div class="home-slot"><div class="pawn greenPawn" data-color="green" data-index="3"></div></div>
+
+<div class="currency">
+
+    <div class="coin">
+        🪙
+    </div>
+
+    <strong id="coins">
+        12,500
+    </strong>
+
 </div>
-</div><div class="zone yellow">
-<div class="home">
-<div class="home-slot"><div class="pawn yellowPawn" data-color="yellow" data-index="0"></div></div>
-<div class="home-slot"><div class="pawn yellowPawn" data-color="yellow" data-index="1"></div></div>
-<div class="home-slot"><div class="pawn yellowPawn" data-color="yellow" data-index="2"></div></div>
-<div class="home-slot"><div class="pawn yellowPawn" data-color="yellow" data-index="3"></div></div>
+
+</div><!-- PLAYERS --><div class="player red"><div class="player-row">
+
+    <div class="avatar">
+        🔥
+    </div>
+
+    <div class="player-info">
+
+        <div class="player-name">
+            آرش
+        </div>
+
+        <div class="player-status online">
+            ● آنلاین
+        </div>
+
+    </div>
+
 </div>
-</div><div class="zone blue">
-<div class="home">
-<div class="home-slot"><div class="pawn bluePawn" data-color="blue" data-index="0"></div></div>
-<div class="home-slot"><div class="pawn bluePawn" data-color="blue" data-index="1"></div></div>
-<div class="home-slot"><div class="pawn-slot"><div class="pawn bluePawn" data-color="blue" data-index="2"></div></div></div>
-<div class="home-slot"><div class="pawn bluePawn" data-color="blue" data-index="3"></div></div>
+
+<div class="player-stats">
+    <span>مهره‌ها <b>4/4</b></span>
+    <span>امتیاز <b>850</b></span>
 </div>
-</div><!-- REALISTIC PATH --><div class="path" id="path"></div><div class="finish"></div><div class="center">★</div><div class="label lred">🔴 بازیکن قرمز</div>
-<div class="label lgreen">🟢 بازیکن سبز</div>
-<div class="label lyellow">🟡 بازیکن زرد</div>
-<div class="label lblue">🔵 شما</div><!-- DICE --><div class="dicePanel"><div class="turn">
-نوبت
-<strong id="turnText">شما 🔵</strong>
-</div><div class="dice" id="dice">⚀</div></div></div>
-</div><div class="top"><div class="status">
-امتیاز:
-<b id="score">0</b>
-</div><button class="back" id="back">↩</button>
 
-</div><!-- START --><div class="overlay" id="startOverlay"><div class="card"><div class="logo">🎲</div><h1>
-عسل <span>منچ</span>
-</h1><p>
-یک بازی منچ حرفه‌ای با چهار بازیکن.
-تاس را بینداز و مهره‌هایت را به خانه برسان.
-</p><button class="start" id="start">
-شروع بازی
-</button></div></div><!-- WIN --><div class="overlay win" id="winOverlay"><div class="card"><div class="logo">🏆</div><h1>برنده شدی!</h1><p>
-تبریک! تمام مهره‌های تو به مقصد رسیدند.
-</p><button class="start" id="restart">
-بازی دوباره
-</button></div></div></div><script>
+</div><div class="player green"><div class="player-row">
 
-/* =====================================================
-   HONEY LUDO ENGINE
-===================================================== */
+    <div class="avatar">
+        😎
+    </div>
 
-const dice = document.getElementById("dice");
-const start = document.getElementById("start");
-const restart = document.getElementById("restart");
-const startOverlay = document.getElementById("startOverlay");
-const winOverlay = document.getElementById("winOverlay");
-const path = document.getElementById("path");
-const scoreEl = document.getElementById("score");
-const turnText = document.getElementById("turnText");
-const back = document.getElementById("back");
+    <div class="player-info">
 
-const faces = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+        <div class="player-name">
+            علی
+        </div>
 
-let gameStarted = false;
-let rolling = false;
-let diceValue = 0;
-let score = 0;
+        <div class="player-status online">
+            ● آنلاین
+        </div>
 
-const colors = ["blue","red","green","yellow"];
+    </div>
 
-let currentTurn = 0;
+</div>
 
-/* =====================================================
-   STANDARD 52 CELL RING
-===================================================== */
+<div class="player-stats">
+    <span>مهره‌ها <b>3/4</b></span>
+    <span>امتیاز <b>720</b></span>
+</div>
 
-const boardCells = [];
+</div><div class="player yellow"><div class="player-row">
 
-/*
-  مسیر حلقه‌ای.
-  مختصات به صورت درصد از برد هستند.
-*/
+    <div class="avatar">
+        ⚡
+    </div>
 
-const coords = [
+    <div class="player-info">
 
-[43,94],[43,88],[43,82],[43,76],[43,70],
-[37,70],[31,70],[25,70],[19,70],[13,70],
-[13,64],[13,58],[13,52],[19,52],[25,52],
-[31,52],[37,52],[37,46],[37,40],[31,40],
-[25,40],[19,40],[13,40],[13,34],[13,28],
-[19,28],[25,28],[31,28],[37,28],[37,22],
-[37,16],[37,10],[43,10],[49,10],[55,10],
-[55,16],[55,22],[55,28],[61,28],[67,28],
-[73,28],[79,28],[85,28],[85,34],[85,40],
-[79,40],[73,40],[67,40],[61,40],[61,46],
-[61,52],[67,52],[73,52],[79,52],[85,52],
-[85,58],[85,64],[85,70],[79,70],[73,70],
-[67,70],[61,70],[61,76],[61,82],[61,88],
-[61,94]
+        <div class="player-name">
+            محمد
+        </div>
+
+        <div class="player-status online">
+            ● آنلاین
+        </div>
+
+    </div>
+
+</div>
+
+<div class="player-stats">
+    <span>مهره‌ها <b>2/4</b></span>
+    <span>امتیاز <b>640</b></span>
+</div>
+
+</div><div class="player blue active"><div class="player-row">
+
+    <div class="avatar">
+        👑
+    </div>
+
+    <div class="player-info">
+
+        <div class="player-name">
+            شما
+        </div>
+
+        <div class="player-status online">
+            ● نوبت شما
+        </div>
+
+    </div>
+
+</div>
+
+<div class="player-stats">
+    <span>مهره‌ها <b id="myPawns">4/4</b></span>
+    <span>امتیاز <b id="myScore">0</b></span>
+</div>
+
+</div><!-- GAME --><div class="game-area"><div class="table"><div class="board"><!-- RED HOME --><div class="home-area home-red"><div class="pawn-grid"><div class="pawn-slot">
+<div class="pawn pawn-red"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-red"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-red"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-red"></div>
+</div></div></div><!-- GREEN HOME --><div class="home-area home-green"><div class="pawn-grid"><div class="pawn-slot">
+<div class="pawn pawn-green"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-green"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-green"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-green"></div>
+</div></div></div><!-- YELLOW HOME --><div class="home-area home-yellow"><div class="pawn-grid"><div class="pawn-slot">
+<div class="pawn pawn-yellow"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-yellow"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-yellow"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-yellow"></div>
+</div></div></div><!-- BLUE HOME --><div class="home-area home-blue"><div class="pawn-grid"><div class="pawn-slot">
+<div class="pawn pawn-blue"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-blue"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-blue"></div>
+</div><div class="pawn-slot">
+<div class="pawn pawn-blue"></div>
+</div></div></div><!-- CENTER --><div class="center">
+★
+</div></div>
+</div>
+</div><!-- ACTIONS --><div class="actions"><button class="action">
+💬 چت
+</button><button class="action">
+⚙ تنظیمات
+</button><button class="action primary" id="hint">
+💡 راهنما
+</button></div><!-- TURN / DICE --><div class="turn-panel"><div class="turn-avatar">
+👑
+</div><div class="turn-info"><small>
+نوبت بازیکن
+</small><strong>
+شما — آبی
+</strong></div><div class="dice" id="dice">
+⚀
+</div></div><div class="notification" id="notification">
+🎲 تاس را پرتاب کن!
+</div></div><script>
+
+const dice =
+document.getElementById("dice");
+
+const notification =
+document.getElementById("notification");
+
+const score =
+document.getElementById("myScore");
+
+const faces = [
+"⚀",
+"⚁",
+"⚂",
+"⚃",
+"⚄",
+"⚅"
 ];
 
-/* =====================================================
-   CREATE PATH
-===================================================== */
-
-coords.forEach((pos,i)=>{
-
-const cell = document.createElement("div");
-
-cell.className = "cell";
-
-cell.style.left = pos[0] + "%";
-cell.style.top = pos[1] + "%";
-
-if([1,14,27,40].includes(i)){
-cell.classList.add("safe");
-}
-
-path.appendChild(cell);
-
-boardCells.push(cell);
-
-});
-
-/* =====================================================
-   PAWN STATE
-===================================================== */
-
-const pawns = {};
-
-colors.forEach(color=>{
-
-pawns[color] = [];
-
-document
-.querySelectorAll(
-`.pawn[data-color="${color}"]`
-)
-.forEach((el,i)=>{
-
-pawns[color].push({
-el:el,
-index:i,
-position:-1,
-finished:false
-});
-
-});
-
-});
-
-/* =====================================================
-   MOVE PAWN VISUALLY
-===================================================== */
-
-function movePawn(pawn, steps){
-
-if(pawn.position < 0){
-
-if(steps !== 6){
-return false;
-}
-
-pawn.position = 0;
-
-}else{
-
-pawn.position += steps;
-
-}
-
-if(pawn.position >= coords.length){
-
-pawn.position = coords.length;
-
-pawn.finished = true;
-
-return true;
-
-}
-
-const p = coords[pawn.position];
-
-pawn.el.style.position = "absolute";
-
-pawn.el.style.left = p[0] + "%";
-pawn.el.style.top = p[1] + "%";
-
-pawn.el.style.transform =
-"translate(-50%,-50%)";
-
-pawn.el.classList.add("moving");
-
-setTimeout(()=>{
-pawn.el.classList.remove("moving");
-},300);
-
-return true;
-}
-
-/* =====================================================
-   AVAILABLE PAWNS
-===================================================== */
-
-function showMovable(){
-
-document
-.querySelectorAll(".pawn")
-.forEach(p=>{
-p.classList.remove("movable");
-});
-
-if(!gameStarted || rolling)
-return;
-
-const list = pawns.blue;
-
-list.forEach(pawn=>{
-
-if(pawn.finished)
-return;
-
-if(pawn.position === -1 && diceValue === 6){
-pawn.el.classList.add("movable");
-}
-
-if(pawn.position >= 0){
-pawn.el.classList.add("movable");
-}
-
-});
-
-}
-
-/* =====================================================
-   PAWN CLICK
-===================================================== */
-
-document
-.querySelectorAll(".pawn[data-color='blue']")
-.forEach((el,index)=>{
-
-el.addEventListener("click",()=>{
-
-if(!gameStarted)
-return;
-
-if(rolling)
-return;
-
-if(currentTurn !== 0)
-return;
-
-const pawn = pawns.blue[index];
-
-if(pawn.position === -1 && diceValue !== 6)
-return;
-
-if(pawn.finished)
-return;
-
-movePawn(pawn,diceValue);
-
-score += diceValue;
-
-scoreEl.textContent = score;
-
-diceValue = 0;
-
-showMovable();
-
-nextTurn();
-
-});
-
-});
-
-/* =====================================================
-   DICE
-===================================================== */
+let busy = false;
+let points = 0;
 
 dice.addEventListener("click",()=>{
 
-if(!gameStarted)
-return;
+if(busy) return;
 
-if(rolling)
-return;
+busy = true;
 
-if(currentTurn !== 0)
-return;
+dice.classList.add("roll");
 
-rolling = true;
+let i = 0;
 
-dice.classList.add("rolling");
-
-let count = 0;
-
-const animation =
+const timer =
 setInterval(()=>{
 
-const n =
+dice.textContent =
+faces[
+Math.floor(Math.random()*6)
+];
+
+i++;
+
+if(i >= 9){
+
+clearInterval(timer);
+
+const result =
 Math.floor(Math.random()*6);
 
 dice.textContent =
-faces[n];
+faces[result];
 
-count++;
+points += (result + 1) * 10;
 
-if(count >= 8){
+score.textContent =
+points;
 
-clearInterval(animation);
+dice.classList.remove("roll");
 
-diceValue =
-Math.floor(Math.random()*6)+1;
-
-dice.textContent =
-faces[diceValue-1];
-
-dice.classList.remove("rolling");
-
-rolling = false;
-
-showMovable();
-
-if(diceValue !== 6){
-
-setTimeout(aiTurn,700);
-
-}
-
-}
-
-},75);
-
-});
-
-/* =====================================================
-   TURN
-===================================================== */
-
-function nextTurn(){
-
-if(diceValue === 6){
-
-turnText.textContent =
-"شما 🔵";
-
-currentTurn = 0;
-
-return;
-
-}
-
-currentTurn = 1;
-
-turnText.textContent =
-"قرمز 🔴";
-
-setTimeout(aiTurn,700);
-
-}
-
-/* =====================================================
-   SIMPLE AI
-===================================================== */
-
-function aiTurn(){
-
-if(!gameStarted)
-return;
-
-if(currentTurn === 0)
-return;
-
-rolling = true;
-
-dice.classList.add("rolling");
+showNotification(
+"🎲 عدد تاس: " + (result+1)
+);
 
 setTimeout(()=>{
+busy = false;
+},500);
 
-const value =
-Math.floor(Math.random()*6)+1;
+}
 
-diceValue = value;
+},70);
 
-dice.textContent =
-faces[value-1];
+});
 
-dice.classList.remove("rolling");
 
-rolling = false;
+function showNotification(text){
 
-const color =
-colors[currentTurn];
+notification.textContent =
+text;
 
-const list =
-pawns[color];
+notification.classList.add("show");
 
-let movable =
-list.filter(p=>
-!p.finished &&
-(p.position >= 0 || value === 6)
+setTimeout(()=>{
+notification.classList.remove("show");
+},1800);
+
+}
+
+
+document
+.getElementById("hint")
+.addEventListener("click",()=>{
+
+showNotification(
+"💡 تاس را بزن و حرکتت را شروع کن!"
 );
 
-if(movable.length){
-
-const pawn =
-movable[
-Math.floor(Math.random()*movable.length)
-];
-
-movePawn(pawn,value);
-
-}
-
-if(value === 6){
-
-setTimeout(aiTurn,800);
-
-}else{
-
-currentTurn++;
-
-if(currentTurn >= 4)
-currentTurn = 0;
-
-turnText.textContent =
-currentTurn === 0
-? "شما 🔵"
-: (
-currentTurn===1
-? "قرمز 🔴"
-: currentTurn===2
-? "سبز 🟢"
-: "زرد 🟡"
-);
-
-}
-
-},650);
-
-}
-
-/* =====================================================
-   START
-===================================================== */
-
-start.addEventListener("click",()=>{
-
-gameStarted = true;
-
-startOverlay.style.display =
-"none";
-
-currentTurn = 0;
-
-turnText.textContent =
-"شما 🔵";
-
 });
-
-/* =====================================================
-   RESTART
-===================================================== */
-
-restart.addEventListener("click",()=>{
-
-location.reload();
-
-});
-
-/* =====================================================
-   BACK
-===================================================== */
-
-back.addEventListener("click",()=>{
-
-window.location.href =
-"games.html";
-
-});
-
-/* =====================================================
-   INIT
-===================================================== */
-
-scoreEl.textContent = "0";
 
 </script></body>
-    </html>
+   </html>
