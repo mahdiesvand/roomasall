@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
 <title>عسل چت 🍯</title>
 
@@ -18,7 +18,7 @@ user-scalable=no">
 <style>
 
 /* ================================
-RESET
+   RESET
 ================================ */
 
 *{
@@ -35,7 +35,6 @@ body{
 }
 
 body{
-
     font-family:
         Tahoma,
         Arial,
@@ -59,11 +58,10 @@ body{
 
 
 /* ================================
-APP
+   APP
 ================================ */
 
 .app{
-
     width:100%;
     height:100vh;
 
@@ -75,7 +73,7 @@ APP
 
 
 /* ================================
-HEADER
+   HEADER
 ================================ */
 
 .header{
@@ -141,14 +139,12 @@ HEADER
 }
 
 .title-box{
-
     display:flex;
     flex-direction:column;
     gap:3px;
 }
 
 .title{
-
     font-size:17px;
     font-weight:bold;
     color:#fff;
@@ -199,57 +195,38 @@ HEADER
 
 
 /* ================================
-MAIN
-================================ */
-
-.main{
-
-    flex:1;
-
-    min-height:0;
-
-    display:flex;
-
-    flex-direction:row;
-
-}
-
-
-/* ================================
-ONLINE USERS - RIGHT
+   ONLINE USERS
 ================================ */
 
 .online-panel{
 
-    width:190px;
-    min-width:190px;
+    position:absolute;
 
-    height:100%;
+    top:70px;
+    right:10px;
+
+    width:190px;
+
+    max-height:230px;
+
+    overflow-y:auto;
 
     background:
         rgba(22,20,16,.97);
 
-    border-left:
+    border:
         1px solid
         rgba(255,193,7,.15);
 
+    border-radius:16px;
+
     padding:10px;
 
-    overflow-y:auto;
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.45);
 
     z-index:20;
-}
-
-.online-panel::-webkit-scrollbar{
-
-    width:4px;
-}
-
-.online-panel::-webkit-scrollbar-thumb{
-
-    background:#4c3b14;
-
-    border-radius:10px;
 }
 
 .online-title{
@@ -264,8 +241,6 @@ ONLINE USERS - RIGHT
     border-bottom:
         1px solid
         rgba(255,255,255,.06);
-
-    margin-bottom:3px;
 }
 
 .online-user{
@@ -281,24 +256,12 @@ ONLINE USERS - RIGHT
     font-size:12px;
 
     color:#ddd;
-
-    border-radius:10px;
-
-    transition:.2s;
-}
-
-.online-user:hover{
-
-    background:
-        rgba(255,193,7,.05);
 }
 
 .online-avatar{
 
     width:30px;
     height:30px;
-
-    min-width:30px;
 
     border-radius:10px;
 
@@ -323,44 +286,21 @@ ONLINE USERS - RIGHT
     width:6px;
     height:6px;
 
-    min-width:6px;
-
     border-radius:50%;
 
     background:#39d353;
 
     margin-right:auto;
-
-    box-shadow:
-        0 0 7px
-        rgba(57,211,83,.6);
 }
 
 
 /* ================================
-CHAT AREA
-================================ */
-
-.chat-area{
-
-    flex:1;
-
-    min-width:0;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-
-/* ================================
-CHAT
+   CHAT
 ================================ */
 
 .chat{
 
-    width:100%;
-    height:100%;
+    flex:1;
 
     overflow-y:auto;
 
@@ -390,20 +330,17 @@ CHAT
 }
 
 .chat::-webkit-scrollbar{
-
     width:4px;
 }
 
 .chat::-webkit-scrollbar-thumb{
-
     background:#4c3b14;
-
     border-radius:10px;
 }
 
 
 /* ================================
-MESSAGE
+   MESSAGE
 ================================ */
 
 .message{
@@ -507,7 +444,7 @@ MESSAGE
 
 
 /* ================================
-IMAGE
+   IMAGE MESSAGE
 ================================ */
 
 .message-image{
@@ -529,7 +466,7 @@ IMAGE
 
 
 /* ================================
-EMPTY
+   EMPTY
 ================================ */
 
 .empty{
@@ -554,7 +491,7 @@ EMPTY
 
 
 /* ================================
-INPUT
+   INPUT AREA
 ================================ */
 
 .input-area{
@@ -593,7 +530,8 @@ INPUT
 
     border-radius:18px;
 
-    background:#1b1915;
+    background:
+        #1b1915;
 
     border:
         1px solid
@@ -629,7 +567,6 @@ INPUT
 }
 
 .input::placeholder{
-
     color:#777;
 }
 
@@ -688,13 +625,12 @@ INPUT
 .send-btn:active,
 .icon-btn:active,
 .exit-btn:active{
-
     transform:scale(.94);
 }
 
 
 /* ================================
-PREVIEW
+   IMAGE PREVIEW
 ================================ */
 
 .preview{
@@ -708,6 +644,7 @@ PREVIEW
     right:10px;
 
     width:120px;
+
     height:120px;
 
     background:#171511;
@@ -754,7 +691,7 @@ PREVIEW
 
 
 /* ================================
-LOADING
+   LOADING
 ================================ */
 
 .loading{
@@ -778,20 +715,17 @@ LOADING
 }
 
 .loading-logo{
-
     font-size:45px;
 }
 
 .loading-text{
-
     color:#c49a25;
-
     font-size:13px;
 }
 
 
 /* ================================
-TOAST
+   TOAST
 ================================ */
 
 .toast{
@@ -840,86 +774,22 @@ TOAST
 
 
 /* ================================
-MOBILE
+   MOBILE
 ================================ */
 
-@media(max-width:600px){
+@media(max-width:500px){
 
     .online-panel{
-
-        width:150px;
-
-        min-width:150px;
-
-        padding:8px;
-    }
-
-    .online-title{
-
-        font-size:11px;
-    }
-
-    .online-user{
-
-        font-size:10px;
-
-        padding:7px 3px;
-    }
-
-    .online-avatar{
-
-        width:28px;
-        height:28px;
-
-        min-width:28px;
+        width:170px;
     }
 
     .message{
-
-        max-width:84%;
+        max-width:86%;
     }
 
     .bubble{
-
         font-size:13px;
     }
-
-}
-
-
-/* ================================
-VERY SMALL
-================================ */
-
-@media(max-width:380px){
-
-    .online-panel{
-
-        width:125px;
-
-        min-width:125px;
-    }
-
-    .online-user{
-
-        gap:5px;
-    }
-
-    .online-avatar{
-
-        width:25px;
-        height:25px;
-
-        min-width:25px;
-
-        font-size:10px;
-    }
-
-    .message{
-
-        max-width:80%;
-    }
-
 }
 
 </style>
@@ -933,70 +803,55 @@ VERY SMALL
 <div class="app">
 
 
-<!-- =========================
-HEADER
-========================= -->
+    <!-- HEADER -->
 
-<header class="header">
+    <header class="header">
 
-    <div class="header-right">
+        <div class="header-right">
 
-        <div class="logo">
-            🍯
-        </div>
-
-        <div class="title-box">
-
-            <div class="title">
-                عسل چت
+            <div class="logo">
+                🍯
             </div>
 
-            <div class="online-status">
+            <div class="title-box">
 
-                <span class="online-dot"></span>
+                <div class="title">
+                    عسل چت
+                </div>
 
-                <span id="onlineCount">
-                    0 نفر آنلاین
-                </span>
+                <div class="online-status">
+
+                    <span class="online-dot"></span>
+
+                    <span id="onlineCount">
+                        0 نفر آنلاین
+                    </span>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
 
+        <button
+            class="exit-btn"
+            id="exitBtn"
+            title="خروج">
+            ↪
+        </button>
 
-    <button
-        class="exit-btn"
-        id="exitBtn">
-
-        ↪
-
-    </button>
-
-</header>
+    </header>
 
 
 
-<!-- =========================
-MAIN
-========================= -->
+    <!-- ONLINE USERS -->
 
-<div class="main">
-
-
-    <!-- =====================
-         RIGHT USERS
-    ====================== -->
-
-    <aside class="online-panel">
+    <div class="online-panel">
 
         <div class="online-title">
-
             👥 کاربران آنلاین
-
         </div>
-
 
         <div id="onlineUsers">
 
@@ -1005,122 +860,104 @@ MAIN
                 color:#777;
                 font-size:11px;
                 padding:8px;
-                text-align:center;
                 ">
-
                 در حال دریافت...
-
             </div>
 
         </div>
 
-    </aside>
+    </div>
 
 
 
-    <!-- =====================
-         CHAT
-    ====================== -->
+    <!-- CHAT -->
 
-    <section class="chat-area">
-
-
-        <main
-            class="chat"
-            id="chat">
-
-
-            <div
-                class="empty"
-                id="empty">
-
-                <div class="empty-icon">
-                    🍯
-                </div>
-
-                هنوز پیامی ارسال نشده
-
-                <br>
-
-                اولین پیام را بفرست!
-
-            </div>
-
-
-        </main>
-
-
-
-        <!-- IMAGE PREVIEW -->
+    <main
+        class="chat"
+        id="chat">
 
         <div
-            class="preview"
-            id="preview">
+            class="empty"
+            id="empty">
+
+            <div class="empty-icon">
+                🍯
+            </div>
+
+            هنوز پیامی ارسال نشده
+
+            <br>
+
+            اولین پیام را بفرست!
+
+        </div>
+
+    </main>
+
+
+
+    <!-- PREVIEW -->
+
+    <div
+        class="preview"
+        id="preview">
+
+        <button
+            class="preview-close"
+            id="previewClose">
+            ×
+        </button>
+
+        <img
+            id="previewImage"
+            alt="preview">
+
+    </div>
+
+
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+        <div class="input-box">
+
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                hidden>
+
 
             <button
-                class="preview-close"
-                id="previewClose">
+                class="icon-btn"
+                id="imageBtn"
+                title="ارسال عکس">
 
-                ×
+                📷
 
             </button>
 
-            <img
-                id="previewImage"
-                alt="preview">
+
+            <textarea
+                class="input"
+                id="messageInput"
+                rows="1"
+                placeholder="پیامت رو بنویس..."></textarea>
+
+
+            <button
+                class="send-btn"
+                id="sendBtn">
+
+                ➤
+
+            </button>
 
         </div>
 
-
-
-        <!-- INPUT -->
-
-        <div class="input-area">
-
-            <div class="input-box">
-
-
-                <input
-                    type="file"
-                    id="imageInput"
-                    accept="image/*"
-                    hidden>
-
-
-                <button
-                    class="icon-btn"
-                    id="imageBtn">
-
-                    📷
-
-                </button>
-
-
-                <textarea
-                    class="input"
-                    id="messageInput"
-                    rows="1"
-                    placeholder="پیامت رو بنویس..."></textarea>
-
-
-                <button
-                    class="send-btn"
-                    id="sendBtn">
-
-                    ➤
-
-                </button>
-
-
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-</div>
+    </div>
 
 
 </div>
@@ -1157,14 +994,13 @@ MAIN
 <script type="module">
 
 
-/* =================================
-   FIREBASE
-================================= */
+/* =========================================
+   FIREBASE IMPORTS
+========================================= */
 
 import {
     initializeApp
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 
@@ -1177,8 +1013,7 @@ import {
     onChildAdded,
     onDisconnect,
     serverTimestamp
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
 
@@ -1187,15 +1022,18 @@ import {
     ref as storageRef,
     uploadBytes,
     getDownloadURL
-}
-from
+} from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
 
 
-
-/* =================================
+/* =========================================
    FIREBASE CONFIG
-================================= */
+========================================= */
+
+/*
+   ⚠️ این قسمت را با Firebase Config
+   پروژه خودت جایگزین کن.
+*/
 
 const firebaseConfig = {
 
@@ -1223,15 +1061,12 @@ const firebaseConfig = {
 };
 
 
-
-/* =================================
-   INIT
-================================= */
+/* =========================================
+   INITIALIZE
+========================================= */
 
 const app =
-    initializeApp(
-        firebaseConfig
-    );
+    initializeApp(firebaseConfig);
 
 const db =
     getDatabase(app);
@@ -1240,16 +1075,18 @@ const storage =
     getStorage(app);
 
 
-
-/* =================================
+/* =========================================
    USER
-================================= */
+========================================= */
 
-const username =
-    localStorage.getItem(
-        "username"
-    );
+let username =
+    localStorage.getItem("username");
 
+
+/*
+   اگر نام کاربر وجود نداشت،
+   برگرد به صفحه ورود.
+*/
 
 if(!username){
 
@@ -1259,107 +1096,90 @@ if(!username){
 }
 
 
-
-/* =================================
+/* =========================================
    ELEMENTS
-================================= */
+========================================= */
 
 const chat =
-    document.getElementById(
-        "chat"
-    );
+    document.getElementById("chat");
 
 const input =
-    document.getElementById(
-        "messageInput"
-    );
+    document.getElementById("messageInput");
 
 const sendBtn =
-    document.getElementById(
-        "sendBtn"
-    );
+    document.getElementById("sendBtn");
 
 const imageBtn =
-    document.getElementById(
-        "imageBtn"
-    );
+    document.getElementById("imageBtn");
 
 const imageInput =
-    document.getElementById(
-        "imageInput"
-    );
+    document.getElementById("imageInput");
 
 const preview =
-    document.getElementById(
-        "preview"
-    );
+    document.getElementById("preview");
 
 const previewImage =
-    document.getElementById(
-        "previewImage"
-    );
+    document.getElementById("previewImage");
 
 const previewClose =
-    document.getElementById(
-        "previewClose"
-    );
+    document.getElementById("previewClose");
 
 const onlineUsers =
-    document.getElementById(
-        "onlineUsers"
-    );
+    document.getElementById("onlineUsers");
 
 const onlineCount =
-    document.getElementById(
-        "onlineCount"
-    );
+    document.getElementById("onlineCount");
 
 const loading =
-    document.getElementById(
-        "loading"
-    );
+    document.getElementById("loading");
 
 const toast =
-    document.getElementById(
-        "toast"
-    );
+    document.getElementById("toast");
 
 const exitBtn =
-    document.getElementById(
-        "exitBtn"
-    );
+    document.getElementById("exitBtn");
 
 const empty =
-    document.getElementById(
-        "empty"
-    );
+    document.getElementById("empty");
 
 
-
-/* =================================
-   DATABASE
-================================= */
+/* =========================================
+   DATABASE REFERENCES
+========================================= */
 
 const messagesRef =
-    ref(
-        db,
-        "messages"
-    );
+    ref(db, "messages");
 
 const onlineRef =
     ref(
         db,
         "online/" +
-        encodeURIComponent(
-            username
-        )
+        encodeURIComponent(username)
     );
 
 
+/* =========================================
+   SHOW USER
+========================================= */
 
-/* =================================
-   ONLINE
-================================= */
+function showUser(){
+
+    /*
+       نام کاربر در localStorage
+       از صفحه ورود گرفته می‌شود.
+    */
+
+    console.log(
+        "User:",
+        username
+    );
+
+}
+
+
+/* =========================================
+   ONLINE USER
+========================================= */
 
 async function setOnline(){
 
@@ -1387,6 +1207,7 @@ async function setOnline(){
     }catch(error){
 
         console.error(
+            "Online error:",
             error
         );
 
@@ -1394,24 +1215,19 @@ async function setOnline(){
 
 }
 
+
 setOnline();
 
 
-
-/* =================================
-   ONLINE USERS LIST
-================================= */
+/* =========================================
+   ONLINE LIST
+========================================= */
 
 onValue(
-    ref(
-        db,
-        "online"
-    ),
-
+    ref(db,"online"),
     snapshot => {
 
-        onlineUsers.innerHTML =
-            "";
+        onlineUsers.innerHTML = "";
 
         let count = 0;
 
@@ -1422,9 +1238,7 @@ onValue(
                 const data =
                     child.val();
 
-                if(!data)
-                    return;
-
+                if(!data) return;
 
                 count++;
 
@@ -1448,10 +1262,7 @@ onValue(
 
 
                 avatar.textContent =
-                    (
-                        data.name ||
-                        "?"
-                    )
+                    (data.name || "?")
                     .charAt(0)
                     .toUpperCase();
 
@@ -1462,8 +1273,7 @@ onValue(
                     );
 
                 name.textContent =
-                    data.name ||
-                    "کاربر";
+                    data.name || "کاربر";
 
 
                 const dot =
@@ -1504,17 +1314,15 @@ onValue(
 );
 
 
-
-/* =================================
+/* =========================================
    ADD MESSAGE
-================================= */
+========================================= */
 
 function addMessage(
     data
 ){
 
-    if(!data)
-        return;
+    if(!data) return;
 
 
     empty.style.display =
@@ -1528,8 +1336,7 @@ function addMessage(
 
 
     const mine =
-        data.name ===
-        username;
+        data.name === username;
 
 
     wrapper.className =
@@ -1571,6 +1378,10 @@ function addMessage(
         "bubble";
 
 
+    /*
+       اگر پیام عکس باشد
+    */
+
     if(data.image){
 
         const img =
@@ -1596,6 +1407,10 @@ function addMessage(
 
     }
 
+
+    /*
+       اگر پیام متنی باشد
+    */
 
     if(data.text){
 
@@ -1629,7 +1444,6 @@ function addMessage(
             new Date(
                 data.time
             );
-
 
         if(
             !isNaN(
@@ -1674,28 +1488,28 @@ function addMessage(
 }
 
 
-
-/* =================================
-   RECEIVE
-================================= */
+/* =========================================
+   RECEIVE MESSAGES
+========================================= */
 
 onChildAdded(
     messagesRef,
-
     snapshot => {
 
+        const data =
+            snapshot.val();
+
         addMessage(
-            snapshot.val()
+            data
         );
 
     }
 );
 
 
-
-/* =================================
-   SEND MESSAGE
-================================= */
+/* =========================================
+   SEND TEXT
+========================================= */
 
 async function sendMessage(){
 
@@ -1748,20 +1562,22 @@ async function sendMessage(){
 }
 
 
+/* =========================================
+   SEND BUTTON
+========================================= */
+
 sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
 
-
-/* =================================
+/* =========================================
    ENTER
-================================= */
+========================================= */
 
 input.addEventListener(
     "keydown",
-
     event => {
 
         if(
@@ -1779,14 +1595,12 @@ input.addEventListener(
 );
 
 
-
-/* =================================
-   AUTO HEIGHT
-================================= */
+/* =========================================
+   AUTO RESIZE
+========================================= */
 
 input.addEventListener(
     "input",
-
     () => {
 
         input.style.height =
@@ -1802,14 +1616,12 @@ input.addEventListener(
 );
 
 
-
-/* =================================
-   IMAGE
-================================= */
+/* =========================================
+   IMAGE BUTTON
+========================================= */
 
 imageBtn.addEventListener(
     "click",
-
     () => {
 
         imageInput.click();
@@ -1818,10 +1630,12 @@ imageBtn.addEventListener(
 );
 
 
+/* =========================================
+   IMAGE SELECT
+========================================= */
 
 imageInput.addEventListener(
     "change",
-
     () => {
 
         const file =
@@ -1855,109 +1669,12 @@ imageInput.addEventListener(
 );
 
 
-
-/* =================================
-   UPLOAD IMAGE
-================================= */
-
-imageInput.addEventListener(
-    "change",
-
-    async () => {
-
-        const file =
-            imageInput.files[0];
-
-        if(!file)
-            return;
-
-
-        try{
-
-            showToast(
-                "در حال ارسال عکس..."
-            );
-
-
-            const fileName =
-                Date.now() +
-                "_" +
-                file.name;
-
-
-            const imageRef =
-                storageRef(
-                    storage,
-                    "chat-images/" +
-                    fileName
-                );
-
-
-            await uploadBytes(
-                imageRef,
-                file
-            );
-
-
-            const url =
-                await getDownloadURL(
-                    imageRef
-                );
-
-
-            await push(
-                messagesRef,
-                {
-
-                    name:
-                        username,
-
-                    image:
-                        url,
-
-                    time:
-                        Date.now()
-
-                }
-            );
-
-
-            imageInput.value =
-                "";
-
-            preview.style.display =
-                "none";
-
-
-            showToast(
-                "عکس ارسال شد ✓"
-            );
-
-
-        }catch(error){
-
-            console.error(
-                error
-            );
-
-            showToast(
-                "ارسال عکس ناموفق بود"
-            );
-
-        }
-
-    }
-);
-
-
-
-/* =================================
+/* =========================================
    CLOSE PREVIEW
-================================= */
+========================================= */
 
 previewClose.addEventListener(
     "click",
-
     () => {
 
         imageInput.value =
@@ -1970,14 +1687,124 @@ previewClose.addEventListener(
 );
 
 
+/* =========================================
+   UPLOAD IMAGE
+========================================= */
 
-/* =================================
+async function uploadImage(
+    file
+){
+
+    if(!file)
+        return;
+
+
+    try{
+
+        showToast(
+            "در حال ارسال عکس..."
+        );
+
+
+        const fileName =
+            Date.now() +
+            "_" +
+            file.name;
+
+
+        const imageRef =
+            storageRef(
+                storage,
+                "chat-images/" +
+                fileName
+            );
+
+
+        await uploadBytes(
+            imageRef,
+            file
+        );
+
+
+        const url =
+            await getDownloadURL(
+                imageRef
+            );
+
+
+        await push(
+            messagesRef,
+            {
+
+                name:
+                    username,
+
+                image:
+                    url,
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        imageInput.value =
+            "";
+
+        preview.style.display =
+            "none";
+
+
+        showToast(
+            "عکس ارسال شد ✓"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+        showToast(
+            "ارسال عکس ناموفق بود"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   IMAGE SEND
+========================================= */
+
+imageInput.addEventListener(
+    "change",
+    async () => {
+
+        const file =
+            imageInput.files[0];
+
+        if(file){
+
+            await uploadImage(
+                file
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
    EXIT
-================================= */
+========================================= */
 
 exitBtn.addEventListener(
     "click",
-
     async () => {
 
         try{
@@ -1987,11 +1814,9 @@ exitBtn.addEventListener(
                 null
             );
 
-        }catch(error){
+        }catch(e){
 
-            console.log(
-                error
-            );
+            console.log(e);
 
         }
 
@@ -2008,13 +1833,11 @@ exitBtn.addEventListener(
 );
 
 
-
-/* =================================
+/* =========================================
    TOAST
-================================= */
+========================================= */
 
 let toastTimer;
-
 
 function showToast(
     text
@@ -2042,17 +1865,18 @@ function showToast(
                 );
 
             },
-
             2500
         );
 
 }
 
 
+/* =========================================
+   START
+========================================= */
 
-/* =================================
-   LOADING
-================================= */
+showUser();
+
 
 setTimeout(
     () => {
@@ -2061,8 +1885,35 @@ setTimeout(
             "none";
 
     },
-
     700
+);
+
+
+/* =========================================
+   CONNECTION CHECK
+========================================= */
+
+onValue(
+    ref(db,".info/connected"),
+    snapshot => {
+
+        if(
+            snapshot.val() === true
+        ){
+
+            console.log(
+                "Firebase connected"
+            );
+
+        }else{
+
+            console.log(
+                "Firebase disconnected"
+            );
+
+        }
+
+    }
 );
 
 </script>
