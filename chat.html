@@ -13,11 +13,13 @@ user-scalable=no">
 
 <title>عسل چت 🍯</title>
 
+<meta name="theme-color" content="#11100d">
+
 <style>
 
-/* =========================
+/* ================================
 RESET
-========================= */
+================================ */
 
 *{
     box-sizing:border-box;
@@ -35,19 +37,30 @@ body{
 body{
 
     font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
+        Tahoma,
+        Arial,
+        sans-serif;
 
-    background:#0c0b09;
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(255,193,7,.08),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(255,170,0,.05),
+            transparent 35%
+        ),
+        #0d0c0a;
 
     color:#fff;
 }
 
 
-/* =========================
+/* ================================
 APP
-========================= */
+================================ */
 
 .app{
 
@@ -55,351 +68,103 @@ APP
     height:100vh;
 
     display:flex;
-
     flex-direction:column;
 
-    background:
-    radial-gradient(
-        circle at 30% 20%,
-        rgba(255,193,7,.06),
-        transparent 35%
-    );
-
+    position:relative;
 }
 
 
-/* =========================
+/* ================================
 HEADER
-========================= */
+================================ */
 
 .header{
 
-    height:60px;
-
-    min-height:60px;
+    height:62px;
+    min-height:62px;
 
     display:flex;
-
     align-items:center;
 
-    justify-content:space-between;
-
-    padding:0 15px;
+    padding:0 14px;
 
     background:
-    linear-gradient(
-        135deg,
-        #211d14,
-        #11100d
-    );
+        linear-gradient(
+            135deg,
+            #1c1a16,
+            #11100d
+        );
 
     border-bottom:
-    1px solid
-    rgba(255,193,7,.16);
+        1px solid
+        rgba(255,193,7,.15);
+
+    box-shadow:
+        0 4px 20px
+        rgba(0,0,0,.35);
 
     z-index:10;
 }
 
-.header-title{
+.header-right{
 
     display:flex;
-
     align-items:center;
-
     gap:10px;
+
+    flex:1;
 }
 
 .logo{
 
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
 
-    border-radius:13px;
+    border-radius:14px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     background:
-    linear-gradient(
-        145deg,
-        #ffd84d,
-        #b87700
-    );
-
-    font-size:21px;
+        linear-gradient(
+            145deg,
+            #ffd54a,
+            #c88600
+        );
 
     box-shadow:
-    0 5px 15px
-    rgba(255,193,7,.2);
+        0 4px 15px
+        rgba(255,193,7,.2);
+
+    font-size:22px;
+}
+
+.title-box{
+
+    display:flex;
+    flex-direction:column;
+    gap:3px;
 }
 
 .title{
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:3px;
+    font-size:17px;
+    font-weight:bold;
+    color:#fff;
 }
 
-.title strong{
-
-    font-size:16px;
-}
-
-.status{
+.online-status{
 
     display:flex;
-
     align-items:center;
-
     gap:5px;
 
-    font-size:10px;
-
-    color:#999;
+    color:#a8a8a8;
+    font-size:11px;
 }
 
-.status-dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#35d05b;
-
-    box-shadow:
-    0 0 8px
-    rgba(53,208,91,.6);
-}
-
-.exit{
-
-    width:38px;
-    height:38px;
-
-    border:0;
-
-    border-radius:12px;
-
-    background:
-    rgba(255,255,255,.06);
-
-    color:#aaa;
-
-    font-size:18px;
-}
-
-
-/* =========================
-MAIN LAYOUT
-========================= */
-
-.main{
-
-    flex:1;
-
-    min-height:0;
-
-    display:flex;
-
-    flex-direction:row-reverse;
-
-}
-
-
-/* =========================
-RIGHT USERS PANEL
-========================= */
-
-.users-panel{
-
-    width:220px;
-
-    min-width:220px;
-
-    height:100%;
-
-    background:
-    linear-gradient(
-        180deg,
-        #181611,
-        #100f0c
-    );
-
-    border-left:
-    1px solid
-    rgba(255,193,7,.13);
-
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-}
-
-
-/* PANEL HEADER */
-
-.users-header{
-
-    padding:15px 13px 12px;
-
-    border-bottom:
-    1px solid
-    rgba(255,255,255,.06);
-}
-
-.users-title{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    color:#e6b82e;
-
-    font-size:13px;
-
-    font-weight:bold;
-}
-
-.users-number{
-
-    min-width:25px;
-
-    height:22px;
-
-    padding:0 7px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:8px;
-
-    background:
-    rgba(255,193,7,.1);
-
-    color:#e4b52a;
-
-    font-size:10px;
-}
-
-
-/* USER LIST */
-
-.users-list{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:8px;
-}
-
-.users-list::-webkit-scrollbar{
-
-    width:4px;
-}
-
-.users-list::-webkit-scrollbar-thumb{
-
-    background:#4a3914;
-
-    border-radius:10px;
-}
-
-
-/* USER */
-
-.user{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding:9px 7px;
-
-    margin-bottom:3px;
-
-    border-radius:12px;
-
-    transition:.2s;
-}
-
-.user:hover{
-
-    background:
-    rgba(255,193,7,.06);
-}
-
-.avatar{
-
-    width:34px;
-    height:34px;
-
-    min-width:34px;
-
-    border-radius:11px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:
-    linear-gradient(
-        145deg,
-        #e8b72e,
-        #805600
-    );
-
-    color:#fff;
-
-    font-size:13px;
-
-    font-weight:bold;
-}
-
-.user-info{
-
-    min-width:0;
-
-    flex:1;
-}
-
-.user-name{
-
-    overflow:hidden;
-
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
-
-    font-size:12px;
-
-    color:#ddd;
-}
-
-.user-state{
-
-    margin-top:2px;
-
-    font-size:9px;
-
-    color:#777;
-}
-
-.user-dot{
+.online-dot{
 
     width:7px;
     height:7px;
@@ -409,14 +174,172 @@ RIGHT USERS PANEL
     background:#39d353;
 
     box-shadow:
-    0 0 7px
-    rgba(57,211,83,.55);
+        0 0 8px
+        rgba(57,211,83,.7);
+}
+
+.exit-btn{
+
+    border:0;
+
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:#bbb;
+
+    font-size:18px;
+
+    cursor:pointer;
 }
 
 
-/* =========================
+/* ================================
+MAIN
+================================ */
+
+.main{
+
+    flex:1;
+
+    min-height:0;
+
+    display:flex;
+
+    flex-direction:row;
+
+}
+
+
+/* ================================
+ONLINE USERS - RIGHT
+================================ */
+
+.online-panel{
+
+    width:190px;
+    min-width:190px;
+
+    height:100%;
+
+    background:
+        rgba(22,20,16,.97);
+
+    border-left:
+        1px solid
+        rgba(255,193,7,.15);
+
+    padding:10px;
+
+    overflow-y:auto;
+
+    z-index:20;
+}
+
+.online-panel::-webkit-scrollbar{
+
+    width:4px;
+}
+
+.online-panel::-webkit-scrollbar-thumb{
+
+    background:#4c3b14;
+
+    border-radius:10px;
+}
+
+.online-title{
+
+    font-size:12px;
+
+    color:#d7a928;
+
+    padding:
+        5px 6px 9px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    margin-bottom:3px;
+}
+
+.online-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 5px;
+
+    font-size:12px;
+
+    color:#ddd;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.online-user:hover{
+
+    background:
+        rgba(255,193,7,.05);
+}
+
+.online-avatar{
+
+    width:30px;
+    height:30px;
+
+    min-width:30px;
+
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5ad25,
+            #7c5200
+        );
+
+    color:#fff;
+
+    font-weight:bold;
+}
+
+.user-online-dot{
+
+    width:6px;
+    height:6px;
+
+    min-width:6px;
+
+    border-radius:50%;
+
+    background:#39d353;
+
+    margin-right:auto;
+
+    box-shadow:
+        0 0 7px
+        rgba(57,211,83,.6);
+}
+
+
+/* ================================
 CHAT AREA
-========================= */
+================================ */
 
 .chat-area{
 
@@ -424,52 +347,46 @@ CHAT AREA
 
     min-width:0;
 
-    display:flex;
-
-    flex-direction:column;
-
     position:relative;
 
-    background:
-
-    radial-gradient(
-        circle at 15% 20%,
-        rgba(255,193,7,.025),
-        transparent 30%
-    ),
-
-    radial-gradient(
-        circle at 80% 70%,
-        rgba(255,193,7,.02),
-        transparent 35%
-    );
-
+    overflow:hidden;
 }
 
 
-/* =========================
+/* ================================
 CHAT
-========================= */
+================================ */
 
 .chat{
 
-    flex:1;
-
-    min-height:0;
+    width:100%;
+    height:100%;
 
     overflow-y:auto;
 
     padding:
-
-    18px
-    15px
-    80px;
+        15px
+        12px
+        85px;
 
     display:flex;
-
     flex-direction:column;
 
-    gap:8px;
+    gap:7px;
+
+    background-image:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(255,193,7,.025) 0 2px,
+            transparent 3px
+        ),
+
+        radial-gradient(
+            circle at 80% 60%,
+            rgba(255,193,7,.018) 0 2px,
+            transparent 3px
+        );
 }
 
 .chat::-webkit-scrollbar{
@@ -479,15 +396,141 @@ CHAT
 
 .chat::-webkit-scrollbar-thumb{
 
-    background:#443614;
+    background:#4c3b14;
 
     border-radius:10px;
 }
 
 
-/* =========================
+/* ================================
+MESSAGE
+================================ */
+
+.message{
+
+    max-width:82%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    animation:
+        messageIn .18s ease;
+}
+
+@keyframes messageIn{
+
+    from{
+        opacity:0;
+        transform:translateY(6px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.message.mine{
+
+    align-self:flex-start;
+    align-items:flex-start;
+}
+
+.message.other{
+
+    align-self:flex-end;
+    align-items:flex-end;
+}
+
+.sender{
+
+    font-size:10px;
+
+    color:#d6a92b;
+
+    margin:
+        0 7px 3px;
+}
+
+.bubble{
+
+    padding:
+        9px 12px;
+
+    border-radius:16px;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    word-break:break-word;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,.18);
+}
+
+.mine .bubble{
+
+    background:
+        linear-gradient(
+            135deg,
+            #72520d,
+            #503805
+        );
+
+    border-bottom-left-radius:5px;
+}
+
+.other .bubble{
+
+    background:
+        #211f1a;
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+    border-bottom-right-radius:5px;
+}
+
+.time{
+
+    font-size:9px;
+
+    color:#888;
+
+    margin:
+        3px 7px 0;
+}
+
+
+/* ================================
+IMAGE
+================================ */
+
+.message-image{
+
+    max-width:230px;
+
+    max-height:300px;
+
+    border-radius:13px;
+
+    display:block;
+
+    object-fit:cover;
+
+    border:
+        1px solid
+        rgba(255,193,7,.15);
+}
+
+
+/* ================================
 EMPTY
-========================= */
+================================ */
 
 .empty{
 
@@ -504,168 +547,35 @@ EMPTY
 
 .empty-icon{
 
-    font-size:45px;
+    font-size:42px;
 
-    margin-bottom:5px;
+    margin-bottom:8px;
 }
 
 
-/* =========================
-MESSAGES
-========================= */
-
-.message{
-
-    max-width:75%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    animation:
-    messageIn .2s ease;
-}
-
-@keyframes messageIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(6px);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
-    }
-}
-
-.message.mine{
-
-    align-self:flex-start;
-
-    align-items:flex-start;
-}
-
-.message.other{
-
-    align-self:flex-end;
-
-    align-items:flex-end;
-}
-
-.sender{
-
-    color:#d7a82a;
-
-    font-size:10px;
-
-    margin:
-    0 7px 3px;
-}
-
-.bubble{
-
-    padding:
-    8px 12px;
-
-    border-radius:16px;
-
-    line-height:1.7;
-
-    font-size:13px;
-
-    word-break:break-word;
-
-    box-shadow:
-    0 3px 10px
-    rgba(0,0,0,.18);
-}
-
-.mine .bubble{
-
-    background:
-    linear-gradient(
-        135deg,
-        #70500e,
-        #503705
-    );
-
-    border-bottom-left-radius:5px;
-}
-
-.other .bubble{
-
-    background:#211f1a;
-
-    border:
-    1px solid
-    rgba(255,255,255,.05);
-
-    border-bottom-right-radius:5px;
-}
-
-.time{
-
-    color:#777;
-
-    font-size:8px;
-
-    margin:
-    3px 7px 0;
-}
-
-
-/* =========================
-IMAGE
-========================= */
-
-.message-image{
-
-    display:block;
-
-    width:auto;
-
-    max-width:230px;
-
-    max-height:300px;
-
-    border-radius:12px;
-
-    object-fit:cover;
-}
-
-
-/* =========================
+/* ================================
 INPUT
-========================= */
+================================ */
 
 .input-area{
 
     position:absolute;
 
+    left:0;
+    right:0;
     bottom:0;
 
-    left:0;
-
-    right:0;
-
     padding:
-    8px 10px;
+        9px 10px;
 
     background:
-    linear-gradient(
-        180deg,
-        transparent,
-        #0c0b09 30%
-    );
+        linear-gradient(
+            180deg,
+            rgba(13,12,10,.3),
+            #0d0c0a 30%
+        );
 
-    z-index:5;
+    z-index:15;
 }
 
 .input-box{
@@ -676,38 +586,38 @@ INPUT
 
     align-items:center;
 
-    gap:6px;
+    gap:7px;
 
-    padding:5px 6px;
+    padding:
+        5px 7px;
 
-    border-radius:17px;
+    border-radius:18px;
 
     background:#1b1915;
 
     border:
-    1px solid
-    rgba(255,193,7,.12);
+        1px solid
+        rgba(255,193,7,.12);
 
     box-shadow:
-    0 -4px 20px
-    rgba(0,0,0,.25);
+        0 -3px 20px
+        rgba(0,0,0,.3);
 }
 
-.message-input{
+.input{
 
     flex:1;
 
-    min-width:0;
-
-    min-height:38px;
-
-    max-height:100px;
+    border:0;
+    outline:0;
 
     resize:none;
 
-    outline:none;
+    min-height:38px;
+    max-height:100px;
 
-    border:0;
+    padding:
+        9px 8px;
 
     background:transparent;
 
@@ -715,65 +625,77 @@ INPUT
 
     font-family:inherit;
 
-    font-size:13px;
-
-    padding:
-    9px 6px;
+    font-size:14px;
 }
 
-.message-input::placeholder{
+.input::placeholder{
 
     color:#777;
 }
 
-.icon-button{
+.icon-btn{
 
-    width:38px;
-    height:38px;
+    width:39px;
+    height:39px;
 
-    min-width:38px;
+    flex:none;
 
     border:0;
 
-    border-radius:11px;
+    border-radius:12px;
 
     background:
-    rgba(255,255,255,.05);
+        rgba(255,255,255,.05);
 
     color:#bbb;
 
-    font-size:17px;
+    font-size:18px;
+
+    cursor:pointer;
 }
 
-.send-button{
+.send-btn{
 
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
 
-    min-width:40px;
+    flex:none;
 
     border:0;
 
-    border-radius:13px;
+    border-radius:14px;
 
     background:
-    linear-gradient(
-        145deg,
-        #ffd54a,
-        #bd7b00
-    );
+        linear-gradient(
+            145deg,
+            #ffd54a,
+            #bd7900
+        );
 
     color:#17120a;
 
-    font-size:18px;
+    font-size:19px;
 
     font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(255,193,7,.18);
+}
+
+.send-btn:active,
+.icon-btn:active,
+.exit-btn:active{
+
+    transform:scale(.94);
 }
 
 
-/* =========================
+/* ================================
 PREVIEW
-========================= */
+================================ */
 
 .preview{
 
@@ -781,25 +703,24 @@ PREVIEW
 
     position:absolute;
 
-    right:12px;
+    bottom:72px;
 
-    bottom:65px;
+    right:10px;
 
-    width:105px;
-
-    height:105px;
-
-    padding:4px;
-
-    border-radius:13px;
+    width:120px;
+    height:120px;
 
     background:#171511;
 
     border:
-    1px solid
-    rgba(255,193,7,.2);
+        1px solid
+        rgba(255,193,7,.2);
 
-    z-index:20;
+    border-radius:15px;
+
+    padding:5px;
+
+    z-index:30;
 }
 
 .preview img{
@@ -809,19 +730,18 @@ PREVIEW
 
     object-fit:cover;
 
-    border-radius:10px;
+    border-radius:11px;
 }
 
 .preview-close{
 
     position:absolute;
 
-    top:-8px;
+    top:-7px;
+    left:-7px;
 
-    left:-8px;
-
-    width:23px;
-    height:23px;
+    width:24px;
+    height:24px;
 
     border:0;
 
@@ -833,9 +753,9 @@ PREVIEW
 }
 
 
-/* =========================
+/* ================================
 LOADING
-========================= */
+================================ */
 
 .loading{
 
@@ -843,67 +763,66 @@ LOADING
 
     inset:0;
 
-    z-index:100;
+    background:#0d0c0a;
 
     display:flex;
 
-    flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
+
+    flex-direction:column;
 
     gap:12px;
 
-    background:#0c0b09;
+    z-index:100;
 }
 
-.loading-icon{
+.loading-logo{
 
     font-size:45px;
 }
 
 .loading-text{
 
-    color:#c69a24;
+    color:#c49a25;
 
-    font-size:12px;
+    font-size:13px;
 }
 
 
-/* =========================
+/* ================================
 TOAST
-========================= */
+================================ */
 
 .toast{
 
     position:fixed;
 
-    top:70px;
-
+    top:75px;
     left:50%;
 
     transform:
-    translate(-50%,-15px);
+        translateX(-50%)
+        translateY(-20px);
 
     opacity:0;
 
     pointer-events:none;
 
-    padding:
-    8px 15px;
-
-    border-radius:11px;
-
     background:#242019;
 
     color:#fff;
 
-    font-size:11px;
+    padding:
+        9px 16px;
+
+    border-radius:12px;
+
+    font-size:12px;
 
     border:
-    1px solid
-    rgba(255,193,7,.15);
+        1px solid
+        rgba(255,193,7,.15);
 
     transition:.25s;
 
@@ -915,100 +834,90 @@ TOAST
     opacity:1;
 
     transform:
-    translate(-50%,0);
+        translateX(-50%)
+        translateY(0);
 }
 
 
-/* =========================
+/* ================================
 MOBILE
-========================= */
+================================ */
 
-@media(max-width:700px){
+@media(max-width:600px){
 
-    .users-panel{
+    .online-panel{
 
-        width:145px;
+        width:150px;
 
-        min-width:145px;
+        min-width:150px;
+
+        padding:8px;
     }
 
-    .users-header{
-
-        padding:12px 9px;
-    }
-
-    .users-title{
+    .online-title{
 
         font-size:11px;
     }
 
-    .user{
-
-        padding:8px 4px;
-
-        gap:6px;
-    }
-
-    .avatar{
-
-        width:30px;
-        height:30px;
-
-        min-width:30px;
-
-        font-size:11px;
-    }
-
-    .user-name{
+    .online-user{
 
         font-size:10px;
+
+        padding:7px 3px;
+    }
+
+    .online-avatar{
+
+        width:28px;
+        height:28px;
+
+        min-width:28px;
     }
 
     .message{
 
-        max-width:82%;
+        max-width:84%;
     }
 
     .bubble{
 
-        font-size:12px;
-    }
-
-    .logo{
-
-        width:36px;
-        height:36px;
-    }
-
-    .title strong{
-
-        font-size:14px;
+        font-size:13px;
     }
 
 }
 
 
-/* =========================
+/* ================================
 VERY SMALL
-========================= */
+================================ */
 
-@media(max-width:400px){
+@media(max-width:380px){
 
-    .users-panel{
+    .online-panel{
 
         width:125px;
 
         min-width:125px;
     }
 
-    .user-state{
+    .online-user{
 
-        display:none;
+        gap:5px;
+    }
+
+    .online-avatar{
+
+        width:25px;
+        height:25px;
+
+        min-width:25px;
+
+        font-size:10px;
     }
 
     .message{
 
-        max-width:78%;
+        max-width:80%;
     }
 
 }
@@ -1024,207 +933,194 @@ VERY SMALL
 <div class="app">
 
 
-    <!-- HEADER -->
+<!-- =========================
+HEADER
+========================= -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="header-title">
+    <div class="header-right">
 
-            <div class="logo">
-                🍯
-            </div>
+        <div class="logo">
+            🍯
+        </div>
+
+        <div class="title-box">
 
             <div class="title">
+                عسل چت
+            </div>
 
-                <strong>
-                    عسل چت
-                </strong>
+            <div class="online-status">
 
-                <div class="status">
+                <span class="online-dot"></span>
 
-                    <span class="status-dot"></span>
+                <span id="onlineCount">
+                    0 نفر آنلاین
+                </span>
 
-                    <span id="onlineCount">
-                        0 نفر آنلاین
-                    </span>
+            </div>
 
+        </div>
+
+    </div>
+
+
+    <button
+        class="exit-btn"
+        id="exitBtn">
+
+        ↪
+
+    </button>
+
+</header>
+
+
+
+<!-- =========================
+MAIN
+========================= -->
+
+<div class="main">
+
+
+    <!-- =====================
+         RIGHT USERS
+    ====================== -->
+
+    <aside class="online-panel">
+
+        <div class="online-title">
+
+            👥 کاربران آنلاین
+
+        </div>
+
+
+        <div id="onlineUsers">
+
+            <div
+                style="
+                color:#777;
+                font-size:11px;
+                padding:8px;
+                text-align:center;
+                ">
+
+                در حال دریافت...
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================
+         CHAT
+    ====================== -->
+
+    <section class="chat-area">
+
+
+        <main
+            class="chat"
+            id="chat">
+
+
+            <div
+                class="empty"
+                id="empty">
+
+                <div class="empty-icon">
+                    🍯
                 </div>
+
+                هنوز پیامی ارسال نشده
+
+                <br>
+
+                اولین پیام را بفرست!
+
+            </div>
+
+
+        </main>
+
+
+
+        <!-- IMAGE PREVIEW -->
+
+        <div
+            class="preview"
+            id="preview">
+
+            <button
+                class="preview-close"
+                id="previewClose">
+
+                ×
+
+            </button>
+
+            <img
+                id="previewImage"
+                alt="preview">
+
+        </div>
+
+
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+            <div class="input-box">
+
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                    hidden>
+
+
+                <button
+                    class="icon-btn"
+                    id="imageBtn">
+
+                    📷
+
+                </button>
+
+
+                <textarea
+                    class="input"
+                    id="messageInput"
+                    rows="1"
+                    placeholder="پیامت رو بنویس..."></textarea>
+
+
+                <button
+                    class="send-btn"
+                    id="sendBtn">
+
+                    ➤
+
+                </button>
+
 
             </div>
 
         </div>
 
 
-        <button
-            class="exit"
-            id="exitBtn">
+    </section>
 
-            ↪
 
-        </button>
-
-    </header>
-
-
-
-    <!-- MAIN -->
-
-    <div class="main">
-
-
-        <!-- =====================
-             RIGHT USERS
-        ====================== -->
-
-        <aside class="users-panel">
-
-
-            <div class="users-header">
-
-                <div class="users-title">
-
-                    <span>
-                        👥 کاربران آنلاین
-                    </span>
-
-                    <span
-                        class="users-number"
-                        id="usersNumber">
-
-                        0
-
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="users-list"
-                id="onlineUsers">
-
-                <div
-                    style="
-                    color:#777;
-                    text-align:center;
-                    padding:15px;
-                    font-size:10px;
-                    ">
-
-                    در حال اتصال...
-
-                </div>
-
-            </div>
-
-
-        </aside>
-
-
-
-        <!-- =====================
-             CHAT
-        ====================== -->
-
-        <section class="chat-area">
-
-
-            <main
-                class="chat"
-                id="chat">
-
-
-                <div
-                    class="empty"
-                    id="empty">
-
-                    <div class="empty-icon">
-                        🍯
-                    </div>
-
-                    هنوز پیامی نیست
-
-                    <br>
-
-                    اولین پیام رو بفرست ❤️
-
-                </div>
-
-
-            </main>
-
-
-
-            <!-- IMAGE PREVIEW -->
-
-            <div
-                class="preview"
-                id="preview">
-
-                <button
-                    class="preview-close"
-                    id="previewClose">
-
-                    ×
-
-                </button>
-
-                <img
-                    id="previewImage">
-
-            </div>
-
-
-
-            <!-- INPUT -->
-
-            <div class="input-area">
-
-                <div class="input-box">
-
-
-                    <input
-                        type="file"
-                        id="imageInput"
-                        accept="image/*"
-                        hidden>
-
-
-                    <button
-                        class="icon-button"
-                        id="imageButton">
-
-                        📷
-
-                    </button>
-
-
-                    <textarea
-                        class="message-input"
-                        id="messageInput"
-                        placeholder="پیامت رو بنویس..."
-                        rows="1"></textarea>
-
-
-                    <button
-                        class="send-button"
-                        id="sendButton">
-
-                        ➤
-
-                    </button>
-
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-    </div>
+</div>
 
 
 </div>
@@ -1237,7 +1133,7 @@ VERY SMALL
     class="loading"
     id="loading">
 
-    <div class="loading-icon">
+    <div class="loading-logo">
         🍯
     </div>
 
@@ -1261,9 +1157,9 @@ VERY SMALL
 <script type="module">
 
 
-/* =====================================
+/* =================================
    FIREBASE
-===================================== */
+================================= */
 
 import {
     initializeApp
@@ -1297,201 +1193,198 @@ from
 
 
 
-/* =====================================
+/* =================================
    FIREBASE CONFIG
-===================================== */
+================================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "YOUR_API_KEY",
+        "YOUR_API_KEY",
 
     authDomain:
-    "YOUR_PROJECT.firebaseapp.com",
+        "YOUR_PROJECT.firebaseapp.com",
 
     databaseURL:
-    "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+        "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
 
     projectId:
-    "YOUR_PROJECT",
+        "YOUR_PROJECT",
 
     storageBucket:
-    "YOUR_PROJECT.firebasestorage.app",
+        "YOUR_PROJECT.firebasestorage.app",
 
     messagingSenderId:
-    "YOUR_SENDER_ID",
+        "YOUR_SENDER_ID",
 
     appId:
-    "YOUR_APP_ID"
+        "YOUR_APP_ID"
 
 };
 
 
 
-/* =====================================
+/* =================================
    INIT
-===================================== */
+================================= */
 
 const app =
-initializeApp(
-    firebaseConfig
-);
+    initializeApp(
+        firebaseConfig
+    );
 
 const db =
-getDatabase(app);
+    getDatabase(app);
 
 const storage =
-getStorage(app);
+    getStorage(app);
 
 
 
-/* =====================================
+/* =================================
    USER
-===================================== */
+================================= */
 
 const username =
-localStorage.getItem(
-    "username"
-);
+    localStorage.getItem(
+        "username"
+    );
 
 
 if(!username){
 
     window.location.href =
-    "index.html";
+        "index.html";
 
 }
 
 
 
-/* =====================================
+/* =================================
    ELEMENTS
-===================================== */
+================================= */
 
 const chat =
-document.getElementById(
-    "chat"
-);
+    document.getElementById(
+        "chat"
+    );
 
 const input =
-document.getElementById(
-    "messageInput"
-);
+    document.getElementById(
+        "messageInput"
+    );
 
-const sendButton =
-document.getElementById(
-    "sendButton"
-);
+const sendBtn =
+    document.getElementById(
+        "sendBtn"
+    );
 
-const imageButton =
-document.getElementById(
-    "imageButton"
-);
+const imageBtn =
+    document.getElementById(
+        "imageBtn"
+    );
 
 const imageInput =
-document.getElementById(
-    "imageInput"
-);
+    document.getElementById(
+        "imageInput"
+    );
 
 const preview =
-document.getElementById(
-    "preview"
-);
+    document.getElementById(
+        "preview"
+    );
 
 const previewImage =
-document.getElementById(
-    "previewImage"
-);
+    document.getElementById(
+        "previewImage"
+    );
 
 const previewClose =
-document.getElementById(
-    "previewClose"
-);
+    document.getElementById(
+        "previewClose"
+    );
 
 const onlineUsers =
-document.getElementById(
-    "onlineUsers"
-);
+    document.getElementById(
+        "onlineUsers"
+    );
 
 const onlineCount =
-document.getElementById(
-    "onlineCount"
-);
-
-const usersNumber =
-document.getElementById(
-    "usersNumber"
-);
+    document.getElementById(
+        "onlineCount"
+    );
 
 const loading =
-document.getElementById(
-    "loading"
-);
+    document.getElementById(
+        "loading"
+    );
 
 const toast =
-document.getElementById(
-    "toast"
-);
-
-const empty =
-document.getElementById(
-    "empty"
-);
+    document.getElementById(
+        "toast"
+    );
 
 const exitBtn =
-document.getElementById(
-    "exitBtn"
-);
+    document.getElementById(
+        "exitBtn"
+    );
+
+const empty =
+    document.getElementById(
+        "empty"
+    );
 
 
 
-/* =====================================
+/* =================================
    DATABASE
-===================================== */
+================================= */
 
 const messagesRef =
-ref(
-    db,
-    "messages"
-);
+    ref(
+        db,
+        "messages"
+    );
 
 const onlineRef =
-ref(
-    db,
-    "online/" +
-    encodeURIComponent(
-        username
-    )
-);
+    ref(
+        db,
+        "online/" +
+        encodeURIComponent(
+            username
+        )
+    );
 
 
 
-/* =====================================
+/* =================================
    ONLINE
-===================================== */
+================================= */
 
-async function goOnline(){
+async function setOnline(){
 
     try{
 
         await set(
             onlineRef,
             {
+
                 name:
-                username,
+                    username,
 
                 time:
-                serverTimestamp()
+                    serverTimestamp()
+
             }
         );
+
 
         onDisconnect(
             onlineRef
         ).remove();
 
-    }
 
-    catch(error){
+    }catch(error){
 
         console.error(
             error
@@ -1501,13 +1394,13 @@ async function goOnline(){
 
 }
 
-goOnline();
+setOnline();
 
 
 
-/* =====================================
-   USERS
-===================================== */
+/* =================================
+   ONLINE USERS LIST
+================================= */
 
 onValue(
     ref(
@@ -1518,7 +1411,7 @@ onValue(
     snapshot => {
 
         onlineUsers.innerHTML =
-        "";
+            "";
 
         let count = 0;
 
@@ -1527,7 +1420,7 @@ onValue(
             child => {
 
                 const data =
-                child.val();
+                    child.val();
 
                 if(!data)
                     return;
@@ -1536,98 +1429,67 @@ onValue(
                 count++;
 
 
-                const user =
-                document.createElement(
-                    "div"
-                );
+                const row =
+                    document.createElement(
+                        "div"
+                    );
 
-                user.className =
-                "user";
+                row.className =
+                    "online-user";
 
 
                 const avatar =
-                document.createElement(
-                    "div"
-                );
+                    document.createElement(
+                        "div"
+                    );
 
                 avatar.className =
-                "avatar";
+                    "online-avatar";
+
 
                 avatar.textContent =
-                (
-                    data.name ||
-                    "?"
-                )
-                .charAt(0);
-
-
-                const info =
-                document.createElement(
-                    "div"
-                );
-
-                info.className =
-                "user-info";
+                    (
+                        data.name ||
+                        "?"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
 
 
                 const name =
-                document.createElement(
-                    "div"
-                );
-
-                name.className =
-                "user-name";
+                    document.createElement(
+                        "span"
+                    );
 
                 name.textContent =
-                data.name ||
-                "کاربر";
-
-
-                const state =
-                document.createElement(
-                    "div"
-                );
-
-                state.className =
-                "user-state";
-
-                state.textContent =
-                "آنلاین";
-
-
-                info.appendChild(
-                    name
-                );
-
-                info.appendChild(
-                    state
-                );
+                    data.name ||
+                    "کاربر";
 
 
                 const dot =
-                document.createElement(
-                    "div"
-                );
+                    document.createElement(
+                        "span"
+                    );
 
                 dot.className =
-                "user-dot";
+                    "user-online-dot";
 
 
-                user.appendChild(
+                row.appendChild(
                     avatar
                 );
 
-                user.appendChild(
-                    info
+                row.appendChild(
+                    name
                 );
 
-                user.appendChild(
+                row.appendChild(
                     dot
                 );
 
 
                 onlineUsers.appendChild(
-                    user
+                    row
                 );
 
             }
@@ -1635,21 +1497,17 @@ onValue(
 
 
         onlineCount.textContent =
-        count +
-        " نفر آنلاین";
-
-
-        usersNumber.textContent =
-        count;
+            count +
+            " نفر آنلاین";
 
     }
 );
 
 
 
-/* =====================================
+/* =================================
    ADD MESSAGE
-===================================== */
+================================= */
 
 function addMessage(
     data
@@ -1660,42 +1518,42 @@ function addMessage(
 
 
     empty.style.display =
-    "none";
+        "none";
 
 
     const wrapper =
-    document.createElement(
-        "div"
-    );
+        document.createElement(
+            "div"
+        );
 
 
     const mine =
-    data.name ===
-    username;
+        data.name ===
+        username;
 
 
     wrapper.className =
-    "message " +
-    (
-        mine
-        ? "mine"
-        : "other"
-    );
+        "message " +
+        (
+            mine
+            ? "mine"
+            : "other"
+        );
 
 
     if(!mine){
 
         const sender =
-        document.createElement(
-            "div"
-        );
+            document.createElement(
+                "div"
+            );
 
         sender.className =
-        "sender";
+            "sender";
 
         sender.textContent =
-        data.name ||
-        "کاربر";
+            data.name ||
+            "کاربر";
 
         wrapper.appendChild(
             sender
@@ -1705,29 +1563,32 @@ function addMessage(
 
 
     const bubble =
-    document.createElement(
-        "div"
-    );
+        document.createElement(
+            "div"
+        );
 
     bubble.className =
-    "bubble";
+        "bubble";
 
 
     if(data.image){
 
         const img =
-        document.createElement(
-            "img"
-        );
+            document.createElement(
+                "img"
+            );
 
         img.className =
-        "message-image";
+            "message-image";
 
         img.src =
-        data.image;
+            data.image;
 
         img.alt =
-        "تصویر";
+            "تصویر";
+
+        img.loading =
+            "lazy";
 
         bubble.appendChild(
             img
@@ -1739,12 +1600,12 @@ function addMessage(
     if(data.text){
 
         const text =
-        document.createElement(
-            "div"
-        );
+            document.createElement(
+                "div"
+            );
 
         text.textContent =
-        data.text;
+            data.text;
 
         bubble.appendChild(
             text
@@ -1754,20 +1615,21 @@ function addMessage(
 
 
     const time =
-    document.createElement(
-        "div"
-    );
+        document.createElement(
+            "div"
+        );
 
     time.className =
-    "time";
+        "time";
 
 
     if(data.time){
 
         const date =
-        new Date(
-            data.time
-        );
+            new Date(
+                data.time
+            );
+
 
         if(
             !isNaN(
@@ -1776,16 +1638,16 @@ function addMessage(
         ){
 
             time.textContent =
-            date.toLocaleTimeString(
-                "fa-IR",
-                {
-                    hour:
-                    "2-digit",
+                date.toLocaleTimeString(
+                    "fa-IR",
+                    {
+                        hour:
+                            "2-digit",
 
-                    minute:
-                    "2-digit"
-                }
-            );
+                        minute:
+                            "2-digit"
+                    }
+                );
 
         }
 
@@ -1807,15 +1669,15 @@ function addMessage(
 
 
     chat.scrollTop =
-    chat.scrollHeight;
+        chat.scrollHeight;
 
 }
 
 
 
-/* =====================================
+/* =================================
    RECEIVE
-===================================== */
+================================= */
 
 onChildAdded(
     messagesRef,
@@ -1831,14 +1693,14 @@ onChildAdded(
 
 
 
-/* =====================================
-   SEND TEXT
-===================================== */
+/* =================================
+   SEND MESSAGE
+================================= */
 
 async function sendMessage(){
 
     const text =
-    input.value.trim();
+        input.value.trim();
 
 
     if(!text)
@@ -1852,27 +1714,26 @@ async function sendMessage(){
             {
 
                 name:
-                username,
+                    username,
 
                 text:
-                text,
+                    text,
 
                 time:
-                Date.now()
+                    Date.now()
 
             }
         );
 
 
         input.value =
-        "";
+            "";
 
         input.style.height =
-        "38px";
+            "38px";
 
-    }
 
-    catch(error){
+    }catch(error){
 
         console.error(
             error
@@ -1887,17 +1748,16 @@ async function sendMessage(){
 }
 
 
-
-sendButton.addEventListener(
+sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
 
 
-/* =====================================
+/* =================================
    ENTER
-===================================== */
+================================= */
 
 input.addEventListener(
     "keydown",
@@ -1920,9 +1780,9 @@ input.addEventListener(
 
 
 
-/* =====================================
+/* =================================
    AUTO HEIGHT
-===================================== */
+================================= */
 
 input.addEventListener(
     "input",
@@ -1930,24 +1790,24 @@ input.addEventListener(
     () => {
 
         input.style.height =
-        "38px";
+            "38px";
 
         input.style.height =
-        Math.min(
-            input.scrollHeight,
-            100
-        ) + "px";
+            Math.min(
+                input.scrollHeight,
+                100
+            ) + "px";
 
     }
 );
 
 
 
-/* =====================================
-   IMAGE BUTTON
-===================================== */
+/* =================================
+   IMAGE
+================================= */
 
-imageButton.addEventListener(
+imageBtn.addEventListener(
     "click",
 
     () => {
@@ -1959,36 +1819,32 @@ imageButton.addEventListener(
 
 
 
-/* =====================================
-   IMAGE PREVIEW
-===================================== */
-
 imageInput.addEventListener(
     "change",
 
     () => {
 
         const file =
-        imageInput.files[0];
+            imageInput.files[0];
 
         if(!file)
             return;
 
 
         const reader =
-        new FileReader();
+            new FileReader();
 
 
         reader.onload =
-        event => {
+            event => {
 
-            previewImage.src =
-            event.target.result;
+                previewImage.src =
+                    event.target.result;
 
-            preview.style.display =
-            "block";
+                preview.style.display =
+                    "block";
 
-        };
+            };
 
 
         reader.readAsDataURL(
@@ -2000,9 +1856,9 @@ imageInput.addEventListener(
 
 
 
-/* =====================================
+/* =================================
    UPLOAD IMAGE
-===================================== */
+================================= */
 
 imageInput.addEventListener(
     "change",
@@ -2010,7 +1866,7 @@ imageInput.addEventListener(
     async () => {
 
         const file =
-        imageInput.files[0];
+            imageInput.files[0];
 
         if(!file)
             return;
@@ -2024,17 +1880,17 @@ imageInput.addEventListener(
 
 
             const fileName =
-            Date.now() +
-            "_" +
-            file.name;
+                Date.now() +
+                "_" +
+                file.name;
 
 
             const imageRef =
-            storageRef(
-                storage,
-                "chat-images/" +
-                fileName
-            );
+                storageRef(
+                    storage,
+                    "chat-images/" +
+                    fileName
+                );
 
 
             await uploadBytes(
@@ -2044,9 +1900,9 @@ imageInput.addEventListener(
 
 
             const url =
-            await getDownloadURL(
-                imageRef
-            );
+                await getDownloadURL(
+                    imageRef
+                );
 
 
             await push(
@@ -2054,32 +1910,31 @@ imageInput.addEventListener(
                 {
 
                     name:
-                    username,
+                        username,
 
                     image:
-                    url,
+                        url,
 
                     time:
-                    Date.now()
+                        Date.now()
 
                 }
             );
 
 
             imageInput.value =
-            "";
+                "";
 
             preview.style.display =
-            "none";
+                "none";
 
 
             showToast(
                 "عکس ارسال شد ✓"
             );
 
-        }
 
-        catch(error){
+        }catch(error){
 
             console.error(
                 error
@@ -2096,9 +1951,9 @@ imageInput.addEventListener(
 
 
 
-/* =====================================
-   PREVIEW CLOSE
-===================================== */
+/* =================================
+   CLOSE PREVIEW
+================================= */
 
 previewClose.addEventListener(
     "click",
@@ -2106,19 +1961,19 @@ previewClose.addEventListener(
     () => {
 
         imageInput.value =
-        "";
+            "";
 
         preview.style.display =
-        "none";
+            "none";
 
     }
 );
 
 
 
-/* =====================================
+/* =================================
    EXIT
-===================================== */
+================================= */
 
 exitBtn.addEventListener(
     "click",
@@ -2132,9 +1987,7 @@ exitBtn.addEventListener(
                 null
             );
 
-        }
-
-        catch(error){
+        }catch(error){
 
             console.log(
                 error
@@ -2149,25 +2002,26 @@ exitBtn.addEventListener(
 
 
         window.location.href =
-        "index.html";
+            "index.html";
 
     }
 );
 
 
 
-/* =====================================
+/* =================================
    TOAST
-===================================== */
+================================= */
 
 let toastTimer;
+
 
 function showToast(
     text
 ){
 
     toast.textContent =
-    text;
+        text;
 
     toast.classList.add(
         "show"
@@ -2180,53 +2034,31 @@ function showToast(
 
 
     toastTimer =
-    setTimeout(
-        () => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        },
+            },
 
-        2500
-    );
+            2500
+        );
 
 }
 
 
 
-/* =====================================
-   CONNECTION
-===================================== */
-
-onValue(
-    ref(
-        db,
-        ".info/connected"
-    ),
-
-    snapshot => {
-
-        console.log(
-            "Firebase:",
-            snapshot.val()
-        );
-
-    }
-);
-
-
-
-/* =====================================
+/* =================================
    LOADING
-===================================== */
+================================= */
 
 setTimeout(
     () => {
 
         loading.style.display =
-        "none";
+            "none";
 
     },
 
@@ -2237,4 +2069,4 @@ setTimeout(
 
 </body>
 
-      </html>
+    </html>
