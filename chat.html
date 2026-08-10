@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width,
-             initial-scale=1.0,
-             maximum-scale=1.0,
-             user-scalable=no"
->
-
-<meta
-    name="theme-color"
-    content="#0b0c0b"
->
-
-<title>عسل چت 🍯</title>
-
-
-<style>
+<meta name="theme-color" content="#0b0c0b"><title>عسل چت 🍯</title><style>
 
 /* =========================================================
    RESET
@@ -52,19 +36,11 @@ body{
     -webkit-tap-highlight-color:transparent;
 }
 
-button,
-input,
-textarea{
-    font-family:inherit;
-}
-
-
 /* =========================================================
    APP
 ========================================================= */
 
 #app{
-
     width:100%;
     height:100dvh;
 
@@ -72,138 +48,107 @@ textarea{
     flex-direction:column;
 
     background:
-
         radial-gradient(
             circle at 50% 0%,
-            rgba(255,193,7,.08),
+            rgba(255,193,7,.10),
             transparent 38%
         ),
-
         #080908;
 }
-
 
 /* =========================================================
    HEADER
 ========================================================= */
 
 .chat-header{
-
     height:64px;
     min-height:64px;
 
     display:flex;
     align-items:center;
 
-    padding:
-        0 14px;
+    padding:0 12px;
 
     background:
-
         linear-gradient(
             135deg,
-            #171712,
+            #191a14,
             #0e0f0d
         );
 
     border-bottom:
         1px solid
-        rgba(255,193,7,.15);
+        rgba(255,193,7,.16);
 
     box-shadow:
-        0 3px 18px
+        0 3px 20px
         rgba(0,0,0,.45);
 
     position:relative;
-
-    z-index:10;
+    z-index:20;
 }
 
-
-/* =========================================================
-   LOGO
-========================================================= */
-
 .logo{
+    width:43px;
+    height:43px;
 
-    width:42px;
-    height:42px;
-
-    flex:0 0 42px;
-
-    border-radius:50%;
+    flex:0 0 43px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
-    font-size:23px;
+    border-radius:50%;
 
     background:
-
         linear-gradient(
             145deg,
             #ffc107,
-            #d99500
+            #c98600
         );
 
     box-shadow:
-
-        0 0 18px
+        0 0 20px
         rgba(255,193,7,.25);
 
-    margin-left:10px;
+    font-size:23px;
 
     cursor:pointer;
 
     user-select:none;
 }
 
-
-/* =========================================================
-   HEADER INFO
-========================================================= */
-
 .header-info{
-
     flex:1;
-
     min-width:0;
+
+    margin-right:10px;
 }
 
 .header-title{
-
-    font-size:17px;
-
-    font-weight:bold;
-
     color:#ffd45a;
 
+    font-size:17px;
+    font-weight:bold;
+
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
 .header-status{
+    display:flex;
+    align-items:center;
+    gap:5px;
 
     margin-top:4px;
 
-    font-size:11px;
+    color:#8d928a;
 
-    color:#8f948d;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
+    font-size:10px;
 }
 
 .online-dot{
-
     width:7px;
     height:7px;
 
@@ -212,27 +157,16 @@ textarea{
     background:#42d96b;
 
     box-shadow:
-
         0 0 8px
-        rgba(66,217,107,.65);
+        rgba(66,217,107,.7);
 }
 
-
-/* =========================================================
-   HEADER BUTTONS
-========================================================= */
-
 .header-actions{
-
     display:flex;
-
-    align-items:center;
-
     gap:6px;
 }
 
 .header-btn{
-
     width:38px;
     height:38px;
 
@@ -241,72 +175,55 @@ textarea{
 
     border-radius:50%;
 
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    color:#ddd;
-
     background:
         rgba(255,255,255,.05);
 
-    font-size:18px;
+    color:#ddd;
+
+    font-size:17px;
 
     cursor:pointer;
-
-    transition:.2s;
 }
 
 .header-btn:active{
-
-    transform:scale(.9);
+    transform:scale(.91);
 
     background:
-        rgba(255,193,7,.14);
+        rgba(255,193,7,.15);
 }
-
 
 /* =========================================================
    CHAT AREA
 ========================================================= */
 
 .chat-area{
-
     flex:1;
+
+    min-height:0;
 
     position:relative;
 
     overflow:hidden;
 
-    display:flex;
-
-    flex-direction:column;
-
     background:
-
         radial-gradient(
-            circle at 20% 20%,
+            circle at 15% 20%,
             rgba(255,193,7,.025),
             transparent 25%
         ),
-
         radial-gradient(
-            circle at 80% 70%,
-            rgba(255,193,7,.018),
-            transparent 28%
+            circle at 80% 75%,
+            rgba(255,193,7,.02),
+            transparent 30%
         ),
-
         #090a09;
 }
-
 
 /* =========================================================
    HONEY BACKGROUND
 ========================================================= */
 
 .honey-bg{
-
     position:absolute;
 
     inset:0;
@@ -316,25 +233,26 @@ textarea{
     opacity:.7;
 
     background-image:
-
         radial-gradient(
             circle,
-            rgba(255,193,7,.045) 1px,
-            transparent 1.5px
+            rgba(255,193,7,.055) 1px,
+            transparent 1.6px
         );
 
-    background-size:
-        28px 28px;
+    background-size:28px 28px;
 }
-
 
 /* =========================================================
    MESSAGES
 ========================================================= */
 
 #messages{
+    position:relative;
 
-    flex:1;
+    z-index:2;
+
+    width:100%;
+    height:100%;
 
     overflow-y:auto;
     overflow-x:hidden;
@@ -342,91 +260,78 @@ textarea{
     padding:
         14px
         10px
-        95px;
-
-    position:relative;
-
-    z-index:2;
+        92px;
 
     scroll-behavior:smooth;
 }
 
 #messages::-webkit-scrollbar{
-
     width:4px;
 }
 
 #messages::-webkit-scrollbar-track{
-
     background:transparent;
 }
 
 #messages::-webkit-scrollbar-thumb{
-
     background:#383a34;
-
     border-radius:10px;
 }
 
-
 /* =========================================================
-   EMPTY CHAT
+   EMPTY
 ========================================================= */
 
 .empty-chat{
-
-    width:100%;
-    height:100%;
+    min-height:100%;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     text-align:center;
 
-    color:#777b73;
-
     padding:30px;
 }
 
 .empty-box{
-
     max-width:280px;
 }
 
 .empty-icon{
-
-    font-size:48px;
+    font-size:52px;
 
     margin-bottom:12px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,193,7,.15)
+        );
 }
 
 .empty-title{
+    color:#deded8;
 
     font-size:17px;
+    font-weight:bold;
 
-    color:#d0d0ca;
-
-    margin-bottom:7px;
+    margin-bottom:8px;
 }
 
 .empty-text{
+    color:#777b73;
 
     font-size:12px;
 
     line-height:2;
-
-    color:#777b73;
 }
-
 
 /* =========================================================
    MESSAGE
 ========================================================= */
 
 .message-row{
-
     width:100%;
 
     display:flex;
@@ -440,166 +345,126 @@ textarea{
 }
 
 .message-row.me{
-
     justify-content:flex-start;
 }
 
 .message-row.other{
-
     justify-content:flex-end;
 }
 
 @keyframes messageIn{
 
     from{
-
         opacity:0;
-
-        transform:
-            translateY(5px);
+        transform:translateY(5px);
     }
 
     to{
-
         opacity:1;
-
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
+
 }
 
-
-/* =========================================================
-   MESSAGE BUBBLE
-========================================================= */
-
 .message-bubble{
-
     max-width:78%;
 
     padding:
-        9px
-        12px;
+        8px 11px;
 
     border-radius:15px;
-
-    position:relative;
-
-    word-break:break-word;
 
     line-height:1.7;
 
     font-size:14px;
+
+    word-break:break-word;
+
+    position:relative;
 }
 
 .message-row.me
 .message-bubble{
 
     background:
-
         linear-gradient(
             145deg,
-            #272820,
+            #292a22,
             #1d1e1a
         );
-
-    border-bottom-right-radius:4px;
 
     border:
         1px solid
         rgba(255,255,255,.035);
+
+    border-bottom-right-radius:4px;
 }
 
 .message-row.other
 .message-bubble{
 
     background:
-
         linear-gradient(
             145deg,
-            #5b4208,
+            #5a4208,
             #3c2d08
         );
 
-    border-bottom-left-radius:4px;
-
     border:
         1px solid
-        rgba(255,193,7,.10);
+        rgba(255,193,7,.11);
+
+    border-bottom-left-radius:4px;
 }
-
-
-/* =========================================================
-   MESSAGE NAME
-========================================================= */
 
 .message-name{
-
-    font-size:11px;
-
     color:#ffc928;
 
-    margin-bottom:3px;
+    font-size:10px;
 
     font-weight:bold;
+
+    margin-bottom:3px;
 }
 
-
-/* =========================================================
-   MESSAGE TEXT
-========================================================= */
-
 .message-text{
-
-    color:#f0f0eb;
+    color:#f2f2ed;
 
     white-space:pre-wrap;
 }
 
-
-/* =========================================================
-   MESSAGE TIME
-========================================================= */
-
 .message-time{
+    color:#858981;
 
     font-size:9px;
-
-    color:#888b84;
 
     margin-top:3px;
 
     text-align:left;
 }
 
-
 /* =========================================================
-   INPUT AREA
+   INPUT
 ========================================================= */
 
 .input-area{
-
     position:absolute;
 
     right:0;
     bottom:0;
     left:0;
 
-    z-index:20;
+    z-index:15;
 
     padding:
-
         8px
-        9px
+        8px
         calc(
             8px +
-            env(
-                safe-area-inset-bottom
-            )
+            env(safe-area-inset-bottom)
         );
 
     background:
-
         linear-gradient(
             to top,
             #080908 75%,
@@ -608,89 +473,68 @@ textarea{
 }
 
 .input-box{
-
     width:100%;
 
-    min-height:48px;
+    min-height:50px;
 
     display:flex;
-
     align-items:flex-end;
 
-    gap:7px;
+    gap:6px;
 
     padding:6px;
 
-    border-radius:25px;
+    border-radius:26px;
 
     background:#171914;
 
     border:
         1px solid
-        rgba(255,193,7,.13);
+        rgba(255,193,7,.14);
 
     box-shadow:
-
         0 5px 25px
-        rgba(0,0,0,.45);
+        rgba(0,0,0,.5);
 }
 
+.input-btn,
+.send-btn{
+    flex:0 0 auto;
 
-/* =========================================================
-   INPUT BUTTON
-========================================================= */
-
-.input-btn{
-
-    flex:
-        0 0 40px;
-
-    width:40px;
-    height:40px;
+    width:39px;
+    height:39px;
 
     border:0;
     outline:0;
 
     border-radius:50%;
 
-    background:
-        rgba(255,255,255,.045);
-
-    color:#aaa;
-
-    font-size:18px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     cursor:pointer;
+
+    font-size:17px;
+}
+
+.input-btn{
+    background:
+        rgba(255,255,255,.045);
+
+    color:#aaa;
 }
 
 .input-btn:active{
-
     transform:scale(.9);
-
-    background:
-        rgba(255,193,7,.14);
-
-    color:#ffc107;
 }
 
-
-/* =========================================================
-   MESSAGE INPUT
-========================================================= */
-
 #messageInput{
-
     flex:1;
 
     min-width:0;
 
-    min-height:36px;
-
+    min-height:37px;
     max-height:110px;
 
     resize:none;
@@ -702,88 +546,55 @@ textarea{
 
     color:#fff;
 
+    font-family:inherit;
+
     font-size:14px;
 
     line-height:1.6;
 
     padding:
-        7px
-        5px;
+        7px 5px;
 
     overflow-y:auto;
 }
 
 #messageInput::placeholder{
-
     color:#6f726b;
 }
 
-
-/* =========================================================
-   SEND
-========================================================= */
-
 .send-btn{
-
-    flex:
-        0 0 40px;
-
-    width:40px;
-    height:40px;
-
-    border:0;
-    outline:0;
-
-    border-radius:50%;
-
     background:
-
         linear-gradient(
             145deg,
             #ffc107,
             #d99500
         );
 
-    color:#16130a;
+    color:#17130a;
 
-    font-size:18px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
+    font-weight:bold;
 
     box-shadow:
-
         0 3px 12px
         rgba(255,193,7,.22);
 }
 
 .send-btn:active{
-
     transform:scale(.9);
 }
 
 .send-btn:disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
+    opacity:.4;
 }
-
 
 /* =========================================================
    CONNECTION
 ========================================================= */
 
 .connection-status{
-
     position:absolute;
 
     top:10px;
-
     left:50%;
 
     transform:
@@ -792,24 +603,20 @@ textarea{
     z-index:30;
 
     padding:
-        5px
-        12px;
+        5px 12px;
 
     border-radius:20px;
 
-    font-size:10px;
-
-    color:#aaa;
-
     background:
-        rgba(20,21,18,.9);
+        rgba(20,21,18,.92);
 
     border:
         1px solid
-        rgba(255,255,255,.05);
+        rgba(255,255,255,.06);
 
-    backdrop-filter:
-        blur(8px);
+    color:#aaa;
+
+    font-size:10px;
 
     opacity:0;
 
@@ -819,27 +626,22 @@ textarea{
 }
 
 .connection-status.show{
-
     opacity:1;
 }
 
 .connection-status.online{
-
     color:#55d978;
 }
 
 .connection-status.offline{
-
     color:#ff6969;
 }
-
 
 /* =========================================================
    PROFILE OVERLAY
 ========================================================= */
 
 .profile-overlay{
-
     position:fixed;
 
     inset:0;
@@ -847,17 +649,16 @@ textarea{
     z-index:200;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     padding:20px;
 
     background:
-        rgba(0,0,0,.72);
+        rgba(0,0,0,.75);
 
     backdrop-filter:
-        blur(5px);
+        blur(6px);
 
     opacity:0;
 
@@ -867,31 +668,20 @@ textarea{
 }
 
 .profile-overlay.show{
-
     opacity:1;
 
     pointer-events:auto;
 }
 
-
-/* =========================================================
-   PROFILE BOX
-========================================================= */
-
 .profile-box{
-
     width:100%;
-
     max-width:360px;
 
-    padding:
-        22px
-        18px;
+    padding:22px 18px;
 
     border-radius:22px;
 
     background:
-
         linear-gradient(
             145deg,
             #1b1c16,
@@ -900,45 +690,33 @@ textarea{
 
     border:
         1px solid
-        rgba(255,193,7,.16);
+        rgba(255,193,7,.17);
 
     box-shadow:
-
         0 15px 50px
-        rgba(0,0,0,.65);
+        rgba(0,0,0,.7);
 
     text-align:center;
 }
 
-
-/* =========================================================
-   PROFILE AVATAR
-========================================================= */
-
 .profile-avatar{
-
     position:relative;
-
-    overflow:hidden;
-
-    cursor:pointer;
 
     width:82px;
     height:82px;
 
     margin:
-        0 auto
-        12px;
+        0 auto 12px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
+
+    overflow:hidden;
 
     border-radius:50%;
 
     background:
-
         linear-gradient(
             145deg,
             #ffc107,
@@ -948,76 +726,32 @@ textarea{
     color:#17130a;
 
     font-size:32px;
-
     font-weight:bold;
 
     box-shadow:
-
         0 0 25px
         rgba(255,193,7,.18);
+
+    cursor:pointer;
 }
 
 .profile-avatar img{
-
     width:100%;
     height:100%;
-
-    display:block;
 
     object-fit:cover;
 }
 
-.avatar-camera{
-
-    position:absolute;
-
-    right:2px;
-    bottom:2px;
-
-    width:27px;
-    height:27px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#ffc107;
-
-    color:#17130a;
-
-    font-size:13px;
-
-    border:
-        2px solid
-        #11120f;
-}
-
-
-/* =========================================================
-   PROFILE TITLE
-========================================================= */
-
 .profile-title{
-
     color:#ffd45a;
 
     font-size:18px;
-
     font-weight:bold;
 
     margin-bottom:18px;
 }
 
-
-/* =========================================================
-   PROFILE LABEL
-========================================================= */
-
 .profile-label{
-
     display:block;
 
     text-align:right;
@@ -1029,15 +763,8 @@ textarea{
     margin-bottom:6px;
 }
 
-
-/* =========================================================
-   PROFILE NAME
-========================================================= */
-
 #profileName{
-
     width:100%;
-
     height:45px;
 
     padding:
@@ -1055,18 +782,19 @@ textarea{
 
     color:#fff;
 
+    font-family:inherit;
+
     font-size:14px;
 
     text-align:right;
 }
 
-
-/* =========================================================
-   PROFILE ACTIONS
-========================================================= */
+#profileName:focus{
+    border-color:
+        rgba(255,193,7,.45);
+}
 
 .profile-actions{
-
     display:flex;
 
     gap:8px;
@@ -1075,24 +803,22 @@ textarea{
 }
 
 .profile-action{
-
     flex:1;
 
     height:43px;
 
     border:0;
-
     outline:0;
 
     border-radius:12px;
+
+    font-family:inherit;
 
     cursor:pointer;
 }
 
 .profile-save{
-
     background:
-
         linear-gradient(
             145deg,
             #ffc107,
@@ -1105,7 +831,6 @@ textarea{
 }
 
 .profile-cancel{
-
     background:
         rgba(255,255,255,.06);
 
@@ -1113,7 +838,6 @@ textarea{
 }
 
 .profile-hint{
-
     margin-top:12px;
 
     color:#6f736b;
@@ -1123,365 +847,452 @@ textarea{
     line-height:1.8;
 }
 
+/* =========================================================
+   USERS PANEL
+========================================================= */
+
+.users-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:150;
+
+    background:
+        rgba(0,0,0,.7);
+
+    backdrop-filter:
+        blur(4px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.users-overlay.show{
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+.users-panel{
+    position:absolute;
+
+    top:0;
+    right:0;
+
+    width:
+        min(
+            320px,
+            86vw
+        );
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            160deg,
+            #191a14,
+            #0c0d0b
+        );
+
+    border-left:
+        1px solid
+        rgba(255,193,7,.13);
+
+    box-shadow:
+        -10px 0 40px
+        rgba(0,0,0,.55);
+
+    transform:
+        translateX(100%);
+
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.users-overlay.show
+.users-panel{
+    transform:
+        translateX(0);
+}
+
+.users-header{
+    height:64px;
+
+    flex:0 0 64px;
+
+    display:flex;
+    align-items:center;
+
+    padding:
+        0 14px;
+
+    border-bottom:
+        1px solid
+        rgba(255,193,7,.12);
+}
+
+.users-title{
+    flex:1;
+
+    color:#ffd45a;
+
+    font-size:16px;
+    font-weight:bold;
+}
+
+.users-close{
+    width:36px;
+    height:36px;
+
+    border:0;
+    outline:0;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#ddd;
+
+    font-size:18px;
+}
+
+#usersList{
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:10px;
+}
+
+.user-item{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px;
+
+    margin-bottom:6px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.user-avatar{
+    width:38px;
+    height:38px;
+
+    flex:0 0 38px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffc107,
+            #9b6900
+        );
+
+    color:#17130a;
+
+    font-weight:bold;
+}
+
+.user-info{
+    min-width:0;
+    flex:1;
+}
+
+.user-name{
+    color:#eee;
+
+    font-size:13px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.user-online{
+    color:#55d978;
+
+    font-size:9px;
+
+    margin-top:3px;
+}
+
+.no-users{
+    text-align:center;
+
+    color:#777;
+
+    padding:30px 10px;
+
+    font-size:12px;
+}
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================= */
 
 @media(max-width:360px){
 
     .chat-header{
-
         height:58px;
-
         min-height:58px;
-
-        padding:
-            0 9px;
+        padding:0 8px;
     }
 
     .logo{
-
         width:38px;
         height:38px;
-
+        flex-basis:38px;
         font-size:20px;
     }
 
     .header-title{
-
         font-size:15px;
     }
 
     .message-bubble{
-
         max-width:84%;
-
         font-size:13px;
     }
 
-    .input-area{
-
-        padding-left:6px;
-        padding-right:6px;
-    }
 }
 
-</style>
+/* =========================================================
+   SELECTION
+========================================================= */
 
-</head>
+::selection{
+    background:#9d7600;
+    color:#fff;
+}
 
-
-<body>
-
-
-<div id="app">
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="chat-header">
-
+</style></head><body><div id="app"><header class="chat-header">
 
     <div
         class="logo"
-        id="logo"
+        id="profileOpen"
         title="پروفایل">
-
         🍯
-
     </div>
-
 
     <div class="header-info">
 
         <div class="header-title">
-
             عسل چت
-
         </div>
-
 
         <div class="header-status">
 
-            <span
-                class="online-dot">
-            </span>
+            <span class="online-dot"></span>
 
             <span id="onlineStatus">
-
                 در حال اتصال...
-
             </span>
 
         </div>
 
     </div>
 
-
     <div class="header-actions">
-
 
         <button
             class="header-btn"
             id="usersBtn"
-            type="button">
-
+            type="button"
+            title="کاربران آنلاین">
             👥
-
         </button>
-
 
         <button
             class="header-btn"
             id="exitBtn"
-            type="button">
-
+            type="button"
+            title="خروج">
             ⎋
-
         </button>
 
-
     </div>
-
 
 </header>
 
 
-
-<!-- =====================================================
-     CHAT
-===================================================== -->
-
 <main class="chat-area">
 
-
     <div class="honey-bg"></div>
-
 
     <div
         id="connectionStatus"
         class="connection-status">
-
         در حال اتصال...
-
     </div>
-
 
     <div id="messages">
 
-
         <div class="empty-chat">
-
 
             <div class="empty-box">
 
-
                 <div class="empty-icon">
-
                     🍯
-
                 </div>
-
 
                 <div class="empty-title">
-
                     به عسل چت خوش آمدید
-
                 </div>
-
 
                 <div class="empty-text">
-
-                    پیام خود را بنویسید
-                    و گفتگو را شروع کنید.
-
+                    پیام خود را بنویسید و گفتگو را شروع کنید.
                 </div>
-
 
             </div>
 
-
         </div>
-
 
     </div>
 
 
-
-    <!-- INPUT -->
-
     <div class="input-area">
 
-
         <div class="input-box">
-
 
             <button
                 class="input-btn"
                 id="attachBtn"
-                type="button">
-
+                type="button"
+                title="ارسال فایل">
                 📎
-
             </button>
-
 
             <textarea
                 id="messageInput"
                 rows="1"
                 maxlength="2000"
                 placeholder="پیام خود را بنویسید..."
-                autocomplete="off">
-            </textarea>
-
+                autocomplete="off"></textarea>
 
             <button
                 class="send-btn"
                 id="sendBtn"
-                type="button"
-                disabled>
-
+                type="button">
                 ➤
-
             </button>
-
 
         </div>
 
-
     </div>
-
 
 </main>
 
-
-</div>
-
-
-
-<!-- =====================================================
+</div><!-- =====================================================
      PROFILE
-===================================================== -->
-
-<div
+===================================================== --><div
     class="profile-overlay"
-    id="profileOverlay">
+    id="profileOverlay"><div class="profile-box">
 
+    <div
+        class="profile-avatar"
+        id="profileAvatar">
+        <span id="avatarLetter">م</span>
+    </div>
 
-    <div class="profile-box">
+    <div class="profile-title">
+        پروفایل من
+    </div>
 
+    <label
+        class="profile-label"
+        for="profileName">
+        نام نمایشی
+    </label>
 
-        <div
-            class="profile-avatar"
-            id="profileAvatar">
+    <input
+        id="profileName"
+        type="text"
+        maxlength="30"
+        autocomplete="off"
+        placeholder="نام خود را وارد کنید">
 
+    <div class="profile-actions">
 
-            <span id="avatarLetter">
+        <button
+            class="profile-action profile-cancel"
+            id="profileCancel"
+            type="button">
+            انصراف
+        </button>
 
-                م
-
-            </span>
-
-
-            <span class="avatar-camera">
-
-                📷
-
-            </span>
-
-
-        </div>
-
-
-        <div class="profile-title">
-
-            پروفایل من
-
-        </div>
-
-
-        <label
-            class="profile-label"
-            for="profileName">
-
-            نام نمایشی
-
-        </label>
-
-
-        <input
-            id="profileName"
-            type="text"
-            maxlength="30"
-            autocomplete="off"
-            placeholder="نام خود را وارد کنید">
-
-
-        <div class="profile-actions">
-
-
-            <button
-                class="profile-action profile-cancel"
-                id="profileCancel"
-                type="button">
-
-                انصراف
-
-            </button>
-
-
-            <button
-                class="profile-action profile-save"
-                id="profileSave"
-                type="button">
-
-                ذخیره
-
-            </button>
-
-
-        </div>
-
-
-        <div class="profile-hint">
-
-            برای تغییر عکس، روی تصویر پروفایل بزنید.
-
-        </div>
-
+        <button
+            class="profile-action profile-save"
+            id="profileSave"
+            type="button">
+            ذخیره
+        </button>
 
     </div>
 
+    <div class="profile-hint">
+        روی عکس پروفایل بزن تا تصویر انتخاب کنی.
+    </div>
 
 </div>
 
+</div><!-- =====================================================
+     USERS
+===================================================== --><div
+    class="users-overlay"
+    id="usersOverlay"><div class="users-panel">
 
+    <div class="users-header">
 
-<!-- =====================================================
+        <div class="users-title">
+            کاربران آنلاین
+        </div>
+
+        <button
+            class="users-close"
+            id="usersClose"
+            type="button">
+            ✕
+        </button>
+
+    </div>
+
+    <div id="usersList">
+
+        <div class="no-users">
+            در حال دریافت کاربران...
+        </div>
+
+    </div>
+
+</div>
+
+</div><!-- =====================================================
      FIREBASE
-===================================================== -->
-
-<script type="module">
-
-
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
+===================================================== --><script type="module">
 
 import {
-
     initializeApp
-
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-
     getDatabase,
     ref,
     push,
@@ -1491,23 +1302,14 @@ import {
     onDisconnect,
     set,
     remove
-
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 import {
-
     getStorage,
     ref as storageRef,
     uploadBytes,
     getDownloadURL
-
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
-
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
 /* =====================================================
@@ -1539,13 +1341,11 @@ const firebaseConfig = {
 
     measurementId:
         "G-T9W22HHGBF"
-
 };
 
 
-
 /* =====================================================
-   START FIREBASE
+   INIT
 ===================================================== */
 
 const app =
@@ -1553,113 +1353,106 @@ const app =
         firebaseConfig
     );
 
-
 const db =
     getDatabase(app);
 
-
 const storage =
     getStorage(app);
-
 
 
 /* =====================================================
    ELEMENTS
 ===================================================== */
 
+const messages =
+    document.getElementById(
+        "messages"
+    );
+
 const messageInput =
     document.getElementById(
         "messageInput"
     );
-
 
 const sendBtn =
     document.getElementById(
         "sendBtn"
     );
 
-
-const messages =
+const attachBtn =
     document.getElementById(
-        "messages"
+        "attachBtn"
     );
-
 
 const onlineStatus =
     document.getElementById(
         "onlineStatus"
     );
 
-
 const connectionStatus =
     document.getElementById(
         "connectionStatus"
     );
-
 
 const exitBtn =
     document.getElementById(
         "exitBtn"
     );
 
-
-const attachBtn =
-    document.getElementById(
-        "attachBtn"
-    );
-
-
 const usersBtn =
     document.getElementById(
         "usersBtn"
     );
 
-
-const logo =
+const usersOverlay =
     document.getElementById(
-        "logo"
+        "usersOverlay"
     );
 
+const usersClose =
+    document.getElementById(
+        "usersClose"
+    );
 
-/* =====================================================
-   PROFILE ELEMENTS
-===================================================== */
+const usersList =
+    document.getElementById(
+        "usersList"
+    );
+
+const profileOpen =
+    document.getElementById(
+        "profileOpen"
+    );
 
 const profileOverlay =
     document.getElementById(
         "profileOverlay"
     );
 
-
-const profileName =
-    document.getElementById(
-        "profileName"
-    );
-
-
 const profileAvatar =
     document.getElementById(
         "profileAvatar"
     );
-
 
 const avatarLetter =
     document.getElementById(
         "avatarLetter"
     );
 
+const profileName =
+    document.getElementById(
+        "profileName"
+    );
 
 const profileSave =
     document.getElementById(
         "profileSave"
     );
 
-
 const profileCancel =
     document.getElementById(
         "profileCancel"
     );
-
 
 
 /* =====================================================
@@ -1670,7 +1463,6 @@ let username =
     localStorage.getItem(
         "username"
     );
-
 
 if(
     !username ||
@@ -1688,18 +1480,12 @@ if(
 }
 
 
-username =
-    username.trim();
-
-
-
 /* =====================================================
    ROOM
 ===================================================== */
 
 const ROOM_NAME =
     "asal-chat";
-
 
 const messagesRef =
     ref(
@@ -1709,7 +1495,6 @@ const messagesRef =
         "/messages"
     );
 
-
 const onlineUsersRef =
     ref(
         db,
@@ -1718,7 +1503,6 @@ const onlineUsersRef =
         "/online"
     );
 
-
 const connectedRef =
     ref(
         db,
@@ -1726,14 +1510,11 @@ const connectedRef =
     );
 
 
-
 /* =====================================================
-   ONLINE REF
+   SAFE USER ID
 ===================================================== */
 
-function makeSafeUsername(
-    name
-){
+function makeSafeUserId(name){
 
     return name
         .replace(
@@ -1747,6 +1528,10 @@ function makeSafeUsername(
 
 }
 
+let safeUser =
+    makeSafeUserId(
+        username
+    );
 
 let onlineRef =
     ref(
@@ -1754,65 +1539,276 @@ let onlineRef =
         "rooms/" +
         ROOM_NAME +
         "/online/" +
-        makeSafeUsername(
-            username
-        )
+        safeUser
     );
-
 
 
 /* =====================================================
-   STATUS
+   CONNECTION
 ===================================================== */
 
-function showStatus(
-    text,
-    type="online",
-    duration=1500
-){
+onValue(
+    connectedRef,
+    snapshot => {
 
-    connectionStatus.textContent =
-        text;
+        if(
+            snapshot.val() === true
+        ){
 
-    connectionStatus.classList.remove(
-        "online",
-        "offline"
-    );
+            onlineStatus.textContent =
+                "آنلاین";
 
-    connectionStatus.classList.add(
-        "show",
-        type
-    );
+            connectionStatus.textContent =
+                "متصل شد";
 
-
-    if(duration){
-
-        setTimeout(
-            function(){
-
-                connectionStatus.classList.remove(
-                    "show"
+            connectionStatus.classList
+                .remove(
+                    "offline"
                 );
 
-            },
-            duration
-        );
+            connectionStatus.classList
+                .add(
+                    "show",
+                    "online"
+                );
+
+            setTimeout(
+                () => {
+
+                    connectionStatus.classList
+                        .remove(
+                            "show"
+                        );
+
+                },
+                1500
+            );
+
+        }else{
+
+            onlineStatus.textContent =
+                "قطع اتصال";
+
+            connectionStatus.textContent =
+                "اتصال به سرور قطع شد";
+
+            connectionStatus.classList
+                .remove(
+                    "online"
+                );
+
+            connectionStatus.classList
+                .add(
+                    "show",
+                    "offline"
+                );
+
+        }
 
     }
+);
+
+
+/* =====================================================
+   ONLINE USER
+===================================================== */
+
+function registerOnlineUser(){
+
+    set(
+        onlineRef,
+        {
+            name:
+                username,
+
+            avatar:
+                localStorage.getItem(
+                    "profileAvatar"
+                ) || "",
+
+            time:
+                serverTimestamp()
+        }
+    );
+
+    onDisconnect(
+        onlineRef
+    ).remove();
 
 }
 
+onValue(
+    connectedRef,
+    snapshot => {
+
+        if(
+            snapshot.val() === true
+        ){
+
+            registerOnlineUser();
+
+        }
+
+    }
+);
 
 
 /* =====================================================
-   INPUT RESIZE
+   ONLINE USERS LIST
+===================================================== */
+
+onValue(
+    onlineUsersRef,
+    snapshot => {
+
+        const data =
+            snapshot.val();
+
+        usersList.innerHTML =
+            "";
+
+        if(!data){
+
+            usersList.innerHTML =
+                `<div class="no-users">
+                    هیچ کاربری آنلاین نیست
+                </div>`;
+
+            onlineStatus.textContent =
+                "۰ نفر آنلاین";
+
+            return;
+
+        }
+
+        const users =
+            Object.values(data);
+
+        onlineStatus.textContent =
+            users.length +
+            " نفر آنلاین";
+
+        users.forEach(
+            user => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+                item.className =
+                    "user-item";
+
+                const avatar =
+                    document.createElement(
+                        "div"
+                    );
+
+                avatar.className =
+                    "user-avatar";
+
+                if(user.avatar){
+
+                    const img =
+                        document.createElement(
+                            "img"
+                        );
+
+                    img.src =
+                        user.avatar;
+
+                    img.style.width =
+                        "100%";
+
+                    img.style.height =
+                        "100%";
+
+                    img.style.objectFit =
+                        "cover";
+
+                    img.style.borderRadius =
+                        "50%";
+
+                    avatar.appendChild(
+                        img
+                    );
+
+                }else{
+
+                    avatar.textContent =
+                        (
+                            user.name ||
+                            "م"
+                        ).charAt(0);
+
+                }
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+                info.className =
+                    "user-info";
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "user-name";
+
+                name.textContent =
+                    user.name ||
+                    "مهمان";
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+                status.className =
+                    "user-online";
+
+                status.textContent =
+                    "● آنلاین";
+
+                info.appendChild(
+                    name
+                );
+
+                info.appendChild(
+                    status
+                );
+
+                item.appendChild(
+                    avatar
+                );
+
+                item.appendChild(
+                    info
+                );
+
+                usersList.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   RESIZE INPUT
 ===================================================== */
 
 function resizeInput(){
 
     messageInput.style.height =
         "auto";
-
 
     messageInput.style.height =
         Math.min(
@@ -1823,10 +1819,14 @@ function resizeInput(){
 
 }
 
+messageInput.addEventListener(
+    "input",
+    resizeInput
+);
 
 
 /* =====================================================
-   SEND BUTTON
+   BUTTON STATE
 ===================================================== */
 
 function updateSendButton(){
@@ -1838,458 +1838,24 @@ function updateSendButton(){
 
 }
 
-
-
-/* =====================================================
-   CONNECTION
-===================================================== */
-
-onValue(
-    connectedRef,
-    async function(
-        snapshot
-    ){
-
-        if(
-            snapshot.val() === true
-        ){
-
-            onlineStatus.textContent =
-                "آنلاین";
-
-
-            showStatus(
-                "متصل شد",
-                "online"
-            );
-
-
-            try{
-
-                await set(
-                    onlineRef,
-                    {
-
-                        name:
-                            username,
-
-                        avatar:
-                            localStorage.getItem(
-                                "profileAvatar"
-                            ) || "",
-
-                        time:
-                            serverTimestamp()
-
-                    }
-                );
-
-
-                onDisconnect(
-                    onlineRef
-                ).remove();
-
-
-            }catch(error){
-
-                console.error(
-                    "Online error:",
-                    error
-                );
-
-            }
-
-
-        }else{
-
-            onlineStatus.textContent =
-                "قطع اتصال";
-
-
-            showStatus(
-                "اتصال به سرور قطع شد",
-                "offline",
-                0
-            );
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   ONLINE COUNT
-===================================================== */
-
-onValue(
-    onlineUsersRef,
-    function(
-        snapshot
-    ){
-
-        const data =
-            snapshot.val();
-
-
-        let count =
-            0;
-
-
-        if(data){
-
-            count =
-                Object.keys(
-                    data
-                ).length;
-
-        }
-
-
-        if(count > 0){
-
-            onlineStatus.textContent =
-                count +
-                " نفر آنلاین";
-
-        }else{
-
-            onlineStatus.textContent =
-                "آنلاین";
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
-
-async function sendMessage(){
-
-    const text =
-        messageInput.value.trim();
-
-
-    if(!text){
-
-        return;
-
-    }
-
-
-    if(
-        text.length > 2000
-    ){
-
-        alert(
-            "پیام خیلی طولانی است."
-        );
-
-        return;
-
-    }
-
-
-    sendBtn.disabled =
-        true;
-
-
-    try{
-
-        await push(
-            messagesRef,
-            {
-
-                name:
-                    username,
-
-                text:
-                    text,
-
-                time:
-                    serverTimestamp(),
-
-                createdAt:
-                    Date.now()
-
-            }
-        );
-
-
-        messageInput.value =
-            "";
-
-
-        resizeInput();
-
-        updateSendButton();
-
-
-    }catch(error){
-
-        console.error(
-            "Firebase send error:",
-            error
-        );
-
-
-        alert(
-            "پیام ارسال نشد.\n\n" +
-            "Realtime Database و قوانین Firebase را بررسی کنید."
-        );
-
-
-        updateSendButton();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   RECEIVE MESSAGE
-===================================================== */
-
-onChildAdded(
-    messagesRef,
-    function(
-        snapshot
-    ){
-
-        const data =
-            snapshot.val();
-
-
-        if(!data){
-
-            return;
-
-        }
-
-
-        addFirebaseMessage(
-
-            data.name ||
-                "مهمان",
-
-            data.text ||
-                "",
-
-            data.time,
-
-            data.createdAt
-
-        );
-
-    }
-);
-
-
-
-/* =====================================================
-   RENDER MESSAGE
-===================================================== */
-
-function addFirebaseMessage(
-
-    name,
-
-    text,
-
-    firebaseTime,
-
-    createdAt
-
-){
-
-    const empty =
-        messages.querySelector(
-            ".empty-chat"
-        );
-
-
-    if(empty){
-
-        empty.remove();
-
-    }
-
-
-    const mine =
-        name === username;
-
-
-    const row =
-        document.createElement(
-            "div"
-        );
-
-
-    row.className =
-        "message-row " +
-        (
-            mine
-                ? "me"
-                : "other"
-        );
-
-
-    const bubble =
-        document.createElement(
-            "div"
-        );
-
-
-    bubble.className =
-        "message-bubble";
-
-
-    const nameElement =
-        document.createElement(
-            "div"
-        );
-
-
-    nameElement.className =
-        "message-name";
-
-
-    nameElement.textContent =
-        name;
-
-
-    const textElement =
-        document.createElement(
-            "div"
-        );
-
-
-    textElement.className =
-        "message-text";
-
-
-    textElement.textContent =
-        text;
-
-
-    const timeElement =
-        document.createElement(
-            "div"
-        );
-
-
-    timeElement.className =
-        "message-time";
-
-
-    let date;
-
-
-    if(
-        typeof firebaseTime ===
-        "number"
-    ){
-
-        date =
-            new Date(
-                firebaseTime
-            );
-
-    }else{
-
-        date =
-            new Date(
-                createdAt ||
-                Date.now()
-            );
-
-    }
-
-
-    timeElement.textContent =
-        date.toLocaleTimeString(
-            "fa-IR",
-            {
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit"
-
-            }
-        );
-
-
-    bubble.appendChild(
-        nameElement
-    );
-
-
-    bubble.appendChild(
-        textElement
-    );
-
-
-    bubble.appendChild(
-        timeElement
-    );
-
-
-    row.appendChild(
-        bubble
-    );
-
-
-    messages.appendChild(
-        row
-    );
-
-
-    requestAnimationFrame(
-        function(){
-
-            messages.scrollTop =
-                messages.scrollHeight;
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   INPUT EVENTS
-===================================================== */
-
 messageInput.addEventListener(
     "input",
-    function(){
-
-        resizeInput();
-
-        updateSendButton();
-
-    }
+    updateSendButton
 );
 
+updateSendButton();
+
+
+/* =====================================================
+   SEND WITH ENTER
+===================================================== */
 
 messageInput.addEventListener(
     "keydown",
-    function(
-        event
-    ){
+    event => {
 
         if(
-            event.key ===
-                "Enter" &&
+            event.key === "Enter" &&
             !event.shiftKey
         ){
 
@@ -2303,305 +1869,428 @@ messageInput.addEventListener(
 );
 
 
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
+
+async function sendMessage(){
+
+    const text =
+        messageInput.value.trim();
+
+    if(!text){
+        return;
+    }
+
+    if(
+        text.length >
+        2000
+    ){
+
+        alert(
+            "پیام نمی‌تواند بیشتر از ۲۰۰۰ کاراکتر باشد."
+        );
+
+        return;
+
+    }
+
+    sendBtn.disabled =
+        true;
+
+    try{
+
+        await push(
+            messagesRef,
+            {
+                name:
+                    username,
+
+                text:
+                    text,
+
+                time:
+                    serverTimestamp(),
+
+                createdAt:
+                    Date.now()
+            }
+        );
+
+        messageInput.value =
+            "";
+
+        resizeInput();
+
+        updateSendButton();
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+        alert(
+            "پیام ارسال نشد. اتصال Firebase یا Rules را بررسی کن."
+        );
+
+        updateSendButton();
+
+    }
+
+}
+
+
+/* =====================================================
+   RECEIVE MESSAGES
+===================================================== */
+
+onChildAdded(
+    messagesRef,
+    snapshot => {
+
+        const data =
+            snapshot.val();
+
+        if(!data){
+            return;
+        }
+
+        renderMessage(
+            data
+        );
+
+    }
+);
+
+
+/* =====================================================
+   RENDER MESSAGE
+===================================================== */
+
+function renderMessage(data){
+
+    const empty =
+        messages.querySelector(
+            ".empty-chat"
+        );
+
+    if(empty){
+        empty.remove();
+    }
+
+    const mine =
+        data.name === username;
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+    row.className =
+        "message-row " +
+        (
+            mine
+                ? "me"
+                : "other"
+        );
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        "message-bubble";
+
+    const name =
+        document.createElement(
+            "div"
+        );
+
+    name.className =
+        "message-name";
+
+    name.textContent =
+        data.name ||
+        "مهمان";
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+    text.className =
+        "message-text";
+
+    text.textContent =
+        data.text ||
+        "";
+
+    const time =
+        document.createElement(
+            "div"
+        );
+
+    time.className =
+        "message-time";
+
+    let date;
+
+    if(
+        typeof data.time ===
+        "number"
+    ){
+
+        date =
+            new Date(
+                data.time
+            );
+
+    }else{
+
+        date =
+            new Date(
+                data.createdAt ||
+                Date.now()
+            );
+
+    }
+
+    time.textContent =
+        date.toLocaleTimeString(
+            "fa-IR",
+            {
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+            }
+        );
+
+    bubble.appendChild(
+        name
+    );
+
+    bubble.appendChild(
+        text
+    );
+
+    bubble.appendChild(
+        time
+    );
+
+    row.appendChild(
+        bubble
+    );
+
+    messages.appendChild(
+        row
+    );
+
+    requestAnimationFrame(
+        () => {
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
 sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
 
+/* =====================================================
+   USERS PANEL
+===================================================== */
+
+usersBtn.addEventListener(
+    "click",
+    () => {
+
+        usersOverlay.classList
+            .add(
+                "show"
+            );
+
+    }
+);
+
+usersClose.addEventListener(
+    "click",
+    () => {
+
+        usersOverlay.classList
+            .remove(
+                "show"
+            );
+
+    }
+);
+
+usersOverlay.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            usersOverlay
+        ){
+
+            usersOverlay.classList
+                .remove(
+                    "show"
+                );
+
+        }
+
+    }
+);
+
 
 /* =====================================================
    PROFILE
 ===================================================== */
 
-function updateProfileAvatar(){
+function updateAvatar(){
 
-    const name =
-        profileName.value.trim() ||
-        username ||
-        "م";
+    const saved =
+        localStorage.getItem(
+            "profileAvatar"
+        );
 
+    if(saved){
 
-    if(
-        !profileAvatar.querySelector(
-            "img"
-        )
-    ){
+        profileAvatar.innerHTML =
+            "";
 
-        avatarLetter.textContent =
-            name.charAt(0);
+        const img =
+            document.createElement(
+                "img"
+            );
 
+        img.src =
+            saved;
 
-        avatarLetter.style.display =
-            "block";
-
-    }
-
-}
-
-
-
-function showProfileAvatar(
-    url
-){
-
-    if(!url){
+        profileAvatar.appendChild(
+            img
+        );
 
         return;
 
     }
 
+    profileAvatar.innerHTML =
+        "";
 
-    let image =
-        profileAvatar.querySelector(
-            "img"
+    const span =
+        document.createElement(
+            "span"
         );
 
+    span.id =
+        "avatarLetter";
 
-    if(!image){
+    span.textContent =
+        (
+            profileName.value.trim() ||
+            username ||
+            "م"
+        ).charAt(0);
 
-        image =
-            document.createElement(
-                "img"
+    profileAvatar.appendChild(
+        span
+    );
+
+}
+
+profileOpen.addEventListener(
+    "click",
+    () => {
+
+        profileName.value =
+            username;
+
+        updateAvatar();
+
+        profileOverlay.classList
+            .add(
+                "show"
             );
 
-
-        profileAvatar.insertBefore(
-            image,
-            profileAvatar.firstChild
+        setTimeout(
+            () => {
+                profileName.focus();
+            },
+            100
         );
 
     }
-
-
-    image.src =
-        url;
-
-
-    avatarLetter.style.display =
-        "none";
-
-}
-
-
-
-function openProfile(){
-
-    profileName.value =
-        username;
-
-
-    const savedAvatar =
-        localStorage.getItem(
-            "profileAvatar"
-        );
-
-
-    if(savedAvatar){
-
-        showProfileAvatar(
-            savedAvatar
-        );
-
-    }else{
-
-        updateProfileAvatar();
-
-    }
-
-
-    profileOverlay.classList.add(
-        "show"
-    );
-
-
-    setTimeout(
-        function(){
-
-            profileName.focus();
-
-        },
-        100
-    );
-
-}
-
-
-
-function closeProfile(){
-
-    profileOverlay.classList.remove(
-        "show"
-    );
-
-}
-
-
-
-logo.addEventListener(
-    "click",
-    openProfile
 );
-
 
 profileCancel.addEventListener(
     "click",
-    closeProfile
+    () => {
+
+        profileOverlay.classList
+            .remove(
+                "show"
+            );
+
+    }
 );
-
-
-profileName.addEventListener(
-    "input",
-    updateProfileAvatar
-);
-
 
 profileOverlay.addEventListener(
     "click",
-    function(
-        event
-    ){
+    event => {
 
         if(
             event.target ===
             profileOverlay
         ){
 
-            closeProfile();
+            profileOverlay.classList
+                .remove(
+                    "show"
+                );
 
         }
 
     }
 );
-
 
 
 /* =====================================================
-   SAVE PROFILE
+   PROFILE NAME PREVIEW
 ===================================================== */
 
-profileSave.addEventListener(
-    "click",
-    async function(){
-
-        const newName =
-            profileName.value.trim();
-
-
-        if(!newName){
-
-            alert(
-                "لطفاً یک نام وارد کنید."
-            );
-
-            return;
-
-        }
-
+profileName.addEventListener(
+    "input",
+    () => {
 
         if(
-            newName.length < 2
+            !localStorage.getItem(
+                "profileAvatar"
+            )
         ){
 
-            alert(
-                "نام باید حداقل ۲ حرف باشد."
-            );
-
-            return;
+            updateAvatar();
 
         }
-
-
-        if(
-            newName.length > 30
-        ){
-
-            alert(
-                "نام نمی‌تواند بیشتر از ۳۰ حرف باشد."
-            );
-
-            return;
-
-        }
-
-
-        const oldOnlineRef =
-            onlineRef;
-
-
-        username =
-            newName;
-
-
-        localStorage.setItem(
-            "username",
-            username
-        );
-
-
-        onlineRef =
-            ref(
-                db,
-                "rooms/" +
-                ROOM_NAME +
-                "/online/" +
-                makeSafeUsername(
-                    username
-                )
-            );
-
-
-        try{
-
-            await remove(
-                oldOnlineRef
-            );
-
-
-            await set(
-                onlineRef,
-                {
-
-                    name:
-                        username,
-
-                    avatar:
-                        localStorage.getItem(
-                            "profileAvatar"
-                        ) || "",
-
-                    time:
-                        serverTimestamp()
-
-                }
-            );
-
-
-            onDisconnect(
-                onlineRef
-            ).remove();
-
-
-        }catch(error){
-
-            console.error(
-                "Profile error:",
-                error
-            );
-
-        }
-
-
-        closeProfile();
-
-
-        alert(
-            "پروفایل با موفقیت ذخیره شد ✓"
-        );
 
     }
 );
-
 
 
 /* =====================================================
@@ -2613,65 +2302,38 @@ const avatarInput =
         "input"
     );
 
-
 avatarInput.type =
     "file";
-
 
 avatarInput.accept =
     "image/*";
 
-
 avatarInput.style.display =
     "none";
-
 
 document.body.appendChild(
     avatarInput
 );
 
-
 profileAvatar.addEventListener(
     "click",
-    function(){
+    () => {
 
         avatarInput.click();
 
     }
 );
 
-
-
-const savedAvatar =
-    localStorage.getItem(
-        "profileAvatar"
-    );
-
-
-if(savedAvatar){
-
-    showProfileAvatar(
-        savedAvatar
-    );
-
-}
-
-
-
 avatarInput.addEventListener(
     "change",
-    async function(){
+    async () => {
 
         const file =
             avatarInput.files[0];
 
-
         if(!file){
-
             return;
-
         }
-
 
         if(
             !file.type.startsWith(
@@ -2680,16 +2342,12 @@ avatarInput.addEventListener(
         ){
 
             alert(
-                "فقط فایل تصویری انتخاب کنید."
+                "فقط عکس انتخاب کنید."
             );
-
-            avatarInput.value =
-                "";
 
             return;
 
         }
-
 
         if(
             file.size >
@@ -2707,12 +2365,10 @@ avatarInput.addEventListener(
 
         }
 
-
         try{
 
             profileAvatar.style.opacity =
                 ".5";
-
 
             const fileName =
                 "avatar_" +
@@ -2723,8 +2379,8 @@ avatarInput.addEventListener(
                     .substring(
                         2,
                         8
-                    );
-
+                    ) +
+                ".jpg";
 
             const fileRef =
                 storageRef(
@@ -2735,35 +2391,27 @@ avatarInput.addEventListener(
                     fileName
                 );
 
-
-            const result =
+            const uploaded =
                 await uploadBytes(
                     fileRef,
                     file
                 );
 
-
             const url =
                 await getDownloadURL(
-                    result.ref
+                    uploaded.ref
                 );
-
 
             localStorage.setItem(
                 "profileAvatar",
                 url
             );
 
-
-            showProfileAvatar(
-                url
-            );
-
+            updateAvatar();
 
             await set(
                 onlineRef,
                 {
-
                     name:
                         username,
 
@@ -2772,15 +2420,12 @@ avatarInput.addEventListener(
 
                     time:
                         serverTimestamp()
-
                 }
             );
-
 
             alert(
                 "عکس پروفایل ذخیره شد ✓"
             );
-
 
         }catch(error){
 
@@ -2789,17 +2434,14 @@ avatarInput.addEventListener(
                 error
             );
 
-
             alert(
-                "آپلود عکس انجام نشد.\n\n" +
-                "Firebase Storage را بررسی کنید."
+                "آپلود عکس انجام نشد. Storage را بررسی کن."
             );
 
         }finally{
 
             profileAvatar.style.opacity =
                 "1";
-
 
             avatarInput.value =
                 "";
@@ -2810,6 +2452,106 @@ avatarInput.addEventListener(
 );
 
 
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+profileSave.addEventListener(
+    "click",
+    async () => {
+
+        const newName =
+            profileName.value.trim();
+
+        if(!newName){
+
+            alert(
+                "لطفاً نام وارد کن."
+            );
+
+            return;
+
+        }
+
+        if(
+            newName.length <
+            2
+        ){
+
+            alert(
+                "نام حداقل باید ۲ حرف باشد."
+            );
+
+            return;
+
+        }
+
+        if(
+            newName.length >
+            30
+        ){
+
+            alert(
+                "نام نباید بیشتر از ۳۰ حرف باشد."
+            );
+
+            return;
+
+        }
+
+        username =
+            newName;
+
+        localStorage.setItem(
+            "username",
+            username
+        );
+
+        const oldOnlineRef =
+            onlineRef;
+
+        safeUser =
+            makeSafeUserId(
+                username
+            );
+
+        onlineRef =
+            ref(
+                db,
+                "rooms/" +
+                ROOM_NAME +
+                "/online/" +
+                safeUser
+            );
+
+        try{
+
+            await remove(
+                oldOnlineRef
+            );
+
+            registerOnlineUser();
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+        }
+
+        profileOverlay.classList
+            .remove(
+                "show"
+            );
+
+        alert(
+            "پروفایل ذخیره شد ✓"
+        );
+
+    }
+);
+
 
 /* =====================================================
    ATTACHMENT
@@ -2817,32 +2559,14 @@ avatarInput.addEventListener(
 
 attachBtn.addEventListener(
     "click",
-    function(){
+    () => {
 
         alert(
-            "ارسال عکس داخل پیام را در مرحله بعد اضافه می‌کنیم 🍯"
+            "ارسال عکس در مرحله بعد به پیام‌ها اضافه می‌شود 🍯"
         );
 
     }
 );
-
-
-
-/* =====================================================
-   USERS
-===================================================== */
-
-usersBtn.addEventListener(
-    "click",
-    function(){
-
-        alert(
-            onlineStatus.textContent
-        );
-
-    }
-);
-
 
 
 /* =====================================================
@@ -2851,20 +2575,16 @@ usersBtn.addEventListener(
 
 exitBtn.addEventListener(
     "click",
-    async function(){
+    async () => {
 
         const ok =
             confirm(
-                "آیا می‌خواهید از عسل چت خارج شوید؟"
+                "آیا می‌خواهی از عسل چت خارج شوی؟"
             );
 
-
         if(!ok){
-
             return;
-
         }
-
 
         try{
 
@@ -2880,11 +2600,9 @@ exitBtn.addEventListener(
 
         }
 
-
         localStorage.removeItem(
             "username"
         );
-
 
         window.location.href =
             "index.html";
@@ -2893,6 +2611,36 @@ exitBtn.addEventListener(
 );
 
 
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key !==
+            "Escape"
+        ){
+
+            return;
+
+        }
+
+        profileOverlay.classList
+            .remove(
+                "show"
+            );
+
+        usersOverlay.classList
+            .remove(
+                "show"
+            );
+
+    }
+);
+
 
 /* =====================================================
    VISIBILITY
@@ -2900,32 +2648,14 @@ exitBtn.addEventListener(
 
 document.addEventListener(
     "visibilitychange",
-    function(){
+    () => {
 
         if(
             document.visibilityState ===
             "visible"
         ){
 
-            set(
-                onlineRef,
-                {
-
-                    name:
-                        username,
-
-                    avatar:
-                        localStorage.getItem(
-                            "profileAvatar"
-                        ) || "",
-
-                    time:
-                        serverTimestamp()
-
-                }
-            ).catch(
-                console.error
-            );
+            registerOnlineUser();
 
         }
 
@@ -2933,18 +2663,14 @@ document.addEventListener(
 );
 
 
-
 /* =====================================================
    INITIAL
 ===================================================== */
 
-resizeInput();
-
-updateSendButton();
-
+updateAvatar();
 
 console.log(
-    "🍯 عسل چت آماده است"
+    "🍯 Asal Chat loaded"
 );
 
 console.log(
@@ -2957,10 +2683,5 @@ console.log(
     ROOM_NAME
 );
 
-
-</script>
-
-
-</body>
-
-      </html>
+</script></body>
+    </html>
