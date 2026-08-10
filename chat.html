@@ -2,7 +2,6 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -17,9 +16,9 @@
 
 <style>
 
-/* =========================================================
+/* ==================================================
    RESET
-========================================================= */
+================================================== */
 
 *{
     box-sizing:border-box;
@@ -31,2043 +30,1928 @@ html,
 body{
     width:100%;
     height:100%;
+    overflow:hidden;
 }
 
 body{
-    overflow:hidden;
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(255,190,0,.08),
-            transparent 35%
-        ),
-        #090b0a;
-    color:#f5f5f5;
     font-family:
         Tahoma,
         Arial,
         sans-serif;
+
+    background:#080908;
+    color:#fff;
+
+    -webkit-tap-highlight-color:transparent;
 }
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root{
-
-    --bg:#090b0a;
-    --panel:#0d100f;
-    --panel2:#111413;
-    --panel3:#171a18;
-
-    --gold:#f4b914;
-    --gold2:#ffcf3b;
-    --gold3:#d99800;
-
-    --text:#f5f5f5;
-    --muted:#929292;
-
-    --border:
-        rgba(255,193,7,.20);
-
-    --green:#1dcc57;
-
-    --danger:#e74c3c;
-
-    --bubble:#161918;
-
-    --mybubble:
-        linear-gradient(
-            145deg,
-            #ffc928,
-            #e2a700
-        );
-
-}
-
-/* =========================================================
+/* ==================================================
    APP
-========================================================= */
+================================================== */
 
-.app{
+#app{
     width:100%;
-    height:100vh;
-
-    display:grid;
-
-    grid-template-columns:
-        330px
-        minmax(430px,1fr)
-        330px;
-
-    grid-template-rows:
-        100px
-        1fr;
-
-    background:#090b0a;
-
-    overflow:hidden;
-}
-
-/* =========================================================
-   TOP HEADER
-========================================================= */
-
-.topbar{
-
-    grid-column:
-        1 / 4;
-
-    grid-row:1;
-
-    position:relative;
+    height:100dvh;
 
     display:flex;
+    flex-direction:column;
 
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,193,7,.08),
+            transparent 38%
+        ),
+        #080908;
+}
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.chat-header{
+    height:64px;
+    min-height:64px;
+
+    display:flex;
     align-items:center;
 
-    justify-content:center;
-
-    border-bottom:
-        1px solid var(--border);
+    padding:0 14px;
 
     background:
         linear-gradient(
-            180deg,
-            #0e100f,
-            #0b0d0c
+            135deg,
+            #171712,
+            #0e0f0d
         );
 
+    border-bottom:1px solid rgba(255,193,7,.15);
+
     box-shadow:
-        0 2px 25px rgba(0,0,0,.5);
+        0 3px 18px rgba(0,0,0,.45);
 
-    z-index:20;
-
+    position:relative;
+    z-index:10;
 }
 
-/* =========================================================
-   HONEY DRIPS
-========================================================= */
+/* ==================================================
+   LOGO
+================================================== */
 
-.honey-decoration{
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:62px;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-}
-
-.honey-decoration::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-20px;
-    left:18%;
-
-    width:64%;
-
+.logo{
+    width:42px;
     height:42px;
 
-    background:
-        linear-gradient(
-            180deg,
-            #ffca27,
-            #d89500
-        );
-
-    border-radius:
-        0 0 45px 45px;
-
-    box-shadow:
-        0 10px 18px rgba(255,184,0,.15);
-
-}
-
-.drip{
-
-    position:absolute;
-
-    top:0;
-
-    width:25px;
-
-    height:65px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffc928,
-            #d89600
-        );
-
-    border-radius:
-        0 0 18px 18px;
-
-    box-shadow:
-        0 5px 12px rgba(255,184,0,.2);
-
-}
-
-.drip:nth-child(1){
-    left:18%;
-    height:62px;
-}
-
-.drip:nth-child(2){
-    left:31%;
-    height:35px;
-}
-
-.drip:nth-child(3){
-    left:70%;
-    height:58px;
-}
-
-.drip:nth-child(4){
-    left:77%;
-    height:30px;
-}
-
-.drip:nth-child(5){
-    left:87%;
-    height:45px;
-}
-
-/* =========================================================
-   BRAND
-========================================================= */
-
-.brand{
-
-    position:relative;
-
-    z-index:5;
+    border-radius:50%;
 
     display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    color:var(--gold2);
-
-    font-size:30px;
-
-    font-weight:bold;
-
-    text-shadow:
-        0 2px 12px rgba(255,193,7,.25);
-
-}
-
-.brand-icon{
-
-    width:45px;
-    height:45px;
-
-    display:flex;
-
     align-items:center;
     justify-content:center;
 
-    font-size:38px;
+    font-size:23px;
 
+    background:
+        linear-gradient(
+            145deg,
+            #ffc107,
+            #d99500
+        );
+
+    box-shadow:
+        0 0 18px rgba(255,193,7,.25);
+
+    margin-left:10px;
 }
 
-.brand small{
+/* ==================================================
+   HEADER TITLE
+================================================== */
 
-    display:block;
+.header-info{
+    flex:1;
+    min-width:0;
+}
+
+.header-title{
+    font-size:17px;
+    font-weight:bold;
+
+    color:#ffd45a;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.header-status{
+    margin-top:4px;
 
     font-size:11px;
 
-    color:#777;
-
-    text-align:center;
-
-    margin-top:2px;
-
-}
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-.logout-btn{
-
-    position:absolute;
-
-    left:25px;
-
-    top:0;
-
-    height:100px;
+    color:#8f948d;
 
     display:flex;
-
     align-items:center;
-
-    gap:10px;
-
-    border:0;
-
-    background:transparent;
-
-    color:#eee;
-
-    font-size:17px;
-
-    cursor:pointer;
-
-    z-index:10;
-
-}
-
-.logout-btn:hover{
-    color:var(--gold2);
-}
-
-.logout-icon{
-    font-size:27px;
-}
-
-/* =========================================================
-   USER MINI PROFILE
-========================================================= */
-
-.mini-profile{
-
-    position:absolute;
-
-    right:18px;
-
-    top:9px;
-
-    width:290px;
-
-    height:82px;
-
-    border:
-        1px solid rgba(255,193,7,.27);
-
-    border-radius:18px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-    padding:10px 14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(0,0,0,.15)
-        );
-
-    box-shadow:
-        inset 0 0 25px rgba(255,193,7,.025);
-
-}
-
-.avatar{
-
-    width:55px;
-    height:55px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:
-        2px solid rgba(255,255,255,.25);
-
-    background:#252827;
-
-}
-
-.mini-info{
-
-    display:flex;
-
-    flex-direction:column;
-
     gap:5px;
-
-}
-
-.mini-name{
-
-    font-size:16px;
-
-    font-weight:bold;
-
-}
-
-.online-text{
-
-    color:#aaa;
-
-    font-size:12px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
 }
 
 .online-dot{
-
-    width:12px;
-    height:12px;
+    width:7px;
+    height:7px;
 
     border-radius:50%;
 
-    background:var(--green);
+    background:#42d96b;
 
     box-shadow:
-        0 0 8px rgba(29,204,87,.6);
-
+        0 0 8px rgba(66,217,107,.65);
 }
 
-/* =========================================================
-   LEFT SIDEBAR
-========================================================= */
+/* ==================================================
+   HEADER BUTTONS
+================================================== */
 
-.sidebar-left{
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
 
-    grid-column:1;
-    grid-row:2;
+.header-btn{
+    width:38px;
+    height:38px;
 
-    border-right:
-        1px solid var(--border);
+    border:none;
+    outline:none;
 
-    background:
-        linear-gradient(
-            180deg,
-            #101211,
-            #0b0d0c
-        );
+    border-radius:50%;
 
     display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
-}
-
-/* =========================================================
-   LEFT NAV
-========================================================= */
-
-.left-nav{
-
-    padding:18px 20px 8px;
-
-}
-
-.nav-button{
-
-    width:100%;
-
-    height:64px;
-
-    border-radius:14px;
-
-    border:
-        1px solid transparent;
-
-    background:transparent;
+    align-items:center;
+    justify-content:center;
 
     color:#ddd;
 
-    display:flex;
+    background:rgba(255,255,255,.05);
 
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 18px;
-
-    font-family:inherit;
-
-    font-size:17px;
+    font-size:18px;
 
     cursor:pointer;
 
     transition:.2s;
-
 }
 
-.nav-button:hover{
+.header-btn:active{
+    transform:scale(.9);
 
     background:
-        rgba(255,193,7,.08);
-
+        rgba(255,193,7,.14);
 }
 
-.nav-button.active{
+/* ==================================================
+   CHAT AREA
+================================================== */
 
-    background:
-        linear-gradient(
-            145deg,
-            #ffc72b,
-            #dda000
-        );
-
-    color:#17130a;
-
-    box-shadow:
-        0 5px 18px rgba(255,193,7,.13);
-
-}
-
-.nav-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-.nav-icon{
-
-    font-size:26px;
-
-}
-
-.nav-title{
-
-    font-weight:bold;
-
-}
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-box{
-
-    margin:8px 20px 14px;
-
-    height:62px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius:14px;
-
-    background:#151817;
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 15px;
-
-    gap:12px;
-
-}
-
-.search-box input{
-
-    width:100%;
-
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    color:white;
-
-    font-family:inherit;
-
-    font-size:14px;
-
-}
-
-.search-box input::placeholder{
-
-    color:#777;
-
-}
-
-.search-icon{
-
-    font-size:24px;
-
-    color:#eee;
-
-}
-
-/* =========================================================
-   PRIVATE TITLE
-========================================================= */
-
-.private-title{
-
-    height:60px;
-
-    padding:
-        0 22px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
-
-    color:#eee;
-
-    font-size:17px;
-
-}
-
-.plus{
-
-    font-size:29px;
-
-    color:#fff;
-
-}
-
-/* =========================================================
-   CHAT LIST
-========================================================= */
-
-.chat-list{
-
+.chat-area{
     flex:1;
 
-    overflow-y:auto;
-
-}
-
-.chat-list::-webkit-scrollbar,
-.online-list::-webkit-scrollbar,
-.messages::-webkit-scrollbar{
-
-    width:5px;
-
-}
-
-.chat-list::-webkit-scrollbar-thumb,
-.online-list::-webkit-scrollbar-thumb,
-.messages::-webkit-scrollbar-thumb{
-
-    background:#3b3d3c;
-
-    border-radius:10px;
-
-}
-
-.chat-item{
-
-    height:103px;
-
-    padding:14px 20px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.055);
-
-    cursor:pointer;
-
-    transition:.18s;
-
-}
-
-.chat-item:hover{
-
-    background:
-        rgba(255,193,7,.055);
-
-}
-
-.chat-item.active{
-
-    background:
-        rgba(255,193,7,.08);
-
-}
-
-.chat-avatar{
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    flex-shrink:0;
-
-}
-
-.chat-info{
-
-    flex:1;
-
-    min-width:0;
-
-}
-
-.chat-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:8px;
-
-    margin-bottom:9px;
-
-}
-
-.chat-name{
-
-    font-size:16px;
-
-    font-weight:bold;
-
-}
-
-.chat-time{
-
-    color:#aaa;
-
-    font-size:11px;
-
-}
-
-.chat-preview{
-
-    color:#aaa;
-
-    font-size:13px;
-
-    white-space:nowrap;
+    position:relative;
 
     overflow:hidden;
 
-    text-overflow:ellipsis;
-
-}
-
-.unread{
-
-    width:26px;
-    height:26px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffc928,
-            #e4a500
-        );
-
-    color:#17130a;
-
     display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
-
-    font-size:12px;
-
-}
-
-/* =========================================================
-   LEFT BOTTOM
-========================================================= */
-
-.left-bottom{
-
-    height:88px;
-
-    padding:15px 22px;
-
-    display:flex;
-
-    gap:7px;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
-}
-
-.bottom-btn{
-
-    flex:1;
-
-    border:
-        1px solid rgba(255,255,255,.06);
-
-    border-radius:14px;
-
-    background:#151817;
-
-    color:#eee;
-
-    font-size:25px;
-
-    cursor:pointer;
-
-}
-
-.bottom-btn:hover{
-
-    background:#1d201e;
-
-    color:var(--gold2);
-
-}
-
-/* =========================================================
-   CENTER
-========================================================= */
-
-.chat-center{
-
-    grid-column:2;
-    grid-row:2;
-
-    min-width:0;
-
-    display:flex;
-
     flex-direction:column;
 
-    background:#0b0e0d;
-
-    position:relative;
-
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,193,7,.025),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255,193,7,.018),
+            transparent 28%
+        ),
+        #090a09;
 }
 
-/* =========================================================
-   CHAT HEADER
-========================================================= */
+/* ==================================================
+   HONEY BACKGROUND
+================================================== */
 
-.chat-header{
+.honey-bg{
+    position:absolute;
+    inset:0;
 
-    height:96px;
+    pointer-events:none;
 
-    flex-shrink:0;
+    opacity:.7;
 
-    border-bottom:
-        1px solid var(--border);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:
-        0 18px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #101311,
-            #0d100f
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,193,7,.045) 1px,
+            transparent 1.5px
         );
 
-    z-index:5;
-
+    background-size:28px 28px;
 }
 
-.room-info{
+/* ==================================================
+   MESSAGES
+================================================== */
 
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-}
-
-.room-hash{
-
-    width:58px;
-    height:58px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:14px;
-
-    color:#ffc329;
-
-    background:
-        rgba(255,193,7,.10);
-
-    border:
-        1px solid rgba(255,193,7,.10);
-
-    font-size:36px;
-
-}
-
-.room-title{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
-
-}
-
-.room-title strong{
-
-    font-size:18px;
-
-}
-
-.room-title span{
-
-    color:#9a9a9a;
-
-    font-size:12px;
-
-}
-
-.room-online{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    color:#eee;
-
-    font-size:15px;
-
-}
-
-.room-online-dot{
-
-    width:14px;
-    height:14px;
-
-    border-radius:50%;
-
-    background:#1dcc57;
-
-    box-shadow:
-        0 0 9px rgba(29,204,87,.55);
-
-}
-
-.room-people{
-
-    width:52px;
-    height:52px;
-
-    border:0;
-
-    border-radius:14px;
-
-    background:#252825;
-
-    color:#fff;
-
-    font-size:26px;
-
-}
-
-/* =========================================================
-   MESSAGES AREA
-========================================================= */
-
-.messages{
-
+#messages{
     flex:1;
 
     overflow-y:auto;
+    overflow-x:hidden;
 
     padding:
-        20px 22px 25px;
+        14px
+        10px
+        90px;
 
     position:relative;
+    z-index:2;
 
-    background-color:#0d1110;
-
-    background-image:
-
-        radial-gradient(
-            circle at 10px 10px,
-            rgba(255,193,7,.07) 1px,
-            transparent 2px
-        ),
-
-        linear-gradient(
-            60deg,
-            transparent 45%,
-            rgba(255,193,7,.035) 46%,
-            transparent 47%
-        ),
-
-        linear-gradient(
-            -60deg,
-            transparent 45%,
-            rgba(255,193,7,.035) 46%,
-            transparent 47%
-        );
-
-    background-size:
-        30px 30px,
-        42px 42px,
-        42px 42px;
-
+    scroll-behavior:smooth;
 }
 
-/* =========================================================
-   DATE
-========================================================= */
+/* scrollbar */
 
-.date-separator{
+#messages::-webkit-scrollbar{
+    width:4px;
+}
 
-    width:max-content;
+#messages::-webkit-scrollbar-track{
+    background:transparent;
+}
 
-    margin:
-        0 auto 20px;
+#messages::-webkit-scrollbar-thumb{
+    background:#383a34;
+    border-radius:10px;
+}
 
-    padding:
-        8px 15px;
+/* ==================================================
+   EMPTY MESSAGE
+================================================== */
 
-    border-radius:20px;
+.empty-chat{
+    width:100%;
+    height:100%;
 
-    background:
-        rgba(18,20,19,.88);
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    border:
-        1px solid rgba(255,255,255,.06);
+    text-align:center;
 
-    color:#bbb;
+    color:#777b73;
 
+    padding:30px;
+}
+
+.empty-box{
+    max-width:280px;
+}
+
+.empty-icon{
+    font-size:48px;
+    margin-bottom:12px;
+}
+
+.empty-title{
+    font-size:17px;
+    color:#d0d0ca;
+    margin-bottom:7px;
+}
+
+.empty-text{
     font-size:12px;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.2);
-
+    line-height:2;
+    color:#777b73;
 }
 
-/* =========================================================
+/* ==================================================
    MESSAGE ROW
-========================================================= */
+================================================== */
 
 .message-row{
+    width:100%;
 
     display:flex;
 
-    align-items:flex-end;
+    margin-bottom:8px;
 
-    gap:9px;
+    animation:
+        messageIn .2s ease;
+}
 
-    margin-bottom:18px;
-
-    width:100%;
-
+.message-row.me{
+    justify-content:flex-start;
 }
 
 .message-row.other{
-
-    justify-content:flex-start;
-
-}
-
-.message-row.mine{
-
     justify-content:flex-end;
-
 }
 
-.message-avatar{
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
 
-    width:47px;
-    height:47px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    flex-shrink:0;
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.message{
+/* ==================================================
+   MESSAGE BUBBLE
+================================================== */
 
-    max-width:70%;
-
-    min-width:120px;
+.message-bubble{
+    max-width:78%;
 
     padding:
-        12px 15px 8px;
+        9px
+        12px;
 
-    border-radius:13px;
+    border-radius:15px;
 
     position:relative;
 
-    background:
-        linear-gradient(
-            145deg,
-            #171a19,
-            #131615
-        );
+    word-break:break-word;
 
-    border:
-        1px solid rgba(255,255,255,.10);
+    line-height:1.7;
 
-    box-shadow:
-        0 5px 16px rgba(0,0,0,.22);
-
+    font-size:14px;
 }
 
-.message.mine{
-
+.message-row.me .message-bubble{
     background:
         linear-gradient(
             145deg,
-            #ffc72b,
-            #dfa300
+            #272820,
+            #1d1e1a
         );
-
-    color:#211a08;
-
-    border:
-        1px solid #ffca32;
 
     border-bottom-right-radius:4px;
 
+    border:1px solid
+        rgba(255,255,255,.035);
 }
 
-.message.other{
+.message-row.other .message-bubble{
+    background:
+        linear-gradient(
+            145deg,
+            #5b4208,
+            #3c2d08
+        );
 
     border-bottom-left-radius:4px;
 
+    border:1px solid
+        rgba(255,193,7,.10);
 }
+
+/* ==================================================
+   MESSAGE NAME
+================================================== */
 
 .message-name{
+    font-size:11px;
 
-    color:#eeb32c;
+    color:#ffc928;
 
-    font-size:14px;
+    margin-bottom:3px;
 
     font-weight:bold;
-
-    margin-bottom:7px;
-
 }
 
-.message.mine .message-name{
-
-    color:#574000;
-
-}
+/* ==================================================
+   MESSAGE TEXT
+================================================== */
 
 .message-text{
+    color:#f0f0eb;
 
-    font-size:15px;
-
-    line-height:1.8;
-
-    word-break:break-word;
-
+    white-space:pre-wrap;
 }
 
-.message-meta{
+/* ==================================================
+   MESSAGE TIME
+================================================== */
 
-    display:flex;
+.message-time{
+    font-size:9px;
 
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:5px;
+    color:#888b84;
 
     margin-top:3px;
 
-    color:#aaa;
-
-    font-size:10px;
-
+    text-align:left;
 }
 
-.message.mine .message-meta{
-
-    color:#5f4a08;
-
-}
-
-.checks{
-
-    font-size:14px;
-
-}
-
-/* =========================================================
-   SYSTEM MESSAGE
-========================================================= */
-
-.system-message{
-
-    width:max-content;
-
-    max-width:80%;
-
-    margin:
-        12px auto 20px;
-
-    padding:
-        9px 16px;
-
-    border-radius:20px;
-
-    background:
-        rgba(10,12,11,.85);
-
-    border:
-        1px solid rgba(255,193,7,.10);
-
-    color:#ccc;
-
-    font-size:12px;
-
-}
-
-/* =========================================================
-   INPUT
-========================================================= */
+/* ==================================================
+   TYPING AREA
+================================================== */
 
 .input-area{
+    position:absolute;
 
-    min-height:93px;
+    right:0;
+    bottom:0;
+    left:0;
 
-    flex-shrink:0;
+    z-index:20;
 
     padding:
-        13px 16px;
-
-    border-top:
-        1px solid var(--border);
+        8px
+        9px
+        calc(8px + env(safe-area-inset-bottom));
 
     background:
-        #0e1110;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
+        linear-gradient(
+            to top,
+            #080908 75%,
+            transparent
+        );
 }
 
-.tool-btn{
+.input-box{
+    width:100%;
 
-    width:52px;
-    height:52px;
+    min-height:48px;
 
-    flex-shrink:0;
+    display:flex;
+    align-items:flex-end;
 
-    border-radius:14px;
+    gap:7px;
 
-    border:
-        1px solid rgba(255,255,255,.07);
+    padding:6px;
 
-    background:#1a1d1b;
+    border-radius:25px;
 
-    color:#f2b800;
+    background:
+        #171914;
 
-    font-size:26px;
+    border:1px solid
+        rgba(255,193,7,.13);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.45);
+}
+
+/* ==================================================
+   INPUT BUTTON
+================================================== */
+
+.input-btn{
+    flex:0 0 38px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    outline:none;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:#aaa;
+
+    font-size:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     cursor:pointer;
 
+    transition:.2s;
 }
 
-.tool-btn:hover{
+.input-btn:active{
+    transform:scale(.9);
 
-    background:#222623;
+    background:
+        rgba(255,193,7,.14);
 
+    color:#ffc107;
 }
 
-.message-input{
+/* ==================================================
+   TEXT INPUT
+================================================== */
 
+#messageInput{
     flex:1;
 
     min-width:0;
 
-    height:54px;
+    max-height:110px;
 
-    border:
-        1px solid rgba(255,255,255,.08);
+    min-height:36px;
 
-    background:
-        #191b1a;
+    resize:none;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
 
     color:#fff;
-
-    border-radius:15px;
-
-    outline:0;
-
-    padding:
-        0 18px;
 
     font-family:inherit;
 
     font-size:14px;
 
+    line-height:1.6;
+
+    padding:
+        7px
+        5px;
+
+    overflow-y:auto;
 }
 
-.message-input:focus{
-
-    border-color:
-        rgba(255,193,7,.3);
-
+#messageInput::placeholder{
+    color:#6f726b;
 }
 
-.message-input::placeholder{
-
-    color:#777;
-
+#messageInput::-webkit-scrollbar{
+    width:3px;
 }
+
+#messageInput::-webkit-scrollbar-thumb{
+    background:#41433c;
+    border-radius:10px;
+}
+
+/* ==================================================
+   SEND BUTTON
+================================================== */
 
 .send-btn{
+    flex:0 0 40px;
 
-    width:76px;
-    height:58px;
+    width:40px;
+    height:40px;
 
-    flex-shrink:0;
+    border:none;
+    outline:none;
 
-    border:0;
-
-    border-radius:14px;
+    border-radius:50%;
 
     background:
         linear-gradient(
             145deg,
-            #ffca28,
-            #dfa000
+            #ffc107,
+            #d99500
         );
 
-    color:#16130b;
-
-    font-size:29px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 5px 17px rgba(255,193,7,.16);
-
-}
-
-.send-btn:active{
-
-    transform:scale(.96);
-
-}
-
-/* =========================================================
-   RIGHT SIDEBAR
-========================================================= */
-
-.sidebar-right{
-
-    grid-column:3;
-    grid-row:2;
-
-    border-left:
-        1px solid var(--border);
-
-    background:
-        linear-gradient(
-            180deg,
-            #101311,
-            #0b0d0c
-        );
-
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
-}
-
-/* =========================================================
-   ONLINE HEADER
-========================================================= */
-
-.online-header{
-
-    height:99px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
+    color:#16130a;
 
     font-size:18px;
 
-}
-
-.online-count{
-
-    color:#27d76a;
-
-    margin-right:7px;
-
-}
-
-/* =========================================================
-   ONLINE LIST
-========================================================= */
-
-.online-list{
-
-    flex:1;
-
-    overflow-y:auto;
-
-}
-
-.online-user{
-
-    min-height:100px;
-
-    padding:
-        15px 24px;
-
     display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.065);
-
-    cursor:pointer;
-
-}
-
-.online-user:hover{
-
-    background:
-        rgba(255,193,7,.045);
-
-}
-
-.online-avatar-wrap{
-
-    position:relative;
-
-}
-
-.online-avatar{
-
-    width:58px;
-    height:58px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
-}
-
-.online-status{
-
-    position:absolute;
-
-    width:13px;
-    height:13px;
-
-    bottom:2px;
-    right:1px;
-
-    border-radius:50%;
-
-    background:#1dcc57;
-
-    border:
-        2px solid #101311;
-
-}
-
-.online-info{
-
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-.online-name{
-
-    font-size:16px;
-
-    font-weight:bold;
-
-}
-
-.online-state{
-
-    color:#aaa;
-
-    font-size:12px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-}
-
-.crown{
-
-    font-size:25px;
-
-    margin-right:auto;
-
-}
-
-/* =========================================================
-   RIGHT FOOTER
-========================================================= */
-
-.right-footer{
-
-    height:145px;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:8px;
-
-}
-
-.footer-logo{
-
-    color:#ffc52b;
-
-    font-size:21px;
-
-    font-weight:bold;
-
-}
-
-.version{
-
-    color:#aaa;
-
-    font-size:12px;
-
-}
-
-/* =========================================================
-   EMOJI PANEL
-========================================================= */
-
-.emoji-panel{
-
-    position:absolute;
-
-    bottom:86px;
-
-    right:85px;
-
-    width:260px;
-
-    padding:15px;
-
-    border:
-        1px solid rgba(255,193,7,.2);
-
-    border-radius:16px;
-
-    background:#171a18;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.5);
-
-    display:none;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
-    gap:7px;
-
-    z-index:30;
-
-}
-
-.emoji-panel.show{
-
-    display:grid;
-
-}
-
-.emoji-item{
-
-    width:32px;
-    height:32px;
-
-    border:0;
-
-    background:transparent;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    border-radius:7px;
-
-}
-
-.emoji-item:hover{
-
-    background:#282c29;
-
-}
-
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
-
-.image-preview{
-
-    position:absolute;
-
-    bottom:90px;
-
-    right:20px;
-
-    width:230px;
-
-    padding:8px;
-
-    border-radius:15px;
-
-    background:#171a18;
-
-    border:
-        1px solid rgba(255,193,7,.2);
-
-    display:none;
-
-    z-index:30;
-
-}
-
-.image-preview img{
-
-    width:100%;
-
-    max-height:170px;
-
-    object-fit:cover;
-
-    border-radius:10px;
-
-}
-
-.preview-close{
-
-    position:absolute;
-
-    left:7px;
-    top:7px;
-
-    width:27px;
-    height:27px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:#000b;
-
-    color:#fff;
-
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(0,0,0,.72);
-
-    display:none;
-
     align-items:center;
     justify-content:center;
 
-    z-index:100;
-
-    padding:20px;
-
-}
-
-.modal.show{
-
-    display:flex;
-
-}
-
-.modal-card{
-
-    width:min(420px,100%);
-
-    background:
-        linear-gradient(
-            180deg,
-            #171a18,
-            #0e100f
-        );
-
-    border:
-        1px solid rgba(255,193,7,.22);
-
-    border-radius:22px;
-
-    padding:25px;
+    cursor:pointer;
 
     box-shadow:
-        0 20px 70px rgba(0,0,0,.6);
+        0 3px 12px
+        rgba(255,193,7,.22);
 
+    transition:.2s;
 }
 
-.modal-title{
-
-    color:#ffc52a;
-
-    font-size:20px;
-
-    margin-bottom:20px;
-
+.send-btn:active{
+    transform:scale(.9);
 }
 
-.modal-close{
-
-    float:left;
-
-    border:0;
-
-    background:transparent;
-
-    color:#aaa;
-
-    font-size:24px;
-
+.send-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
 }
 
-.modal-row{
+/* ==================================================
+   CONNECTION STATUS
+================================================== */
 
-    margin-bottom:14px;
+.connection-status{
+    position:absolute;
 
-}
-
-.modal-row label{
-
-    display:block;
-
-    color:#aaa;
-
-    font-size:12px;
-
-    margin-bottom:7px;
-
-}
-
-.modal-row input{
-
-    width:100%;
-
-    height:45px;
-
-    border-radius:12px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:#101211;
-
-    color:#fff;
-
-    outline:0;
-
-    padding:0 12px;
-
-}
-
-.modal-save{
-
-    width:100%;
-
-    height:48px;
-
-    border:0;
-
-    border-radius:13px;
-
-    background:#f2b600;
-
-    color:#191408;
-
-    font-family:inherit;
-
-    font-weight:bold;
-
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    bottom:25px;
-
+    top:10px;
     left:50%;
 
-    transform:
-        translate(-50%,30px);
+    transform:translateX(-50%);
+
+    z-index:30;
+
+    padding:
+        5px
+        12px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    color:#aaa;
+
+    background:
+        rgba(20,21,18,.9);
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+    backdrop-filter:blur(8px);
 
     opacity:0;
 
     pointer-events:none;
 
-    padding:
-        12px 20px;
-
-    border-radius:14px;
-
-    background:#1d211f;
-
-    border:
-        1px solid rgba(255,193,7,.2);
-
-    color:#eee;
-
-    transition:.25s;
-
-    z-index:200;
-
+    transition:.3s;
 }
 
-.toast.show{
-
+.connection-status.show{
     opacity:1;
-
-    transform:
-        translate(-50%,0);
-
 }
 
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-
-    position:absolute;
-
-    inset:0;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:
-        rgba(9,11,10,.7);
-
-    z-index:50;
-
+.connection-status.online{
+    color:#55d978;
 }
 
-.loading.show{
-
-    display:flex;
-
+.connection-status.offline{
+    color:#ff6969;
 }
 
-.loader{
+/* ==================================================
+   RESPONSIVE
+================================================== */
 
-    width:44px;
-    height:44px;
+@media(max-width:360px){
 
-    border:
-        4px solid rgba(255,193,7,.15);
+    .chat-header{
+        height:58px;
+        min-height:58px;
+        padding:0 9px;
+    }
 
-    border-top-color:#ffc52b;
+    .logo{
+        width:38px;
+        height:38px;
+        font-size:20px;
+    }
 
-    border-radius:50%;
+    .header-title{
+        font-size:15px;
+    }
 
-    animation:
-        spin .8s linear infinite;
+    .message-bubble{
+        max-width:84%;
+        font-size:13px;
+    }
 
+    .input-area{
+        padding-left:6px;
+        padding-right:6px;
+    }
 }
 
-@keyframes spin{
+/* ==================================================
+   SAFE AREA
+================================================== */
 
-    to{
-        transform:rotate(360deg);
+@supports(padding:max(0px)){
+
+    .input-area{
+        padding-bottom:
+            max(
+                8px,
+                env(safe-area-inset-bottom)
+            );
     }
 
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* ==================================================
+   SELECTION
+================================================== */
 
-.mobile-menu-btn{
-
-    display:none;
-
-    position:absolute;
-
-    right:15px;
-
-    top:28px;
-
-    width:45px;
-    height:45px;
-
-    border:0;
-
-    border-radius:12px;
-
-    background:#202421;
-
+::selection{
+    background:#9d7600;
     color:#fff;
+}
 
-    font-size:23px;
+</style>
+</head>
 
-    z-index:50;
+<body>
+
+<div id="app">
+
+    <header class="chat-header">
+
+        <div class="logo">
+            🍯
+        </div>
+
+        <div class="header-info">
+
+            <div class="header-title">
+                عسل چت
+            </div>
+
+            <div class="header-status">
+                <span class="online-dot"></span>
+                <span id="onlineStatus">
+                    در حال اتصال...
+                </span>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="header-btn"
+                id="usersBtn"
+                type="button">
+                👥
+            </button>
+
+            <button
+                class="header-btn"
+                id="exitBtn"
+                type="button">
+                ⎋
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="chat-area">
+
+        <div class="honey-bg"></div>
+
+        <div
+            id="connectionStatus"
+            class="connection-status">
+            در حال اتصال...
+        </div>
+
+        <div id="messages">
+
+            <div class="empty-chat">
+
+                <div class="empty-box">
+
+                    <div class="empty-icon">
+                        🍯
+                    </div>
+
+                    <div class="empty-title">
+                        به عسل چت خوش آمدید
+                    </div>
+
+                    <div class="empty-text">
+                        پیام خود را بنویسید و گفتگو را شروع کنید.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="input-area">
+
+            <div class="input-box">
+
+                <button
+                    class="input-btn"
+                    id="attachBtn"
+                    type="button">
+                    📎
+                </button>
+
+                <textarea
+                    id="messageInput"
+                    rows="1"
+                    maxlength="2000"
+                    placeholder="پیام خود را بنویسید..."
+                    autocomplete="off">
+                </textarea>
+
+                <button
+                    class="send-btn"
+                    id="sendBtn"
+                    type="button">
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   BASIC ELEMENTS
+================================================== */
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const messages =
+    document.getElementById("messages");
+
+const onlineStatus =
+    document.getElementById("onlineStatus");
+
+const connectionStatus =
+    document.getElementById("connectionStatus");
+
+const exitBtn =
+    document.getElementById("exitBtn");
+
+const attachBtn =
+    document.getElementById("attachBtn");
+
+
+/* ==================================================
+   USER
+================================================== */
+
+let username =
+    localStorage.getItem("username");
+
+if(!username){
+
+    username = "مهمان";
 
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
 
-@media(max-width:1200px){
+/* ==================================================
+   AUTO RESIZE INPUT
+================================================== */
 
-    .app{
+function resizeInput(){
 
-        grid-template-columns:
-            270px
-            minmax(400px,1fr)
-            280px;
+    messageInput.style.height = "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            110
+        ) + "px";
+
+}
+
+messageInput.addEventListener(
+    "input",
+    resizeInput
+);
+
+
+/* ==================================================
+   SEND BUTTON STATE
+================================================== */
+
+function updateSendButton(){
+
+    sendBtn.disabled =
+        messageInput.value.trim().length === 0;
+
+}
+
+messageInput.addEventListener(
+    "input",
+    updateSendButton
+);
+
+updateSendButton();
+
+
+/* ==================================================
+   ENTER TO SEND
+================================================== */
+
+messageInput.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   SEND MESSAGE
+================================================== */
+
+function sendMessage(){
+
+    const text =
+        messageInput.value.trim();
+
+    if(!text){
+        return;
+    }
+
+    addMessage(
+        username,
+        text,
+        true
+    );
+
+    messageInput.value = "";
+
+    resizeInput();
+
+    updateSendButton();
+
+}
+
+
+/* ==================================================
+   ADD MESSAGE
+================================================== */
+
+function addMessage(
+    name,
+    text,
+    mine = false
+){
+
+    const empty =
+        messages.querySelector(".empty-chat");
+
+    if(empty){
+        empty.remove();
+    }
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "message-row " +
+        (mine ? "me" : "other");
+
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "message-bubble";
+
+
+    const nameEl =
+        document.createElement("div");
+
+    nameEl.className =
+        "message-name";
+
+    nameEl.textContent =
+        name;
+
+
+    const textEl =
+        document.createElement("div");
+
+    textEl.className =
+        "message-text";
+
+    textEl.textContent =
+        text;
+
+
+    const timeEl =
+        document.createElement("div");
+
+    timeEl.className =
+        "message-time";
+
+    timeEl.textContent =
+        new Date().toLocaleTimeString(
+            "fa-IR",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+
+    bubble.appendChild(nameEl);
+
+    bubble.appendChild(textEl);
+
+    bubble.appendChild(timeEl);
+
+    row.appendChild(bubble);
+
+    messages.appendChild(row);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* ==================================================
+   SEND CLICK
+================================================== */
+
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* ==================================================
+   EXIT
+================================================== */
+
+exitBtn.addEventListener(
+    "click",
+    function(){
+
+        if(
+            confirm(
+                "آیا می‌خواهید از چت خارج شوید؟"
+            )
+        ){
+
+            localStorage.removeItem(
+                "username"
+            );
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ATTACHMENT
+================================================== */
+
+attachBtn.addEventListener(
+    "click",
+    function(){
+
+        alert(
+            "ارسال عکس و فایل را در قسمت بعدی فعال می‌کنیم 🍯"
+        );
+
+    }
+);
+
+
+/* ==================================================
+   DEMO CONNECTION
+================================================== */
+
+setTimeout(
+    function(){
+
+        onlineStatus.textContent =
+            "آنلاین";
+
+        connectionStatus.textContent =
+            "متصل شد";
+
+        connectionStatus.classList.add(
+            "show",
+            "online"
+        );
+
+        setTimeout(
+            function(){
+
+                connectionStatus.classList.remove(
+                    "show"
+                );
+
+            },
+            1800
+        );
+
+    },
+    700
+);
+
+</script>
+
+</body>
+      </html>
+
+      <script type="module">
+
+/* ==================================================
+   FIREBASE IMPORTS
+================================================== */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    push,
+    onChildAdded,
+    onValue,
+    serverTimestamp,
+    onDisconnect,
+    set,
+    remove
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+/* ==================================================
+   FIREBASE CONFIG
+   این اطلاعات را با اطلاعات Firebase خودت جایگزین کن
+================================================== */
+
+const firebaseConfig = {
+
+    apiKey: "اینجا_API_KEY_خودت",
+
+    authDomain:
+        "اینجا_AUTH_DOMAIN_خودت",
+
+    databaseURL:
+        "اینجا_DATABASE_URL_خودت",
+
+    projectId:
+        "اینجا_PROJECT_ID_خودت",
+
+    storageBucket:
+        "اینجا_STORAGE_BUCKET_خودت",
+
+    messagingSenderId:
+        "اینجا_MESSAGING_SENDER_ID_خودت",
+
+    appId:
+        "اینجا_APP_ID_خودت"
+
+};
+
+
+/* ==================================================
+   FIREBASE START
+================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(app);
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const messages =
+    document.getElementById("messages");
+
+const onlineStatus =
+    document.getElementById("onlineStatus");
+
+const connectionStatus =
+    document.getElementById("connectionStatus");
+
+const exitBtn =
+    document.getElementById("exitBtn");
+
+const attachBtn =
+    document.getElementById("attachBtn");
+
+const usersBtn =
+    document.getElementById("usersBtn");
+
+
+/* ==================================================
+   USERNAME
+================================================== */
+
+let username =
+    localStorage.getItem("username");
+
+if(!username || !username.trim()){
+
+    username = "مهمان";
+
+    localStorage.setItem(
+        "username",
+        username
+    );
+
+}
+
+
+/* ==================================================
+   ROOM
+================================================== */
+
+const ROOM_NAME =
+    "asal-chat";
+
+const messagesRef =
+    ref(
+        db,
+        "rooms/" +
+        ROOM_NAME +
+        "/messages"
+    );
+
+
+/* ==================================================
+   CONNECTION
+================================================== */
+
+const connectedRef =
+    ref(
+        db,
+        ".info/connected"
+    );
+
+
+onValue(
+    connectedRef,
+    function(snapshot){
+
+        if(snapshot.val() === true){
+
+            onlineStatus.textContent =
+                "آنلاین";
+
+            connectionStatus.textContent =
+                "متصل شد";
+
+            connectionStatus.classList.add(
+                "show",
+                "online"
+            );
+
+            setTimeout(
+                function(){
+
+                    connectionStatus.classList.remove(
+                        "show"
+                    );
+
+                },
+                1500
+            );
+
+        }else{
+
+            onlineStatus.textContent =
+                "قطع اتصال";
+
+            connectionStatus.textContent =
+                "اتصال به سرور قطع شد";
+
+            connectionStatus.classList.add(
+                "show",
+                "offline"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ONLINE USER
+================================================== */
+
+const safeUser =
+    username
+        .replace(/[.#$[\]/]/g,"_")
+        .substring(0,40);
+
+const onlineRef =
+    ref(
+        db,
+        "rooms/" +
+        ROOM_NAME +
+        "/online/" +
+        safeUser
+    );
+
+
+onValue(
+    connectedRef,
+    function(snapshot){
+
+        if(snapshot.val() !== true){
+            return;
+        }
+
+
+        set(
+            onlineRef,
+            {
+                name: username,
+                time: serverTimestamp()
+            }
+        );
+
+
+        onDisconnect(
+            onlineRef
+        ).remove();
+
+    }
+);
+
+
+/* ==================================================
+   ONLINE COUNT
+================================================== */
+
+const onlineUsersRef =
+    ref(
+        db,
+        "rooms/" +
+        ROOM_NAME +
+        "/online"
+    );
+
+
+onValue(
+    onlineUsersRef,
+    function(snapshot){
+
+        const data =
+            snapshot.val();
+
+        let count = 0;
+
+        if(data){
+
+            count =
+                Object.keys(data).length;
+
+        }
+
+
+        if(count === 0){
+
+            onlineStatus.textContent =
+                "آنلاین";
+
+        }else{
+
+            onlineStatus.textContent =
+                count +
+                " نفر آنلاین";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   INPUT RESIZE
+================================================== */
+
+function resizeInput(){
+
+    messageInput.style.height =
+        "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            110
+        ) + "px";
+
+}
+
+
+messageInput.addEventListener(
+    "input",
+    resizeInput
+);
+
+
+/* ==================================================
+   SEND BUTTON STATE
+================================================== */
+
+function updateSendButton(){
+
+    sendBtn.disabled =
+        messageInput.value
+            .trim()
+            .length === 0;
+
+}
+
+
+messageInput.addEventListener(
+    "input",
+    updateSendButton
+);
+
+
+updateSendButton();
+
+
+/* ==================================================
+   ENTER SEND
+================================================== */
+
+messageInput.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   SEND MESSAGE TO FIREBASE
+================================================== */
+
+async function sendMessage(){
+
+    const text =
+        messageInput.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    if(text.length > 2000){
+
+        alert(
+            "پیام خیلی طولانی است."
+        );
+
+        return;
 
     }
 
-    .mini-profile{
 
-        width:240px;
+    sendBtn.disabled =
+        true;
 
-    }
 
-    .brand{
+    try{
 
-        font-size:25px;
+        await push(
+            messagesRef,
+            {
+
+                name:
+                    username,
+
+                text:
+                    text,
+
+                time:
+                    serverTimestamp(),
+
+                createdAt:
+                    Date.now()
+
+            }
+        );
+
+
+        messageInput.value =
+            "";
+
+        resizeInput();
+
+        updateSendButton();
+
+
+    }catch(error){
+
+        console.error(
+            "Firebase send error:",
+            error
+        );
+
+
+        alert(
+            "پیام ارسال نشد.\n" +
+            "اتصال Firebase یا قوانین Database را بررسی کن."
+        );
+
+
+        updateSendButton();
 
     }
 
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
 
-@media(max-width:850px){
+/* ==================================================
+   RECEIVE MESSAGES
+================================================== */
 
-    body{
+onChildAdded(
+    messagesRef,
+    function(snapshot){
 
-        overflow:hidden;
+        const data =
+            snapshot.val();
+
+
+        if(!data){
+            return;
+        }
+
+
+        addFirebaseMessage(
+            data.name || "مهمان",
+            data.text || "",
+            data.time,
+            data.createdAt || Date.now()
+        );
+
+    }
+);
+
+
+/* ==================================================
+   RENDER FIREBASE MESSAGE
+================================================== */
+
+function addFirebaseMessage(
+    name,
+    text,
+    firebaseTime,
+    createdAt
+){
+
+    const empty =
+        messages.querySelector(
+            ".empty-chat"
+        );
+
+
+    if(empty){
+
+        empty.remove();
 
     }
 
-    .app{
 
-        display:block;
+    const mine =
+        name === username;
 
-        position:relative;
 
-        height:100vh;
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+    row.className =
+        "message-row " +
+        (
+            mine
+                ? "me"
+                : "other"
+        );
+
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+
+    bubble.className =
+        "message-bubble";
+
+
+    const nameEl =
+        document.createElement(
+            "div"
+        );
+
+
+    nameEl.className =
+        "message-name";
+
+
+    nameEl.textContent =
+        name;
+
+
+    const textEl =
+        document.createElement(
+            "div"
+        );
+
+
+    textEl.className =
+        "message-text";
+
+
+    textEl.textContent =
+        text;
+
+
+    const timeEl =
+        document.createElement(
+            "div"
+        );
+
+
+    timeEl.className =
+        "message-time";
+
+
+    let messageDate;
+
+
+    if(
+        firebaseTime &&
+        typeof firebaseTime === "number"
+    ){
+
+        messageDate =
+            new Date(
+                firebaseTime
+            );
+
+    }else{
+
+        messageDate =
+            new Date(
+                createdAt
+            );
 
     }
 
-    .top
+
+    timeEl.textContent =
+        messageDate.toLocaleTimeString(
+            "fa-IR",
+            {
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+            }
+        );
+
+
+    bubble.appendChild(
+        nameEl
+    );
+
+    bubble.appendChild(
+        textEl
+    );
+
+    bubble.appendChild(
+        timeEl
+    );
+
+
+    row.appendChild(
+        bubble
+    );
+
+
+    messages.appendChild(
+        row
+    );
+
+
+    requestAnimationFrame(
+        function(){
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   SEND BUTTON
+================================================== */
+
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* ==================================================
+   EXIT
+================================================== */
+
+exitBtn.addEventListener(
+    "click",
+    function(){
+
+        const ok =
+            confirm(
+                "آیا می‌خواهید از عسل چت خارج شوید؟"
+            );
+
+
+        if(!ok){
+            return;
+        }
+
+
+        remove(
+            onlineRef
+        ).catch(
+            function(error){
+
+                console.error(
+                    error
+                );
+
+            }
+        );
+
+
+        localStorage.removeItem(
+            "username"
+        );
+
+
+        window.location.href =
+            "index.html";
+
+    }
+);
+
+
+/* ==================================================
+   ATTACHMENT - LATER
+================================================== */
+
+attachBtn.addEventListener(
+    "click",
+    function(){
+
+        alert(
+            "ارسال عکس را در قسمت بعدی اضافه می‌کنیم 🍯"
+        );
+
+    }
+);
+
+
+/* ==================================================
+   USERS BUTTON
+================================================== */
+
+usersBtn.addEventListener(
+    "click",
+    function(){
+
+        alert(
+            "لیست کاربران آنلاین را در قسمت بعدی اضافه می‌کنیم 👥"
+        );
+
+    }
+);
+
+
+/* ==================================================
+   PAGE VISIBILITY
+================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            set(
+                onlineRef,
+                {
+                    name: username,
+                    time: serverTimestamp()
+                }
+            ).catch(
+                function(error){
+
+                    console.error(
+                        error
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   GLOBAL ERROR
+================================================== */
+
+window.addEventListener(
+    "error",
+    function(event){
+
+        console.error(
+            "Page error:",
+            event.error ||
+            event.message
+        );
+
+    }
+);
+
+
+console.log(
+    "🍯 عسل چت آماده است"
+);
+
+console.log(
+    "User:",
+    username
+);
+
+console.log(
+    "Room:",
+    ROOM_NAME
+);
+
+      </script>
