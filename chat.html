@@ -205,6 +205,50 @@
 }
 
 
+/* ==================================================
+   PROFILE PHOTO
+================================================== */
+
+.profile-avatar{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.profile-avatar img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+
+.avatar-camera{
+    position:absolute;
+
+    right:2px;
+    bottom:2px;
+
+    width:27px;
+    height:27px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#ffc107;
+
+    color:#17130a;
+
+    font-size:13px;
+
+    border:2px solid #11120f;
+}
+
+
       
 <style>
 
@@ -1369,8 +1413,353 @@ setTimeout(
     700
 );
 
+/* ==================================================
+   PROFILE
+================================================== */
+
+const profileOverlay =
+    document.getElementById(
+        "profileOverlay"
+    );
+
+const profileName =
+    document.getElementById(
+        "profileName"
+    );
+
+const profileAvatar =
+    document.getElementById(
+        "profileAvatar"
+    );
+
+const profileSave =
+    document.getElementById(
+        "profileSave"
+    );
+
+const profileCancel =
+    document.getElementById(
+        "profileCancel"
+    );
+
+
+/* ==================================================
+   PROFILE OPEN
+================================================== */
+
+function openProfile(){
+
+    profileName.value =
+        username;
+
+    updateProfileAvatar();
+
+    profileOverlay.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        function(){
+
+            profileName.focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* ==================================================
+   PROFILE CLOSE
+================================================== */
+
+function closeProfile(){
+
+    profileOverlay.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* ==================================================
+   AVATAR
+================================================== */
+
+function updateProfileAvatar(){
+
+    const name =
+        profileName.value.trim() ||
+        username ||
+        "م";
+
+    profileAvatar.textContent =
+        name.charAt(0);
+
+}
+
+
+/* ==================================================
+   LIVE AVATAR
+================================================== */
+
+profileName.addEventListener(
+    "input",
+    updateProfileAvatar
+);
+
+
+/* ==================================================
+   SAVE PROFILE
+================================================== */
+
+profileSave.addEventListener(
+    "click",
+    async function(){
+
+        let newName =
+            profileName.value.trim();
+
+
+        if(!newName){
+
+            alert(
+                "لطفاً یک نام وارد کنید."
+            );
+
+            return;
+
+        }
+
+
+        if(newName.length < 2){
+
+            alert(
+                "نام باید حداقل ۲ حرف داشته باشد."
+            );
+
+            return;
+
+        }
+
+
+        if(newName.length > 30){
+
+            alert(
+                "نام نمی‌تواند بیشتر از ۳۰ حرف باشد."
+            );
+
+            return;
+
+        }
+
+
+        const oldName =
+            username;
+
+
+        username =
+            newName;
+
+
+        localStorage.setItem(
+            "username",
+            username
+        );
+
+
+        /* ------------------------------------------
+           بروزرسانی کاربر آنلاین
+        ------------------------------------------ */
+
+        try{
+
+            await set(
+                onlineRef,
+                {
+                    name:
+                        username,
+
+                    time:
+                        serverTimestamp()
+                }
+            );
+
+        }catch(error){
+
+            console.error(
+                "Profile update error:",
+                error
+            );
+
+        }
+
+
+        closeProfile();
+
+
+        alert(
+            "پروفایل با موفقیت ذخیره شد ✓"
+        );
+
+
+        /*
+         * اگر نام قبلی و جدید متفاوت باشد،
+         * پیام‌های قدیمی تغییر نمی‌کنند.
+         */
+
+        console.log(
+            "Profile changed:",
+            oldName,
+            "→",
+            username
+        );
+
+    }
+);
+
+
+/* ==================================================
+   CANCEL
+================================================== */
+
+profileCancel.addEventListener(
+    "click",
+    closeProfile
+);
+
+
+/* ==================================================
+   CLICK OUTSIDE
+================================================== */
+
+profileOverlay.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            profileOverlay
+        ){
+
+            closeProfile();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ESC
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            profileOverlay.classList.contains(
+                "show"
+            )
+        ){
+
+            closeProfile();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   OPEN PROFILE BY LOGO
+================================================== */
+
+const logo =
+    document.querySelector(
+        ".logo"
+    );
+
+
+if(logo){
+
+    logo.style.cursor =
+        "pointer";
+
+
+    logo.addEventListener(
+        "click",
+        openProfile
+    );
+
+      }
+
+      
 </script>
 
+<!-- ==================================================
+     PROFILE
+================================================== -->
+
+<div
+    class="profile-overlay"
+    id="profileOverlay">
+
+    <div class="profile-box">
+
+        <div
+            class="profile-avatar"
+            id="profileAvatar">
+            م
+        </div>
+
+        <div class="profile-title">
+            پروفایل من
+        </div>
+
+        <label
+            class="profile-label"
+            for="profileName">
+            نام نمایشی
+        </label>
+
+        <input
+            id="profileName"
+            type="text"
+            maxlength="30"
+            autocomplete="off"
+            placeholder="نام خود را وارد کنید">
+
+        <div class="profile-actions">
+
+            <button
+                class="profile-action profile-cancel"
+                id="profileCancel"
+                type="button">
+                انصراف
+            </button>
+
+            <button
+                class="profile-action profile-save"
+                id="profileSave"
+                type="button">
+                ذخیره
+            </button>
+
+        </div>
+
+        <div class="profile-hint">
+            این نام در پیام‌های شما و لیست کاربران آنلاین نمایش داده می‌شود.
+        </div>
+
+    </div>
+
+</div>
+
+      
 </body>
       </html>
 
@@ -2147,3 +2536,317 @@ console.log(
 );
 
       </script>
+
+
+
+/* ==================================================
+   PROFILE PHOTO
+================================================== */
+
+const avatarLetter =
+    document.getElementById(
+        "avatarLetter"
+    );
+
+
+/* ==================================================
+   PROFILE IMAGE INPUT
+================================================== */
+
+const avatarInput =
+    document.createElement(
+        "input"
+    );
+
+avatarInput.type =
+    "file";
+
+avatarInput.accept =
+    "image/*";
+
+avatarInput.style.display =
+    "none";
+
+document.body.appendChild(
+    avatarInput
+);
+
+
+/* ==================================================
+   OPEN GALLERY
+================================================== */
+
+profileAvatar.addEventListener(
+    "click",
+    function(){
+
+        avatarInput.click();
+
+    }
+);
+
+
+/* ==================================================
+   LOAD SAVED AVATAR
+================================================== */
+
+const savedAvatar =
+    localStorage.getItem(
+        "profileAvatar"
+    );
+
+
+if(savedAvatar){
+
+    showProfileAvatar(
+        savedAvatar
+    );
+
+}
+
+
+/* ==================================================
+   SELECT IMAGE
+================================================== */
+
+avatarInput.addEventListener(
+    "change",
+    async function(){
+
+        const file =
+            avatarInput.files[0];
+
+
+        if(!file){
+            return;
+        }
+
+
+        if(
+            !file.type.startsWith(
+                "image/"
+            )
+        ){
+
+            alert(
+                "فقط فایل تصویری انتخاب کنید."
+            );
+
+            return;
+
+        }
+
+
+        /* ------------------------------------------
+           5MB LIMIT
+        ------------------------------------------ */
+
+        if(
+            file.size >
+            5 * 1024 * 1024
+        ){
+
+            alert(
+                "حجم عکس پروفایل نباید بیشتر از ۵ مگابایت باشد."
+            );
+
+            avatarInput.value =
+                "";
+
+            return;
+
+        }
+
+
+        try{
+
+            profileAvatar.style.opacity =
+                ".5";
+
+
+            const fileName =
+                "avatar_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2,8) +
+                ".jpg";
+
+
+            const avatarRef =
+                storageRef(
+                    storage,
+                    "avatars/" +
+                    ROOM_NAME +
+                    "/" +
+                    fileName
+                );
+
+
+            /* --------------------------------------
+               UPLOAD
+            -------------------------------------- */
+
+            const result =
+                await uploadBytes(
+                    avatarRef,
+                    file
+                );
+
+
+            /* --------------------------------------
+               GET URL
+            -------------------------------------- */
+
+            const url =
+                await getDownloadURL(
+                    result.ref
+                );
+
+
+            /* --------------------------------------
+               SAVE LOCAL
+            -------------------------------------- */
+
+            localStorage.setItem(
+                "profileAvatar",
+                url
+            );
+
+
+            /* --------------------------------------
+               SHOW
+            -------------------------------------- */
+
+            showProfileAvatar(
+                url
+            );
+
+
+            /* --------------------------------------
+               SAVE ONLINE USER
+            -------------------------------------- */
+
+            await set(
+                onlineRef,
+                {
+                    name:
+                        username,
+
+                    avatar:
+                        url,
+
+                    time:
+                        serverTimestamp()
+                }
+            );
+
+
+            alert(
+                "عکس پروفایل ذخیره شد ✓"
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Avatar upload error:",
+                error
+            );
+
+
+            alert(
+                "آپلود عکس پروفایل انجام نشد.\n" +
+                "Firebase Storage را بررسی کنید."
+            );
+
+        }finally{
+
+            profileAvatar.style.opacity =
+                "1";
+
+            avatarInput.value =
+                "";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   SHOW AVATAR
+================================================== */
+
+function showProfileAvatar(
+    url
+){
+
+    if(!url){
+        return;
+    }
+
+
+    let image =
+        profileAvatar.querySelector(
+            "img"
+        );
+
+
+    if(!image){
+
+        image =
+            document.createElement(
+                "img"
+            );
+
+        profileAvatar.insertBefore(
+            image,
+            profileAvatar.firstChild
+        );
+
+    }
+
+
+    image.src =
+        url;
+
+
+    avatarLetter.style.display =
+        "none";
+
+}
+
+
+/* ==================================================
+   UPDATE AVATAR LETTER
+================================================== */
+
+function updateProfileAvatar(){
+
+    const name =
+        profileName.value.trim() ||
+        username ||
+        "م";
+
+
+    if(
+        !profileAvatar.querySelector(
+            "img"
+        )
+    ){
+
+        avatarLetter.textContent =
+            name.charAt(0);
+
+        avatarLetter.style.display =
+            "block";
+
+    }
+
+}
+
+
+
+
