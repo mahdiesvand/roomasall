@@ -541,37 +541,34 @@ body::before{
 
 </head>
 
-
 <body>
-
 
 <div class="page">
 
 <main class="login-card">
 
-
 <div class="logo">
 🍯
 </div>
-
 
 <h1 class="title">
 عسل چت
 </h1>
 
-
 <p class="subtitle">
 به جمع دوستان عسل چت خوش آمدید
 </p>
 
-
 <form id="loginForm">
-
 
 <div class="field">
 
-<label class="field-label">
-نام شما
+<label
+    class="field-label"
+    for="username">
+
+    نام شما
+
 </label>
 
 <input
@@ -586,19 +583,22 @@ body::before{
 
 </div>
 
-
 <div class="field">
 
-<label class="field-label">
-کد امنیتی
+<label
+    class="field-label"
+    for="captchaInput">
+
+    کد امنیتی
+
 </label>
 
 <div class="captcha-box">
 
 <div
     class="captcha-image"
-    id="captchaCode"
-></div>
+    id="captchaCode">
+</div>
 
 <input
     id="captchaInput"
@@ -615,17 +615,19 @@ body::before{
 
 </div>
 
-
 <div class="field">
 
-<label class="field-label">
-جنسیت
+<label
+    class="field-label"
+    for="gender">
+
+    جنسیت
+
 </label>
 
 <select
     id="gender"
-    class="select"
->
+    class="select">
 
 <option value="male">
 پسر
@@ -639,24 +641,21 @@ body::before{
 
 </div>
 
-
 <button
     id="loginButton"
     class="login-btn"
-    type="submit"
->
-ورود به عسل چت
-</button>
+    type="submit">
 
+ورود به عسل چت
+
+</button>
 
 <div
     id="message"
-    class="message"
-></div>
-
+    class="message">
+</div>
 
 </form>
-
 
 <div class="rules">
 
@@ -682,7 +681,6 @@ body::before{
 
 </div>
 
-
 <div class="footer">
 
 © 2026
@@ -691,40 +689,50 @@ body::before{
 
 </div>
 
-
 </main>
 
 </div>
 
-
 <script>
 
-/* =========================================
-   عناصر صفحه
-========================================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const loginForm =
-    document.getElementById("loginForm");
+    document.getElementById(
+        "loginForm"
+    );
 
 const usernameInput =
-    document.getElementById("username");
+    document.getElementById(
+        "username"
+    );
 
 const captchaInput =
-    document.getElementById("captchaInput");
+    document.getElementById(
+        "captchaInput"
+    );
 
 const genderInput =
-    document.getElementById("gender");
+    document.getElementById(
+        "gender"
+    );
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
 const loginButton =
-    document.getElementById("loginButton");
+    document.getElementById(
+        "loginButton"
+    );
 
 
-/* =========================================
+/* =====================================================
    CAPTCHA
-========================================= */
+===================================================== */
 
 let captchaValue = "";
 
@@ -737,7 +745,6 @@ function generateCaptcha(){
             Math.random() * 9000
         ).toString();
 
-
     document.getElementById(
         "captchaCode"
     ).textContent =
@@ -749,9 +756,9 @@ function generateCaptcha(){
 generateCaptcha();
 
 
-/* =========================================
-   پاکسازی نام
-========================================= */
+/* =====================================================
+   CLEAN USERNAME
+===================================================== */
 
 function cleanUsername(name){
 
@@ -762,9 +769,9 @@ function cleanUsername(name){
 }
 
 
-/* =========================================
-   نمایش پیام
-========================================= */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(text){
 
@@ -774,9 +781,9 @@ function showMessage(text){
 }
 
 
-/* =========================================
-   ورود
-========================================= */
+/* =====================================================
+   LOGIN
+===================================================== */
 
 loginForm.addEventListener(
     "submit",
@@ -800,10 +807,12 @@ loginForm.addEventListener(
 
 
         /* ==============================
-           بررسی نام
+           NAME
         ============================== */
 
-        if(username.length < 2){
+        if(
+            username.length < 2
+        ){
 
             showMessage(
                 "لطفاً یک نام حداقل دو حرفی وارد کنید."
@@ -816,7 +825,9 @@ loginForm.addEventListener(
         }
 
 
-        if(username.length > 20){
+        if(
+            username.length > 20
+        ){
 
             showMessage(
                 "نام کاربری نباید بیشتر از ۲۰ کاراکتر باشد."
@@ -828,10 +839,12 @@ loginForm.addEventListener(
 
 
         /* ==============================
-           بررسی کد امنیتی
+           CAPTCHA
         ============================== */
 
-        if(captcha !== captchaValue){
+        if(
+            captcha !== captchaValue
+        ){
 
             showMessage(
                 "کد امنیتی اشتباه است."
@@ -849,7 +862,7 @@ loginForm.addEventListener(
 
 
         /* ==============================
-           ورود موفق
+           LOGIN
         ============================== */
 
         loginButton.disabled =
@@ -864,20 +877,26 @@ loginForm.addEventListener(
 
         try{
 
-
-            /* ==========================
-               ذخیره نام کاربر
-            ========================== */
+            /*
+             * مهم:
+             * نام کاربر در هر دو کلید
+             * ذخیره می‌شود.
+             */
 
             localStorage.setItem(
                 "asalchat_username",
                 username
             );
 
+            localStorage.setItem(
+                "username",
+                username
+            );
 
-            /* ==========================
-               ذخیره جنسیت
-            ========================== */
+
+            /*
+             * جنسیت
+             */
 
             localStorage.setItem(
                 "asalchat_gender",
@@ -885,9 +904,9 @@ loginForm.addEventListener(
             );
 
 
-            /* ==========================
-               ذخیره وضعیت ورود
-            ========================== */
+            /*
+             * وضعیت ورود
+             */
 
             localStorage.setItem(
                 "asalchat_logged_in",
@@ -895,9 +914,9 @@ loginForm.addEventListener(
             );
 
 
-            /* ==========================
-               زمان ورود
-            ========================== */
+            /*
+             * زمان ورود
+             */
 
             localStorage.setItem(
                 "asalchat_login_time",
@@ -905,32 +924,31 @@ loginForm.addEventListener(
             );
 
 
-            /* ==========================
-               پیام موفقیت
-            ========================== */
-
             showMessage(
                 "ورود با موفقیت انجام شد 🍯"
             );
 
 
-            /* ==========================
-               انتقال به چت
-            ========================== */
+            /*
+             * انتقال به chat.html
+             */
 
-            setTimeout(function(){
+            setTimeout(
+                function(){
 
-                window.location.href =
-                    "./chat.html";
+                    window.location.href =
+                        "./chat.html";
 
-            },500);
+                },
+                500
+            );
 
 
-        }
+        }catch(error){
 
-        catch(error){
-
-            console.error(error);
+            console.error(
+                error
+            );
 
 
             showMessage(
@@ -953,7 +971,6 @@ loginForm.addEventListener(
 );
 
 </script>
-
 
 </body>
 
