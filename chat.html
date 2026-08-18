@@ -11,15 +11,12 @@
                maximum-scale=1.0,
                user-scalable=no">
 
-<meta name="theme-color" content="#0b0c0b">
+<meta name="theme-color"
+      content="#0b0c0b">
 
 <title>عسل چت 🍯</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -48,10 +45,6 @@ body{
     -webkit-tap-highlight-color:transparent;
 }
 
-/* =========================================================
-   APP
-========================================================= */
-
 #app{
 
     width:100%;
@@ -71,9 +64,10 @@ body{
         #080908;
 }
 
-/* =========================================================
+
+/* =====================================================
    HEADER
-========================================================= */
+===================================================== */
 
 .chat-header{
 
@@ -232,9 +226,10 @@ body{
         rgba(255,193,7,.15);
 }
 
-/* =========================================================
-   CHAT AREA
-========================================================= */
+
+/* =====================================================
+   CHAT
+===================================================== */
 
 .chat-area{
 
@@ -260,10 +255,6 @@ body{
         #090a09;
 }
 
-/* =========================================================
-   HONEY BACKGROUND
-========================================================= */
-
 .honey-bg{
 
     position:absolute;
@@ -283,10 +274,6 @@ body{
 
     background-size:28px 28px;
 }
-
-/* =========================================================
-   MESSAGES
-========================================================= */
 
 #messages{
 
@@ -327,9 +314,10 @@ body{
     border-radius:10px;
 }
 
-/* =========================================================
+
+/* =====================================================
    EMPTY
-========================================================= */
+===================================================== */
 
 .empty-chat{
 
@@ -384,9 +372,10 @@ body{
     line-height:2;
 }
 
-/* =========================================================
+
+/* =====================================================
    MESSAGE
-========================================================= */
+===================================================== */
 
 .message-row{
 
@@ -513,9 +502,10 @@ body{
     text-align:left;
 }
 
-/* =========================================================
+
+/* =====================================================
    INPUT
-========================================================= */
+===================================================== */
 
 .input-area{
 
@@ -676,9 +666,10 @@ body{
     opacity:.4;
 }
 
-/* =========================================================
+
+/* =====================================================
    CONNECTION
-========================================================= */
+===================================================== */
 
 .connection-status{
 
@@ -731,9 +722,10 @@ body{
     color:#ff6969;
 }
 
-/* =========================================================
-   PROFILE OVERLAY
-========================================================= */
+
+/* =====================================================
+   PROFILE
+===================================================== */
 
 .profile-overlay{
 
@@ -966,9 +958,10 @@ body{
     line-height:1.8;
 }
 
-/* =========================================================
-   USERS PANEL
-========================================================= */
+
+/* =====================================================
+   USERS
+===================================================== */
 
 .users-overlay{
 
@@ -1138,6 +1131,8 @@ body{
 
     justify-content:center;
 
+    overflow:hidden;
+
     background:
         linear-gradient(
             145deg,
@@ -1148,6 +1143,17 @@ body{
     color:#17130a;
 
     font-weight:bold;
+}
+
+.user-avatar img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
 }
 
 .user-info{
@@ -1190,9 +1196,10 @@ body{
     font-size:12px;
 }
 
-/* =========================================================
+
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:360px){
 
@@ -1230,10 +1237,6 @@ body{
 
 }
 
-/* =========================================================
-   SELECTION
-========================================================= */
-
 ::selection{
 
     background:#9d7600;
@@ -1245,183 +1248,138 @@ body{
 
 </head>
 
-
 <body>
-
 
 <div id="app">
 
-
 <header class="chat-header">
 
+<div
+    class="logo"
+    id="profileOpen"
+    title="پروفایل">
 
-    <div
-        class="logo"
-        id="profileOpen"
-        title="پروفایل">
+    🍯
 
-        🍯
+</div>
 
-    </div>
+<div class="header-info">
 
+<div class="header-title">
+عسل چت
+</div>
 
-    <div class="header-info">
+<div class="header-status">
 
+<span class="online-dot"></span>
 
-        <div class="header-title">
+<span id="onlineStatus">
+در حال اتصال...
+</span>
 
-            عسل چت
+</div>
 
-        </div>
+</div>
 
+<div class="header-actions">
 
-        <div class="header-status">
+<button
+    class="header-btn"
+    id="usersBtn"
+    type="button"
+    title="کاربران آنلاین">
 
+    👥
 
-            <span class="online-dot"></span>
+</button>
 
+<button
+    class="header-btn"
+    id="exitBtn"
+    type="button"
+    title="خروج">
 
-            <span id="onlineStatus">
+    ⎋
 
-                در حال اتصال...
+</button>
 
-            </span>
-
-
-        </div>
-
-
-    </div>
-
-
-    <div class="header-actions">
-
-
-        <button
-            class="header-btn"
-            id="usersBtn"
-            type="button"
-            title="کاربران آنلاین">
-
-            👥
-
-        </button>
-
-
-        <button
-            class="header-btn"
-            id="exitBtn"
-            type="button"
-            title="خروج">
-
-            ⎋
-
-        </button>
-
-
-    </div>
-
+</div>
 
 </header>
 
 
 <main class="chat-area">
 
+<div class="honey-bg"></div>
 
-    <div class="honey-bg"></div>
+<div
+    id="connectionStatus"
+    class="connection-status">
 
+    در حال اتصال...
 
-    <div
-        id="connectionStatus"
-        class="connection-status">
+</div>
 
-        در حال اتصال...
+<div id="messages">
 
-    </div>
+<div class="empty-chat">
 
+<div class="empty-box">
 
-    <div id="messages">
+<div class="empty-icon">
+🍯
+</div>
 
+<div class="empty-title">
+به عسل چت خوش آمدید
+</div>
 
-        <div class="empty-chat">
+<div class="empty-text">
+پیام خود را بنویسید و گفتگو را شروع کنید.
+</div>
 
+</div>
 
-            <div class="empty-box">
+</div>
 
-
-                <div class="empty-icon">
-
-                    🍯
-
-                </div>
-
-
-                <div class="empty-title">
-
-                    به عسل چت خوش آمدید
-
-                </div>
-
-
-                <div class="empty-text">
-
-                    پیام خود را بنویسید و گفتگو را شروع کنید.
-
-                </div>
+</div>
 
 
-            </div>
+<div class="input-area">
 
+<div class="input-box">
 
-        </div>
+<button
+    class="input-btn"
+    id="attachBtn"
+    type="button"
+    title="ارسال فایل">
 
+    📎
 
-    </div>
+</button>
 
+<textarea
+    id="messageInput"
+    rows="1"
+    maxlength="2000"
+    placeholder="پیام خود را بنویسید..."
+    autocomplete="off"></textarea>
 
-    <div class="input-area">
+<button
+    class="send-btn"
+    id="sendBtn"
+    type="button">
 
+    ➤
 
-        <div class="input-box">
+</button>
 
+</div>
 
-            <button
-                class="input-btn"
-                id="attachBtn"
-                type="button"
-                title="ارسال فایل">
-
-                📎
-
-            </button>
-
-
-            <textarea
-                id="messageInput"
-                rows="1"
-                maxlength="2000"
-                placeholder="پیام خود را بنویسید..."
-                autocomplete="off"></textarea>
-
-
-            <button
-                class="send-btn"
-                id="sendBtn"
-                type="button">
-
-                ➤
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
+</div>
 
 </main>
-
 
 </div>
 
@@ -1430,87 +1388,70 @@ body{
      PROFILE
 ===================================================== -->
 
-
 <div
     class="profile-overlay"
     id="profileOverlay">
 
+<div class="profile-box">
 
-    <div class="profile-box">
+<div
+    class="profile-avatar"
+    id="profileAvatar">
 
+<span id="avatarLetter">
+م
+</span>
 
-        <div
-            class="profile-avatar"
-            id="profileAvatar">
+</div>
 
-            <span id="avatarLetter">
+<div class="profile-title">
+پروفایل من
+</div>
 
-                م
+<label
+    class="profile-label"
+    for="profileName">
 
-            </span>
+    نام نمایشی
 
-        </div>
+</label>
 
+<input
+    id="profileName"
+    type="text"
+    maxlength="30"
+    autocomplete="off"
+    placeholder="نام خود را وارد کنید">
 
-        <div class="profile-title">
+<div class="profile-actions">
 
-            پروفایل من
+<button
+    class="profile-action profile-cancel"
+    id="profileCancel"
+    type="button">
 
-        </div>
+    انصراف
 
+</button>
 
-        <label
-            class="profile-label"
-            for="profileName">
+<button
+    class="profile-action profile-save"
+    id="profileSave"
+    type="button">
 
-            نام نمایشی
+    ذخیره
 
-        </label>
+</button>
 
+</div>
 
-        <input
-            id="profileName"
-            type="text"
-            maxlength="30"
-            autocomplete="off"
-            placeholder="نام خود را وارد کنید">
+<div class="profile-hint">
 
+روی عکس پروفایل بزن تا تصویر انتخاب کنی.
 
-        <div class="profile-actions">
+</div>
 
-
-            <button
-                class="profile-action profile-cancel"
-                id="profileCancel"
-                type="button">
-
-                انصراف
-
-            </button>
-
-
-            <button
-                class="profile-action profile-save"
-                id="profileSave"
-                type="button">
-
-                ذخیره
-
-            </button>
-
-
-        </div>
-
-
-        <div class="profile-hint">
-
-            روی عکس پروفایل بزن تا تصویر انتخاب کنی.
-
-        </div>
-
-
-    </div>
-
+</div>
 
 </div>
 
@@ -1519,53 +1460,38 @@ body{
      USERS
 ===================================================== -->
 
-
 <div
     class="users-overlay"
     id="usersOverlay">
 
+<div class="users-panel">
 
-    <div class="users-panel">
+<div class="users-header">
 
+<div class="users-title">
+کاربران آنلاین
+</div>
 
-        <div class="users-header">
+<button
+    class="users-close"
+    id="usersClose"
+    type="button">
 
+    ✕
 
-            <div class="users-title">
+</button>
 
-                کاربران آنلاین
+</div>
 
-            </div>
+<div id="usersList">
 
+<div class="no-users">
+در حال دریافت کاربران...
+</div>
 
-            <button
-                class="users-close"
-                id="usersClose"
-                type="button">
+</div>
 
-                ✕
-
-            </button>
-
-
-        </div>
-
-
-        <div id="usersList">
-
-
-            <div class="no-users">
-
-                در حال دریافت کاربران...
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
+</div>
 
 </div>
 
@@ -1574,9 +1500,7 @@ body{
      FIREBASE
 ===================================================== -->
 
-
 <script type="module">
-
 
 import {
     initializeApp
@@ -1611,7 +1535,6 @@ import {
    FIREBASE CONFIG
 ===================================================== */
 
-
 const firebaseConfig = {
 
     apiKey:
@@ -1642,21 +1565,18 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   INIT
+   INIT FIREBASE
 ===================================================== */
-
 
 const app =
     initializeApp(
         firebaseConfig
     );
 
-
 const db =
     getDatabase(
         app
     );
-
 
 const storage =
     getStorage(
@@ -1668,108 +1588,85 @@ const storage =
    ELEMENTS
 ===================================================== */
 
-
 const messages =
     document.getElementById(
         "messages"
     );
-
 
 const messageInput =
     document.getElementById(
         "messageInput"
     );
 
-
 const sendBtn =
     document.getElementById(
         "sendBtn"
     );
-
 
 const attachBtn =
     document.getElementById(
         "attachBtn"
     );
 
-
 const onlineStatus =
     document.getElementById(
         "onlineStatus"
     );
-
 
 const connectionStatus =
     document.getElementById(
         "connectionStatus"
     );
 
-
 const exitBtn =
     document.getElementById(
         "exitBtn"
     );
-
 
 const usersBtn =
     document.getElementById(
         "usersBtn"
     );
 
-
 const usersOverlay =
     document.getElementById(
         "usersOverlay"
     );
-
 
 const usersClose =
     document.getElementById(
         "usersClose"
     );
 
-
 const usersList =
     document.getElementById(
         "usersList"
     );
-
 
 const profileOpen =
     document.getElementById(
         "profileOpen"
     );
 
-
 const profileOverlay =
     document.getElementById(
         "profileOverlay"
     );
-
 
 const profileAvatar =
     document.getElementById(
         "profileAvatar"
     );
 
-
-const avatarLetter =
-    document.getElementById(
-        "avatarLetter"
-    );
-
-
 const profileName =
     document.getElementById(
         "profileName"
     );
 
-
 const profileSave =
     document.getElementById(
         "profileSave"
     );
-
 
 const profileCancel =
     document.getElementById(
@@ -1778,20 +1675,13 @@ const profileCancel =
 
 
 /* =====================================================
-   USER
-   اصلاح شده
+   USERNAME
+   مهم‌ترین بخش اصلاح مشکل «مهمان»
 ===================================================== */
 
-
 /*
-   صفحه ورود نام کاربر را با کلید
-   asalchat_username ذخیره می‌کند.
-
-   نسخه قبلی chat.html دنبال
-   username می‌گشت و به همین دلیل
-   همیشه ممکن بود «مهمان» نشان داده شود.
-*/
-
+ * ابتدا نام اصلی را می‌خوانیم.
+ */
 
 let username =
     localStorage.getItem(
@@ -1800,9 +1690,9 @@ let username =
 
 
 /*
-   سازگاری با نسخه قدیمی سایت
-*/
-
+ * اگر نام اصلی وجود نداشت،
+ * کلید قدیمی را بررسی می‌کنیم.
+ */
 
 if(
     !username ||
@@ -1818,26 +1708,47 @@ if(
 
 
 /*
-   اگر هیچ نامی پیدا نشد،
-   مهمان استفاده می‌شود.
-*/
-
+ * اگر مقدار «مهمان» یا خالی بود،
+ * اجازه ورود مستقیم به چت نمی‌دهیم.
+ */
 
 if(
     !username ||
-    !username.trim()
+    !username.trim() ||
+    username.trim() === "مهمان"
 ){
 
-    username =
-        "مهمان";
+    /*
+     * نام‌های خراب قبلی حذف می‌شوند.
+     */
+
+    localStorage.removeItem(
+        "asalchat_username"
+    );
+
+    localStorage.removeItem(
+        "username"
+    );
+
+    localStorage.removeItem(
+        "asalchat_logged_in"
+    );
+
+
+    /*
+     * بازگشت به صفحه ورود
+     */
+
+    window.location.replace(
+        "./index.html"
+    );
 
 }
 
 
 /*
-   پاکسازی نام
-*/
-
+ * پاکسازی نام
+ */
 
 username =
     username
@@ -1849,15 +1760,13 @@ username =
 
 
 /*
-   ذخیره نام صحیح در هر دو کلید
-*/
-
+ * ذخیره دوباره در هر دو کلید
+ */
 
 localStorage.setItem(
     "asalchat_username",
     username
 );
-
 
 localStorage.setItem(
     "username",
@@ -1865,10 +1774,19 @@ localStorage.setItem(
 );
 
 
+/*
+ * نمایش نام در Console
+ */
+
+console.log(
+    "🍯 Current user:",
+    username
+);
+
+
 /* =====================================================
    ROOM
 ===================================================== */
-
 
 const ROOM_NAME =
     "asal-chat";
@@ -1903,10 +1821,7 @@ const connectedRef =
    SAFE USER ID
 ===================================================== */
 
-
-function makeSafeUserId(
-    name
-){
+function makeSafeUserId(name){
 
     return name
         .replace(
@@ -1941,11 +1856,9 @@ let onlineRef =
    CONNECTION
 ===================================================== */
 
-
 onValue(
     connectedRef,
     snapshot => {
-
 
         if(
             snapshot.val() === true
@@ -1987,7 +1900,6 @@ onValue(
 
         }else{
 
-
             onlineStatus.textContent =
                 "قطع اتصال";
 
@@ -2015,12 +1927,10 @@ onValue(
 
 
 /* =====================================================
-   ONLINE USER
+   REGISTER ONLINE USER
 ===================================================== */
 
-
 function registerOnlineUser(){
-
 
     set(
         onlineRef,
@@ -2052,7 +1962,6 @@ onValue(
     connectedRef,
     snapshot => {
 
-
         if(
             snapshot.val() === true
         ){
@@ -2066,14 +1975,12 @@ onValue(
 
 
 /* =====================================================
-   ONLINE USERS LIST
+   ONLINE USERS
 ===================================================== */
-
 
 onValue(
     onlineUsersRef,
     snapshot => {
-
 
         const data =
             snapshot.val();
@@ -2084,7 +1991,6 @@ onValue(
 
 
         if(!data){
-
 
             usersList.innerHTML =
                 `<div class="no-users">
@@ -2115,12 +2021,10 @@ onValue(
         users.forEach(
             user => {
 
-
                 const item =
                     document.createElement(
                         "div"
                     );
-
 
                 item.className =
                     "user-item";
@@ -2131,7 +2035,6 @@ onValue(
                         "div"
                     );
 
-
                 avatar.className =
                     "user-avatar";
 
@@ -2140,40 +2043,19 @@ onValue(
                     user.avatar
                 ){
 
-
                     const img =
                         document.createElement(
                             "img"
                         );
 
-
                     img.src =
                         user.avatar;
-
-
-                    img.style.width =
-                        "100%";
-
-
-                    img.style.height =
-                        "100%";
-
-
-                    img.style.objectFit =
-                        "cover";
-
-
-                    img.style.borderRadius =
-                        "50%";
-
 
                     avatar.appendChild(
                         img
                     );
 
-
                 }else{
-
 
                     avatar.textContent =
                         (
@@ -2191,7 +2073,6 @@ onValue(
                         "div"
                     );
 
-
                 info.className =
                     "user-info";
 
@@ -2200,7 +2081,6 @@ onValue(
                     document.createElement(
                         "div"
                     );
-
 
                 name.className =
                     "user-name";
@@ -2216,7 +2096,6 @@ onValue(
                         "div"
                     );
 
-
                 status.className =
                     "user-online";
 
@@ -2229,26 +2108,21 @@ onValue(
                     name
                 );
 
-
                 info.appendChild(
                     status
                 );
-
 
                 item.appendChild(
                     avatar
                 );
 
-
                 item.appendChild(
                     info
                 );
 
-
                 usersList.appendChild(
                     item
                 );
-
 
             }
         );
@@ -2258,16 +2132,13 @@ onValue(
 
 
 /* =====================================================
-   RESIZE INPUT
+   INPUT
 ===================================================== */
-
 
 function resizeInput(){
 
-
     messageInput.style.height =
         "auto";
-
 
     messageInput.style.height =
         Math.min(
@@ -2286,12 +2157,10 @@ messageInput.addEventListener(
 
 
 /* =====================================================
-   BUTTON STATE
+   SEND BUTTON
 ===================================================== */
 
-
 function updateSendButton(){
-
 
     sendBtn.disabled =
         messageInput.value
@@ -2311,14 +2180,12 @@ updateSendButton();
 
 
 /* =====================================================
-   SEND WITH ENTER
+   ENTER
 ===================================================== */
-
 
 messageInput.addEventListener(
     "keydown",
     event => {
-
 
         if(
             event.key === "Enter" &&
@@ -2339,9 +2206,7 @@ messageInput.addEventListener(
    SEND MESSAGE
 ===================================================== */
 
-
 async function sendMessage(){
-
 
     const text =
         messageInput.value.trim();
@@ -2355,8 +2220,7 @@ async function sendMessage(){
 
 
     if(
-        text.length >
-        2000
+        text.length > 2000
     ){
 
         alert(
@@ -2373,7 +2237,6 @@ async function sendMessage(){
 
 
     try{
-
 
         await push(
             messagesRef,
@@ -2401,12 +2264,10 @@ async function sendMessage(){
 
         resizeInput();
 
-
         updateSendButton();
 
 
     }catch(error){
-
 
         console.error(
             error
@@ -2429,11 +2290,9 @@ async function sendMessage(){
    RECEIVE MESSAGES
 ===================================================== */
 
-
 onChildAdded(
     messagesRef,
     snapshot => {
-
 
         const data =
             snapshot.val();
@@ -2458,11 +2317,7 @@ onChildAdded(
    RENDER MESSAGE
 ===================================================== */
 
-
-function renderMessage(
-    data
-){
-
+function renderMessage(data){
 
     const empty =
         messages.querySelector(
@@ -2559,9 +2414,7 @@ function renderMessage(
                 data.time
             );
 
-
     }else{
-
 
         date =
             new Date(
@@ -2591,11 +2444,9 @@ function renderMessage(
         name
     );
 
-
     bubble.appendChild(
         text
     );
-
 
     bubble.appendChild(
         time
@@ -2628,7 +2479,6 @@ function renderMessage(
    SEND BUTTON
 ===================================================== */
 
-
 sendBtn.addEventListener(
     "click",
     sendMessage
@@ -2638,7 +2488,6 @@ sendBtn.addEventListener(
 /* =====================================================
    USERS PANEL
 ===================================================== */
-
 
 usersBtn.addEventListener(
     "click",
@@ -2687,12 +2536,10 @@ usersOverlay.addEventListener(
 
 
 /* =====================================================
-   PROFILE
+   PROFILE AVATAR
 ===================================================== */
 
-
 function updateAvatar(){
-
 
     const saved =
         localStorage.getItem(
@@ -2701,7 +2548,6 @@ function updateAvatar(){
 
 
     if(saved){
-
 
         profileAvatar.innerHTML =
             "";
@@ -2737,15 +2583,10 @@ function updateAvatar(){
         );
 
 
-    span.id =
-        "avatarLetter";
-
-
     span.textContent =
         (
             profileName.value.trim() ||
-            username ||
-            "م"
+            username
         ).charAt(
             0
         );
@@ -2758,10 +2599,13 @@ function updateAvatar(){
 }
 
 
+/* =====================================================
+   OPEN PROFILE
+===================================================== */
+
 profileOpen.addEventListener(
     "click",
     () => {
-
 
         profileName.value =
             username;
@@ -2789,6 +2633,10 @@ profileOpen.addEventListener(
 );
 
 
+/* =====================================================
+   CLOSE PROFILE
+===================================================== */
+
 profileCancel.addEventListener(
     "click",
     () => {
@@ -2805,7 +2653,6 @@ profileCancel.addEventListener(
 profileOverlay.addEventListener(
     "click",
     event => {
-
 
         if(
             event.target ===
@@ -2827,11 +2674,9 @@ profileOverlay.addEventListener(
    PROFILE NAME PREVIEW
 ===================================================== */
 
-
 profileName.addEventListener(
     "input",
     () => {
-
 
         if(
             !localStorage.getItem(
@@ -2850,7 +2695,6 @@ profileName.addEventListener(
 /* =====================================================
    PROFILE PHOTO
 ===================================================== */
-
 
 const avatarInput =
     document.createElement(
@@ -2889,7 +2733,6 @@ avatarInput.addEventListener(
     "change",
     async () => {
 
-
         const file =
             avatarInput.files[0];
 
@@ -2925,10 +2768,8 @@ avatarInput.addEventListener(
                 "حجم عکس نباید بیشتر از ۵ مگابایت باشد."
             );
 
-
             avatarInput.value =
                 "";
-
 
             return;
 
@@ -2936,7 +2777,6 @@ avatarInput.addEventListener(
 
 
         try{
-
 
             profileAvatar.style.opacity =
                 ".5";
@@ -3011,7 +2851,6 @@ avatarInput.addEventListener(
 
         }catch(error){
 
-
             console.error(
                 "Avatar error:",
                 error
@@ -3025,10 +2864,8 @@ avatarInput.addEventListener(
 
         }finally{
 
-
             profileAvatar.style.opacity =
                 "1";
-
 
             avatarInput.value =
                 "";
@@ -3041,14 +2878,11 @@ avatarInput.addEventListener(
 
 /* =====================================================
    SAVE PROFILE
-   اصلاح شده
 ===================================================== */
-
 
 profileSave.addEventListener(
     "click",
     async () => {
-
 
         const newName =
             profileName.value.trim();
@@ -3066,8 +2900,7 @@ profileSave.addEventListener(
 
 
         if(
-            newName.length <
-            2
+            newName.length < 2
         ){
 
             alert(
@@ -3080,12 +2913,24 @@ profileSave.addEventListener(
 
 
         if(
-            newName.length >
-            30
+            newName.length > 30
         ){
 
             alert(
                 "نام نباید بیشتر از ۳۰ حرف باشد."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            newName === "مهمان"
+        ){
+
+            alert(
+                "این نام قابل استفاده نیست."
             );
 
             return;
@@ -3098,27 +2943,23 @@ profileSave.addEventListener(
 
 
         /*
-           ذخیره نام جدید در کلید اصلی
-        */
-
+         * ذخیره نام جدید
+         */
 
         localStorage.setItem(
             "asalchat_username",
             username
         );
 
-
-        /*
-           ذخیره در کلید قدیمی
-           برای سازگاری
-        */
-
-
         localStorage.setItem(
             "username",
             username
         );
 
+
+        /*
+         * تغییر شناسه آنلاین
+         */
 
         const oldOnlineRef =
             onlineRef;
@@ -3142,7 +2983,6 @@ profileSave.addEventListener(
 
         try{
 
-
             await remove(
                 oldOnlineRef
             );
@@ -3152,7 +2992,6 @@ profileSave.addEventListener(
 
 
         }catch(error){
-
 
             console.error(
                 error
@@ -3179,11 +3018,9 @@ profileSave.addEventListener(
    ATTACHMENT
 ===================================================== */
 
-
 attachBtn.addEventListener(
     "click",
     () => {
-
 
         alert(
             "ارسال عکس در مرحله بعد به پیام‌ها اضافه می‌شود 🍯"
@@ -3197,11 +3034,9 @@ attachBtn.addEventListener(
    EXIT
 ===================================================== */
 
-
 exitBtn.addEventListener(
     "click",
     async () => {
-
 
         const ok =
             confirm(
@@ -3218,14 +3053,11 @@ exitBtn.addEventListener(
 
         try{
 
-
             await remove(
                 onlineRef
             );
 
-
         }catch(error){
-
 
             console.error(
                 error
@@ -3235,27 +3067,37 @@ exitBtn.addEventListener(
 
 
         /*
-           حذف هر دو کلید نام
-        */
-
+         * پاک کردن اطلاعات ورود
+         */
 
         localStorage.removeItem(
             "username"
         );
 
-
         localStorage.removeItem(
             "asalchat_username"
         );
-
 
         localStorage.removeItem(
             "asalchat_gender"
         );
 
+        localStorage.removeItem(
+            "asalchat_logged_in"
+        );
 
-        window.location.href =
-            "index.html";
+        localStorage.removeItem(
+            "asalchat_login_time"
+        );
+
+
+        /*
+         * برگشت به صفحه ورود
+         */
+
+        window.location.replace(
+            "./index.html"
+        );
 
     }
 );
@@ -3265,11 +3107,9 @@ exitBtn.addEventListener(
    ESC
 ===================================================== */
 
-
 document.addEventListener(
     "keydown",
     event => {
-
 
         if(
             event.key !==
@@ -3300,11 +3140,9 @@ document.addEventListener(
    VISIBILITY
 ===================================================== */
 
-
 document.addEventListener(
     "visibilitychange",
     () => {
-
 
         if(
             document.visibilityState ===
@@ -3323,7 +3161,6 @@ document.addEventListener(
    INITIAL
 ===================================================== */
 
-
 updateAvatar();
 
 
@@ -3331,22 +3168,18 @@ console.log(
     "🍯 Asal Chat loaded"
 );
 
-
 console.log(
     "User:",
     username
 );
-
 
 console.log(
     "Room:",
     ROOM_NAME
 );
 
-
 </script>
-
 
 </body>
 
-   </html>
+      </html>
