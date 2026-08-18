@@ -31,14 +31,12 @@ body{
 }
 
 body{
-
     font-family:
         Tahoma,
         Arial,
         sans-serif;
 
     background:#080908;
-
     color:#fff;
 
     -webkit-tap-highlight-color:transparent;
@@ -51,7 +49,6 @@ textarea{
 }
 
 #app{
-
     width:100%;
     height:100dvh;
 
@@ -276,7 +273,6 @@ textarea{
 }
 
 #messages::-webkit-scrollbar-thumb{
-
     background:#383a34;
     border-radius:10px;
 }
@@ -385,8 +381,7 @@ textarea{
     position:relative;
 }
 
-.message-row.me
-.message-bubble{
+.message-row.me .message-bubble{
 
     background:
         linear-gradient(
@@ -402,8 +397,7 @@ textarea{
     border-bottom-right-radius:4px;
 }
 
-.message-row.other
-.message-bubble{
+.message-row.other .message-bubble{
 
     background:
         linear-gradient(
@@ -447,7 +441,7 @@ textarea{
     text-align:left;
 }
 
-/* ================= IMAGE MESSAGE ================= */
+/* ================= IMAGE ================= */
 
 .chat-image{
 
@@ -468,17 +462,6 @@ textarea{
     cursor:pointer;
 
     background:#111;
-}
-
-.image-loading{
-
-    padding:12px;
-
-    color:#aaa;
-
-    font-size:11px;
-
-    text-align:center;
 }
 
 /* ================= INPUT ================= */
@@ -565,10 +548,22 @@ textarea{
     color:#aaa;
 }
 
-.input-btn:active,
-.send-btn:active{
+.send-btn{
 
-    transform:scale(.9);
+    background:
+        linear-gradient(
+            145deg,
+            #ffc107,
+            #d99500
+        );
+
+    color:#17130a;
+
+    font-weight:bold;
+}
+
+.send-btn:disabled{
+    opacity:.4;
 }
 
 #messageInput{
@@ -603,7 +598,213 @@ textarea{
     color:#6f726b;
 }
 
-.send-btn{
+/* ================= USERS ================= */
+
+.users-overlay{
+
+    position:fixed;
+    inset:0;
+
+    z-index:150;
+
+    background:
+        rgba(0,0,0,.7);
+
+    backdrop-filter:
+        blur(4px);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.users-overlay.show{
+
+    opacity:1;
+    pointer-events:auto;
+}
+
+.users-panel{
+
+    position:absolute;
+
+    top:0;
+    right:0;
+
+    width:min(340px,88vw);
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            160deg,
+            #191a14,
+            #0c0d0b
+        );
+
+    border-left:
+        1px solid
+        rgba(255,193,7,.13);
+
+    box-shadow:
+        -10px 0 40px
+        rgba(0,0,0,.55);
+
+    transform:
+        translateX(100%);
+
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.users-overlay.show .users-panel{
+
+    transform:
+        translateX(0);
+}
+
+.users-header{
+
+    height:64px;
+    flex:0 0 64px;
+
+    display:flex;
+    align-items:center;
+
+    padding:
+        0 14px;
+
+    border-bottom:
+        1px solid
+        rgba(255,193,7,.12);
+}
+
+.users-title{
+
+    flex:1;
+
+    color:#ffd45a;
+
+    font-size:16px;
+    font-weight:bold;
+}
+
+.users-close{
+
+    width:36px;
+    height:36px;
+
+    border:0;
+    outline:0;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#ddd;
+
+    font-size:18px;
+}
+
+#usersList{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:10px;
+}
+
+.user-item{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px;
+
+    margin-bottom:7px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.user-avatar{
+
+    width:42px;
+    height:42px;
+
+    flex:0 0 42px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffc107,
+            #9b6900
+        );
+
+    color:#17130a;
+
+    font-weight:bold;
+}
+
+.user-avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.user-info{
+
+    min-width:0;
+    flex:1;
+}
+
+.user-name{
+
+    color:#eee;
+
+    font-size:13px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.user-online{
+
+    color:#55d978;
+
+    font-size:9px;
+
+    margin-top:3px;
+}
+
+.private-btn{
+
+    border:0;
+
+    padding:
+        8px 10px;
+
+    border-radius:10px;
 
     background:
         linear-gradient(
@@ -614,64 +815,190 @@ textarea{
 
     color:#17130a;
 
+    font-size:11px;
+
     font-weight:bold;
 
-    box-shadow:
-        0 3px 12px
-        rgba(255,193,7,.22);
+    cursor:pointer;
 }
 
-.send-btn:disabled{
-    opacity:.4;
-}
+/* ================= PRIVATE CHAT ================= */
 
-/* ================= CONNECTION ================= */
+.private-overlay{
 
-.connection-status{
+    position:fixed;
 
-    position:absolute;
+    inset:0;
 
-    top:10px;
-    left:50%;
+    z-index:300;
 
-    transform:
-        translateX(-50%);
+    display:flex;
+    flex-direction:column;
 
-    z-index:30;
-
-    padding:
-        5px 12px;
-
-    border-radius:20px;
-
-    background:
-        rgba(20,21,18,.92);
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-    color:#aaa;
-
-    font-size:10px;
+    background:#090a09;
 
     opacity:0;
 
     pointer-events:none;
 
-    transition:.3s;
+    transform:translateY(20px);
+
+    transition:.25s;
 }
 
-.connection-status.show{
+.private-overlay.show{
+
     opacity:1;
+
+    pointer-events:auto;
+
+    transform:translateY(0);
 }
 
-.connection-status.online{
+.private-header{
+
+    height:64px;
+    min-height:64px;
+
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
+    padding:
+        0 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #191a14,
+            #0e0f0d
+        );
+
+    border-bottom:
+        1px solid
+        rgba(255,193,7,.16);
+}
+
+.private-back{
+
+    width:40px;
+    height:40px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:#fff;
+
+    font-size:19px;
+}
+
+.private-avatar{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffc107,
+            #9b6900
+        );
+
+    color:#17130a;
+
+    font-weight:bold;
+}
+
+.private-avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.private-user-info{
+
+    flex:1;
+    min-width:0;
+}
+
+.private-title{
+
+    color:#ffd45a;
+
+    font-size:15px;
+    font-weight:bold;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.private-status{
+
     color:#55d978;
+
+    font-size:9px;
+
+    margin-top:3px;
 }
 
-.connection-status.offline{
-    color:#ff6969;
+.private-messages{
+
+    flex:1;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:
+        14px 10px 100px;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,193,7,.025),
+            transparent 25%
+        ),
+        #090a09;
+}
+
+.private-input-area{
+
+    position:absolute;
+
+    right:0;
+    bottom:0;
+    left:0;
+
+    padding:
+        8px
+        8px
+        calc(
+            8px +
+            env(safe-area-inset-bottom)
+        );
+
+    background:
+        linear-gradient(
+            to top,
+            #080908 75%,
+            transparent
+        );
 }
 
 /* ================= PROFILE ================= */
@@ -681,7 +1008,7 @@ textarea{
     position:fixed;
     inset:0;
 
-    z-index:200;
+    z-index:400;
 
     display:flex;
     align-items:center;
@@ -766,10 +1093,6 @@ textarea{
     font-size:32px;
     font-weight:bold;
 
-    box-shadow:
-        0 0 25px
-        rgba(255,193,7,.18);
-
     cursor:pointer;
 }
 
@@ -824,8 +1147,6 @@ textarea{
 
     color:#fff;
 
-    font-family:inherit;
-
     font-size:14px;
 
     text-align:right;
@@ -847,11 +1168,8 @@ textarea{
     height:43px;
 
     border:0;
-    outline:0;
 
     border-radius:12px;
-
-    font-family:inherit;
 
     cursor:pointer;
 }
@@ -878,233 +1196,6 @@ textarea{
     color:#ddd;
 }
 
-.profile-hint{
-
-    margin-top:12px;
-
-    color:#6f736b;
-
-    font-size:10px;
-
-    line-height:1.8;
-}
-
-/* ================= USERS ================= */
-
-.users-overlay{
-
-    position:fixed;
-    inset:0;
-
-    z-index:150;
-
-    background:
-        rgba(0,0,0,.7);
-
-    backdrop-filter:
-        blur(4px);
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:.25s;
-}
-
-.users-overlay.show{
-
-    opacity:1;
-    pointer-events:auto;
-}
-
-.users-panel{
-
-    position:absolute;
-
-    top:0;
-    right:0;
-
-    width:
-        min(
-            320px,
-            86vw
-        );
-
-    height:100%;
-
-    background:
-        linear-gradient(
-            160deg,
-            #191a14,
-            #0c0d0b
-        );
-
-    border-left:
-        1px solid
-        rgba(255,193,7,.13);
-
-    box-shadow:
-        -10px 0 40px
-        rgba(0,0,0,.55);
-
-    transform:
-        translateX(100%);
-
-    transition:.3s;
-
-    display:flex;
-    flex-direction:column;
-}
-
-.users-overlay.show
-.users-panel{
-
-    transform:
-        translateX(0);
-}
-
-.users-header{
-
-    height:64px;
-    flex:0 0 64px;
-
-    display:flex;
-    align-items:center;
-
-    padding:
-        0 14px;
-
-    border-bottom:
-        1px solid
-        rgba(255,193,7,.12);
-}
-
-.users-title{
-
-    flex:1;
-
-    color:#ffd45a;
-
-    font-size:16px;
-    font-weight:bold;
-}
-
-.users-close{
-
-    width:36px;
-    height:36px;
-
-    border:0;
-    outline:0;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.05);
-
-    color:#ddd;
-
-    font-size:18px;
-}
-
-#usersList{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:10px;
-}
-
-.user-item{
-
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-    padding:10px;
-    margin-bottom:6px;
-
-    border-radius:13px;
-
-    background:
-        rgba(255,255,255,.035);
-}
-
-.user-avatar{
-
-    width:38px;
-    height:38px;
-
-    flex:0 0 38px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffc107,
-            #9b6900
-        );
-
-    color:#17130a;
-
-    font-weight:bold;
-}
-
-.user-avatar img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.user-info{
-
-    min-width:0;
-    flex:1;
-}
-
-.user-name{
-
-    color:#eee;
-
-    font-size:13px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-}
-
-.user-online{
-
-    color:#55d978;
-
-    font-size:9px;
-
-    margin-top:3px;
-}
-
-.no-users{
-
-    text-align:center;
-
-    color:#777;
-
-    padding:30px 10px;
-
-    font-size:12px;
-}
-
 /* ================= IMAGE VIEWER ================= */
 
 .image-viewer{
@@ -1113,7 +1204,7 @@ textarea{
 
     inset:0;
 
-    z-index:500;
+    z-index:600;
 
     display:flex;
 
@@ -1135,7 +1226,6 @@ textarea{
 .image-viewer.show{
 
     opacity:1;
-
     pointer-events:auto;
 }
 
@@ -1171,25 +1261,63 @@ textarea{
     font-size:22px;
 }
 
-/* ================= MOBILE ================= */
+/* ================= STATUS ================= */
+
+.connection-status{
+
+    position:absolute;
+
+    top:10px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:30;
+
+    padding:
+        5px 12px;
+
+    border-radius:20px;
+
+    background:
+        rgba(20,21,18,.92);
+
+    color:#aaa;
+
+    font-size:10px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+}
+
+.connection-status.show{
+    opacity:1;
+}
+
+.connection-status.online{
+    color:#55d978;
+}
+
+.connection-status.offline{
+    color:#ff6969;
+}
 
 @media(max-width:360px){
 
     .chat-header{
-
         height:58px;
         min-height:58px;
-
         padding:0 8px;
     }
 
     .logo{
-
         width:38px;
         height:38px;
-
         flex-basis:38px;
-
         font-size:20px;
     }
 
@@ -1198,9 +1326,7 @@ textarea{
     }
 
     .message-bubble{
-
         max-width:86%;
-
         font-size:13px;
     }
 
@@ -1224,8 +1350,7 @@ textarea{
 
     <div
         class="logo"
-        id="profileOpen"
-        title="پروفایل">
+        id="profileOpen">
 
         🍯
 
@@ -1233,8 +1358,12 @@ textarea{
 
     <div class="header-info">
 
-        <div class="header-title">
+        <div
+            class="header-title"
+            id="headerTitle">
+
             عسل چت
+
         </div>
 
         <div class="header-status">
@@ -1273,6 +1402,7 @@ textarea{
 
 </header>
 
+
 <main class="chat-area">
 
     <div class="honey-bg"></div>
@@ -1309,6 +1439,7 @@ textarea{
 
     </div>
 
+
     <div class="input-area">
 
         <div class="input-box">
@@ -1316,8 +1447,7 @@ textarea{
             <button
                 class="input-btn"
                 id="attachBtn"
-                type="button"
-                title="ارسال عکس">
+                type="button">
 
                 📎
 
@@ -1348,7 +1478,152 @@ textarea{
 </div>
 
 
-<!-- PROFILE -->
+<!-- ================= USERS ================= -->
+
+<div
+    class="users-overlay"
+    id="usersOverlay">
+
+    <div class="users-panel">
+
+        <div class="users-header">
+
+            <div class="users-title">
+                کاربران آنلاین
+            </div>
+
+            <button
+                class="users-close"
+                id="usersClose"
+                type="button">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div id="usersList">
+
+            <div class="no-users">
+                در حال دریافت کاربران...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRIVATE CHAT ================= -->
+
+<div
+    class="private-overlay"
+    id="privateOverlay">
+
+    <div class="private-header">
+
+        <button
+            class="private-back"
+            id="privateBack"
+            type="button">
+
+            ➜
+
+        </button>
+
+        <div
+            class="private-avatar"
+            id="privateAvatar">
+
+            م
+
+        </div>
+
+        <div class="private-user-info">
+
+            <div
+                class="private-title"
+                id="privateTitle">
+
+                چت خصوصی
+
+            </div>
+
+            <div class="private-status">
+                🔒 گفت‌وگوی خصوصی
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="private-messages"
+        id="privateMessages">
+
+        <div class="empty-chat">
+
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    🔒
+                </div>
+
+                <div class="empty-title">
+                    چت خصوصی
+                </div>
+
+                <div class="empty-text">
+                    این گفتگو فقط بین شما و این کاربر است.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="private-input-area">
+
+        <div class="input-box">
+
+            <button
+                class="input-btn"
+                id="privateAttachBtn"
+                type="button">
+
+                📎
+
+            </button>
+
+            <textarea
+                id="privateInput"
+                rows="1"
+                maxlength="2000"
+                placeholder="پیام خصوصی..."
+                autocomplete="off"></textarea>
+
+            <button
+                class="send-btn"
+                id="privateSendBtn"
+                type="button">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PROFILE ================= -->
 
 <div
     class="profile-overlay"
@@ -1360,9 +1635,7 @@ textarea{
             class="profile-avatar"
             id="profileAvatar">
 
-            <span id="avatarLetter">
-                م
-            </span>
+            م
 
         </div>
 
@@ -1407,56 +1680,12 @@ textarea{
 
         </div>
 
-        <div class="profile-hint">
-
-            روی عکس پروفایل بزن تا تصویر انتخاب کنی.
-
-        </div>
-
     </div>
 
 </div>
 
 
-<!-- USERS -->
-
-<div
-    class="users-overlay"
-    id="usersOverlay">
-
-    <div class="users-panel">
-
-        <div class="users-header">
-
-            <div class="users-title">
-                کاربران آنلاین
-            </div>
-
-            <button
-                class="users-close"
-                id="usersClose"
-                type="button">
-
-                ✕
-
-            </button>
-
-        </div>
-
-        <div id="usersList">
-
-            <div class="no-users">
-                در حال دریافت کاربران...
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- IMAGE VIEWER -->
+<!-- ================= IMAGE VIEWER ================= -->
 
 <div
     class="image-viewer"
@@ -1479,8 +1708,6 @@ textarea{
 </div>
 
 
-<!-- FIREBASE -->
-
 <script type="module">
 
 import {
@@ -1494,12 +1721,12 @@ import {
     getDatabase,
     ref,
     push,
-    onChildAdded,
-    onValue,
-    serverTimestamp,
-    onDisconnect,
     set,
-    remove
+    remove,
+    onValue,
+    onChildAdded,
+    serverTimestamp,
+    onDisconnect
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
@@ -1515,14 +1742,23 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
+import {
+    getAuth,
+    signInAnonymously,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBmV0ikTOiXmtibjuXgJ4PhIbJcTxkhP5A",
+        "AIzaSyBmV0ikTOiXmtibXgJ4PhIbJcTxkhP5A",
 
     authDomain:
         "roomasal.firebaseapp.com",
@@ -1548,14 +1784,8 @@ const firebaseConfig = {
 };
 
 
-/* =====================================================
-   INIT
-===================================================== */
-
 const app =
-    initializeApp(
-        firebaseConfig
-    );
+    initializeApp(firebaseConfig);
 
 const db =
     getDatabase(app);
@@ -1563,167 +1793,114 @@ const db =
 const storage =
     getStorage(app);
 
+const auth =
+    getAuth(app);
+
 
 /* =====================================================
    ELEMENTS
 ===================================================== */
 
 const messages =
-    document.getElementById(
-        "messages"
-    );
+    document.getElementById("messages");
 
 const messageInput =
-    document.getElementById(
-        "messageInput"
-    );
+    document.getElementById("messageInput");
 
 const sendBtn =
-    document.getElementById(
-        "sendBtn"
-    );
+    document.getElementById("sendBtn");
 
 const attachBtn =
-    document.getElementById(
-        "attachBtn"
-    );
-
-const onlineStatus =
-    document.getElementById(
-        "onlineStatus"
-    );
-
-const connectionStatus =
-    document.getElementById(
-        "connectionStatus"
-    );
-
-const exitBtn =
-    document.getElementById(
-        "exitBtn"
-    );
+    document.getElementById("attachBtn");
 
 const usersBtn =
-    document.getElementById(
-        "usersBtn"
-    );
+    document.getElementById("usersBtn");
 
 const usersOverlay =
-    document.getElementById(
-        "usersOverlay"
-    );
+    document.getElementById("usersOverlay");
 
 const usersClose =
-    document.getElementById(
-        "usersClose"
-    );
+    document.getElementById("usersClose");
 
 const usersList =
-    document.getElementById(
-        "usersList"
-    );
+    document.getElementById("usersList");
+
+const onlineStatus =
+    document.getElementById("onlineStatus");
+
+const connectionStatus =
+    document.getElementById("connectionStatus");
+
+const exitBtn =
+    document.getElementById("exitBtn");
 
 const profileOpen =
-    document.getElementById(
-        "profileOpen"
-    );
+    document.getElementById("profileOpen");
 
 const profileOverlay =
-    document.getElementById(
-        "profileOverlay"
-    );
+    document.getElementById("profileOverlay");
 
 const profileAvatar =
-    document.getElementById(
-        "profileAvatar"
-    );
+    document.getElementById("profileAvatar");
 
 const profileName =
-    document.getElementById(
-        "profileName"
-    );
+    document.getElementById("profileName");
 
 const profileSave =
-    document.getElementById(
-        "profileSave"
-    );
+    document.getElementById("profileSave");
 
 const profileCancel =
-    document.getElementById(
-        "profileCancel"
-    );
+    document.getElementById("profileCancel");
 
 const imageViewer =
-    document.getElementById(
-        "imageViewer"
-    );
+    document.getElementById("imageViewer");
 
 const viewerImage =
-    document.getElementById(
-        "viewerImage"
-    );
+    document.getElementById("viewerImage");
 
 const imageViewerClose =
-    document.getElementById(
-        "imageViewerClose"
-    );
+    document.getElementById("imageViewerClose");
+
+const privateOverlay =
+    document.getElementById("privateOverlay");
+
+const privateBack =
+    document.getElementById("privateBack");
+
+const privateAvatar =
+    document.getElementById("privateAvatar");
+
+const privateTitle =
+    document.getElementById("privateTitle");
+
+const privateMessages =
+    document.getElementById("privateMessages");
+
+const privateInput =
+    document.getElementById("privateInput");
+
+const privateSendBtn =
+    document.getElementById("privateSendBtn");
+
+const privateAttachBtn =
+    document.getElementById("privateAttachBtn");
 
 
 /* =====================================================
    USER
 ===================================================== */
 
-/*
-   مهم:
-   نام از index.html خوانده می‌شود.
-*/
-
 let username =
-    localStorage.getItem(
-        "asalchat_username"
-    );
-
-
-/*
-   سازگاری با نسخه‌های قبلی
-*/
-
-if(
-    !username ||
-    !username.trim()
-){
-
-    username =
-        localStorage.getItem(
-            "username"
-        );
-
-}
-
-
-/*
-   فقط اگر هیچ نامی وجود نداشت
-*/
-
-if(
-    !username ||
-    !username.trim()
-){
-
-    username =
-        "مهمان";
-
-}
-
+    localStorage.getItem("asalchat_username") ||
+    localStorage.getItem("username") ||
+    "مهمان";
 
 username =
-    username
-        .trim()
-        .replace(
-            /\s+/g,
-            " "
-        );
+    username.trim().replace(/\s+/g," ");
 
+if(!username){
+    username = "مهمان";
+}
 
 localStorage.setItem(
     "asalchat_username",
@@ -1733,6 +1910,44 @@ localStorage.setItem(
 localStorage.setItem(
     "username",
     username
+);
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+let currentUser = null;
+
+let authReady =
+    signInAnonymously(auth)
+        .catch(error => {
+
+            console.error(
+                "AUTH ERROR:",
+                error
+            );
+
+            alert(
+                "ورود Firebase انجام نشد.\n\nAnonymous Authentication را در Firebase فعال کن."
+            );
+
+        });
+
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(!user){
+            return;
+        }
+
+        currentUser = user;
+
+        registerOnlineUser();
+
+    }
 );
 
 
@@ -1770,109 +1985,33 @@ const connectedRef =
 
 
 /* =====================================================
-   USER ID
+   ONLINE
 ===================================================== */
 
-function makeSafeUserId(name){
+let onlineRef = null;
 
-    return name
-        .replace(
-            /[.#$[\]/]/g,
-            "_"
-        )
-        .substring(
-            0,
-            40
-        );
-
-}
-
-
-let safeUser =
-    makeSafeUserId(
-        username
-    );
-
-
-let onlineRef =
-    ref(
-        db,
-        "rooms/" +
-        ROOM_NAME +
-        "/online/" +
-        safeUser
-    );
-
-
-/* =====================================================
-   CONNECTION
-===================================================== */
-
-onValue(
-    connectedRef,
-    snapshot => {
-
-        if(
-            snapshot.val() === true
-        ){
-
-            onlineStatus.textContent =
-                "آنلاین";
-
-            connectionStatus.textContent =
-                "متصل شد";
-
-            connectionStatus.classList
-                .remove("offline");
-
-            connectionStatus.classList
-                .add(
-                    "show",
-                    "online"
-                );
-
-            setTimeout(
-                () => {
-
-                    connectionStatus.classList
-                        .remove("show");
-
-                },
-                1500
-            );
-
-        }else{
-
-            onlineStatus.textContent =
-                "قطع اتصال";
-
-            connectionStatus.textContent =
-                "اتصال به سرور قطع شد";
-
-            connectionStatus.classList
-                .remove("online");
-
-            connectionStatus.classList
-                .add(
-                    "show",
-                    "offline"
-                );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   REGISTER ONLINE USER
-===================================================== */
 
 function registerOnlineUser(){
+
+    if(!currentUser){
+        return;
+    }
+
+    onlineRef =
+        ref(
+            db,
+            "rooms/" +
+            ROOM_NAME +
+            "/online/" +
+            currentUser.uid
+        );
 
     set(
         onlineRef,
         {
+
+            uid:
+                currentUser.uid,
 
             name:
                 username,
@@ -1899,11 +2038,51 @@ onValue(
     connectedRef,
     snapshot => {
 
-        if(
-            snapshot.val() === true
-        ){
+        if(snapshot.val() === true){
+
+            onlineStatus.textContent =
+                "آنلاین";
+
+            connectionStatus.textContent =
+                "متصل شد";
+
+            connectionStatus.classList
+                .remove("offline");
+
+            connectionStatus.classList
+                .add(
+                    "show",
+                    "online"
+                );
+
+            setTimeout(
+                () => {
+
+                    connectionStatus.classList
+                        .remove("show");
+
+                },
+                1200
+            );
 
             registerOnlineUser();
+
+        }else{
+
+            onlineStatus.textContent =
+                "قطع اتصال";
+
+            connectionStatus.textContent =
+                "اتصال قطع شد";
+
+            connectionStatus.classList
+                .remove("online");
+
+            connectionStatus.classList
+                .add(
+                    "show",
+                    "offline"
+                );
 
         }
 
@@ -1912,7 +2091,7 @@ onValue(
 
 
 /* =====================================================
-   ONLINE USERS
+   USERS
 ===================================================== */
 
 onValue(
@@ -1932,19 +2111,37 @@ onValue(
                     هیچ کاربری آنلاین نیست
                 </div>`;
 
-            onlineStatus.textContent =
-                "۰ نفر آنلاین";
-
             return;
 
         }
 
         const users =
-            Object.values(data);
+            Object.values(data)
+                .filter(
+                    user =>
+                        currentUser &&
+                        user.uid !==
+                        currentUser.uid
+                );
 
         onlineStatus.textContent =
-            users.length +
+            (
+                Object.keys(data).length
+            ) +
             " نفر آنلاین";
+
+
+        if(users.length === 0){
+
+            usersList.innerHTML =
+                `<div class="no-users">
+                    کاربر دیگری آنلاین نیست
+                </div>`;
+
+            return;
+
+        }
+
 
         users.forEach(
             user => {
@@ -1957,6 +2154,7 @@ onValue(
                 item.className =
                     "user-item";
 
+
                 const avatar =
                     document.createElement(
                         "div"
@@ -1964,6 +2162,7 @@ onValue(
 
                 avatar.className =
                     "user-avatar";
+
 
                 if(user.avatar){
 
@@ -1989,6 +2188,7 @@ onValue(
 
                 }
 
+
                 const info =
                     document.createElement(
                         "div"
@@ -1996,6 +2196,7 @@ onValue(
 
                 info.className =
                     "user-info";
+
 
                 const name =
                     document.createElement(
@@ -2009,6 +2210,7 @@ onValue(
                     user.name ||
                     "مهمان";
 
+
                 const status =
                     document.createElement(
                         "div"
@@ -2020,25 +2222,40 @@ onValue(
                 status.textContent =
                     "● آنلاین";
 
-                info.appendChild(
-                    name
+
+                info.appendChild(name);
+                info.appendChild(status);
+
+
+                const privateBtn =
+                    document.createElement(
+                        "button"
+                    );
+
+                privateBtn.className =
+                    "private-btn";
+
+                privateBtn.textContent =
+                    "💬 چت";
+
+
+                privateBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+                        openPrivateChat(user);
+
+                    }
                 );
 
-                info.appendChild(
-                    status
-                );
 
-                item.appendChild(
-                    avatar
-                );
+                item.appendChild(avatar);
+                item.appendChild(info);
+                item.appendChild(privateBtn);
 
-                item.appendChild(
-                    info
-                );
-
-                usersList.appendChild(
-                    item
-                );
+                usersList.appendChild(item);
 
             }
         );
@@ -2048,63 +2265,185 @@ onValue(
 
 
 /* =====================================================
-   INPUT
+   PRIVATE CHAT STATE
 ===================================================== */
 
-function resizeInput(){
+let privateUser = null;
 
-    messageInput.style.height =
-        "auto";
+let privateMessagesRef = null;
 
-    messageInput.style.height =
-        Math.min(
-            messageInput.scrollHeight,
-            110
-        ) +
-        "px";
-
-}
-
-
-function updateSendButton(){
-
-    sendBtn.disabled =
-        messageInput.value
-            .trim()
-            .length === 0;
-
-}
-
-
-messageInput.addEventListener(
-    "input",
-    resizeInput
-);
-
-messageInput.addEventListener(
-    "input",
-    updateSendButton
-);
-
-updateSendButton();
+let stopPrivateListener = null;
 
 
 /* =====================================================
-   ENTER
+   PRIVATE CHAT ID
 ===================================================== */
 
-messageInput.addEventListener(
-    "keydown",
-    event => {
+function makePrivateChatId(
+    uid1,
+    uid2
+){
 
-        if(
-            event.key === "Enter" &&
-            !event.shiftKey
-        ){
+    return [
+        uid1,
+        uid2
+    ]
+    .sort()
+    .join("_");
 
-            event.preventDefault();
+}
 
-            sendMessage();
+
+/* =====================================================
+   OPEN PRIVATE CHAT
+===================================================== */
+
+function openPrivateChat(user){
+
+    if(!currentUser){
+        alert("در حال اتصال به Firebase...");
+        return;
+    }
+
+    if(
+        !user ||
+        !user.uid
+    ){
+        return;
+    }
+
+    privateUser =
+        user;
+
+
+    privateTitle.textContent =
+        user.name ||
+        "مهمان";
+
+
+    privateAvatar.innerHTML =
+        "";
+
+    if(user.avatar){
+
+        const img =
+            document.createElement(
+                "img"
+            );
+
+        img.src =
+            user.avatar;
+
+        privateAvatar.appendChild(
+            img
+        );
+
+    }else{
+
+        privateAvatar.textContent =
+            (
+                user.name ||
+                "م"
+            ).charAt(0);
+
+    }
+
+
+    usersOverlay.classList
+        .remove("show");
+
+
+    privateOverlay.classList
+        .add("show");
+
+
+    privateMessages.innerHTML =
+        `<div class="empty-chat">
+
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    🔒
+                </div>
+
+                <div class="empty-title">
+                    چت خصوصی
+                </div>
+
+                <div class="empty-text">
+                    این گفتگو فقط بین شما و ${escapeHtml(user.name || "این کاربر")} است.
+                </div>
+
+            </div>
+
+        </div>`;
+
+
+    const chatId =
+        makePrivateChatId(
+            currentUser.uid,
+            user.uid
+        );
+
+
+    privateMessagesRef =
+        ref(
+            db,
+            "privateChats/" +
+            chatId +
+            "/messages"
+        );
+
+
+    if(stopPrivateListener){
+
+        stopPrivateListener();
+
+    }
+
+
+    stopPrivateListener =
+        onChildAdded(
+            privateMessagesRef,
+            snapshot => {
+
+                const data =
+                    snapshot.val();
+
+                if(data){
+
+                    renderPrivateMessage(
+                        data
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   CLOSE PRIVATE
+===================================================== */
+
+privateBack.addEventListener(
+    "click",
+    () => {
+
+        privateOverlay.classList
+            .remove("show");
+
+        privateUser = null;
+
+        privateMessagesRef = null;
+
+        if(stopPrivateListener){
+
+            stopPrivateListener();
+
+            stopPrivateListener = null;
 
         }
 
@@ -2113,7 +2452,256 @@ messageInput.addEventListener(
 
 
 /* =====================================================
-   SEND TEXT
+   SEND PRIVATE
+===================================================== */
+
+async function sendPrivateMessage(){
+
+    const text =
+        privateInput.value.trim();
+
+    if(
+        !text ||
+        !privateMessagesRef ||
+        !privateUser ||
+        !currentUser
+    ){
+
+        return;
+
+    }
+
+
+    privateSendBtn.disabled =
+        true;
+
+
+    try{
+
+        await push(
+            privateMessagesRef,
+            {
+
+                senderUid:
+                    currentUser.uid,
+
+                receiverUid:
+                    privateUser.uid,
+
+                name:
+                    username,
+
+                text:
+                    text,
+
+                type:
+                    "text",
+
+                time:
+                    serverTimestamp(),
+
+                createdAt:
+                    Date.now()
+
+            }
+        );
+
+
+        privateInput.value =
+            "";
+
+        resizePrivateInput();
+
+        updatePrivateSendButton();
+
+    }
+    catch(error){
+
+        console.error(
+            "PRIVATE SEND ERROR:",
+            error
+        );
+
+        alert(
+            "ارسال پیام خصوصی انجام نشد."
+        );
+
+    }
+
+
+    privateSendBtn.disabled =
+        false;
+
+}
+
+
+/* =====================================================
+   PRIVATE RENDER
+===================================================== */
+
+function renderPrivateMessage(data){
+
+    const empty =
+        privateMessages.querySelector(
+            ".empty-chat"
+        );
+
+    if(empty){
+        empty.remove();
+    }
+
+
+    const mine =
+        data.senderUid ===
+        currentUser.uid;
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+    row.className =
+        "message-row " +
+        (
+            mine
+                ? "me"
+                : "other"
+        );
+
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        "message-bubble";
+
+
+    const name =
+        document.createElement(
+            "div"
+        );
+
+    name.className =
+        "message-name";
+
+    name.textContent =
+        mine
+            ? "شما"
+            : (
+                data.name ||
+                privateUser?.name ||
+                "مهمان"
+            );
+
+
+    bubble.appendChild(name);
+
+
+    if(
+        data.type === "image" &&
+        data.imageUrl
+    ){
+
+        const img =
+            document.createElement(
+                "img"
+            );
+
+        img.className =
+            "chat-image";
+
+        img.src =
+            data.imageUrl;
+
+        img.loading =
+            "lazy";
+
+        img.addEventListener(
+            "click",
+            () => {
+
+                viewerImage.src =
+                    data.imageUrl;
+
+                imageViewer.classList
+                    .add("show");
+
+            }
+        );
+
+        bubble.appendChild(img);
+
+    }
+
+
+    if(data.text){
+
+        const text =
+            document.createElement(
+                "div"
+            );
+
+        text.className =
+            "message-text";
+
+        text.textContent =
+            data.text;
+
+        bubble.appendChild(text);
+
+    }
+
+
+    const time =
+        document.createElement(
+            "div"
+        );
+
+    time.className =
+        "message-time";
+
+
+    const date =
+        new Date(
+            data.createdAt ||
+            Date.now()
+        );
+
+
+    time.textContent =
+        date.toLocaleTimeString(
+            "fa-IR",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+
+    bubble.appendChild(time);
+
+    row.appendChild(bubble);
+
+    privateMessages.appendChild(row);
+
+
+    requestAnimationFrame(
+        () => {
+
+            privateMessages.scrollTop =
+                privateMessages.scrollHeight;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PUBLIC SEND
 ===================================================== */
 
 async function sendMessage(){
@@ -2125,24 +2713,15 @@ async function sendMessage(){
         return;
     }
 
-    if(text.length > 2000){
-
-        alert(
-            "پیام نمی‌تواند بیشتر از ۲۰۰۰ کاراکتر باشد."
-        );
-
-        return;
-
-    }
-
-    sendBtn.disabled =
-        true;
-
     try{
 
         await push(
             messagesRef,
             {
+
+                senderUid:
+                    currentUser?.uid ||
+                    "",
 
                 name:
                     username,
@@ -2174,10 +2753,8 @@ async function sendMessage(){
         console.error(error);
 
         alert(
-            "پیام ارسال نشد. Firebase را بررسی کن."
+            "پیام ارسال نشد."
         );
-
-        updateSendButton();
 
     }
 
@@ -2185,7 +2762,7 @@ async function sendMessage(){
 
 
 /* =====================================================
-   RECEIVE
+   PUBLIC RECEIVE
 ===================================================== */
 
 onChildAdded(
@@ -2195,18 +2772,18 @@ onChildAdded(
         const data =
             snapshot.val();
 
-        if(!data){
-            return;
-        }
+        if(data){
 
-        renderMessage(data);
+            renderMessage(data);
+
+        }
 
     }
 );
 
 
 /* =====================================================
-   RENDER
+   PUBLIC RENDER
 ===================================================== */
 
 function renderMessage(data){
@@ -2220,8 +2797,14 @@ function renderMessage(data){
         empty.remove();
     }
 
+
     const mine =
-        data.name === username;
+        data.senderUid &&
+        currentUser
+            ? data.senderUid ===
+              currentUser.uid
+            : data.name === username;
+
 
     const row =
         document.createElement(
@@ -2236,6 +2819,7 @@ function renderMessage(data){
                 : "other"
         );
 
+
     const bubble =
         document.createElement(
             "div"
@@ -2243,6 +2827,7 @@ function renderMessage(data){
 
     bubble.className =
         "message-bubble";
+
 
     const name =
         document.createElement(
@@ -2253,17 +2838,16 @@ function renderMessage(data){
         "message-name";
 
     name.textContent =
-        data.name ||
-        "مهمان";
+        mine
+            ? "شما"
+            : (
+                data.name ||
+                "مهمان"
+            );
 
-    bubble.appendChild(
-        name
-    );
 
+    bubble.appendChild(name);
 
-    /* =========================
-       IMAGE
-    ========================= */
 
     if(
         data.type === "image" &&
@@ -2281,9 +2865,6 @@ function renderMessage(data){
         img.src =
             data.imageUrl;
 
-        img.alt =
-            "تصویر ارسال شده";
-
         img.loading =
             "lazy";
 
@@ -2300,16 +2881,10 @@ function renderMessage(data){
             }
         );
 
-        bubble.appendChild(
-            img
-        );
+        bubble.appendChild(img);
 
     }
 
-
-    /* =========================
-       TEXT
-    ========================= */
 
     if(data.text){
 
@@ -2324,16 +2899,10 @@ function renderMessage(data){
         text.textContent =
             data.text;
 
-        bubble.appendChild(
-            text
-        );
+        bubble.appendChild(text);
 
     }
 
-
-    /* =========================
-       TIME
-    ========================= */
 
     const time =
         document.createElement(
@@ -2343,53 +2912,30 @@ function renderMessage(data){
     time.className =
         "message-time";
 
-    let date;
 
-    if(
-        typeof data.time ===
-        "number"
-    ){
+    const date =
+        new Date(
+            data.createdAt ||
+            Date.now()
+        );
 
-        date =
-            new Date(
-                data.time
-            );
-
-    }else{
-
-        date =
-            new Date(
-                data.createdAt ||
-                Date.now()
-            );
-
-    }
 
     time.textContent =
         date.toLocaleTimeString(
             "fa-IR",
             {
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit"
-
+                hour:"2-digit",
+                minute:"2-digit"
             }
         );
 
-    bubble.appendChild(
-        time
-    );
 
-    row.appendChild(
-        bubble
-    );
+    bubble.appendChild(time);
 
-    messages.appendChild(
-        row
-    );
+    row.appendChild(bubble);
+
+    messages.appendChild(row);
+
 
     requestAnimationFrame(
         () => {
@@ -2404,8 +2950,114 @@ function renderMessage(data){
 
 
 /* =====================================================
-   SEND BUTTON
+   INPUT
 ===================================================== */
+
+function resizeInput(){
+
+    messageInput.style.height =
+        "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            110
+        ) + "px";
+
+}
+
+
+function updateSendButton(){
+
+    sendBtn.disabled =
+        messageInput.value.trim()
+            .length === 0;
+
+}
+
+
+function resizePrivateInput(){
+
+    privateInput.style.height =
+        "auto";
+
+    privateInput.style.height =
+        Math.min(
+            privateInput.scrollHeight,
+            110
+        ) + "px";
+
+}
+
+
+function updatePrivateSendButton(){
+
+    privateSendBtn.disabled =
+        privateInput.value.trim()
+            .length === 0;
+
+}
+
+
+messageInput.addEventListener(
+    "input",
+    () => {
+
+        resizeInput();
+        updateSendButton();
+
+    }
+);
+
+
+privateInput.addEventListener(
+    "input",
+    () => {
+
+        resizePrivateInput();
+        updatePrivateSendButton();
+
+    }
+);
+
+
+messageInput.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+privateInput.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendPrivateMessage();
+
+        }
+
+    }
+);
+
 
 sendBtn.addEventListener(
     "click",
@@ -2413,8 +3065,67 @@ sendBtn.addEventListener(
 );
 
 
+privateSendBtn.addEventListener(
+    "click",
+    sendPrivateMessage
+);
+
+
 /* =====================================================
-   REAL IMAGE UPLOAD
+   IMAGE UPLOAD HELPER
+===================================================== */
+
+async function uploadImage(
+    file,
+    path
+){
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const fileName =
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,10) +
+        "." +
+        extension;
+
+
+    const fileRef =
+        storageRef(
+            storage,
+            path +
+            "/" +
+            fileName
+        );
+
+
+    const uploaded =
+        await uploadBytes(
+            fileRef,
+            file,
+            {
+                contentType:
+                    file.type
+            }
+        );
+
+
+    return await getDownloadURL(
+        uploaded.ref
+    );
+
+}
+
+
+/* =====================================================
+   PUBLIC IMAGE
 ===================================================== */
 
 const imageInput =
@@ -2426,7 +3137,7 @@ imageInput.type =
     "file";
 
 imageInput.accept =
-    "image/jpeg,image/png,image/webp,image/gif";
+    "image/*";
 
 imageInput.style.display =
     "none";
@@ -2435,10 +3146,6 @@ document.body.appendChild(
     imageInput
 );
 
-
-/* =========================
-   OPEN FILE PICKER
-========================= */
 
 attachBtn.addEventListener(
     "click",
@@ -2449,10 +3156,6 @@ attachBtn.addEventListener(
     }
 );
 
-
-/* =========================
-   SELECT IMAGE
-========================= */
 
 imageInput.addEventListener(
     "change",
@@ -2466,53 +3169,27 @@ imageInput.addEventListener(
         }
 
 
-        /* ======================
-           IMAGE CHECK
-        ====================== */
-
-        if(
-            !file.type.startsWith(
-                "image/"
-            )
-        ){
+        if(!file.type.startsWith("image/")){
 
             alert(
-                "لطفاً فقط یک تصویر انتخاب کنید."
+                "فقط عکس انتخاب کنید."
             );
-
-            imageInput.value =
-                "";
 
             return;
 
         }
 
 
-        /* ======================
-           SIZE
-           حداکثر 5MB
-        ====================== */
-
-        if(
-            file.size >
-            5 * 1024 * 1024
-        ){
+        if(file.size > 5 * 1024 * 1024){
 
             alert(
                 "حجم عکس نباید بیشتر از ۵ مگابایت باشد."
             );
 
-            imageInput.value =
-                "";
-
             return;
 
         }
 
-
-        /* ======================
-           DISABLE BUTTON
-        ====================== */
 
         attachBtn.disabled =
             true;
@@ -2523,76 +3200,21 @@ imageInput.addEventListener(
 
         try{
 
-            /* ====================
-               FILE NAME
-            ==================== */
-
-            const extension =
-                file.name
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
-
-            const fileName =
-                "chat_" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(
-                        2,
-                        10
-                    ) +
-                "." +
-                extension;
-
-
-            /* ====================
-               STORAGE PATH
-            ==================== */
-
-            const fileRef =
-                storageRef(
-                    storage,
-                    "chat-images/" +
-                    ROOM_NAME +
-                    "/" +
-                    fileName
-                );
-
-
-            /* ====================
-               UPLOAD
-            ==================== */
-
-            const uploaded =
-                await uploadBytes(
-                    fileRef,
+            const url =
+                await uploadImage(
                     file,
-                    {
-                        contentType:
-                            file.type
-                    }
+                    "chat-images/" +
+                    ROOM_NAME
                 );
 
-
-            /* ====================
-               URL
-            ==================== */
-
-            const imageUrl =
-                await getDownloadURL(
-                    uploaded.ref
-                );
-
-
-            /* ====================
-               SEND TO DATABASE
-            ==================== */
 
             await push(
                 messagesRef,
                 {
+
+                    senderUid:
+                        currentUser?.uid ||
+                        "",
 
                     name:
                         username,
@@ -2601,7 +3223,7 @@ imageInput.addEventListener(
                         "image",
 
                     imageUrl:
-                        imageUrl,
+                        url,
 
                     imageName:
                         file.name,
@@ -2618,17 +3240,13 @@ imageInput.addEventListener(
                 }
             );
 
-
         }
         catch(error){
 
-            console.error(
-                "IMAGE UPLOAD ERROR:",
-                error
-            );
+            console.error(error);
 
             alert(
-                "آپلود عکس انجام نشد.\n\nلطفاً Firebase Storage و Rules را بررسی کن."
+                "ارسال عکس انجام نشد."
             );
 
         }
@@ -2650,210 +3268,58 @@ imageInput.addEventListener(
 
 
 /* =====================================================
-   USERS PANEL
+   PRIVATE IMAGE
 ===================================================== */
 
-usersBtn.addEventListener(
-    "click",
-    () => {
-
-        usersOverlay.classList
-            .add("show");
-
-    }
-);
-
-
-usersClose.addEventListener(
-    "click",
-    () => {
-
-        usersOverlay.classList
-            .remove("show");
-
-    }
-);
-
-
-usersOverlay.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            usersOverlay
-        ){
-
-            usersOverlay.classList
-                .remove("show");
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   PROFILE AVATAR
-===================================================== */
-
-function updateAvatar(){
-
-    const saved =
-        localStorage.getItem(
-            "profileAvatar"
-        );
-
-    if(saved){
-
-        profileAvatar.innerHTML =
-            "";
-
-        const img =
-            document.createElement(
-                "img"
-            );
-
-        img.src =
-            saved;
-
-        profileAvatar.appendChild(
-            img
-        );
-
-        return;
-
-    }
-
-    profileAvatar.innerHTML =
-        "";
-
-    const span =
-        document.createElement(
-            "span"
-        );
-
-    span.textContent =
-        (
-            profileName.value.trim() ||
-            username ||
-            "م"
-        ).charAt(0);
-
-    profileAvatar.appendChild(
-        span
-    );
-
-}
-
-
-/* =====================================================
-   PROFILE OPEN
-===================================================== */
-
-profileOpen.addEventListener(
-    "click",
-    () => {
-
-        profileName.value =
-            username;
-
-        updateAvatar();
-
-        profileOverlay.classList
-            .add("show");
-
-        setTimeout(
-            () => {
-
-                profileName.focus();
-
-            },
-            100
-        );
-
-    }
-);
-
-
-profileCancel.addEventListener(
-    "click",
-    () => {
-
-        profileOverlay.classList
-            .remove("show");
-
-    }
-);
-
-
-profileOverlay.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            profileOverlay
-        ){
-
-            profileOverlay.classList
-                .remove("show");
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   PROFILE PHOTO
-===================================================== */
-
-const avatarInput =
+const privateImageInput =
     document.createElement(
         "input"
     );
 
-avatarInput.type =
+privateImageInput.type =
     "file";
 
-avatarInput.accept =
+privateImageInput.accept =
     "image/*";
 
-avatarInput.style.display =
+privateImageInput.style.display =
     "none";
 
 document.body.appendChild(
-    avatarInput
+    privateImageInput
 );
 
 
-profileAvatar.addEventListener(
+privateAttachBtn.addEventListener(
     "click",
     () => {
 
-        avatarInput.click();
+        privateImageInput.click();
 
     }
 );
 
 
-avatarInput.addEventListener(
+privateImageInput.addEventListener(
     "change",
     async () => {
 
         const file =
-            avatarInput.files[0];
-
-        if(!file){
-            return;
-        }
+            privateImageInput.files[0];
 
         if(
-            !file.type.startsWith(
-                "image/"
-            )
+            !file ||
+            !privateUser ||
+            !privateMessagesRef ||
+            !currentUser
         ){
+
+            return;
+
+        }
+
+
+        if(!file.type.startsWith("image/")){
 
             alert(
                 "فقط عکس انتخاب کنید."
@@ -2863,377 +3329,53 @@ avatarInput.addEventListener(
 
         }
 
-        if(
-            file.size >
-            5 * 1024 * 1024
-        ){
+
+        if(file.size > 5 * 1024 * 1024){
 
             alert(
                 "حجم عکس نباید بیشتر از ۵ مگابایت باشد."
             );
 
-            avatarInput.value =
-                "";
-
             return;
 
         }
 
+
+        privateAttachBtn.disabled =
+            true;
+
+        privateAttachBtn.textContent =
+            "⏳";
+
+
         try{
 
-            profileAvatar.style.opacity =
-                ".5";
-
-            const fileName =
-                "avatar_" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(
-                        2,
-                        8
-                    ) +
-                ".jpg";
-
-            const fileRef =
-                storageRef(
-                    storage,
-                    "avatars/" +
-                    ROOM_NAME +
-                    "/" +
-                    fileName
+            const chatId =
+                makePrivateChatId(
+                    currentUser.uid,
+                    privateUser.uid
                 );
 
-            const uploaded =
-                await uploadBytes(
-                    fileRef,
-                    file
-                );
 
             const url =
-                await getDownloadURL(
-                    uploaded.ref
+                await uploadImage(
+                    file,
+                    "private-images/" +
+                    chatId
                 );
 
-            localStorage.setItem(
-                "profileAvatar",
-                url
-            );
 
-            updateAvatar();
-
-            await set(
-                onlineRef,
+            await push(
+                privateMessagesRef,
                 {
+
+                    senderUid:
+                        currentUser.uid,
+
+                    receiverUid:
+                        privateUser.uid,
 
                     name:
                         username,
 
-                    avatar:
-                        url,
-
-                    time:
-                        serverTimestamp()
-
-                }
-            );
-
-            alert(
-                "عکس پروفایل ذخیره شد ✓"
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                error
-            );
-
-            alert(
-                "آپلود عکس پروفایل انجام نشد. Storage را بررسی کن."
-            );
-
-        }
-        finally{
-
-            profileAvatar.style.opacity =
-                "1";
-
-            avatarInput.value =
-                "";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SAVE PROFILE
-===================================================== */
-
-profileSave.addEventListener(
-    "click",
-    async () => {
-
-        const newName =
-            profileName.value.trim();
-
-        if(!newName){
-
-            alert(
-                "لطفاً نام وارد کن."
-            );
-
-            return;
-
-        }
-
-        if(newName.length < 2){
-
-            alert(
-                "نام حداقل باید ۲ حرف باشد."
-            );
-
-            return;
-
-        }
-
-        if(newName.length > 30){
-
-            alert(
-                "نام نباید بیشتر از ۳۰ حرف باشد."
-            );
-
-            return;
-
-        }
-
-        const oldOnlineRef =
-            onlineRef;
-
-        username =
-            newName;
-
-        localStorage.setItem(
-            "asalchat_username",
-            username
-        );
-
-        localStorage.setItem(
-            "username",
-            username
-        );
-
-        safeUser =
-            makeSafeUserId(
-                username
-            );
-
-        onlineRef =
-            ref(
-                db,
-                "rooms/" +
-                ROOM_NAME +
-                "/online/" +
-                safeUser
-            );
-
-        try{
-
-            await remove(
-                oldOnlineRef
-            );
-
-            registerOnlineUser();
-
-        }
-        catch(error){
-
-            console.error(
-                error
-            );
-
-        }
-
-        updateAvatar();
-
-        profileOverlay.classList
-            .remove("show");
-
-        alert(
-            "پروفایل ذخیره شد ✓"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   IMAGE VIEWER
-===================================================== */
-
-imageViewerClose.addEventListener(
-    "click",
-    () => {
-
-        imageViewer.classList
-            .remove("show");
-
-        viewerImage.src =
-            "";
-
-    }
-);
-
-
-imageViewer.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            imageViewer
-        ){
-
-            imageViewer.classList
-                .remove("show");
-
-            viewerImage.src =
-                "";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   EXIT
-===================================================== */
-
-exitBtn.addEventListener(
-    "click",
-    async () => {
-
-        const ok =
-            confirm(
-                "آیا می‌خواهی از عسل چت خارج شوی؟"
-            );
-
-        if(!ok){
-            return;
-        }
-
-        try{
-
-            await remove(
-                onlineRef
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                error
-            );
-
-        }
-
-        localStorage.removeItem(
-            "username"
-        );
-
-        localStorage.removeItem(
-            "asalchat_username"
-        );
-
-        localStorage.removeItem(
-            "asalchat_gender"
-        );
-
-        localStorage.removeItem(
-            "asalchat_logged_in"
-        );
-
-        window.location.href =
-            "index.html";
-
-    }
-);
-
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            event.key !==
-            "Escape"
-        ){
-            return;
-        }
-
-        profileOverlay.classList
-            .remove("show");
-
-        usersOverlay.classList
-            .remove("show");
-
-        imageViewer.classList
-            .remove("show");
-
-    }
-);
-
-
-/* =====================================================
-   VISIBILITY
-===================================================== */
-
-document.addEventListener(
-    "visibilitychange",
-    () => {
-
-        if(
-            document.visibilityState ===
-            "visible"
-        ){
-
-            registerOnlineUser();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   INITIAL
-===================================================== */
-
-updateAvatar();
-
-console.log(
-    "🍯 Asal Chat loaded"
-);
-
-console.log(
-    "User:",
-    username
-);
-
-console.log(
-    "Room:",
-    ROOM_NAME
-);
-
-</script>
-
-</body>
-      </html>
+            
