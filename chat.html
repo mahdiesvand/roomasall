@@ -1,4 +1,4 @@
-خ<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
 <meta charset="UTF-8"><meta name="viewport"
 content="width=device-width,
 initial-scale=1.0,
@@ -2682,53 +2682,6 @@ console.log(
     "Room:",
     ROOM_NAME
 );
-/* =====================================================
-   FIREBASE CONNECTION TEST
-===================================================== */
 
-const firebaseTestRef = ref(
-    db,
-    ".info/connected"
-);
-
-onValue(
-    firebaseTestRef,
-    (snapshot) => {
-
-        const connected = snapshot.val();
-
-        if (connected === true) {
-
-            console.log("🟢 FIREBASE: CONNECTED");
-
-            alert(
-                "🟢 اتصال به Firebase برقرار است"
-            );
-
-        } else {
-
-            console.log("🔴 FIREBASE: DISCONNECTED");
-
-            alert(
-                "🔴 اتصال به Firebase برقرار نیست"
-            );
-
-        }
-
-    },
-    (error) => {
-
-        console.error(
-            "Firebase Test Error:",
-            error
-        );
-
-        alert(
-            "❌ خطای Firebase:\n" +
-            error.message
-        );
-
-    }
-);
 </script></body>
-    </html>
+   </html>
