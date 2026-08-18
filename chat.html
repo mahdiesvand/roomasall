@@ -1,11 +1,21 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head>
-<meta charset="UTF-8"><meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-<meta name="theme-color" content="#0b0c0b"><title>عسل چت 🍯</title><style>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<meta name="theme-color" content="#0b0c0b">
+
+<title>عسل چت 🍯</title>
+
+<style>
 
 /* =========================================================
    RESET
@@ -25,12 +35,14 @@ body{
 }
 
 body{
+
     font-family:
         Tahoma,
         Arial,
         sans-serif;
 
     background:#080908;
+
     color:#fff;
 
     -webkit-tap-highlight-color:transparent;
@@ -41,10 +53,13 @@ body{
 ========================================================= */
 
 #app{
+
     width:100%;
+
     height:100dvh;
 
     display:flex;
+
     flex-direction:column;
 
     background:
@@ -61,10 +76,13 @@ body{
 ========================================================= */
 
 .chat-header{
+
     height:64px;
+
     min-height:64px;
 
     display:flex;
+
     align-items:center;
 
     padding:0 12px;
@@ -85,17 +103,22 @@ body{
         rgba(0,0,0,.45);
 
     position:relative;
+
     z-index:20;
 }
 
 .logo{
+
     width:43px;
+
     height:43px;
 
     flex:0 0 43px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     border-radius:50%;
@@ -119,26 +142,35 @@ body{
 }
 
 .header-info{
+
     flex:1;
+
     min-width:0;
 
     margin-right:10px;
 }
 
 .header-title{
+
     color:#ffd45a;
 
     font-size:17px;
+
     font-weight:bold;
 
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
 }
 
 .header-status{
+
     display:flex;
+
     align-items:center;
+
     gap:5px;
 
     margin-top:4px;
@@ -149,7 +181,9 @@ body{
 }
 
 .online-dot{
+
     width:7px;
+
     height:7px;
 
     border-radius:50%;
@@ -162,15 +196,20 @@ body{
 }
 
 .header-actions{
+
     display:flex;
+
     gap:6px;
 }
 
 .header-btn{
+
     width:38px;
+
     height:38px;
 
     border:0;
+
     outline:0;
 
     border-radius:50%;
@@ -186,6 +225,7 @@ body{
 }
 
 .header-btn:active{
+
     transform:scale(.91);
 
     background:
@@ -197,6 +237,7 @@ body{
 ========================================================= */
 
 .chat-area{
+
     flex:1;
 
     min-height:0;
@@ -224,6 +265,7 @@ body{
 ========================================================= */
 
 .honey-bg{
+
     position:absolute;
 
     inset:0;
@@ -247,14 +289,17 @@ body{
 ========================================================= */
 
 #messages{
+
     position:relative;
 
     z-index:2;
 
     width:100%;
+
     height:100%;
 
     overflow-y:auto;
+
     overflow-x:hidden;
 
     padding:
@@ -266,15 +311,19 @@ body{
 }
 
 #messages::-webkit-scrollbar{
+
     width:4px;
 }
 
 #messages::-webkit-scrollbar-track{
+
     background:transparent;
 }
 
 #messages::-webkit-scrollbar-thumb{
+
     background:#383a34;
+
     border-radius:10px;
 }
 
@@ -283,10 +332,13 @@ body{
 ========================================================= */
 
 .empty-chat{
+
     min-height:100%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -295,10 +347,12 @@ body{
 }
 
 .empty-box{
+
     max-width:280px;
 }
 
 .empty-icon{
+
     font-size:52px;
 
     margin-bottom:12px;
@@ -311,15 +365,18 @@ body{
 }
 
 .empty-title{
+
     color:#deded8;
 
     font-size:17px;
+
     font-weight:bold;
 
     margin-bottom:8px;
 }
 
 .empty-text{
+
     color:#777b73;
 
     font-size:12px;
@@ -332,6 +389,7 @@ body{
 ========================================================= */
 
 .message-row{
+
     width:100%;
 
     display:flex;
@@ -345,28 +403,37 @@ body{
 }
 
 .message-row.me{
+
     justify-content:flex-start;
 }
 
 .message-row.other{
+
     justify-content:flex-end;
 }
 
 @keyframes messageIn{
 
     from{
+
         opacity:0;
-        transform:translateY(5px);
+
+        transform:
+            translateY(5px);
     }
 
     to{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:
+            translateY(0);
     }
 
 }
 
 .message-bubble{
+
     max-width:78%;
 
     padding:
@@ -418,6 +485,7 @@ body{
 }
 
 .message-name{
+
     color:#ffc928;
 
     font-size:10px;
@@ -428,12 +496,14 @@ body{
 }
 
 .message-text{
+
     color:#f2f2ed;
 
     white-space:pre-wrap;
 }
 
 .message-time{
+
     color:#858981;
 
     font-size:9px;
@@ -448,10 +518,13 @@ body{
 ========================================================= */
 
 .input-area{
+
     position:absolute;
 
     right:0;
+
     bottom:0;
+
     left:0;
 
     z-index:15;
@@ -473,11 +546,13 @@ body{
 }
 
 .input-box{
+
     width:100%;
 
     min-height:50px;
 
     display:flex;
+
     align-items:flex-end;
 
     gap:6px;
@@ -499,18 +574,23 @@ body{
 
 .input-btn,
 .send-btn{
+
     flex:0 0 auto;
 
     width:39px;
+
     height:39px;
 
     border:0;
+
     outline:0;
 
     border-radius:50%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     cursor:pointer;
@@ -519,6 +599,7 @@ body{
 }
 
 .input-btn{
+
     background:
         rgba(255,255,255,.045);
 
@@ -526,20 +607,24 @@ body{
 }
 
 .input-btn:active{
+
     transform:scale(.9);
 }
 
 #messageInput{
+
     flex:1;
 
     min-width:0;
 
     min-height:37px;
+
     max-height:110px;
 
     resize:none;
 
     border:0;
+
     outline:0;
 
     background:transparent;
@@ -559,10 +644,12 @@ body{
 }
 
 #messageInput::placeholder{
+
     color:#6f726b;
 }
 
 .send-btn{
+
     background:
         linear-gradient(
             145deg,
@@ -580,10 +667,12 @@ body{
 }
 
 .send-btn:active{
+
     transform:scale(.9);
 }
 
 .send-btn:disabled{
+
     opacity:.4;
 }
 
@@ -592,9 +681,11 @@ body{
 ========================================================= */
 
 .connection-status{
+
     position:absolute;
 
     top:10px;
+
     left:50%;
 
     transform:
@@ -626,14 +717,17 @@ body{
 }
 
 .connection-status.show{
+
     opacity:1;
 }
 
 .connection-status.online{
+
     color:#55d978;
 }
 
 .connection-status.offline{
+
     color:#ff6969;
 }
 
@@ -642,6 +736,7 @@ body{
 ========================================================= */
 
 .profile-overlay{
+
     position:fixed;
 
     inset:0;
@@ -649,7 +744,9 @@ body{
     z-index:200;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     padding:20px;
@@ -668,13 +765,16 @@ body{
 }
 
 .profile-overlay.show{
+
     opacity:1;
 
     pointer-events:auto;
 }
 
 .profile-box{
+
     width:100%;
+
     max-width:360px;
 
     padding:22px 18px;
@@ -700,16 +800,20 @@ body{
 }
 
 .profile-avatar{
+
     position:relative;
 
     width:82px;
+
     height:82px;
 
     margin:
         0 auto 12px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     overflow:hidden;
@@ -726,6 +830,7 @@ body{
     color:#17130a;
 
     font-size:32px;
+
     font-weight:bold;
 
     box-shadow:
@@ -736,22 +841,27 @@ body{
 }
 
 .profile-avatar img{
+
     width:100%;
+
     height:100%;
 
     object-fit:cover;
 }
 
 .profile-title{
+
     color:#ffd45a;
 
     font-size:18px;
+
     font-weight:bold;
 
     margin-bottom:18px;
 }
 
 .profile-label{
+
     display:block;
 
     text-align:right;
@@ -764,7 +874,9 @@ body{
 }
 
 #profileName{
+
     width:100%;
+
     height:45px;
 
     padding:
@@ -790,11 +902,13 @@ body{
 }
 
 #profileName:focus{
+
     border-color:
         rgba(255,193,7,.45);
 }
 
 .profile-actions{
+
     display:flex;
 
     gap:8px;
@@ -803,11 +917,13 @@ body{
 }
 
 .profile-action{
+
     flex:1;
 
     height:43px;
 
     border:0;
+
     outline:0;
 
     border-radius:12px;
@@ -818,6 +934,7 @@ body{
 }
 
 .profile-save{
+
     background:
         linear-gradient(
             145deg,
@@ -831,6 +948,7 @@ body{
 }
 
 .profile-cancel{
+
     background:
         rgba(255,255,255,.06);
 
@@ -838,6 +956,7 @@ body{
 }
 
 .profile-hint{
+
     margin-top:12px;
 
     color:#6f736b;
@@ -852,6 +971,7 @@ body{
 ========================================================= */
 
 .users-overlay{
+
     position:fixed;
 
     inset:0;
@@ -872,15 +992,18 @@ body{
 }
 
 .users-overlay.show{
+
     opacity:1;
 
     pointer-events:auto;
 }
 
 .users-panel{
+
     position:absolute;
 
     top:0;
+
     right:0;
 
     width:
@@ -912,21 +1035,25 @@ body{
     transition:.3s;
 
     display:flex;
+
     flex-direction:column;
 }
 
 .users-overlay.show
 .users-panel{
+
     transform:
         translateX(0);
 }
 
 .users-header{
+
     height:64px;
 
     flex:0 0 64px;
 
     display:flex;
+
     align-items:center;
 
     padding:
@@ -938,19 +1065,24 @@ body{
 }
 
 .users-title{
+
     flex:1;
 
     color:#ffd45a;
 
     font-size:16px;
+
     font-weight:bold;
 }
 
 .users-close{
+
     width:36px;
+
     height:36px;
 
     border:0;
+
     outline:0;
 
     border-radius:50%;
@@ -964,6 +1096,7 @@ body{
 }
 
 #usersList{
+
     flex:1;
 
     overflow-y:auto;
@@ -972,7 +1105,9 @@ body{
 }
 
 .user-item{
+
     display:flex;
+
     align-items:center;
 
     gap:10px;
@@ -988,7 +1123,9 @@ body{
 }
 
 .user-avatar{
+
     width:38px;
+
     height:38px;
 
     flex:0 0 38px;
@@ -996,7 +1133,9 @@ body{
     border-radius:50%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     background:
@@ -1012,21 +1151,27 @@ body{
 }
 
 .user-info{
+
     min-width:0;
+
     flex:1;
 }
 
 .user-name{
+
     color:#eee;
 
     font-size:13px;
 
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
 }
 
 .user-online{
+
     color:#55d978;
 
     font-size:9px;
@@ -1035,6 +1180,7 @@ body{
 }
 
 .no-users{
+
     text-align:center;
 
     color:#777;
@@ -1051,24 +1197,34 @@ body{
 @media(max-width:360px){
 
     .chat-header{
+
         height:58px;
+
         min-height:58px;
+
         padding:0 8px;
     }
 
     .logo{
+
         width:38px;
+
         height:38px;
+
         flex-basis:38px;
+
         font-size:20px;
     }
 
     .header-title{
+
         font-size:15px;
     }
 
     .message-bubble{
+
         max-width:84%;
+
         font-size:13px;
     }
 
@@ -1079,106 +1235,166 @@ body{
 ========================================================= */
 
 ::selection{
+
     background:#9d7600;
+
     color:#fff;
 }
 
-</style></head><body><div id="app"><header class="chat-header">
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app">
+
+
+<header class="chat-header">
+
 
     <div
         class="logo"
         id="profileOpen"
         title="پروفایل">
+
         🍯
+
     </div>
+
 
     <div class="header-info">
 
+
         <div class="header-title">
+
             عسل چت
+
         </div>
+
 
         <div class="header-status">
 
+
             <span class="online-dot"></span>
 
+
             <span id="onlineStatus">
+
                 در حال اتصال...
+
             </span>
+
 
         </div>
 
+
     </div>
 
+
     <div class="header-actions">
+
 
         <button
             class="header-btn"
             id="usersBtn"
             type="button"
             title="کاربران آنلاین">
+
             👥
+
         </button>
+
 
         <button
             class="header-btn"
             id="exitBtn"
             type="button"
             title="خروج">
+
             ⎋
+
         </button>
 
+
     </div>
+
 
 </header>
 
 
 <main class="chat-area">
 
+
     <div class="honey-bg"></div>
+
 
     <div
         id="connectionStatus"
         class="connection-status">
+
         در حال اتصال...
+
     </div>
+
 
     <div id="messages">
 
+
         <div class="empty-chat">
+
 
             <div class="empty-box">
 
+
                 <div class="empty-icon">
+
                     🍯
+
                 </div>
+
 
                 <div class="empty-title">
+
                     به عسل چت خوش آمدید
+
                 </div>
 
+
                 <div class="empty-text">
+
                     پیام خود را بنویسید و گفتگو را شروع کنید.
+
                 </div>
+
 
             </div>
 
+
         </div>
+
 
     </div>
 
 
     <div class="input-area">
 
+
         <div class="input-box">
+
 
             <button
                 class="input-btn"
                 id="attachBtn"
                 type="button"
                 title="ارسال فایل">
+
                 📎
+
             </button>
+
 
             <textarea
                 id="messageInput"
@@ -1187,110 +1403,186 @@ body{
                 placeholder="پیام خود را بنویسید..."
                 autocomplete="off"></textarea>
 
+
             <button
                 class="send-btn"
                 id="sendBtn"
                 type="button">
+
                 ➤
+
             </button>
+
 
         </div>
 
+
     </div>
+
 
 </main>
 
-</div><!-- =====================================================
+
+</div>
+
+
+<!-- =====================================================
      PROFILE
-===================================================== --><div
+===================================================== -->
+
+
+<div
     class="profile-overlay"
-    id="profileOverlay"><div class="profile-box">
+    id="profileOverlay">
 
-    <div
-        class="profile-avatar"
-        id="profileAvatar">
-        <span id="avatarLetter">م</span>
+
+    <div class="profile-box">
+
+
+        <div
+            class="profile-avatar"
+            id="profileAvatar">
+
+            <span id="avatarLetter">
+
+                م
+
+            </span>
+
+        </div>
+
+
+        <div class="profile-title">
+
+            پروفایل من
+
+        </div>
+
+
+        <label
+            class="profile-label"
+            for="profileName">
+
+            نام نمایشی
+
+        </label>
+
+
+        <input
+            id="profileName"
+            type="text"
+            maxlength="30"
+            autocomplete="off"
+            placeholder="نام خود را وارد کنید">
+
+
+        <div class="profile-actions">
+
+
+            <button
+                class="profile-action profile-cancel"
+                id="profileCancel"
+                type="button">
+
+                انصراف
+
+            </button>
+
+
+            <button
+                class="profile-action profile-save"
+                id="profileSave"
+                type="button">
+
+                ذخیره
+
+            </button>
+
+
+        </div>
+
+
+        <div class="profile-hint">
+
+            روی عکس پروفایل بزن تا تصویر انتخاب کنی.
+
+        </div>
+
+
     </div>
 
-    <div class="profile-title">
-        پروفایل من
-    </div>
-
-    <label
-        class="profile-label"
-        for="profileName">
-        نام نمایشی
-    </label>
-
-    <input
-        id="profileName"
-        type="text"
-        maxlength="30"
-        autocomplete="off"
-        placeholder="نام خود را وارد کنید">
-
-    <div class="profile-actions">
-
-        <button
-            class="profile-action profile-cancel"
-            id="profileCancel"
-            type="button">
-            انصراف
-        </button>
-
-        <button
-            class="profile-action profile-save"
-            id="profileSave"
-            type="button">
-            ذخیره
-        </button>
-
-    </div>
-
-    <div class="profile-hint">
-        روی عکس پروفایل بزن تا تصویر انتخاب کنی.
-    </div>
 
 </div>
 
-</div><!-- =====================================================
+
+<!-- =====================================================
      USERS
-===================================================== --><div
+===================================================== -->
+
+
+<div
     class="users-overlay"
-    id="usersOverlay"><div class="users-panel">
+    id="usersOverlay">
 
-    <div class="users-header">
 
-        <div class="users-title">
-            کاربران آنلاین
+    <div class="users-panel">
+
+
+        <div class="users-header">
+
+
+            <div class="users-title">
+
+                کاربران آنلاین
+
+            </div>
+
+
+            <button
+                class="users-close"
+                id="usersClose"
+                type="button">
+
+                ✕
+
+            </button>
+
+
         </div>
 
-        <button
-            class="users-close"
-            id="usersClose"
-            type="button">
-            ✕
-        </button>
+
+        <div id="usersList">
+
+
+            <div class="no-users">
+
+                در حال دریافت کاربران...
+
+            </div>
+
+
+        </div>
+
 
     </div>
 
-    <div id="usersList">
-
-        <div class="no-users">
-            در حال دریافت کاربران...
-        </div>
-
-    </div>
 
 </div>
 
-</div><!-- =====================================================
+
+<!-- =====================================================
      FIREBASE
-===================================================== --><script type="module">
+===================================================== -->
+
+
+<script type="module">
+
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
 
 import {
     getDatabase,
@@ -1302,19 +1594,23 @@ import {
     onDisconnect,
     set,
     remove
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
 
 import {
     getStorage,
     ref as storageRef,
     uploadBytes,
     getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
 /* =====================================================
    FIREBASE CONFIG
 ===================================================== */
+
 
 const firebaseConfig = {
 
@@ -1341,6 +1637,7 @@ const firebaseConfig = {
 
     measurementId:
         "G-T9W22HHGBF"
+
 };
 
 
@@ -1348,106 +1645,131 @@ const firebaseConfig = {
    INIT
 ===================================================== */
 
+
 const app =
     initializeApp(
         firebaseConfig
     );
 
+
 const db =
-    getDatabase(app);
+    getDatabase(
+        app
+    );
+
 
 const storage =
-    getStorage(app);
+    getStorage(
+        app
+    );
 
 
 /* =====================================================
    ELEMENTS
 ===================================================== */
 
+
 const messages =
     document.getElementById(
         "messages"
     );
+
 
 const messageInput =
     document.getElementById(
         "messageInput"
     );
 
+
 const sendBtn =
     document.getElementById(
         "sendBtn"
     );
+
 
 const attachBtn =
     document.getElementById(
         "attachBtn"
     );
 
+
 const onlineStatus =
     document.getElementById(
         "onlineStatus"
     );
+
 
 const connectionStatus =
     document.getElementById(
         "connectionStatus"
     );
 
+
 const exitBtn =
     document.getElementById(
         "exitBtn"
     );
+
 
 const usersBtn =
     document.getElementById(
         "usersBtn"
     );
 
+
 const usersOverlay =
     document.getElementById(
         "usersOverlay"
     );
+
 
 const usersClose =
     document.getElementById(
         "usersClose"
     );
 
+
 const usersList =
     document.getElementById(
         "usersList"
     );
+
 
 const profileOpen =
     document.getElementById(
         "profileOpen"
     );
 
+
 const profileOverlay =
     document.getElementById(
         "profileOverlay"
     );
+
 
 const profileAvatar =
     document.getElementById(
         "profileAvatar"
     );
 
+
 const avatarLetter =
     document.getElementById(
         "avatarLetter"
     );
+
 
 const profileName =
     document.getElementById(
         "profileName"
     );
 
+
 const profileSave =
     document.getElementById(
         "profileSave"
     );
+
 
 const profileCancel =
     document.getElementById(
@@ -1457,12 +1779,49 @@ const profileCancel =
 
 /* =====================================================
    USER
+   اصلاح شده
 ===================================================== */
+
+
+/*
+   صفحه ورود نام کاربر را با کلید
+   asalchat_username ذخیره می‌کند.
+
+   نسخه قبلی chat.html دنبال
+   username می‌گشت و به همین دلیل
+   همیشه ممکن بود «مهمان» نشان داده شود.
+*/
+
 
 let username =
     localStorage.getItem(
-        "username"
+        "asalchat_username"
     );
+
+
+/*
+   سازگاری با نسخه قدیمی سایت
+*/
+
+
+if(
+    !username ||
+    !username.trim()
+){
+
+    username =
+        localStorage.getItem(
+            "username"
+        );
+
+}
+
+
+/*
+   اگر هیچ نامی پیدا نشد،
+   مهمان استفاده می‌شود.
+*/
+
 
 if(
     !username ||
@@ -1472,20 +1831,48 @@ if(
     username =
         "مهمان";
 
-    localStorage.setItem(
-        "username",
-        username
-    );
-
 }
+
+
+/*
+   پاکسازی نام
+*/
+
+
+username =
+    username
+        .trim()
+        .replace(
+            /\s+/g,
+            " "
+        );
+
+
+/*
+   ذخیره نام صحیح در هر دو کلید
+*/
+
+
+localStorage.setItem(
+    "asalchat_username",
+    username
+);
+
+
+localStorage.setItem(
+    "username",
+    username
+);
 
 
 /* =====================================================
    ROOM
 ===================================================== */
 
+
 const ROOM_NAME =
     "asal-chat";
+
 
 const messagesRef =
     ref(
@@ -1495,6 +1882,7 @@ const messagesRef =
         "/messages"
     );
 
+
 const onlineUsersRef =
     ref(
         db,
@@ -1502,6 +1890,7 @@ const onlineUsersRef =
         ROOM_NAME +
         "/online"
     );
+
 
 const connectedRef =
     ref(
@@ -1514,7 +1903,10 @@ const connectedRef =
    SAFE USER ID
 ===================================================== */
 
-function makeSafeUserId(name){
+
+function makeSafeUserId(
+    name
+){
 
     return name
         .replace(
@@ -1528,10 +1920,12 @@ function makeSafeUserId(name){
 
 }
 
+
 let safeUser =
     makeSafeUserId(
         username
     );
+
 
 let onlineRef =
     ref(
@@ -1547,9 +1941,11 @@ let onlineRef =
    CONNECTION
 ===================================================== */
 
+
 onValue(
     connectedRef,
     snapshot => {
+
 
         if(
             snapshot.val() === true
@@ -1558,19 +1954,23 @@ onValue(
             onlineStatus.textContent =
                 "آنلاین";
 
+
             connectionStatus.textContent =
                 "متصل شد";
+
 
             connectionStatus.classList
                 .remove(
                     "offline"
                 );
 
+
             connectionStatus.classList
                 .add(
                     "show",
                     "online"
                 );
+
 
             setTimeout(
                 () => {
@@ -1584,18 +1984,23 @@ onValue(
                 1500
             );
 
+
         }else{
+
 
             onlineStatus.textContent =
                 "قطع اتصال";
 
+
             connectionStatus.textContent =
                 "اتصال به سرور قطع شد";
+
 
             connectionStatus.classList
                 .remove(
                     "online"
                 );
+
 
             connectionStatus.classList
                 .add(
@@ -1613,11 +2018,14 @@ onValue(
    ONLINE USER
 ===================================================== */
 
+
 function registerOnlineUser(){
+
 
     set(
         onlineRef,
         {
+
             name:
                 username,
 
@@ -1628,8 +2036,10 @@ function registerOnlineUser(){
 
             time:
                 serverTimestamp()
+
         }
     );
+
 
     onDisconnect(
         onlineRef
@@ -1637,9 +2047,11 @@ function registerOnlineUser(){
 
 }
 
+
 onValue(
     connectedRef,
     snapshot => {
+
 
         if(
             snapshot.val() === true
@@ -1657,142 +2069,186 @@ onValue(
    ONLINE USERS LIST
 ===================================================== */
 
+
 onValue(
     onlineUsersRef,
     snapshot => {
 
+
         const data =
             snapshot.val();
+
 
         usersList.innerHTML =
             "";
 
+
         if(!data){
+
 
             usersList.innerHTML =
                 `<div class="no-users">
                     هیچ کاربری آنلاین نیست
                 </div>`;
 
+
             onlineStatus.textContent =
                 "۰ نفر آنلاین";
+
 
             return;
 
         }
 
+
         const users =
-            Object.values(data);
+            Object.values(
+                data
+            );
+
 
         onlineStatus.textContent =
             users.length +
             " نفر آنلاین";
 
+
         users.forEach(
             user => {
+
 
                 const item =
                     document.createElement(
                         "div"
                     );
 
+
                 item.className =
                     "user-item";
+
 
                 const avatar =
                     document.createElement(
                         "div"
                     );
 
+
                 avatar.className =
                     "user-avatar";
 
-                if(user.avatar){
+
+                if(
+                    user.avatar
+                ){
+
 
                     const img =
                         document.createElement(
                             "img"
                         );
 
+
                     img.src =
                         user.avatar;
+
 
                     img.style.width =
                         "100%";
 
+
                     img.style.height =
                         "100%";
+
 
                     img.style.objectFit =
                         "cover";
 
+
                     img.style.borderRadius =
                         "50%";
+
 
                     avatar.appendChild(
                         img
                     );
 
+
                 }else{
+
 
                     avatar.textContent =
                         (
                             user.name ||
                             "م"
-                        ).charAt(0);
+                        ).charAt(
+                            0
+                        );
 
                 }
+
 
                 const info =
                     document.createElement(
                         "div"
                     );
 
+
                 info.className =
                     "user-info";
+
 
                 const name =
                     document.createElement(
                         "div"
                     );
 
+
                 name.className =
                     "user-name";
+
 
                 name.textContent =
                     user.name ||
                     "مهمان";
+
 
                 const status =
                     document.createElement(
                         "div"
                     );
 
+
                 status.className =
                     "user-online";
 
+
                 status.textContent =
                     "● آنلاین";
+
 
                 info.appendChild(
                     name
                 );
 
+
                 info.appendChild(
                     status
                 );
+
 
                 item.appendChild(
                     avatar
                 );
 
+
                 item.appendChild(
                     info
                 );
 
+
                 usersList.appendChild(
                     item
                 );
+
 
             }
         );
@@ -1805,10 +2261,13 @@ onValue(
    RESIZE INPUT
 ===================================================== */
 
+
 function resizeInput(){
+
 
     messageInput.style.height =
         "auto";
+
 
     messageInput.style.height =
         Math.min(
@@ -1818,6 +2277,7 @@ function resizeInput(){
         "px";
 
 }
+
 
 messageInput.addEventListener(
     "input",
@@ -1829,7 +2289,9 @@ messageInput.addEventListener(
    BUTTON STATE
 ===================================================== */
 
+
 function updateSendButton(){
+
 
     sendBtn.disabled =
         messageInput.value
@@ -1838,10 +2300,12 @@ function updateSendButton(){
 
 }
 
+
 messageInput.addEventListener(
     "input",
     updateSendButton
 );
+
 
 updateSendButton();
 
@@ -1850,9 +2314,11 @@ updateSendButton();
    SEND WITH ENTER
 ===================================================== */
 
+
 messageInput.addEventListener(
     "keydown",
     event => {
+
 
         if(
             event.key === "Enter" &&
@@ -1873,14 +2339,20 @@ messageInput.addEventListener(
    SEND MESSAGE
 ===================================================== */
 
+
 async function sendMessage(){
+
 
     const text =
         messageInput.value.trim();
 
+
     if(!text){
+
         return;
+
     }
+
 
     if(
         text.length >
@@ -1895,14 +2367,18 @@ async function sendMessage(){
 
     }
 
+
     sendBtn.disabled =
         true;
 
+
     try{
+
 
         await push(
             messagesRef,
             {
+
                 name:
                     username,
 
@@ -1914,25 +2390,33 @@ async function sendMessage(){
 
                 createdAt:
                     Date.now()
+
             }
         );
+
 
         messageInput.value =
             "";
 
+
         resizeInput();
+
 
         updateSendButton();
 
+
     }catch(error){
+
 
         console.error(
             error
         );
 
+
         alert(
             "پیام ارسال نشد. اتصال Firebase یا Rules را بررسی کن."
         );
+
 
         updateSendButton();
 
@@ -1945,16 +2429,22 @@ async function sendMessage(){
    RECEIVE MESSAGES
 ===================================================== */
 
+
 onChildAdded(
     messagesRef,
     snapshot => {
 
+
         const data =
             snapshot.val();
 
+
         if(!data){
+
             return;
+
         }
+
 
         renderMessage(
             data
@@ -1968,24 +2458,34 @@ onChildAdded(
    RENDER MESSAGE
 ===================================================== */
 
-function renderMessage(data){
+
+function renderMessage(
+    data
+){
+
 
     const empty =
         messages.querySelector(
             ".empty-chat"
         );
 
+
     if(empty){
+
         empty.remove();
+
     }
+
 
     const mine =
         data.name === username;
+
 
     const row =
         document.createElement(
             "div"
         );
+
 
     row.className =
         "message-row " +
@@ -1995,47 +2495,59 @@ function renderMessage(data){
                 : "other"
         );
 
+
     const bubble =
         document.createElement(
             "div"
         );
 
+
     bubble.className =
         "message-bubble";
+
 
     const name =
         document.createElement(
             "div"
         );
 
+
     name.className =
         "message-name";
+
 
     name.textContent =
         data.name ||
         "مهمان";
+
 
     const text =
         document.createElement(
             "div"
         );
 
+
     text.className =
         "message-text";
+
 
     text.textContent =
         data.text ||
         "";
+
 
     const time =
         document.createElement(
             "div"
         );
 
+
     time.className =
         "message-time";
 
+
     let date;
+
 
     if(
         typeof data.time ===
@@ -2047,7 +2559,9 @@ function renderMessage(data){
                 data.time
             );
 
+
     }else{
+
 
         date =
             new Date(
@@ -2057,37 +2571,46 @@ function renderMessage(data){
 
     }
 
+
     time.textContent =
         date.toLocaleTimeString(
             "fa-IR",
             {
+
                 hour:
                     "2-digit",
 
                 minute:
                     "2-digit"
+
             }
         );
+
 
     bubble.appendChild(
         name
     );
 
+
     bubble.appendChild(
         text
     );
+
 
     bubble.appendChild(
         time
     );
 
+
     row.appendChild(
         bubble
     );
 
+
     messages.appendChild(
         row
     );
+
 
     requestAnimationFrame(
         () => {
@@ -2105,6 +2628,7 @@ function renderMessage(data){
    SEND BUTTON
 ===================================================== */
 
+
 sendBtn.addEventListener(
     "click",
     sendMessage
@@ -2114,6 +2638,7 @@ sendBtn.addEventListener(
 /* =====================================================
    USERS PANEL
 ===================================================== */
+
 
 usersBtn.addEventListener(
     "click",
@@ -2127,6 +2652,7 @@ usersBtn.addEventListener(
     }
 );
 
+
 usersClose.addEventListener(
     "click",
     () => {
@@ -2138,6 +2664,7 @@ usersClose.addEventListener(
 
     }
 );
+
 
 usersOverlay.addEventListener(
     "click",
@@ -2163,51 +2690,66 @@ usersOverlay.addEventListener(
    PROFILE
 ===================================================== */
 
+
 function updateAvatar(){
+
 
     const saved =
         localStorage.getItem(
             "profileAvatar"
         );
 
+
     if(saved){
+
 
         profileAvatar.innerHTML =
             "";
+
 
         const img =
             document.createElement(
                 "img"
             );
 
+
         img.src =
             saved;
+
 
         profileAvatar.appendChild(
             img
         );
 
+
         return;
 
     }
 
+
     profileAvatar.innerHTML =
         "";
+
 
     const span =
         document.createElement(
             "span"
         );
 
+
     span.id =
         "avatarLetter";
+
 
     span.textContent =
         (
             profileName.value.trim() ||
             username ||
             "م"
-        ).charAt(0);
+        ).charAt(
+            0
+        );
+
 
     profileAvatar.appendChild(
         span
@@ -2215,29 +2757,37 @@ function updateAvatar(){
 
 }
 
+
 profileOpen.addEventListener(
     "click",
     () => {
 
+
         profileName.value =
             username;
 
+
         updateAvatar();
+
 
         profileOverlay.classList
             .add(
                 "show"
             );
 
+
         setTimeout(
             () => {
+
                 profileName.focus();
+
             },
             100
         );
 
     }
 );
+
 
 profileCancel.addEventListener(
     "click",
@@ -2251,9 +2801,11 @@ profileCancel.addEventListener(
     }
 );
 
+
 profileOverlay.addEventListener(
     "click",
     event => {
+
 
         if(
             event.target ===
@@ -2275,9 +2827,11 @@ profileOverlay.addEventListener(
    PROFILE NAME PREVIEW
 ===================================================== */
 
+
 profileName.addEventListener(
     "input",
     () => {
+
 
         if(
             !localStorage.getItem(
@@ -2297,23 +2851,29 @@ profileName.addEventListener(
    PROFILE PHOTO
 ===================================================== */
 
+
 const avatarInput =
     document.createElement(
         "input"
     );
 
+
 avatarInput.type =
     "file";
+
 
 avatarInput.accept =
     "image/*";
 
+
 avatarInput.style.display =
     "none";
+
 
 document.body.appendChild(
     avatarInput
 );
+
 
 profileAvatar.addEventListener(
     "click",
@@ -2324,16 +2884,22 @@ profileAvatar.addEventListener(
     }
 );
 
+
 avatarInput.addEventListener(
     "change",
     async () => {
 
+
         const file =
             avatarInput.files[0];
 
+
         if(!file){
+
             return;
+
         }
+
 
         if(
             !file.type.startsWith(
@@ -2349,6 +2915,7 @@ avatarInput.addEventListener(
 
         }
 
+
         if(
             file.size >
             5 * 1024 * 1024
@@ -2358,17 +2925,22 @@ avatarInput.addEventListener(
                 "حجم عکس نباید بیشتر از ۵ مگابایت باشد."
             );
 
+
             avatarInput.value =
                 "";
+
 
             return;
 
         }
 
+
         try{
+
 
             profileAvatar.style.opacity =
                 ".5";
+
 
             const fileName =
                 "avatar_" +
@@ -2382,6 +2954,7 @@ avatarInput.addEventListener(
                     ) +
                 ".jpg";
 
+
             const fileRef =
                 storageRef(
                     storage,
@@ -2391,27 +2964,33 @@ avatarInput.addEventListener(
                     fileName
                 );
 
+
             const uploaded =
                 await uploadBytes(
                     fileRef,
                     file
                 );
 
+
             const url =
                 await getDownloadURL(
                     uploaded.ref
                 );
+
 
             localStorage.setItem(
                 "profileAvatar",
                 url
             );
 
+
             updateAvatar();
+
 
             await set(
                 onlineRef,
                 {
+
                     name:
                         username,
 
@@ -2420,28 +2999,36 @@ avatarInput.addEventListener(
 
                     time:
                         serverTimestamp()
+
                 }
             );
+
 
             alert(
                 "عکس پروفایل ذخیره شد ✓"
             );
 
+
         }catch(error){
+
 
             console.error(
                 "Avatar error:",
                 error
             );
 
+
             alert(
                 "آپلود عکس انجام نشد. Storage را بررسی کن."
             );
 
+
         }finally{
+
 
             profileAvatar.style.opacity =
                 "1";
+
 
             avatarInput.value =
                 "";
@@ -2454,14 +3041,18 @@ avatarInput.addEventListener(
 
 /* =====================================================
    SAVE PROFILE
+   اصلاح شده
 ===================================================== */
+
 
 profileSave.addEventListener(
     "click",
     async () => {
 
+
         const newName =
             profileName.value.trim();
+
 
         if(!newName){
 
@@ -2472,6 +3063,7 @@ profileSave.addEventListener(
             return;
 
         }
+
 
         if(
             newName.length <
@@ -2486,6 +3078,7 @@ profileSave.addEventListener(
 
         }
 
+
         if(
             newName.length >
             30
@@ -2499,21 +3092,43 @@ profileSave.addEventListener(
 
         }
 
+
         username =
             newName;
+
+
+        /*
+           ذخیره نام جدید در کلید اصلی
+        */
+
+
+        localStorage.setItem(
+            "asalchat_username",
+            username
+        );
+
+
+        /*
+           ذخیره در کلید قدیمی
+           برای سازگاری
+        */
+
 
         localStorage.setItem(
             "username",
             username
         );
 
+
         const oldOnlineRef =
             onlineRef;
+
 
         safeUser =
             makeSafeUserId(
                 username
             );
+
 
         onlineRef =
             ref(
@@ -2524,15 +3139,20 @@ profileSave.addEventListener(
                 safeUser
             );
 
+
         try{
+
 
             await remove(
                 oldOnlineRef
             );
 
+
             registerOnlineUser();
 
+
         }catch(error){
+
 
             console.error(
                 error
@@ -2540,10 +3160,12 @@ profileSave.addEventListener(
 
         }
 
+
         profileOverlay.classList
             .remove(
                 "show"
             );
+
 
         alert(
             "پروفایل ذخیره شد ✓"
@@ -2557,9 +3179,11 @@ profileSave.addEventListener(
    ATTACHMENT
 ===================================================== */
 
+
 attachBtn.addEventListener(
     "click",
     () => {
+
 
         alert(
             "ارسال عکس در مرحله بعد به پیام‌ها اضافه می‌شود 🍯"
@@ -2573,26 +3197,35 @@ attachBtn.addEventListener(
    EXIT
 ===================================================== */
 
+
 exitBtn.addEventListener(
     "click",
     async () => {
+
 
         const ok =
             confirm(
                 "آیا می‌خواهی از عسل چت خارج شوی؟"
             );
 
+
         if(!ok){
+
             return;
+
         }
 
+
         try{
+
 
             await remove(
                 onlineRef
             );
 
+
         }catch(error){
+
 
             console.error(
                 error
@@ -2600,9 +3233,26 @@ exitBtn.addEventListener(
 
         }
 
+
+        /*
+           حذف هر دو کلید نام
+        */
+
+
         localStorage.removeItem(
             "username"
         );
+
+
+        localStorage.removeItem(
+            "asalchat_username"
+        );
+
+
+        localStorage.removeItem(
+            "asalchat_gender"
+        );
+
 
         window.location.href =
             "index.html";
@@ -2615,9 +3265,11 @@ exitBtn.addEventListener(
    ESC
 ===================================================== */
 
+
 document.addEventListener(
     "keydown",
     event => {
+
 
         if(
             event.key !==
@@ -2628,10 +3280,12 @@ document.addEventListener(
 
         }
 
+
         profileOverlay.classList
             .remove(
                 "show"
             );
+
 
         usersOverlay.classList
             .remove(
@@ -2646,9 +3300,11 @@ document.addEventListener(
    VISIBILITY
 ===================================================== */
 
+
 document.addEventListener(
     "visibilitychange",
     () => {
+
 
         if(
             document.visibilityState ===
@@ -2667,21 +3323,30 @@ document.addEventListener(
    INITIAL
 ===================================================== */
 
+
 updateAvatar();
+
 
 console.log(
     "🍯 Asal Chat loaded"
 );
+
 
 console.log(
     "User:",
     username
 );
 
+
 console.log(
     "Room:",
     ROOM_NAME
 );
 
-</script></body>
+
+</script>
+
+
+</body>
+
    </html>
